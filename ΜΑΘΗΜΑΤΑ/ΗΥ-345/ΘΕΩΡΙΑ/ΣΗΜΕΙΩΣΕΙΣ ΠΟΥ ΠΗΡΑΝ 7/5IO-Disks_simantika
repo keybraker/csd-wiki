@@ -1,0 +1,208 @@
+1)IDE/SATA diskoi exoun microcontroller(kani caching,bad block remapping ktl)
+  => epikoinonia me controller tous ginete se pio high level
+
+  *logo tou caching mporo na diavazo px oloklira tracks kathe fora px 4mb
+
+2)Interleaving/Buffering
+
+   O controller thelo na exi arketa megalo buffer oste na xoraei to track/tracks 
+   oste na mpori na diabazi eleuthera 
+
+   Alos tropos gia na petixo to pano alla me kathisterisi einai to interleaving,
+   otan den exo arketo buffer,tote bazo tous sectors sto track me endiamesous 
+   gia kathisterisi
+
+   0 4 1 5 2 ktl   oste sto 4 na eimai mexri na stilo to 0 kai meta na diabaso to 1 ktl
+
+
+3)1 controller isos poli disks
+
+4)Raid (Redundant Array of Inexpensive Disks)
+
+  Mikrous ftinous(isos argoterous) diskous pou douleuoun parallila
+  Ta data diamirazonte stous diskous oste na douleuoun parallila
+   px oxi ena file se 1 mono disko
+
+  Raid scsi/Raid sata
+  
+  RAID = virtual disk,olo auto fenete san 1 diskos,o controller 
+    frontizi na briski to pou einai to kathe ti
+  
+  Levels 1 eos 6 => enalaktikoi tropoi apothikeusis ton dedomenon
+    Stoxos einai i paralilia kai i asfalia ton dedomenon
+
+  strip = k sectors
+
+8)RAID Level 0
+
+  disk1   disk2
+
+  strip1 strip2
+  strip3 strip4
+  .............
+
+
+  Arnitika = ean kapios diskos xalasi(pou exo polous => pithano)
+     tote problima,giati apo pola data the lipoun komatia
+
+9)RAID Level 1 (backup)
+
+  Gia kathe disko exo kai enan me to back up tou
+
+  => write se taxitita san na exo tous misous
+     read omos mpori eos 2x
+
+  Recovery eukoli => bazo neo disko kai antigrafo apo to backup tou
+
+10)RAID Level 2 
+   1 bit/disko
+   synchronized drivers(den mporo na perimeno gia kati toso mikro)
+   endimesa parity bits
+   error detection alla kai error correction
+   (3-5 mono error detection)
+
+11)Raid Level 3 (1bit ana disko +1 parity bit sinolika)
+
+   Edo px ean egrafa halfwords tha egrafa 5 bits
+
+   4 bit + 1 parity  
+
+   1 bit arkei giati 1 diskos mpori na xalasi mono kathe fora kai xero pios xalase,
+   ara exo kai detection kai correction (analoga me to parity xero ean ixe sosta 0 i 1)
+
+12)Raid Level 4 (parity strip)
+
+   Edo einai san to Level 0 ,alla exo kai enan extra disko pou exi to parity strip
+ 
+   px   strip0 strip1 strip2 strip3 parity_strip_0-3
+        strip4 ...                  parity_strip_4-7
+
+   Edo ola ta parity eiani ston teleuteo disko
+
+   To parity strip ipologizete os exis
+
+    strip0
+    strip1
+    strip2
+XOR strip3
+=   parity_strip_0-3 
+
+
+    To recovery ginete pali me ton idio tropo,alla sto XOR simetexi to parity_strip_0-3
+    kai to apotelesma einai to strip pou xathike
+
+   Ta parity otan allazo dedomena prepei na ta xanaipologizo,kai ean ola einai se 1 
+   drive auto simeni oti tha sikoni poli baros 
+
+13)RAID Level 5(parity_strip oxi se ena disko alla kiklika)
+
+   Arxika ston 4 disko,meta sto 3 ktl ,kiklika apo telos pros arxi
+  
+
+14)RAID LEVEL 6
+
+   Exo 2 parity strips ,gia perisoteri asfalia
+
+15)cylinder skew = spinning offset ,apostasi teleuteou sector track me proto sector
+     tou epomenou,oste otan alazo kilindro na peso ston 0 tou epomenou track kai 
+     na sinexiso
+
+16)Low level format/Partition table/high level format 
+
+  1)low level format => orizo sectors
+   Sector(px 512 bytes)
+     preable(pou arxizi o sector+cycilder number+sector number)
+     data
+     ECC (error recovery)
+
+   Exo epipleon sectors "krifous" gia na antikatastisoun xalasmenous sectors
+
+   => formating diskoi mikroteros xoros apothikeusis 20% pianoun ta pano
+
+   Se kathe track arithmo tous sectors xekinontas apo to 0
+
+  2)ftiaxno partition table
+
+    partition table = starting sectors gia kathe partition
+    booting partition = ston partition table fenete san active partition
+
+    H kathe partition einai san enas logical xexoristos diskos
+
+    Se partition bazo oti thelo litourgiko/swap/sketo xoro apothikeusis
+    (sixnos logos xrisis einai i iparxi 2+ litourgikon)
+
+  3)high level format se kathe partition xexorista
+    orizi Partition parts
+
+   Boot block
+   Superblock  
+      fortonete stin mnimi sto boot
+      basikes parametrous pou perigrafoun to filesystem 
+        px magic number me to filesystem type,number of blocks sto filesystem ktl
+   Free space mgmt  //free space,list of pointers se adia blocks sto disko
+   Array of I-nodes  1 i-node/1 file 
+   Root dir //top sto filesystem
+   Files and directories  //ta ipolipa data
+    
+   Episis enimeroni ton partition table gia to filesystem tis partition
+
+25)Reducing Disk-Arm Motion
+
+   blocks ton arxion ta thelo ston idio kilindro oso mporo
+   episis to komati tou diskou pou exi ta inodes to thelo px sto kentro oste
+     na kano kata meso oro pio liges metakinisis
+   i i-nodes+ arxia pou antistixoun se kontines apostasis
+
+17)Algorithmi metakinisis kefalis
+
+  Oi diskoi exoun para pola requests na exipiretisoun,giauto prepei na orisoun 
+  mia seira pou ta exipiretoun
+
+  Enoite otan exo pola requests gia ton idio kilindro tote otan pao se kapio
+  kilindro ta exipireto ola,afou ta balo stin seira se sxesi me tin thesi pou
+  eimai
+
+  1)FCFS (first come first servered)
+
+    poli kakos giati px i kefali mpori na einai ston kilindro 40 kai na erthi
+    na diabasi apo ton 1,kai meta apo ton 30 ktl
+
+ 
+  2)SSF (shortest seek first)
+
+    einai kalos,alla oxi beltistos,giati den lambani tin sinoliki apostasi alla
+    pou einai pio konta
+
+    alla den einai dikeos os pros ta requests
+
+    enas fortomenos diskos tha kataligi na einai sinexia sto meso oro diladi
+    stous meseous kilindrous kai oi akriani den tha exipiretounte pote
+
+
+  3)Elevetor algorithm
+    Exo 1 bit pou kratao tin kateuthinsi,pou pigeno,kai pao max pros ta ekei
+
+    px ean pao pano bit=UP,prota ftano stin PIO PSILI REQUEST me stasis gia requests,
+       kai meta allazo to bit=DOWN kai pao pros ta kato me stasis gia requests 
+       mexri TIN PIO XAMILI REQUEST
+   
+    Ean den exo request ite pano ite kato perimeno
+
+  4)Paralagi tou elevator algorithm
+
+    pao mono UP me stasis kanonika kai otan PIO PSILI REQUEST pao stin pio XAMILI
+    request xoris omos stasis kai meta xana up
+
+18)stable storage = exo 2 diskous
+
+   1)write => grafo ston 1 kai to diavazo gia na bebeotho oti graftike to sosto
+      kai meta kano to idio kai ston deutero
+   2)reads => diabazo kai elenxo ECC ean error tote apo ton alo disko
+     (exeretika apithano 2 diski error sto idio simio)
+   3)crash recovery => sigrino ta dedomena kai grafo kai stous 2 ta sosta
+       px o 2 exi ECC error kapou => perno to sosto apo ton 1 kai tou to grafo
+
+     Gia pio grigoro crash recovery mporo na grafo pio ekana write otan kolise
+     kai na ftiaxno mono to trexon
+     (mporo na to grafo se mia cmos mnimi me mpataria opos auti pou krataei tin ora
+      nonvolatile RAM)

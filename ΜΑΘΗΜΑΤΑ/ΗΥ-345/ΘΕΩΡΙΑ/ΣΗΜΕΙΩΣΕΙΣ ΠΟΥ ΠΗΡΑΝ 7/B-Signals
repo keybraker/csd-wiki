@@ -1,0 +1,173 @@
+1)signal = aynchronous event , Signals can be raised, caught and acted upon, or ignored
+
+  ta signals pane se process,px apo to terminal px apo ali process(san epikoinonia)
+  
+  ta errors prokaloune episis signals px segment violation
+
+  Mia process mpori:
+  ignore/discard the signal (not possible with SIGKILL or SIGSTOP)
+  execute a signal handler function, and then possibly resume execution or terminate
+  carry out the default action for that signal
+
+2)signal.h
+
+  SIGABORT *Process abort
+  SIGALRM Alarm clock
+  SIGFPE *Floating-point exception
+  SIGHUP Hangup
+  SIGILL *Illegal instruction
+  SIGINT Terminal interrupt //CTRL+C POU PATAO=> STELNETE SIGNAL APO TERMINAL
+  SIGKILL Kill (can’t be caught or ignored)
+  SIGPIPE Write on a pipe with no reader
+  SIGQUIT Terminal quit
+  SIGSEGV *Invalid memory segment access
+  SIGTERM Termination
+  SIGUSR1 User-defined signal 1
+  SIGUSR2 User-defined signal 2
+
+  SIGCHLD Child process has stopped or exited.
+  SIGCONT Continue executing, if stopped.
+  SIGSTOP Stop executing. (Can’t be caught or ignored.)
+  SIGTSTP Terminal stop signal.
+  SIGTTIN Background process trying to read.
+  SIGTTOU Background process trying to write.
+  
+  *ola auta termatizoun tin process,ektos apo to SIGCONT kai to SIGCHLD pou sinithos
+   ginete ingore?
+   
+
+3)control+z VS control+c
+
+  control+z => suspend SIGTSTP (ean thelo meta resume grafontas fg i bg)
+  control+c => kill SIGINT
+
+  kill %1 => kill suspended program(gia otan einai sto bg) me id=1
+
+  jobs
+
+  will list them, like this:
+
+  [1]-  Stopped                 pianobar
+  [2]+  Stopped                 yes
+
+  Using %#, where # is the job number (the one in square brackets from the jobs output) with bg, fg, or kill, can be used to do the action on that job.
+
+4)kill shell command
+  Tin xrisimopoio apo to shell gia na stilo signal se sigekrimeni process pou einai 
+  sto background HUP apo to hangup
+
+  kill -HUP PROCESS_PID //px kill -HUP 512
+  
+  killall -HUP program  //klino oles tis process tou sigekrimenou programatos
+
+  
+5)Signal library function => orizo handler pou kalite otan simbi to sigekrimeno event
+
+  #include <signal.h>
+  void (*signal(int sig, void (*func)(int)))(int);
+
+  px 
+
+  #include <signal.h>
+  #include <stdio.h>
+  #include <unistd.h>
+
+  void ouch(int sig)
+  {
+    printf(“OUCH! - I got signal %d\n”, sig); //kano kati 
+    (void) signal(SIGINT, SIG_DFL); //epanafero tin normal drasi
+  }
+  
+  int main()
+  {
+    (void) signal(SIGINT, ouch); //klisi=allazo tin normal drasi otan SIGINT
+             
+     while(1) {
+      printf(“Hello World!\n”);
+      sleep(1);
+    }
+  }
+
+  By default otan paraxthi to signal SIGINT patontas diladi ctrl+c tote i default 
+  antidrasi einai na stamatisi to programa
+
+
+  Edo leo otan to signal einai SIGINT kalese tin ouch,i ouch kani kani kai meta lei
+  otan SIGINT kane pali to default SIG_DFL
+
+  
+6)kill system call => stelno signal stin process
+ 
+  #include <sys/types.h>
+  #include <signal.h>
+  int kill(pid_t pid, int sig);  
+  
+  pid  
+    >0  send signal to process pid
+    ==0 send signal to all processes whose process group ID equals the
+         sender’s pgid. e.g. parent kills all children
+    -1 send signal to every process for which the calling process has
+         permission to send signals
+ 
+  sig = to idos tou signal pou stelno  
+
+  returns 0 ean ola estila to signal
+          -1 ean apotixia kai  
+              errno =  EINVAL //signal invalid
+              errno =  EPERM  //den exo permission
+              errno =  ESRCH //den iparxi i process 
+
+  Signals mporo na stelno stis dikes ou processes diladi idio user ID
+  O superuser mpori na stelni se oles
+
+7)Alarm system call (leo se posa seconds(sto peripou) na stilo to signal)
+
+  #include <unistd.h>
+  unsigned int alarm(unsigned int seconds); 
+
+  #include <unistd.h>
+  int pause(void); //pause stin process mexri na dekti signal
+
+  *H pause theli prosoxi,prepei prota pause kai meta na stilo signal giati
+   alios meno ekei kai kolaei
+ 
+  Kathe process mpori na exi mono 1 outstanding alarm?
+
+  #include <stdlib.h>
+  #include <sys/types.h>
+  #include <signal.h>
+  #include <stdio.h>
+  #include <unistd.h>
+
+
+  static int alarm_fired = 0;
+
+  void ding(int sig)
+  {
+    alarm_fired = 1;
+  }
+
+  int main()
+  {
+    pid_t pid;
+    printf(“alarm application starting\n”);
+    pid = fork();
+    switch(pid) {
+      case -1:   /* Failure */
+        perror(“fork failed”);
+        exit(1);
+      case 0:  /* child */
+        sleep(5);
+        //getppid() dini tou parent to pid,diladi child stelni signal gia alarm
+        kill(getppid(), SIGALRM);  
+        exit(0);
+   }
+   /* if we get here we are the parent process */
+   printf(“waiting for alarm to go off\n”);
+   (void) signal(SIGALRM, ding); //leo otan SIGALRM na kaleso tin ding
+   pause();
+   if (alarm_fired) printf(“Ding!\n”);
+
+   printf(“done\n”);
+   exit(0);
+}

@@ -1,0 +1,605 @@
+1)Litourgiko -> interfaces gia IO (oso to dinaton pio idies)
+
+2)IO code apotelei megalo komati tou sinolikou kodika tou litourgikou
+
+3)Me endiaferi o programatismos ton IO devices,alla sixna gia na tis programatiso
+  prepei na xero pos douleuoun esoterika
+
+4)2 basikes categories IO devices
+ 
+  1)block devices
+    stores data se statherou megethous blocks 
+    kathe block exi diki tou address
+    sixno megethos block 512 eos 65,536 bytes
+  
+    px hard disk,blu-ray disks,usb sticks 
+  
+  2)character devices
+    stelnooun/dexonte xaraktires
+
+    px printers,mouse
+
+8)device controller = endiamesi ilektroniki siskeuei pou xrisimopoieite sixna gia tin 
+                      epikoinonia IO-ipologisti (px graphic card,sata controller)
+
+  Kanoun
+   convert serial bit stream to block of bytes
+   perform error correction as necessary
+   make available to main memory
+
+9)device controller interfaces 
+
+  Metaxi controller + device xrisimeuoun gia na kanoun meros tis doulias pou xriazete
+  
+    
+    Prokimenou oi siskeues na xrisimopoioun idio tropo epikoinonias,exoun ftiaxti
+    interfaces gia sigekrimenes siskeues 
+
+     px interfaces gia hard disks 
+       SATA, SCSI, USB, Thunderbolt, or FireWire (IEEE 1394)  
+
+    Poli low level
+
+    px hard disk -> controller
+
+       Esto 2.000.000 sectors kai megethos sector 512bytes
+
+       stelni ston controller
+         preamble (metadata)
+         data
+         checksum gia error detection
+
+    px  othoni kai graphics card 
+
+        litourgiko stelno odigies gia to ti theli kai i graphic card
+        zografizi ena ena ta pixels,kai to lei stin othoni gia na ta emfanisi
+
+10)Oi controllers exoun 
+   1)control registers (rithmizoun tin epikoinonia)
+   2)buffers   (oxi oli)
+     idika otan stelnoun pola dedomena,giati mpori
+     na min prolabeni o epexergastis na ta katanaloni se pragmatiko xrono i na min
+     thelo na asxolite o epexergastis diarkos me to ti exi i IO
+  
+11)Dieuthiodotisi ton devices
+
+   1)IO ports
+   
+     Control register  -> IO port number  8-16 bit 
+
+     IO port space = sinolo ton ports pou mporoun na xrisimopoiithoun san IO ports
+
+     Epikoinonia ginete me idikes entoles(trexoun mono se kernel space)
+
+     IN REG,PORT  //diabase apo tin PORT kai grapse ston CPU REG 
+    
+     OUT PORT,REG //grapse stin PORT apo ton CPU REG
+
+  2)Memory mapped IO
+
+    Oi IO siskeues exoun kanonikes dieuthinsis mnimis san na itan tmima tis main
+    memory,diladi exo address pou den einai simia stin main memory alla IO 
+    dieuthinsis
+
+    IN R0,4    //to 4 einai address kanoniki alla enai IO address
+    MOV R0,4   //grapse to CPU register R0 stin address 4
+
+    Sinithos oi dieuthinsis pou einai IO address einai stis top addresses tou address
+    space (megaliteres)
+
+
+    Address space = memory space + IO space
+
+    Otan thelo na diabaso i na grapso prota elenxo ean einai sto memory space i sto
+    IO space,kai analoga pao stin mnimi i stin siskeui
+
+  3)Hybrid => ports+memory mapped
+
+    memory mapped gia tous buffers
+    ports gia tous control registers
+
+    x86 architecture = hybrid
+
+     addresses 640K to 1M − 1 being reserved for device data buffers 
+     I/O ports 0 to 64K − 1
+
+13)Sigrisi memory mapped me oxi memory mapped
+
+  0)o diaxorismos kai stis dio periptosis einai aplos
+    diladi to pou anaferome
+
+
+ Thetika memory mapped
+   1)oxi idikes entoles gia egrafi/anagnosi
+      => ligoteres entoles
+      => mporo na tis xrisimopoio san kanoniki mnimi px apo programa C
+         Alios prepei na grafo assembly gia tis idikes entoles pros IO
+
+   2)Prostasia me memory mapped poli apli => dino ston xristi to address space
+     tis sikeuis pou xriazete => elenxo pios exi dikeoma xrisis siskeueis eukola
+    
+ Arnitika
+ 1)memory cache
+
+     oi IO pages den prepei na ginonte cached => prepei na elenxo ean einai IO page
+
+   Problima sinoxis main-cache memory (coherence)
+   
+
+   To problima einai oti i IO epikoinoni epeuthias me tin mnimi kai oxi meso
+   tis cache       ( IO<->Main memory )
+
+   Pros IO
+   Kapia dedomena mporoun na minoun stin cache kai na min pane stin main memory
+   oste na ta pari i IO  => ean pei parta stin DMA engine mpori na min ta pari sosta
+
+   Auto simbeni otan i cache akolouthi to write back(grafo stin main mono otan kapios
+   pai na tin dioxi)
+
+   Sto write through kathe allagi stin cache enimeroni kai tin mnimi.Ara lini to 
+   problima egrafis sto OUT,alla den lino to problima otan IN.
+   (+ anagazo olo to sistima na einai write thought=> problimatiko)
+   
+   Apo IO
+   IN stelno se enan pinaka stin mnimi,kai apo ekei ston processor,o pinakas stin 
+   mnimi epanaxrisimopoieite => pai stin cache,kai se mia nea xrisi o processor
+   pou den xeri oti einai neo data,lei asto to exo kai to perni apo tin cache
+ 
+
+   *Episis den mporo na bazo ta IO dedomena stin cache giati mpori na einai terastia
+    kai tha xano oli tin cache
+    
+ 2)Diaxorismos tis addres tou IO apo Memory
+
+   1)Otan diaforetiko bus IO apo main Memory (me koino bus den iparxi problima)
+     *Me koino bus einai eukolo,elenxoun kai IO kai Memory to bus
+
+     1)Mia lisi einai na ta stelno arxika stin mnimi,kai ean den einai sosti address
+     tote na krino oti einai IO address     
+
+     2)Mia alli lisi einai na balo mia snooping device sto memory bus,kai oles
+       oi address
+     na pigenoun kai stis IO siskeues pou pithanon na exoun tin zitoumeni address
+     To problima einai oti oi IO devices einai pio arges,kai den tha prolabenoun na
+     epexergastoun tin request me tin taxitita tis mnimis
+   
+   2)Mia alli sinithismeni lisi einai na exo prokathorismenes addresses gia IO kai 
+     alles gia memory => xrisimopoiontas enan memory controller,krino pote einai gia
+     IO kai pote einai gia memory kai stelno tin request analoga
+
+     px 640K to 1M − 1 gia IO
+
+     To arnitiko tou pano einai oti prepei na xero at boot time pies einai oi IO 
+     addresses
+ 
+15)DMA(direct memory access)
+
+ 1)Giati DMA
+   Sta kato ipotheto oti exo ena koino bus cpu/dma controller/diafores IO 
+   (ola pernane apo to bus)
+
+   1)xrisi IO => metafora dedomenon pros i apo autes
+   2)xoris dma litourgia
+     px diskos 
+     1)diskos controller perni bits apo disko kai kani error checking
+       ta bazi sto buffer
+     2)interrupt => litourgiko analambani
+     3)i cpu apasxolite me tin metafora auti,me ena ena byte i word 
+       ta dedomena pane stin mnimi
+   
+   3)den thelo na apasxolo tin cpu kai ena ena word/byte na pane stin mnimi
+     => xrisi dma (IO <-> MNIMI xoris na dini entoli entoli i cpu)
+        i metafora ginete anexartita
+     i cpu dini mono tis odigies kai tin metafora tin kani i dma engine
+      IO->MNIMI
+      MNIMI->IO
+
+   *dma den xrisimopoio ean o epexergastis mou periseuei ara den me niazi na 
+   asxolite me tin metafora ,kai gia logous kostous agoras tis dma
+
+ 2)Domi DMA
+   o dma controller sixna einai mia xexoristi siskeuei sindedemeni sto bus
+   kai mpori na epikoinoni me tis IO kai na epikoinoni me poles IO 
+   akoma kai tautoxrona
+   (mpori omos kai na einai ensomatomenos stin IO device => kathe IO ton diko tis)
+
+      1   memory address register(pou tha graftoun ta data)
+      1   byte count register (posa data)
+      1+  control registers px registers gia
+         IO port to use
+         IN/OUT se IO
+         tranfer unit (px byte i word)
+         bytes to transfer ana burst
+         
+   
+ 3)DMA litourgia
+     px diskos
+     1)cpu arxikopoiisi (meta xekinaei to transfer)
+       posa data tha graftoun stin mnimi => timi ston byte counter register
+       pou tha graftoun stin mnimi  => timi ston memory address register  
+     
+       cpu lei ston disk controller diabase(balta sto buffer sou) kai elenxe oti einai
+       ola ok
+     2)DMA stelni read request ston disk controller 
+     3)word pai apo to disk controller sto bus kai meta stin mnimi
+     4)molis pai i word stelno apo to bus oti pige = ackowledgement
+
+       dma grafi lexi auxani ton pointer stin mnimi mioni byte coun,kai ean
+       akoma byte counter>0 kani ta 2,3,4 os otou gini 0 o byte counter
+     5)Molis teliosi byte counter =0 => interrupt stin cpu  
+                
+     *ean exo dma pou mpori na kani tautoxrona poles metafores einai san na exo
+      polous dma se 1 siskeuei px xexoristous registers ktl
+
+ 4)word/block
+
+   1)word-at-a-time
+      stelno mia mia lexi
+      den desmeuo to bus para mono otan stelno
+
+   2)block kai burst mode(grigorotero to argo einai na piaso to bus,meta stelno eukola) 
+      stelno blocks
+      desmeuo to bus(burst),stelno pola blocks kai meta to eleutherono
+
+ 5)Meso DMA i oxi
+   1)fly by mode = device controller -> main memory
+   2)device controller -> dma contoller -> main memory
+     exi to pleonektima oti kani device to device epikoinia
+     alla argi giati xanapernai apo to bus gia na grapsi stin main memory
+
+
+ 6)dma controller xrisimopoiei physical addresses gia ta data,den exi prosbasi sto MMU
+
+
+21)3 Eidi programatismou IO
+ 
+   1)programmed(polling=busy)
+   2)interrupt-driven
+   3)xrisi dma
+
+
+37)Thelo na antidraso otan kapio event
+
+  interrupt vs polling
+
+  to event prokali to interrupt xoris ego na to perimeno,alla exoun megalo kostos
+  logo context switch 
+
+  polling
+    perimeno gia to event,kata meso oro mpori na perimeno to miso tou xronou pou 
+    kani na simbi to event
+
+22)programmed I/O
+
+   polling(=busy waiting(sto user epistrefo otan teliosi i siskeui))
+   1)buffer apo user space ston kernel space
+   2)switch to kernel mode
+   3)perimeno na teliosi i siskeuei
+   4)switch pali se user mode
+
+   copy from user(buffer, p, count);
+   for (i = 0; i < count; i++) {
+     while ( * pr inter status reg != READY) ;
+     *pr inter data register = p[i];
+   }
+   retur n to user( );
+
+   Problima einai oti kolai i cpu kai perimeni tin siskeui na teliosi
+   i cpu einai poli grigoroteri apo tin taxitita pou douleuoun oi IO ara tin spatalao   
+
+23)Interrupt-Driven I/O (epistrefo amesos ston user kai ton idopio me interrupt)
+
+   1)buffer apo user space ston kernel space
+   2)switch to kernel mode
+   3)trexo ton interrupt handler(pio kato analitika)
+   4)switch pali se user mode
+   5)otan teliosi i IO stelni pali etima gia interrupt
+
+   ktl eos otou etsi tmimatika teliosi i ergasia
+
+   kano tmima-interrupt-kano tmima-....-telos 
+
+   //code litourgikou
+   copy from user(buffer, p, count);
+   enable interr upts( );
+   while ( * pr inter status reg != READY) ;
+   * pr inter data register = p[0];
+   scheduler( );
+
+   //procedure ston printer
+   if (count == 0) {
+   unblock user( );
+   } else {
+   * pr inter data register = p[i];
+   count = count − 1;
+   i = i + 1;
+   }
+   acknowledge interr upt( );
+   retur n from interr upt( );
+   
+   Problima = apasxolo kai diakopto tin cpu,to oti den perimeni tin device => 
+     pola interrupts pou kostizoun
+
+
+24)DMA I/O
+
+   H cpu dini tin enarxi kai tin metafora tin kani i DMA controller(siskeuei) 
+   pou otan teliosi enimeroni tin CPU
+
+   copy from user(buffer, p, count);
+   set up DMA controller( );
+   scheduler( );
+
+   acknowledge interr upt( );
+   unblock user( );
+   return from interr upt( );
+
+
+   dma kaliteri genika,ektos kai ean mou periseuei cpu,i i IO einai toso grigori pou o 
+   dma controller den tin prolabeni kai thelo kati toso grigoro oso i CPU
+
+20)Goals of IO-software
+
+   1)uniform naming
+     
+     To onoma tis device px einai panta 1 string i 1 akereos san na itan file
+     
+     px sto unix usb ginete mounted kai fenete apla san 1 fakelos
+
+   2)device independence
+
+     px read a file,anexartita apo auto proerxete hard disk/dvd/usb ktl
+
+   3)error handling
+     na ginete oso to dinaton low level
+     px apo ton controller tis device,xoris na xriasti na klithi o software driver
+        tis siskeueis gia na lisi to problima
+
+   4)synchronous (blocking)  na parexi dinatotita etsi
+     parolo pou ilopoieite asynchronous (interrupt-driven) 
+
+     Parolo pou to physical IO einai asynchronous,to litourgiko mpori na to parousiazi
+     os synchronous blokarontas to programa eos otou teliosi,gia na dieukolini ton
+     programatisti
+
+     Alles fores gia high perfomance mpori o xristis na theli asynchronous IO
+
+   5)buffering
+
+     xirizonte sosta to buffer pou exoun oi IO
+
+   6)sharable vs. dedicated devices
+   
+     prepei na epitrepoun polapli prosbasi se mia siskeuei px diskos => access apo pola
+     applications se alla simia
+
+     den xriazonte oles oi siskeues sharable access,px pliktrologio logika exo 1 xristi
+
+
+25)IO software layers
+
+   Low Level
+   1)interrupt handlers //Wake up driver when I/O completed
+   2)device drivers //Set up device registers; check status
+   3)device independent operating system software
+     //Naming, protection, blocking, buffering, allocation
+   4)user-level IO software //Make I/O call; format I/O; spooling
+   Hig level
+
+26)interrupt handler ti kani epano me ta interrupts
+
+27)Device drivers
+
+   device-controller-driver-ipolipo litourgiko
+
+   1)Software gia xirismo ton siskeuon
+     ta ftiaxnoun sinithos oi kataskeuastes ton siskeuon se diafores ekdosis analoga
+     to litourgiko
+     (paliotera otan ixa liges standard IO itan meros tou litourgikou apeuthias)
+   
+   2)1 driver 1 siskeui (exatomikeumeni drivers)
+     H 
+     1 driver 1 omada sikeuon
+
+     px SCSI disk driver => gia omada scsi siskeuon 
+
+   3)Mpori kapia drivers na mirazonte koina layers
+     px usb sticks/cameras/mouses,ola mirazonte to usb tropo epikoinonias tou driver
+     => exoun koina layers kai exatomikeumena layers oi drivers tous
+
+   4)Oi device drivers trexoun sinithos se kernel space,alla mporoun na trexoun kai
+     se user space me system calls(apofigi system crashes)
+   
+   5)Apo pano basikos diaxorismos sti IO einai 
+     block devices
+     character devices
+
+     Sinithos exo standard interface gia tis block devices
+     kai standard gia tis character devices
+
+   6)Basikes litourgies pou prepei na parexi o driver
+     read/write
+     initialize
+     power managment
+     log events
+     error checking
+     na kani tis abstract odigies apo device independent software se sigekrimenes
+       px ean diskos kai zitai to independent ena block,auto na gini arithmos 
+       cylinder ktl
+     elenxos ean i siskeuei einai diathesimi
+     na dini tis entoles se lista oste na tis ekteli siriaka o controller
+     
+     
+   7)driver ginete sleep ean argi o controller
+
+   8)oi drivers prepei na dexonte poles klisis akoma kai otan trexoun (reentract)
+
+   9)hot-pluggable system = devices can be added or removed while the computer running
+
+     Prepi na min crashari to sistima ean tin bgalo/balo,kai na min xathoun resources
+     px kolisoun data stin mnimi
+
+   10)drivers den mporoun na kanoun system calls,alla mporoun na kaloun idikes kernel
+      procedures px DMA controller call ktl
+
+28)Device independent IO software
+
+   Stoxos = na periexi tis koines litourgies
+            kai idiou tipou interfaces gia oles tis siskeues
+
+   1)Uniform interfacing+naming+protection for device drivers
+     1)Interfacing
+       Thelo 1 interface sto litourgiko na epikoinoni me omada apo drivers
+       (1 interface/device type)
+       => Den thelo xexoristo kodika sto litourgiko/driver,giati tha prepei na grafo
+      poli kodika alla kai na aneneono to litourgiko gia kathe nea siskeuei
+       => oi kataskeuastes ton drivers epikoinonoun me idio tropo me to litourgiko
+      2)Naming
+        To onoma tis device px einai panta 1 string i 1 akereos san na itan file
+        px sto unix usb ginete mounted kai fenete apla san 1 fakelos
+        Auto einai to i-node for a special file 
+         1)major device number(gia locate tou driver tis)
+         2)minor device number(gia locate nomizo tis sigekrimeni siskeueis
+          (1 driver/type))
+        *minor+major device numbers exoun oles oi siskeues
+
+      3)protection => orizo pios xristis exi prosbasi se pies siskeues
+
+   2)Buffering
+      Tous thelo gia dio logous
+      1)gia na min apasxolo tin cpu gia mikrometafores
+      2)gia na prolabeno ta data,ean mou erthoun pola isos na min mporo na ta stilo
+        amesos
+
+      Software buffers
+      1)oxi buffer=> problima,den thelo na asxolite to logismiko gia liga data
+      2)sinithos exo 2 se kernel space kai 1 se user space (double buffering)
+       otan full kai pai na antigrafti gia oti neo erthi xrisimopoio ton neo buffer
+      *mia ali paralagi einai to circular buffer pou otan bazo neo sto buffer tote
+       bgazo apo ton buffer  
+
+   3)Error reporting
+      IO epirepis se errors=> litourgiko prepei na anakampt
+      Skopos einai na linonte oso pio xamila ginonte kai na min fenonte sta psila layers
+
+      device spesific => driver prepei na to lini
+      device independent => operating system to lini
+
+     1)programming errors 
+       px write se input IO
+
+       invalid buffer addresses
+       invalid parameters
+       invalid device number
+     2)IO errors
+       px xalase tmima tou diskou
+      
+       H lisi einai apo report kai retry ,se program fail i akoma kai se system crash
+
+   4)Allocating and releasing dedicated devices
+     1 tropos einai ean xrisimopoiite => failed
+     alos einai na beni se oura
+
+   5)Providing a device-independent block size
+     
+     exo ena logical block size,parolo pou to physical block size mpori na einai
+     alo gia kathe siskeui,parola auta to device indepedent software douleuei san
+     oles to idio block size
+   
+  
+34)User-Space I/O Software
+
+   Xrisi libraries apo user space gia klisi tou IO px printf(+format output)/scanf 
+
+   Iparxoun 2 tropoi 
+    print kati
+    spooling=to bazo se ena directory px kai
+      kapios daemon kapia stigmi to perni apo ekei gia na to tiposi
+   
+   Spooling einai enas tropos na afino ena px daemon print software na krini ti
+   kai pote tha tiposi
+   
+
+35)Olokliromeno paradigma
+
+
+   user->operating system(device independent software)->driver->controller->IO
+
+   o controller enimeroni stin epistrofi ton operating system meso interrupt
+
+36)clocks(=timers)
+
+   kanoun poles doulies pera apo to na kratane tin ora kai imerominia
+   
+37)Clock hardware => generates interrupts ana diastimata pou orizo
+
+   enas crystal bgazi enan palmo pou autos pai se enan register pou einai
+   counter kai ton mioni se kathe palmo
+
+   kai analoga to poso xrono thelo na metriso toso bazo ton counter na einai
+   otan pai sto 0 tote cpu interrupt
+
+   
+   one shot mode => apla midenizi o counter ston register 1 fora
+
+   square wave mode => exo alon enan register me mia timi,kai kathe fora pou ginete
+      0 o arxikos register antigrafo xana tin arxiki timi,kai ginete apo tin arxi
+      to metrima => clock ticks
+
+
+   programmatible clock chips = rologia pou mporoun na programatistoun oste na paragoun
+      diaforous xronous
+
+   sto motherboard iparxi ena roloi me mia mpataria pou metraei tin ora,kai enimeroni
+   to software
+
+38)clock software = clock driver
+
+   Ean thelo polous timers tous ftiaxno os exis
+
+   px gia 3sec,gia 9sec,gia 16 sec
+
+ 
+     Exo mia lista me stixia,kathe tick afero -1 apo to proto stixio
+     sto 0 => ligi o 3 sec => head to 6 ktl
+     
+     3-6-7
+     6-7
+     7
+
+   Ta kani/elenxi ola auta se kathe tik
+
+   1)Maintaining the time of day.
+     exo enan counter kai se kathe tik auxani
+     metrao tikskai ta prostheto se kapia gnosti ora 
+     => athrizo kai brisko tin ora (px apo to boot)
+   2)switch ean quantum
+      otan xekinaei i kathe process to quantium tis mpeni se antistrofi metrisi
+      otan zero kalite o scheduler
+   3) Accounting for CPU usage
+     1)me 1 deutero timer metrao poso pragmatika etrexe ii process(poso pire apo to
+      quantium tis)(mporo na to metriso kai me mia global metabliti alla mperdema)     
+   4)timers gia eidopoiisis
+     alarm system call/signals/eidopoiisis made by user processes.
+   5)Providing watchdog timers for parts of the system itself
+     watch dog times
+       to litourgio xrisimopoiei pola timers gia na elenxi ean px mia siskeui kolise  
+       otan lixi to timer trexete mia procedure
+   6)Doing profiling, monitoring, and statistics gathering.
+      grafo sto istoriko,px times tou program counter
+
+
+39)Soft timers
+
+   Ean den simferi prokalo interrupts oute na kano polling,
+   tote xrisimopoio soft-timers.Einai gia poli mikrous xronous giati sto kernel
+   mpeno sinexia
+
+   Exo ena pinaka me tous soft-times,otan bgeno apo to kernel mode prin bgo
+   elenxo ean elixe kapios timer,ean nai ontas se kernel mode,kano to event pou
+   prepei enimerono ton table kai bgeno apo kernel mode
+
+   (i logiki einai afou ime mesa as elenxo)
+   
+40)pidixa ola ta ipolipa
+   

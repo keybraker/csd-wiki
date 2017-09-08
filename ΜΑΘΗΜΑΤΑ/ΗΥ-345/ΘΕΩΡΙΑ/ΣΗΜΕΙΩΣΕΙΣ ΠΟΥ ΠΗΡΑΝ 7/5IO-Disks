@@ -1,0 +1,292 @@
+1)disks 10**3 pio argos apo RAM
+
+2)H kathisterisi einai mexri na bali tin kefali ston katalilo simio
+  1-10msec
+  meta exo 50MB/sec
+
+3)Blepo ton disko san polous kilidrous o enas mesa ston alon = cylinders
+  Episis ton blepo san diskous me ogo o enas pano ston alon = platters
+  (anamesa sta platters exo heads)  
+
+  Xorizo ton disko se omokentrous kiklous+san pizza
+    
+  track = omokentros kiklos tis platter(apostasi metaxi dio gitonikon omokentron)
+   (i epifania tou kilindrou(omokentros kiklos),periexi pola tracks)
+
+  sector = to komati pou antistixi se kapio track 
+     (hundreds in hard discks sinithos 512bytes)
+     (stous sinxorous diskous oso pio makria apo to kentro einai to track => pio megalo
+      => exi pio pola sectors)
+
+  cluster = omada sinexomenon sector (sinexomenon me tin fora peristrofis)
+
+
+  px   36000 kilindroi
+       255 tracks ana kilindro
+       63  sectors ana track
+
+4)Oi palioi diski apla epistrefoun ena bit stream ston controller
+
+  IDE/SATA diskoi omos exou microcontroller(kani caching,bad block remapping ktl)
+   mesa stin IO kai boithane ton controller oste i epikoinonia na ginete pio high level
+
+  
+5)overlapped seeks 
+
+  Enas controller mpori na xirizete polous diskous tautoxrona,ston enan na grafi
+  ston alon na diavazi ktl
+
+  Alla controller - mnimi iparxi mono 1 data path
+
+
+6)Access
+  (x, y, z) //  (cylinder,head,sector) //max values (65535,16,63)
+  
+  To software zitaei logical access ekei kai o controller kani to mapping se
+  alithines times ston disko 
+
+
+7)Raid (Redundant Array of Inexpensive Disks)
+
+  Anti na exo 1 megalo disko SLED (Single Large Expensive Disk)
+  exo polous mikroterous sindedemenous me enan Raid controller(ftontizi na enoni 
+  ta data ktl) pou douleuoun paralila,kai parolo pou einai poli diskoi sto 
+  litourgiko fenonte san na einai enas
+
+  *Gia paralilia thelo otan mou zitane kati ena tmima na einai disk1,ena alo disk2
+   ktl oste na mporo na tous douleuo paralila(oxi oti mou zitane se 1 disko)
+
+  Mpori na exo Raid SCSI (scsi o controller kai oi diskoi) ,
+  i RAID SATA (douleuei amesos me to software xoris kapio idietero drives 
+  installation pio ftino)
+
+  
+  RAID => virtual disk , autos o virtual disk exi mapping stous pragmatikous diskous
+        me diaforous tropous,ta RAID level 0 eos level 6 einai diaforetikoi tropoi
+        katanomis ton dedomenous stous diskous
+        Stoxos einai i paralilia kai i asfalia ton dedomenon
+
+  Levels 0 eos 6 =>  sel 374 sxima
+
+8)RAID Level 0
+
+  strip = k sectors
+
+  Striping = 
+  Bazo k sectors se ena disko kai tous epomenous k ston epomeno disko ktl
+   otan ftaso sto telos xanarxizo apo ton proto disko
+
+  Douleuei poli kala otan mou zitane pola data pou pianoun olous tous diskous
+
+  Arnitika = ean kapios diskos xalasi(pou exo polous => pithano)
+     tote problima,giati apo pola data the lipoun komatia
+
+9)RAID Level 1 (backup)
+
+  Gia kathe disko exo kai enan me to back up tou
+
+  => write se taxitita san na exo tous misous
+     read omos mpori eos 2x
+
+  Recovery eukoli => bazo neo disko kai antigrafo apo to backup tou
+
+10)RAID Level 2 (1 bit/disko synchronized drivers)
+
+   Edo anti na grafo strip ana disko,grafo bit ana disko
+   Analoga me to posous diskous exo kai poso megales words exo kano to xorisma
+
+
+   px 32 bit word = 4 bytes => 8 halfbyte (4 bits)
+      +3 parity bits  (parity=mono i zigo to athrisma)
+      = 7 bits => 7 diskous (1 bit/disko)
+
+   Prepei i diskoi na douleuoun sinxronismena,oste otan zitao ena halfbyte,na mou dini
+   o kathenas 1 bit(den mporo na parimeno kapion,gia na diabaso kati toso mikro)
+
+   Ta parity bits einai gia asfalia
+   Exo pola gia na kano oxi mono error detection alla kai error correction
+
+11)Raid Level 3 (1 parity bit)
+
+   Edo px ean egrafa halfwords tha egrafa 5 bits
+
+   4 bit + 1 parity  
+
+   1 bit arkei giati 1 diskos mpori na xalasi mono kathe fora kai xero pios xalase,
+   ara exo kai detection kai correction (analoga me to parity xero ean ixe sosta 0 i 1)
+
+12)Raid Level 4 (parity strip)
+
+   Edo einai san to Level 0 ,alla exo kai enan extra disko pou exi to parity strip
+ 
+   px   strip0 strip1 strip2 strip3 parity_strip_0-3
+        strip4 ...                  parity_strip_4-7
+
+   Edo ola ta parity eiani ston teleuteo disko
+
+   To parity strip ipologizete os exis
+
+    strip0
+    strip1
+    strip2
+XOR strip3
+=   parity_strip_0-3 
+
+
+    To recovery ginete pali me ton idio tropo,alla sto XOR simetexi to parity_strip_0-3
+    kai to apotelesma einai to strip pou xathike
+
+   Ta parity otan allazo dedomena prepei na ta xanaipologizo,kai ean ola einai se 1 
+   drive auto simeni oti tha sikoni poli baros 
+
+13)RAID Level 5(parity_strip oxi se ena disko alla kiklika)
+
+   Arxika ston 4 disko,meta sto 3 ktl ,kiklika apo telos pros arxi
+  
+
+14)RAID LEVEL 6
+
+   Exo 2 parity strips ,gia perisoteri asfalia
+
+
+15)Formating 
+
+   Prin apothikeuso sto disko prepei na ton kano format me xrisi software
+
+   Sector(px 512 bytes)
+     preable(pou arxizi o sector+cycilder number+sector number)
+     data
+     ECC (error recovery)
+
+   Exo epipleon sectors "krifous" gia na antikatastisoun xalasmenous sectors
+
+   => formating diskoi mikroteros xoros apothikeusis 20% pianoun ta pano
+
+   Se kathe track arithmo tous sectors xekinontas apo to 0
+
+16)cylinder skew = spinning offset ,apostasi teleuteou sector track me proto sector
+     tou epomenou
+
+   Otan diabaso teleuteo sector tou track i kefali anebeni kai o diskos girizi 
+   kai thelo na pesi ston proto sector tou epomenou track,giauto ta bazo etsi oste
+   na pesi sosta i kefali(ean to xaso tha prepei na kano olokliro spin)
+
+   px ean girnaei prota ta pano,to sector 0 tou epomenu track einai pio xamial apo tou
+      proigoumenou
+
+   Analoga me taxitita ktl orizo to offset 
+
+17)Interleaving/Buffering
+
+   O controller thelo na exi arketa megalo buffer oste na xoraei to track/tracks 
+   oste na mpori na diabazi eleuthera 
+
+   Alos tropos gia na petixo to pano alla me kathisterisi einai to interleaving,
+   otan den exo arketo buffer,tote bazo tous sectors sto track me endiamesous 
+   gia kathisterisi
+
+   0 4 1 5 2 ktl   oste sto 4 na eimai mexri na stilo to 0 kai meta na diabaso to 1 ktl
+
+18)Partition
+ 
+   Meta to format ftiaxno partition table
+
+   H kathe partition einai san enas logical xexoristos diskos
+
+   Se partition bazo oti thelo litourgiko/swap/sketo xoro apothikeusis
+   (sixnos logos xrisis einai i iparxi 2+ litourgikon)
+
+   sector 0 = MBR(Master Boot Record) = boot code+partition table
+
+   partition table = starting sectors gia kathe partition
+
+   booting partition = ston partition table fenete san active partition 
+
+   Meta kano high level format se kathe partition xexorista
+   creates a boot sector stin partition ean einai bootable
+   (auto diabazete otan pao na kano boot apo tin partition kai kali ena programa 
+    ton boot loader,gia na bri to litourgiko)
+   kathorizete to root directory kai to adio file-system
+   Episis enimeroni ton partition table gia to filesystem tis partition
+   
+19)Disk arm scheduling algorithms
+
+20)Taxitita exartate 
+   1)Seek time (the time to move the arm to the proper cylinder)
+   2)Rotational delay (how long for the proper sector to appear under the
+     reading head).
+   3)Actual data transfer time.
+
+   to 1) einai to poli argo => asxoloume me to pos tha kano grigoro to 1)
+  
+21)Algorithmi metakinisis kefalis
+
+  Oi diskoi exoun para pola requests na exipiretisoun,giauto prepei na orisoun 
+  mia seira pou ta exipiretoun
+
+  Enoite otan exo pola requests gia ton idio kilindro tote otan pao se kapio
+  kilindro ta exipireto ola,afou ta balo stin seira se sxesi me tin thesi pou
+  eimai
+
+  1)FCFS (first come first servered)
+
+    poli kakos giati px i kefali mpori na einai ston kilindro 40 kai na erthi
+    na diabasi apo ton 1,kai meta apo ton 30 ktl
+
+ 
+  2)SSF (shortest seek first)
+
+    einai kalos,alla oxi beltistos,giati den lambani tin sinoliki apostasi alla
+    pou einai pio konta
+
+    alla den einai dikeos os pros ta requests
+
+    enas fortomenos diskos tha kataligi na einai sinexia sto meso oro diladi
+    stous meseous kilindrous kai oi akriani den tha exipiretounte pote
+
+
+  3)Elevetor algorithm
+    Exo 1 bit pou kratao tin kateuthinsi,pou pigeno,kai pao max pros ta ekei
+
+    px ean pao pano bit=UP,prota ftano stin PIO PSILI REQUEST me stasis gia requests,
+       kai meta allazo to bit=DOWN kai pao pros ta kato me stasis gia requests 
+       mexri TIN PIO XAMILI REQUEST
+   
+    Ean den exo request ite pano ite kato perimeno
+
+  4)Paralagi tou elevator algorithm
+
+    pao mono UP me stasis kanonika kai otan PIO PSILI REQUEST pao stin pio XAMILI
+    request xoris omos stasis kai meta xana up
+
+22)Oi diskoi exoun cache kai auto pou kostizi einai i kefali => otan pao ektos
+   apo auto pou thelo diabazo kiala kai ta bazo sto cache px 4MB
+   (2 caches exoun ena read kai enan write cache)
+   (logika afou einai epomena einai pithanon na zitithoun meta)
+
+   Mpori kai to operating system na exi cache gia ton disko,alla auto to cache
+   einai software me diafora kritiria,oxi px idios kilindros apla opos to disk cache
+
+23)Errors pidixa
+
+
+24)stable storage= when a write is issued to it, the disk 
+     either correctly writes the data or it does nothing,
+     leaving the existing data intact
+
+   
+   Exo 2 diskous me idia dedomena
+
+   1)Stable writes => grafo kati kai to diabazo mexri na bebeotho oti graftike 
+       oti eprepe (arxika to kano ston 1 disko kai meta ston alon)
+
+   2)Stable reads => diabazo kai elenxo ECC ean error tote apo ton alo disko
+     (exeretika apithano 2 diski error sto idio simio)
+
+   3)crash recovery => sigrino ta dedomena kai grafo kai stous 2 ta sosta
+       px o 2 exi ECC error kapou => perno to sosto apo ton 1 kai tou to grafo
+
+     Gia pio grigoro crash recovery mporo na grafo pio ekana write otan kolise
+     kai na ftiaxno mono to trexon
+     (mporo na to grafo se mia cmos mnimi me mpataria opos auti pou krataei tin ora
+      nonvolatile RAM)

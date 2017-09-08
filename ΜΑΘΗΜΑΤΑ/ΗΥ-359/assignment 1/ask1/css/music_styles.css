@@ -1,0 +1,41 @@
+ .menu_nav {text-transform: uppercase;margin: 0 auto;display:inline;list-style-type:none}
+      .active  {display: block;text-align: center;color: white;padding: 14px 16px;text-decoration: none; background-color: #FFAE00;}
+      .active1 {display: block;text-align: center;color: white;padding: 14px 16px;text-decoration: none; background-color: #FFBE00;}
+      .active2 {display: block;text-align: center;color: white;padding: 14px 16px;text-decoration: none; background-color: #FFCE00;}
+      .active3 {display: block;text-align: center;color: white;padding: 14px 16px;text-decoration: none; background-color: #000000;}
+
+        h1{
+          text-align:center;
+          color: #fff;
+        }
+
+        
+        footer {
+          padding: 1em;
+          color: white;
+          clear: left;
+          text-align: center;
+          clear: both;
+          margin-bottom: 0;
+        } 
+        audio {
+          position: relative;
+          bottom: 0;
+          margin-left: 35%;
+          margin-right: 35%;
+          width: 30%;
+          margin-bottom: 0px;
+          margin-top: 0px;
+        }
+
+        @media only screen and (max-width: 1024px) {
+          audio {
+          position: relative;
+          bottom: 0;
+          margin-left: 15%;
+          margin-right: 15%;
+          width: 70%;
+          margin-bottom: 0px;
+          margin-top: 0px;
+        }
+      }

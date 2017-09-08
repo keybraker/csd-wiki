@@ -1,0 +1,32 @@
+Merika Apo Ta Pollpalis epilogis.
+
+-eidh lexikografikwn analutwn.
+kwdika.
+
+
+-pote mia grammatiki den einai diforoumeni?
+	idios arithmos vimatwn se kathe paragwgi.
+
+-pote mia grammatiki den einai diforoumeni?
+	ohi 2 suntaktika dentra gia tin idia paragwi
+
+-exalipsi diforoumenis grammatikis me aristeri prosetairistikotita.
+
+-eheis auto
+t=[{"()" : (function(z,i) {if (z[0]) z[0]=i else z[0]+=i;  print(z[0]); return z;     } )]
+
+ti paragei auto ?
+
+t(1)(3)(5)(8);
+
+14917
+
+
+-environemt function
+thesi stack gia locals , globals, formals
+
+
+-top , topsp kai stack sugekrimeni stigmi tou programmatos.
+
+-quads pou paragei to while.
+

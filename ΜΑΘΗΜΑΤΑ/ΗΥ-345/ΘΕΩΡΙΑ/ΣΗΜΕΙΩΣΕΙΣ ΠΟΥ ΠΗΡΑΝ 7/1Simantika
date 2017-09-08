@@ -1,0 +1,150 @@
+1024=2**10 
+
+k    m
+M    μ (10-6)
+G    n
+T    p
+
+
+1)Operation systems  
+  1)kani eukoli tin xrisi tou hardware apo ton application programmer/user
+    Meso abstractions(px diepafes)
+
+     Aplousteboun para poli tin xrisi tou hardware
+     O tropos pou to kanoun einai meso drivers(exidikeumenous gia siskeues)
+     kai device independant software pou einai gia omada siskeuon 
+     (meta exi leptomeries gia to ti prepei na parexi to litourgiko oste na dieukolini
+      max ton xristi)
+     Px gia sata odigies einai 450 selides,me basi autes ftiaxno disk driver
+     kai meta xrisi apo ta application einai eukoli
+
+  2)beltistos tropos axiopiisis tou hardware
+    (o tropos pou xirizete to litourgiko to hardware einai beltistopoiimenos se sxesi 
+    me ena tixeo programatismo pou tha mporouse na kani enas xristis)
+ 
+  3)diamirasmos tou hardware se ola ta programata kai se olous tous xristes 
+    me apodotiko/dikeo tropo = multiplexing (sharing) resources
+    Exo polous xristes me pola application o kathenas,ola me koina resources => 
+    anagi apo to litourgiko na mirazi ta resources alla kai na orizi xronous
+     xrisis
+
+    Multiplexing(sharing) resources.Thelo apodotika kai dikea
+    1)time //orizo xroniki sira,kai xrono xrisis apo kathena 
+    2)space //xorizo tin resource kai perni o kathenas ena tmima px mnimi
+
+2)Main memory(analitika)
+    1)RAM (RANDOM ACCESS MEMORY)  //grigori
+      read/write/volatile(xani dedomena xoris reuma)
+    2)ROM  
+      read only/non-volatile
+    3)EEPROM(Electrically Erasable PROM)
+      +flash memory RAM(to bios einai edo apothikeumeno)
+      read/write/nonvolatile
+    4)CMOS memory 
+      volatile alla me bataria san non-volatile
+      gia imerominia i gia parametrous pou rithmizo px allages sto bios
+
+    5)to bios einai se flash 
+
+
+3)Buses
+
+   Arxika eixa ena bus kai ola itan sindedemena pano tou
+
+   ISA -> PCI -> PCIexpress (exelixi)
+
+   shared bus architecture => 1 sto bus kathe fora (palia) ISA
+   parallel bus architecture => stelno se pola kalodia to idio minima PCI
+   serial bus architecture => stelno sigekrimena ta dedomena se messages(lane= apostoli)
+     *Ean thelo mporo na stilo pola lanes paralila
+   
+   
+
+   Meta eixa pola buses PCI/PCIe/SATA/USB/DMI
+   px domi
+    multicores me shared cache memory bus
+    CPU -DDR3 BUS- memory
+    CPU -PCIe bus - GPU
+    CPU-DMI bus-controller(kai ston controller sindeo poles alles siskeues me 
+      px USB/PCIe/PCI/SATA buses/SCSI (Small Computer System Interface) bus)
+   
+   Mporo na exo pola buses na pigenoun se controller kai me DMI meta na sindeonte
+   me ipolipa sto motherboard
+
+4)plug and play pc => bazo dinamika siskeues => io ports+onomata oxi kathorismena
+   alla dinamika orismena
+
+5)booting
+  1)BIOS(software se flash ram) epilegi boot device(xrisimopoiei plirofories apo CMOS memory)
+  2)diabazi 1 sector(MBR)
+  3)partition table
+  4)1 block(boot block) tis active partition
+  5)fortonete litourgiko(xrisimopoiei plirofories apo to bios gia siskeues)
+
+6)OPERATING SYSTEM STRUCTURE
+
+  1)monolithic systems
+  2)layered systems
+  3)microkernels
+  4)client-server systems
+  5)virtual machines
+  6)exokernels
+
+  
+8)Monolithic (to pio sixno)
+   Main procedure
+     to litourgiko einai 1 programa pou to kano compile kai to trexo
+     (apo kodika litourgikou mporo na kaleso opia sinartisi litourgikou thelo)
+   Xrsi System calls gia kernel mode
+   boithitikes sinartisis,libraries
+
+   Arnitika einai i poliplokotita tou oti den to xorizo se autoteli tmimata
+   kai otan crash pai olo crash
+
+9)Layered Systems
+
+   5 The operator
+   4 User programs
+   3 Input/output management
+   2 Operator-process communication  
+   1 Memory and drum management
+   0 Processor allocation and multiprogramming
+
+
+   Ta layers einai xexorista programata,pou epoikoinonoun
+
+10)Microkenels
+
+   Exo 1 micro kernel me ta basika kai ta ipolipa trexoun san user processes
+   Ean crash
+    oti trexi se user mode exi ligotera dikeomata,ara den mpori na kani megali zimia
+    episis den tha kolisi olo to kernel    
+
+   3 layers of processes pou trexoun se user mode
+   user programs
+   server (basikes litourgies tou litourgikou px file managers)
+   device drivers(den mporoun apeuthias call se IO prepi na kalesoun kernel)
+
+   To microkernel asxolite me
+   Microkernel handles interrupts, processes,scheduling, interprocess communication
+   
+11)Client server model
+
+   Xorizo tis process se servers kai clients
+
+   To modelo auto einai gia disturbed operating systems
+
+12)virtual machines
+
+   Type-1, native or bare-metal hypervisors
+    to kathe litourgiko trexi apeuthias sto hardware
+
+   Type-2 or hosted hypervisors
+    exo ena host litourgiko kai ta ipolipa trexoun 
+    san guests litourgika,san processes tou litourgikou
+    (access sto hardware exi mono to host,apo auto zitane ta alla)
+
+13)Exokernels
+
+   Xorizo resources kai kathe virtual machine exi ta dika tou
+   (sto pano ginotan me mapping ti aniki se pion,edo orizete exarxis)

@@ -1,0 +1,725 @@
+1)1 process pola threads 
+ 
+  *main thread to arxiko
+
+2)Mirazonte ta threads
+
+  shares global variables
+  file descriptors
+  signal handlers
+  current directory state
+
+3)Kathe thread exi diko tou stack ara mpori na exi dikes tou local variables
+
+4)Ta threads ean den exoun multicore,tote trexoun pseutoparallila,o kirios logos
+  xrisis tous se single cpu einai gia na apofigo to blockarisma.
+
+  px thelo na kano kati alla na min to perimeno,to bazo se ena thread kai to trexo
+     kai sinexizo
+
+4)Thetika ton threads
+  1)kostizoun poli ligotero apo nea process
+    kai i enalagi ektelesis ton thread apo tin cpu einai poli pio eukoli  
+  2)Kapia simia sta applications einai diaxorismena apo tin fisi tous 
+    kai ilopoiounte kalitera os diaxorismena
+
+     px clients se database server
+  3)ean perimeno px blocking IO,tote mpori kapio alo thread na xrisimopoiei
+    tin cpu
+
+5)Arnitika
+  1)sinxronismos diskolos
+
+    Sinxronismos simeni na oriso diladi tin sosti seira
+    San na itan 1 thread toulaxiston sta simia pou i seira exi simasia
+
+6)pthread library gia threads
+  Prepei
+   define macro _REENTRANT
+   include pthread.h
+   sto compile na -1pthread
+
+7)Xrisimopoio re-entrant routines,einai sinolo sinartiseon pou einai thread safe
+  kai exoun paromia onomata me tis palies px  gethostbyname_r 
+  //to _r einai i re-entrant ekdosi
+
+8)Create a new thread
+
+  #include <pthread.h>
+  int pthread_create(pthread_t *thread, pthread_attr_t *attr,
+                     void*  (*start_routine)(void *), void *arg);
+
+  pthread_t = ekei apothikeuete to id tou thread otan ftiaxti
+
+  pthread_attr_t *attr =  attributes ,sinithos NULL
+
+  void*  (*start_routine)(void *) = i sinartisi pou tha trexi sto neo thread
+    //ta void* ginonte match me olous tous pointers.alla anagastika i proti
+    //function exi 1 argument
+    
+  void *arg = to orisma pou tha perasi stin start_routine
+
+  returns 0 => ola ok. (alios !=0 iparxi lista me pithana error numbers)
+
+9)p_thread_exit()  //tin kali to thread otan teliosi miazi me exit() stis process
+  
+  #include <pthread.h>
+  void pthread_exit(void *retval);
+    
+
+10)p_thread_join 
+ 
+  //san wait,tin kali autos pou eftiaxe to thread kai perimeni na teliosi
+   
+   #include <pthread.h>
+   int pthread_join(pthread_t th, void **thread_return);
+
+   Den tin xrisimopoio aparetita tin xrisimopoio mono otan thelo na perimeno
+   kapio thread pou teliose,gia na paro to orisma pou ebale stin pthread_exit
+   to thread (timi tou thread_return).Ta thread pou den me niazi na ta perimeno
+   legonte detached threads kai otan ta ano init bazo sigekrimeno attr.
+   Pio kato gia detached threads+attr
+
+  *Ta thread apoteloun exeresi sto error,giati otan einai ola ok epistrefoun 0
+
+11)Ta threads mirazonte tis global variables.
+   Episis i sinartisi pou xekinaei to thread mpori na pari 1 void* orisma
+
+12)Paradigma
+   
+   Ftiaxno ena thread,kai perimeno me join na epistrepsi
+   To thread xekinaei me tin function pou allazi ena koinoxristo string(global variable)
+   To perni san orisma hello world(den xriazotan exi prosbasi kai apeuthias)
+   allazi tin global variable to thread kai epistrefi
+   
+   #include <stdio.h>
+   #include <unistd.h>
+   #include <stdlib.h>
+   #include <string.h>
+   #include <pthread.h>
+
+   void *thread_function(void *arg);
+   char message[] = "Hello World"; //auto tha allaxi to thread
+
+   int main()
+   {
+     int res;
+     pthread_t a_thread;
+     void *thread_result;
+     
+     
+     res = pthread_create(&a_thread, NULL, thread_function, (void *)message);
+
+     if (res != 0)  //ean error stin dimiourgia
+     {
+       perror("Thread creation failed");
+       exit(EXIT_FAILURE);
+     }
+
+     //wait thread meso ID=a_thread  to finish
+     //thread_result perni to orisma pou ebale to thred sto pthread_exit()
+     res = pthread_join(a_thread, &thread_result);
+
+     if (res != 0)
+     {
+       perror("Thread join failed");
+       exit(EXIT_FAILURE);
+     }
+     printf("Thread joined, it returned %s\n", (char *)thread_result);
+     printf("Message is now %s\n", message); 
+     exit(EXIT_SUCCESS);
+  }
+
+  void *thread_function(void *arg)
+  {
+    printf("thread_function is running. Argument was %s\n", (char *)arg);
+    sleep(3);
+    strcpy(message, "Bye!");
+    pthread_exit("Thank you for the CPU time"); //thread terminate
+  }
+
+
+ Compile
+  gcc -D_REENTRANT thread1.c -o thread1 -lpthread
+
+  //-o thread1 = onoma ektelesimou arxeiou
+  
+12)Polling =H cpu apo mono tis enalasi ta threads 
+            px otan to ena pai sleep tote pao sto alo
+
+   Yparxoun methodoi sinxronismou pou kathorizo ego pote ginete to switch
+
+13)Paradigma sto opio i cpu enalasi to pio ekteli,auto simbeni logo tis sleep
+   otan se ena thread kano sleep piano ena allo,edo kai sto main thread kano sleep
+   kai sto thread kano sleep,opote enalasonte
+
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <pthread.h>
+
+void *thread_function(void *arg);
+int run_now = 1;
+char message[] = "Hello World";
+
+int main() {
+    int res;
+    pthread_t a_thread;
+    void *thread_result;
+    int print_count1 = 0;
+
+    res = pthread_create(&a_thread, NULL, thread_function, (void *)message);
+    if (res != 0) {
+        perror("Thread creation failed");
+        exit(EXIT_FAILURE);
+    }
+
+    while(print_count1++ < 20) {
+        if (run_now == 1) {
+            printf("1");
+            run_now = 2;
+        }
+        else {
+            sleep(1);
+        }
+    }
+
+    printf("\nWaiting for thread to finish...\n");
+    res = pthread_join(a_thread, &thread_result);
+    if (res != 0) {
+        perror("Thread join failed");
+        exit(EXIT_FAILURE);
+    }
+    printf("Thread joined\n");
+    exit(EXIT_SUCCESS);
+}
+
+void *thread_function(void *arg) {
+    int print_count2 = 0;
+
+    while(print_count2++ < 20) {
+        if (run_now == 2) {
+            printf("2");
+            run_now = 1;
+        }
+        else {
+            sleep(1);
+        }
+    }
+
+    sleep(3);
+}
+
+
+12)detached threads(+Thread Attributes)
+   detached thread= thread pou to thread pou to ekane init den to perimeni na kani join
+   
+   Kathorizo sigekrimeno attr sto init tou
+
+   //kani init ena attr object
+   #include <pthread.h>
+   int pthread_attr_init(pthread_attr_t *attr);  //0 success
+
+   //Afou ftiaxo to attr object meta tou dino idiotita meso sinartisis
+   //kai meta einai etimo gia na to balo san orisma stin init tou thread
+
+   //detachstate=PTHREAD_CREATE_JOINABLE(deafault) i PTHREAD_CREATE_DETACHED
+   int pthread_attr_setdetachstate(pthread_attr_t *attr, int detachstate);
+   int pthread_attr_getdetachstate(const pthread_attr_t *attr, int *detachstate);
+
+
+      (void)pthread_attr_destroy(&thread_attr);  //meta tin create thread to kano destroyed
+
+   /*Advanced idiotites.Auto pou kani i detachstate mporo na to kano kai me autes
+     Episis mporo na kano kai alla pera tin detachstate
+
+	   //SCHED_OTHER(default) ,SCHED_RP ,SCHED_FIFO
+	   //afora to pos tha trexi to schedule stin cpu
+	   int pthread_attr_setschedpolicy(pthread_attr_t *attr, int policy);
+	   int pthread_attr_getschedpolicy(const pthread_attr_t *attr, int *policy);
+
+	   //kai auto gia schedule otan balo sched_other
+	   int pthread_attr_setschedparam(pthread_attr_t *attr, const struct sched_param
+	   *param);
+	   int pthread_attr_getschedparam(const pthread_attr_t *attr, struct sched_param
+	   *param);
+
+	   //pali schedule PTHREAD_EXPLICIT_SCHED(default) and PTHREAD_INHERIT_SCHED
+	   //ean mporo na allaxo tis schedule parameters?
+	   int pthread_attr_setinheritsched(pthread_attr_t *attr, int inherit);
+	   int pthread_attr_getinheritsched(const pthread_attr_t *attr, int *inherit);
+
+	   //pali schedule,sta linux mono 1 timi tin PTHREAD_SCOPE_SYSTEM
+	   int pthread_attr_setscope(pthread_attr_t *attr, int scope);
+	   int pthread_attr_getscope(const pthread_attr_t *attr, int *scope);
+
+	   //den me niazi se linux
+	   int pthread_attr_setstacksize(pthread_attr_t *attr, int scope);
+	   int pthread_attr_getstacksize(const pthread_attr_t *attr, int *scope);
+  */
+
+13)Paradigma detached
+   Ftiaxno attr me init,tou dino idiotita me setdetachedstate,kai meta init tou thread
+
+   #include <stdio.h>
+   #include <unistd.h>
+   #include <stdlib.h>
+   #include <pthread.h>
+
+   void *thread_function(void *arg);
+   char message[] = “Hello World”;
+   int thread_finished = 0;
+   int main() {
+     int res;
+
+     pthread_t a_thread;
+     pthread_attr_t thread_attr;
+     res = pthread_attr_init(&thread_attr); //init to attribute
+
+
+     if (res != 0) {
+       perror(“Attribute creation failed”);
+       exit(EXIT_FAILURE);
+     }
+     //idiotita sto atrri
+     res = pthread_attr_setdetachstate(&thread_attr, PTHREAD_CREATE_DETACHED);
+     if (res != 0) {
+       perror(“Setting detached attribute failed”);
+       exit(EXIT_FAILURE);
+     }
+     res = pthread_create(&a_thread, &thread_attr,
+     thread_function, (void *)message);  //to bazo os orisma
+
+     if (res != 0) {
+       perror(“Thread creation failed”);
+       exit(EXIT_FAILURE);
+     }
+
+     (void)pthread_attr_destroy(&thread_attr);
+     while(!thread_finished) {
+	printf(“Waiting for thread to say it’s finished...\n”);
+	sleep(1);
+	}
+	printf(“Other thread finished, bye!\n”);
+	exit(EXIT_SUCCESS);
+	}
+	void *thread_function(void *arg) {
+	printf(“thread_function is running. Argument was %s\n”, (char *)arg);
+	sleep(4);
+	printf(“Second thread setting finished flag, and exiting now\n”);
+	thread_finished = 1;
+	pthread_exit(NULL);
+    }
+
+14)Canceling a thread
+   Sender
+    #include <pthread.h>
+    int pthread_cancel(pthread_t thread);//cancel sto thread
+
+   Receiver
+    #include <pthread.h>
+      //ean dexome cancel i ean ta kano ignore
+      //PTHREAD_CANCEL_ENABLE i PTHREAD_CANCEL_DISABLE
+      //to oldstate(genika bazo NULL) nomizo einai epanafora stin proigoumeni katastasi 
+      //otan paro cancel. Px den dexome alla prin dexomouna,ara me 2 cancel => cancel?
+    int pthread_setcancelstate(int state, int *oldstate);
+
+       //PTHREAD_CANCEL_ASYNCHRONOUS => amesa termatismos
+       //PTHREAD_CANCEL_DEFERRED=>oxi cancel mexri to thread pou to kalese na ftasi se:
+           pthread_join , pthread_cond_wait ,pthread_cond_timedwait
+           pthread_testcancel ,   sem_wait , or sigwait
+       //oldtype pali genika bazo NULL       
+     int pthread_setcanceltype(int type, int *oldtype);    
+
+15)Paradigma
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <pthread.h>
+
+void *thread_function(void *arg);
+
+int main() {
+    int res;
+    pthread_t a_thread;
+    void *thread_result;
+
+    res = pthread_create(&a_thread, NULL, thread_function, NULL);
+    if (res != 0) {
+        perror("Thread creation failed");
+        exit(EXIT_FAILURE);
+    }
+    sleep(3);
+    printf("Canceling thread...\n");
+    res = pthread_cancel(a_thread); //cancel
+    if (res != 0) {
+        perror("Thread cancelation failed");
+        exit(EXIT_FAILURE);
+    }
+    printf("Waiting for thread to finish...\n");
+    res = pthread_join(a_thread, &thread_result);
+    if (res != 0) {
+        perror("Thread join failed");
+        exit(EXIT_FAILURE);
+    }
+    exit(EXIT_SUCCESS);
+}
+
+void *thread_function(void *arg) {
+    int i, res, j;
+    //dexete cancel
+    res = pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
+    if (res != 0) {
+        perror("Thread pthread_setcancelstate failed");
+        exit(EXIT_FAILURE);
+    }
+    //molis to thread pou to kalese ftasi px se join => stamataei
+    res = pthread_setcanceltype(PTHREAD_CANCEL_DEFERRED, NULL);
+    if (res != 0) {
+        perror("Thread pthread_setcanceltype failed");
+        exit(EXIT_FAILURE);
+    }
+    printf("thread_function is running\n");
+    for(i = 0; i < 10; i++) {
+        printf("Thread is still running (%d)...\n", i);
+        sleep(1);
+    }
+    pthread_exit(0);
+}
+
+16)Synchronization = iparxi seira ektelesis ton threads
+
+   Diladi pote to ena pote to alo-alla.
+   Oxi tautoxroni kai abebei prospelasi
+
+   Tha do dio methodous pou einai paromies 
+     semaphores
+     mutexes
+
+   Otan den iparxi sira mpori px ena thread na auxisi kata 1 enan counter
+   kai ena alo na auxisi kata 1 ena counter.Kai ta dio na apothikeusoun counter+1
+   ara i mia praxi na xathi.
+   Otan orizete seira tote ginonte kai oi dio  
+
+   Oi semaphores kathorizoun oti i access eiani siriaki(san oura),alla den xero ean 
+   kathorizoun kai pio thread proto pio deutero ktl  
+
+17)Semaphores
+     Binary 
+     Counting
+
+   Binary
+    H semaphore einai mia boolean metabliti 0 i 1,kai otan pao na trexo ena
+    komati kodika,blepo prota tin timi tis semaphore kai ean einai px 1 tote
+    to trexo
+
+    Einai san na perno adia gia na trexo kapio kodika
+
+   O skopos tou sinxronismou einai kapia dedomena(resources) pou prepei na allaxoun me sosti seira
+
+   Kai sta dio 
+
+   wait()
+   critical(allazo koina resources)
+   post()
+ 
+
+   *Oles oi kato sinartisis opos kai sta threads epistrefoun 0 on success
+
+   Semaphore unitialize
+
+     #include <semaphore.h>
+     int sem_init(sem_t *sem, int pshared, unsigned int value);
+   
+     sem =  diktis sto semaphore object
+     psphared = panta 0 giati linux mono auto ipostirizi
+        0 => den mirazome tin semaphore me alli process
+        !=0 => mirazome 
+     value = 0 i 1 ean binary
+   
+   Increase kai decrease the value of semaphore  
+    
+     #include <semaphore.h>
+     int sem_wait(sem_t * sem);
+     int sem_post(sem_t * sem);
+    
+     sem= semaphore object pou exo kani prota utiliaze me tin pano init
+
+      
+     post => +1 stin semaphore value
+     wait => -1 ean >0 semaphore (i wait blockari ean semaphore 0)
+
+     Ean xekiniso tin semaphore me 0
+     Ean to thread kani wait,blockari mexri na kani kapio alo post
+
+     post wait
+     i
+     post post.... wait   //nomizo einai gia counting semaphores pou den me niazoun
+
+     Binary => post/wait,post/wait    panta 0-1-0...
+       *(akoma kai ean kano post post,se binary to ena prepei na metrisi mono)
+     =>
+     To thread pou kani wait panta ektelite meta apo auto pou kani post
+
+     To wait ean to balo stin arxi tou thread tote xero oti to thread den
+     the xekinisi eos otou gini to proto post
+
+   Destroy 
+    Katharizi ta resources mias semaphores kai katastrefi
+    
+    #include <semaphore.h>
+    int sem_destroy(sem_t * sem);
+    
+
+18)Thread Semaphore
+
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <string.h>
+#include <pthread.h>
+#include <semaphore.h>
+
+void *thread_function(void *arg);
+sem_t bin_sem;
+
+#define WORK_SIZE 1024
+char work_area[WORK_SIZE];
+
+int main() {
+    int res;
+    pthread_t a_thread;
+    void *thread_result;
+
+
+    //init sem==0
+    res = sem_init(&bin_sem, 0, 0); 
+    if (res != 0) {
+        perror("Semaphore initialization failed");
+        exit(EXIT_FAILURE);
+    }
+
+    //create-run thread
+    res = pthread_create(&a_thread, NULL, thread_function, NULL);
+    if (res != 0) {
+        perror("Thread creation failed");
+        exit(EXIT_FAILURE);
+    }
+
+
+    printf("Input some text. Enter 'end' to finish\n");
+    while(strncmp("end", work_area, 3) != 0) {
+        fgets(work_area, WORK_SIZE, stdin); //prota allazo tin metabliti kai meta post
+        sem_post(&bin_sem);
+    }
+
+    //Waiting for thread to finish
+    res = pthread_join(a_thread, &thread_result);
+    if (res != 0) {
+        perror("Thread join failed");
+        exit(EXIT_FAILURE);
+    }
+    printf("Thread joined\n");
+
+    //destroy sem
+    sem_destroy(&bin_sem);
+    exit(EXIT_SUCCESS);
+
+
+}
+
+void *thread_function(void *arg)
+{
+    sem_wait(&bin_sem);  //perimeno to proto post gia na xekiniso
+
+    while(strncmp("end", work_area, 3) != 0) {
+        printf("You input %d characters\n", strlen(work_area) -1);
+        sem_wait(&bin_sem);
+    }
+
+    pthread_exit(NULL);
+}
+
+19)Prepei prota na allazo oti thelo na allaxo kai meta na kano post
+   Alios prokiptoun problimata xronismou
+
+  *Allazo ligo ton kodika sto main thread
+
+  printf(“Input some text. Enter ‘end’ to finish\n”);
+  while(strncmp(“end”, work_area, 3) != 0)
+  {
+       sem_post(&bin_sem);
+       strcpy(work_area, “Wheeee...”);
+  }
+ 
+  px edo kano post protou allaxo to work_area kano post,otan xekinisi to thread
+     den xero poso tha exo grapsi sto work_area
+
+
+20)Mutexes
+  #include <pthread.h>
+
+  int pthread_mutex_init(pthread_mutex_t *mutex, //o mutex
+                         const pthread_mutexattr_t *mutexattr); //NULL bazo sto attr
+
+  int pthread_mutex_lock(pthread_mutex_t *mutex));
+  int pthread_mutex_unlock(pthread_mutex_t *mutex);
+
+  int pthread_mutex_destroy(pthread_mutex_t *mutex);
+
+  *Pali to 0 einai gia success
+
+  Edo kano lock kai unlock
+
+  Panta otan kano lock prepei na kano meta unlock.
+  Otan pao na kano lock,ean einai locked kolao kai perimeno na gini unlocked
+  (=> ean den kano unlock ola tha kolisoun kai tha perimenou = deadlock)
+
+  Etsi o kodikas einai mia seira lock kai unlock,mporo na kano lock kai unlock
+  apo to idio thread,alla den exi xrisimotita,o skopos einai kapio thread na kani
+  lock na allazi resources,meta na kani unlock,kai kapio alo thread lock kai
+  xana.... 
+   
+  px
+
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <string.h>
+#include <pthread.h>
+#include <semaphore.h>
+
+void *thread_function(void *arg); //i function tou thread 
+pthread_mutex_t work_mutex; //o mutex
+
+#define WORK_SIZE 1024
+char work_area[WORK_SIZE];
+int time_to_exit = 0;
+
+int main() {
+    int res;
+    pthread_t a_thread;
+    void *thread_result;
+    res = pthread_mutex_init(&work_mutex, NULL);
+    if (res != 0) {
+        perror("Mutex initialization failed");
+        exit(EXIT_FAILURE);
+    }
+    res = pthread_create(&a_thread, NULL, thread_function, NULL);
+    if (res != 0) {
+        perror("Thread creation failed");
+        exit(EXIT_FAILURE);
+    }
+
+    pthread_mutex_lock(&work_mutex); //xekinao 
+    printf("Input some text. Enter 'end' to finish\n");
+    while(!time_to_exit) {
+        fgets(work_area, WORK_SIZE, stdin);
+        pthread_mutex_unlock(&work_mutex); //egrapsa sto work_area kai unlock
+        while(1) {
+            pthread_mutex_lock(&work_mutex); //xana lock mono otan unlock to alo thread
+            if (work_area[0] != '\0') {
+                pthread_mutex_unlock(&work_mutex);
+                sleep(1);
+            }
+            else {
+                break;
+            }
+        }
+    }
+    pthread_mutex_unlock(&work_mutex);
+    printf("\nWaiting for thread to finish...\n");
+    res = pthread_join(a_thread, &thread_result);
+    if (res != 0) {
+        perror("Thread join failed");
+        exit(EXIT_FAILURE);
+    }
+    printf("Thread joined\n");
+    pthread_mutex_destroy(&work_mutex);
+    exit(EXIT_SUCCESS);
+}
+
+void *thread_function(void *arg) {
+    sleep(1);
+    pthread_mutex_lock(&work_mutex);
+    while(strncmp("end", work_area, 3) != 0) {
+        printf("You input %d characters\n", strlen(work_area) -1);
+        work_area[0] = '\0';
+        pthread_mutex_unlock(&work_mutex);
+        sleep(1);
+        pthread_mutex_lock(&work_mutex);
+        while (work_area[0] == '\0' ) {
+            pthread_mutex_unlock(&work_mutex);
+            sleep(1);
+            pthread_mutex_lock(&work_mutex);
+        }
+    }
+    time_to_exit = 1;
+    work_area[0] = '\0';
+    pthread_mutex_unlock(&work_mutex);
+    pthread_exit(0);
+}
+
+$ cc -D_REENTRANT thread4.c –o thread4 -lpthread
+$ ./thread4
+Input some text. Enter ‘end’ to finish
+Whit
+You input 4 characters
+The Crow Road
+You input 13 characters
+end
+Waiting for thread to finish...
+Thread joined
+
+
+21)Polla threads (1 main)
+
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <pthread.h>
+
+#define NUM_THREADS 6
+
+void *thread_function(void *arg);
+
+int main() {
+    int res;
+    pthread_t a_thread[NUM_THREADS];
+    void *thread_result;
+    int lots_of_threads;
+
+    for(lots_of_threads = 0; lots_of_threads < NUM_THREADS; lots_of_threads++) {
+
+        res = pthread_create(&(a_thread[lots_of_threads]), NULL, thread_function, (void *)lots_of_threads);
+        if (res != 0) {
+            perror("Thread creation failed");
+            exit(EXIT_FAILURE);
+        }
+        sleep(1);
+    }
+    printf("Waiting for threads to finish...\n");
+    for(lots_of_threads = NUM_THREADS - 1; lots_of_threads >= 0; lots_of_threads--) {
+        res = pthread_join(a_thread[lots_of_threads], &thread_result);
+        if (res == 0) {
+            printf("Picked up a thread\n");
+        }
+        else {
+            perror("pthread_join failed");
+        }
+    }
+    printf("All done\n");
+    exit(EXIT_SUCCESS);
+}
+
+void *thread_function(void *arg) {
+    int my_number = (int)arg;
+    int rand_num;
+
+    printf("thread_function is running. Argument was %d\n", my_number);
+    rand_num=1+(int)(9.0*rand()/(RAND_MAX+1.0));
+    sleep(rand_num);
+    printf("Bye from %d\n", my_number);
+    pthread_exit(NULL);
+}
+  

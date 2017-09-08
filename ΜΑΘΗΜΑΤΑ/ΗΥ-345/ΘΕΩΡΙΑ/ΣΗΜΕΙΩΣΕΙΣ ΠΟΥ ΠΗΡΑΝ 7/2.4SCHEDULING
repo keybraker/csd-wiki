@@ -1,0 +1,197 @@
+1)scheduler = part of operating system pou kathorizi to pia process trexi kathe fora
+              stin cpu
+
+2)scheduling algorithm = o algorithmos pou xrisimopoieite gia tin epilogi
+    kata to process switching
+
+3)sta pc den exo tosa pola process pou exi simasia to scheduling toso
+  stous server exi simasia
+
+4)IO bound processes
+  Pola switching ginonte kirios otan exo pola I/O blocks
+  diladi i cpu den exi ti na kani giati perimeni mia siskeui
+
+6)CPU bound processes
+  Ean den exo pola I/O blocks exo pio spania switch,gia na iparxi katanomi tis cpu
+  
+7)blocks mporoun na ginoun gia diaforous logous pera apo I/O px synchronization block
+
+8)CPU burst = xroniko diastima pou trexi mia process mexri switch
+  IO burst = poso xrono theli to IO 
+
+9)idle process = i process pou trexi otan kamia den einai se ready state
+
+10)Logoi gia na allaxo process
+  1)block(px I/O px synchronyzation)
+  2)xronos(apla perase o xronos pou orizi o scheduler,xrisimopoio to hardware clock)
+
+  otan kano switch logo block einai fisikos logos gia switch,o xronos pou perase 
+  einai epembasi alla aparetiti gia dikeosini
+
+11)nonpreemptive scheduling algorithm 
+     = switching mono logo block i exit,o xronos den me niazi
+    
+   preemptive scheduling algorithm
+     = switching kai me basi to xrono apo to hardware clock
+
+12)Categories of scheduling algorithms(analoga me to peribalon xrisis epilego)
+  1)Batch
+    adiaforo gia to clock,exo ena sinolo ergasion na kano
+    den kano sixna diakopes,einai gia periptosis pou den perimeni kapios xristis
+    apla exo na kano mia doulia,xrisimopoiounte sto business world sixna
+    
+  2)Interactive
+    me niazi to clock,exo na exipiretiso xristes
+    xriazome preemption scheduling algorithm,exo xristes kai pola process
+    px servers i kai prosopikoi ipologistes   
+  
+  3)Real time
+    adiaforo sinithos gia to clock giati einai autorithmizomes (real time)
+    real time systems,me tin enia oti den rithmizo ton xrono ego,ala opos 
+    prokipti apo tis anages ton real time diergasion
+
+13)Stoxoi enos scheduling algorithm
+   Geniki stoxoi
+     Fair ness - giving each process a fair share of the CPU
+      *auto den simeni oti agnoo protereotites
+     Policy enforcement - seeing that stated policy is carried out
+      *kanones pou prepei na tirounte,px kapia process prepi na exi 
+       max protereotita kai na perimeno na teliosi
+     Balance - keeping all parts of the system busy 
+      *prepei na exo mixed cpu bound processes kai i/o bound processes
+       oste kai na exo kapios na apasxoli tin cpu,alla kai to i/o
+      
+   Batch systems
+     Throughput - maximize jobs per hour
+     Turnaround time - xronos mexri na teliosi batch job
+     
+     O skopos einai na kano poles doulies ana ora,
+     alla apo tin alli,den prepei na afino piso tis xronobores doulies
+     kai prepei na apasxoli tin cpu diarkos     
+
+   Interactive systems
+     Response time - respond to requests quickly
+     Propor tionality - meet users’ expectations
+
+   Real-time systems
+     Meeting deadlines - avoid losing data
+     Predictability - avoid quality degradation in multimedia systems
+  
+14)Batch systems scheduling algorithms
+   1)first come first served
+      mia queue of processes
+      otan block,tote otan xana ready mpeni sto telos tis ouras
+      Arnitika=I/O bound processes ean pola block kanoun poli poli xrono
+   2)shortest job first
+     proipotheto oti xero poso kani kathe job(tin exo xanatrexi)
+     kai oti oles exoun tin idia axia
+     kai oti tis exo oles diathesimes
+   3)Shortest Remaining Time Next
+     pali xero poso theli kathe job
+     edo exo oura,kai protereotita exi panta i job pou tis apomeni ligoteros xronos 
+     gia na teliosi
+
+15)Interactive systems scheduling algorithms
+   Round-Robin Scheduling
+   Priority Scheduling
+   Multiple Queues
+   Shortest Process Next
+   Guaranteed Scheduling
+   Lottery Scheduling
+   Fair-Share Scheduling
+
+   *diaisthika i sosti lisi tha itan na exo protereotites pou kathorizoun to poso
+    xrono tha trexi i process,px ipsili => megalitero quantum time
+    alla den exo di tetio algorithmo
+
+16)Round-Robin Scheduling (poli sixna xrisimopoieite)
+   1)Each process -> time interval = quantum
+                                  (=sinexomenos xronos pou mpori na trexi stin cpu)
+   2)Exo mia oura me processes
+   3)Switching => pai xana sto telos tis ouras otan :
+     etrexe quantum
+     teliose
+     i block
+
+   4)to switching einai expensive ala kai to argo switch einai problima giati perimeni
+     kapios xristis,giauto einai simantiko na bro ena kalo quantum time
+     20–50 msec is often a reasonable compromise
+
+   *tou lipi i protereotita
+
+17)Priority Scheduling
+   1)kathe process exi mia timi priority
+   2)trexi panta prota auti me tin megaliteri priority
+   3)gia na min monopouloun tin cpu oi ipsilis priority mono,
+     otan trexo mia priority mporo na tis miono tin priority
+     kai na oriso quantum time,diladi kai na tis miono kai na leo trexe eos toso xrono
+   4)proteretotita mpori na tin orisi o xristis
+     sto unix mporo na xrisimopoiiso to nice,pou simeni na xamiloso tin protereotita 
+     mias process
+   5)i mpori na tin orisi to systima dinamika
+     ta kritiria pou xrisimopoio einai poso piran apo to quantum time tous
+     ean piran ligo,simeni oti prokaloune block,ara tis theoro ipsilis protereotitas
+
+     px priority = 1/ f  opou f=pososto quantum pou trexane
+
+    *kindinos ean den allazo protereotita oi xamilis na min trexoun pote
+
+18)Mixi priority scheduling + Round-Robin Scheduling
+   Exo classes protereotitas kai se kathe class exo mia oura round robin
+   Panta epilego tis ipsilis protereotitas
+
+
+19)Multiple Queues
+   Exo priority classes
+   Stin pio high priority class trexo 1 quantium
+   stin amesos epomeni 2 quantium ktl
+
+   Otan trexo mia process ean den teliosi tote tin bazo stin amesos xamiloteri class
+
+   Oi megales proccess pane ston pato alla otan trexoun,trexoun gia poli ora
+   (megalo quantum)
+   
+20)Shortest Process Next
+   Trexo prota tin pio sintomi(oste poli interactive to sistima)
+
+   Krino pia einai i pio grigori process me basi to istoriko tis
+
+21)Guaranteed Scheduling sel 162
+
+22)Lottery Scheduling
+
+23)Fair share scheduling
+   cpu/xristes
+
+   px ean 2 xristes mirazonte tin cpu anexartita apo to poses process exi o kathenas
+     
+24)Scheduling in real time systems
+   Sistima pragmatikou xronou px mixanima pou lambani apo aisthitires pliroforia
+
+25)Policy Versus Mechanism
+   Eos tora oi process den mporousan na epireasoun to scheduling
+   px mia parent process pou xekinaei child processes mpori na xeri pia einai
+      pio simantiki
+   
+   scheduling policy simeni oti i process mpori na dini parametrous ston 
+   scheduling mechanism,oste na krini me perisoteres plirofories
+
+
+26)Thread Scheduling
+
+   O tropos pou kano to scheduling diaferi analoga me to ean einai kernel/user level
+
+   Se user level i process perni kapio xrono kai apo ekei kai pera ta threads 
+   apofasizoun kai o thread schedule kani tis allages
+
+   Se kernel mode ta threads apo diaforetikes processes mporoun na enalasonte
+   (auto den mpori na gini se user level)
+
+   Se kernel einai poli pio arges oi enalages,to basiko problima einai to memory map
+   and having the memory cache pou allazoun(se user den allazoun)
+
+   Se kernel omos otan ginete px IO block piano ena alo thread,eno se user kolane ola 
+   kai perimenoun
+
+   Se user level omos ta threads mporoun na kanoun tis enalages tous me kritiria tou
+   aplication,to kernel den xeri ti kanoun ta threads oste na krini   

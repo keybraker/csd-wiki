@@ -1,0 +1,39 @@
+body { 
+              font-family: 'Trebuchet MS', Verdana, Arial, sans-serif; 
+              font-size: 10pt; 
+			  background-image:url('../images/register.jpg');
+			  background-size:100% 100%;
+} 
+
+#login-form { 
+              width: 150px; 
+              margin: auto; 
+} 
+
+
+#login-form fieldset { 
+              padding: 10px;	
+			  background-color:white;
+} 
+  
+#login-form legend { 
+              font-weight: bold; 
+              font-size: 10pt; 
+} 
+#login-form input { 
+              border: 1px solid #999; 
+              clear: right; 
+              background: #ccc; 
+} 
+
+ 
+#login-form input[type="bank"]
+{
+			  display:none;
+}
+
+ 
+#login-form input:focus, #login-form input-hover { 
+			  background: #999;
+              border: 1px solid #333; 
+} 

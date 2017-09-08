@@ -1,0 +1,850 @@
+1)Idi mnimon
+  1)cache
+  2)ram 
+  3)hard drive
+
+2)Memory manager = tmima tou litourgikou pou asxolite me tin RAM
+   1)desmeuei/eleutheroni mnimi
+   2)krataei plirofories giro pou tin mnimi (px pios exi pio meros,posi exi mini ktl)
+
+  *to memory managment tou cache ginete apo to hardware
+
+3)1 programa + litourgiko
+
+  Lisis 
+  1)Alos xoros gia litourgiko kai alos gia user program  
+  2)Alos xoros gia litourgiko kai alos gia user program 
+    +
+    ROM gia device drivers
+    
+  3)ROM gia operating
+    RAM gia programa
+
+4)  >1 programa
+  1)swap ston disko oste na trexo ena allo kai xana piso
+
+  2)memory keys,diladi kathe programa na mpori na di mono tin diki tou mnimi
+    To litourgiko edine ta keys 
+
+    *Problima me ta jumps,giati eprepe na allazoun dieuthinsis analoga me to ixa
+     fortosi
+
+5)Memory mapping dynamic relocation (dinamikos ipologismos tou jump)
+
+  Thelo na ipologizo tis antistixes dieuthinsis,apo tin address pou lei
+  to programa me tin physical address
+
+  Bazontas to se sinexomeni mnimi px apo tin thesi 25 kai meta,tote 
+  i kathe address tou programatos eiani +25 (douleuei mono gia sinexomeni)
+
+  Exo 2 registers base/limit
+
+  Otan thelo na kano jump timi kano jump base+timi
+  (to jump 2,theorontas oti xekinao apo to 0 tha me pigene sto 2,
+   ean xekiniso omos px apo to 57 to kano   jump 59)
+  Ean base+timi > limit => segmentation fault
+
+
+6)To litourgiko prepei na xeri pou iparxi free memory(px tripa) kai pia einai piasmeni
+   
+   Lisis:
+   1)bitmap
+   2)free lists
+
+   Kai stis 2 lisis i mnimi xorizete se allocation units me megethos komatiou
+   apo merikes words eos kb
+
+7)Lisi bitmap
+   Exo ena bitimap pou antistixi se allocation units  
+   1=> gemato to allocation unit   0=> free
+
+   px 
+
+   1 1 1 0 0 1 1 1  
+    // lei oti ta 3 prota allocation units einai gemata,meta hole,kai meta 3 gemata
+
+   Ean exo pola tetia ftiaxno ena bitmap gia tin mnimi xekinontas apo tin arxi
+   tis mnimis xero kathe keno pou exo kai poso megalo einai to keno
+
+   px bitmap
+
+   1 1 1 0 0 1 1 1  
+   0 0 1 1 1 0 0 1 
+   ...............
+
+   Arnitika tou bitmaps = px ean thelo 10 kenes thesis prepei na metrao midenika
+                          
+
+8)List 
+
+   To idio alla exo sorted lista apo tin arxi tis mnimis xekinao
+
+   node
+   {
+     type=p(process_memory) h hole(free memory)
+     start byte 
+     size
+     next*;
+     prv*;
+   }
+  
+   H lista allazi analoga me to pia process termatizi i fortonete 
+  
+   H kathe process px ean exi ena dikti sto node tis,exo base kai limit 
+
+   Algorithms
+  1)first fit me listes = psaxno xekinontas apo tin arxi,mia hole pou xorai mia process
+                         pou thelo na fortoso
+
+  2)next fit = psaxno xekinontas apo ekei pou emina tin proigoumeni fora pou epsaxa
+     *ligo pio argi apo first fit
+     
+  3)best fit = psaxno tin hole me to mikrotero megethos > apo auto pou thelo
+      (diatrexo oli tin lista)
+     *xiroteri,giati gemizi me mikres tripes(useless) tin mnimi
+ 
+  4)worst fit = psaxno tin megaliteri tripa (diatrexo oli tin lista)
+     *kaki lisi episis
+
+  5)quick fit = tis holes tis exo se xexoristes listes analoga me to megethos
+                px holes ton peripou 2kb,holes ton 10kb ktl (px i 12kb pai stis 10kb)
+  
+ 
+  Gia na dieukolino tous pano algorithmous mporo na exo 2 listes 1 gia holes kai
+  mia gia processes
+
+  Ean i holes lista einai sorted tote oi best/worst fit mporoun na broune eukola
+  tin sosti thesi
+
+  Oles oi lisis me xexoristes kai sorted listes kanoun pio diskoli tin allagi tis 
+  mnimis giati prepei na enimerothoun (allagi = nea desmeusi i eleutherosi)
+
+   px free mia 15ara,dipla tis exi mia 10ara,prepei na tin bro stis sorted listes
+      kai na tis enoso,kai na tin balo stis 25 ares
+
+  Oikonomia mnimis,apothikeuo node tou holes stin eleutheri mnimi
+  Episis epidi i holes exoun eleutheri mnimi mporo na xrisimopoiiso tin mnimi auti
+  gia na kratao ta stixia tou node tous,px size kai next 
+  
+9)Simerina programata => virtual memory(memory abstraction) 
+                         1 address space diko tou
+
+  Paliotera eblepan => psysical memory
+
+                     
+10)Pos douleuei i eikoniki mnimi
+
+  Kathe process exi diko tis memory space me virtual addresses
+
+  Ean 32bit epexergastis tote 4gb,alla ta misa einai gia to kernel space?
+  Ara px 2 gbit
+
+  Apo auta exo
+    xamiles 
+      0  //null
+     text
+     data
+     heap
+      V
+      
+      ^
+     stack
+    psiles
+
+   H mnimi metaxi tou heap kai tou stack einai adia.
+   Mia tetia process mpori na trexi se mixanima me 1gb mnimi den exi simasia,
+   etsi kai alios o eleutheros xoros heap/stack einai megalos
+
+
+11)Memory swapping = otan i mnimi gemizi to litourgiko apothikeuei tin mnimi 
+                    apo processes pou kimounte ston disko,kai ean xipnisoun
+                    tis xanaepenaferi stin ram oste na trexoun 
+
+12)Memory compaction = apo ta pola swap i mnimi mpori na arxisi na exi pola 
+                      kena,me memory compaction i mnimi ginete pali sinexomeni
+                      alla genika to litourgiko den to polikani giati argi i antigrafi
+
+13)Virtual memory(exo pseutikes dieuthinsis,pou antistixoun se alithines) logoi
+  
+  1)Xrisi tou diskou san mnimi
+   
+    Ierarxia mnimis
+
+    processor->cache->main->hardDisk/flash(to swap space tou)
+
+    *harddisk/flash=non volatile (xoris reuma den xanoun data)
+
+    (to kostos tou na paro kati apo ton diko,einai terastio,milliseconds
+     giauto prepi na min xriazete sxedon pote,kai giauto exo poli diaforetikous
+     algorithmous otan to kano,se sxesi me cache-main)
+
+    Miss_penalty tou na pao sto disko peripoun 1 ekatomirio kiklous rologiou 
+
+   
+  2)Virtualization
+
+    H kathe process blepi tin mnimi san na einai oli diki tis
+    (diladi den blekonte oi dieuthinsis diaforetikon processes,kai nomizo
+     oti einai oli diki mou)
+
+
+    Einai diladi san na exo poles mixanes,1 mixani ana process
+    Diaxorismos kathe process apo tin alli
+
+  3)Fragmentation
+
+    Mporo na blepo ena tmima mnimis san sinexomeno(diadoxikes address)
+    eno stin ousia na min einai sinexomeno se alithines dieuthinsis
+
+    H mnimi xorizete se pages
+
+13)Virtual memory
+
+   process -> virtual space diko tou -> xorismeno se virtual pages(sinexomeni mnimi)->
+   pou antistixoun se physical pages(idiou megethous me tis virtual)
+    (px 4KB page me 4KB page frame gia applications kai 1 gb gia to kernel)
+
+   *gia na trexi ena programa den einai anagi na exo oles tis pages tous 
+        stin physical memory
+
+   *Yparxoun periptosis pou diaforetikes diergasies(ite i idia pou trexi poles fores)
+  mirazonte tmima tis physical memory,o logos einai oti mpori na thelo na mirazonte
+  dedomena
+
+  px thelo na fortoso stin physical memory read only kodika,pou einai koinoxristos
+  px thelo na kano pipe,ara se ena tmima tis physical memory o enas grafi kai o alos
+     to diabazi apo to idio simio
+
+  Alla genika einai anexartites,ektos ean prepei na mirazonte ton idio xoro
+
+   
+14)MMUs (Memory mapping unit) xrisimopoiei ton page table oste na paragi tin
+   physical address
+
+  O epexergastis asxolite mono me virtual addresses
+  Diladi oi lw,sw exoun virtual dieuthinsis
+
+  Ean mia selida den exi physical page tote segmentation fault kai analambani litourgiko
+  =>trap px mpori na einai ston disko,i mpori na min einai pouthena px akiri address
+  
+  O epexergastis exi enan idiko kataxoriti pou dixni se auton ton pinaka
+  regPageTable (den einai sto register file einai idikos kataxoritis)
+  Se auton ton kataxoriti grafi mono to litourgiko,den epitrepete px na 
+  ton allaxi se user mode,kai grafi mono otan kani switch
+
+
+  H virtual address xorizete se 2 tmimata
+  1)aristera bit pane sto page table px ta 20 aristera
+  2)dexia bits menoun opos einai,einai gia mesa stin selida
+
+
+  Paradigma
+  1)4gb memory => 32bit memory address(panta virtual)
+    pagesize=4kbytes  (idio physical kai virtual)
+
+    32 bit virtual
+
+    20(aristera)=pia selida eimai(address ston page table) 12=mesa stin selida ti thelo
+ 
+
+    2**20 = 1mb dieuthinsis selidon diladi exo oles tis dieuthinsis pou
+                   mporo na exo me 20bits
+
+  2)physical mnimi = 1gb
+    ara 30bits  
+    pagesize = 4kbytes 
+
+    ara pali 12 bits aristera einai aparetita,ara telika exo
+
+
+    18(aristera)=pia selida einai  12=ti thelo mesa stin selida    
+       
+    
+15)Page table entry 
+      18 physical page address (to megethos exartate apo to posi physiki mnimi exo)
+      1 valid(1=exo tin selida stin physical memory  (Present/absent bit)
+              0=den tin exo,eite eiani ston disko eite einai paranomi den mou aniki)
+      3 protection(read/write/execute)
+        segmentation violation - core dumped
+          read i write se execute only
+          write se read only
+          kai otan den iparxi i selida katholou
+      1 dirty(modified)
+         (ean allaxe i mnimi=> oste ean prepei na tin xanastilo ston disko ean
+              den allaxe tote na kratiso to palio antitipo(ean exo)kai na min tin stilo)
+      1 Referencing(LRU)
+        (otan anafertho stin page tote to kano 1,logika ginonte 0 ana periodous
+         afora ton algorithmo pou apofasizo ti na dioxo)
+      1 caching bit
+         (ean i page mpori na gini cached i oxi,sinithos gia IO addresses pou den
+          tis thelo sto cache(ean to IO ginete se seperate address space den to 
+          xriazome))
+       
+    
+    Ara exo enan pinaka  1mb X 18+7=25 bits
+
+    
+
+16)1 Mapping/process
+
+    H kathe process exi diko tis pinaka metafrasis,kai den prepei na mpori mia diergasia
+    na exi prosbasi ston pinaka metafrasis tis alis,oste na di data pou den einai dika 
+    tis
+
+  5)Afou telioso kai paro tin psysical address,tote pao stin cache kai meta stin ram
+    ean xriasti ktl
+
+  
+  6)O MMU episis prosferi diaxorismo ton diergasion kai asfalia(px read/write dikeoma)
+    ,afou gia kathe diergasia exo 1 pointer kai mpori na prospelasi mono ton diko
+    tis table
+
+
+  7)Yparxi to problima oti o pinakas einai megalos,kai oti exo polous pinakes
+    => Oi pinakes metafrasis einai stin RAM
+    (sto hardware tha mporouse na einai mono gia poli mikres mnimes)
+
+17)Translation lookaside buffer(assosiative memory)(sinithos mesa sto MMU kikloma)
+
+  1)cache gia ton pinaka metafrasis gia taxitita mapping
+
+  2)o kathe pinakas exi mia cache ston epexergasti   16-64 pages
+
+  3)stin cache exo tis pio sixna xrisimopoioumenes selides,oste na mporo
+    na kano to map amesa xoris na fortoso olokliro ton pinaka apo tin ram
+
+  4)Domi tou TLB
+
+    1 TLB gia oles tis process => kathe egrafi exi kai to pid mprosta
+    i virtual address den eiani address tou TLB => entry exi kai tin virtual address
+    
+    
+    PID + virtual_address + egrafi_opos_page_table    
+
+    Einai san enas mikros pinakas metafrasis
+
+    px   pid=1   13 virt_page  [7 page   + alla_bits px protection ktl,san page table] 
+         pid=2   13 page  10 page
+
+    O logos pou to kano auto einai epidi otan kano switch den thelo na xano
+    apo tin cache oti eixa gia tin proigoumeni diergasia(thelo na thimame alla cache)
+    gia na min xekinao kathe fora apo to 0,otan kano switch
+
+  5)H anazitisi stin TLB douleuei paralila me tin anazitisi stin krifi mnimi,ara
+    den xano kiklo rologiou
+
+  6)Genika apo sistima se sistima to posa kani to litourgiko kai posa o MMU pikili,
+    px astoxia ston TLB mpori MMU na bri page table,i na to kani to litourgiko
+       to pia selida tha antikatastathi ston TLB mpori na to orisi to hardware i
+       to litourgio
+
+18)H seira einai (page table walk)
+
+   TLB(soft miss)->page table(hard miss)->diskos->fault
+
+   minor page fault => i page einai stin mnimi alla akoma den exi enimerothi o 
+     page table
+
+   major page fault => pao sto disko
+
+   segmentation fault => den iparxi pouthena
+
+
+18)Miosi tou megethous tou pinaka(me xrisi orion)
+
+   Epidi kathe programa piani apo 0 eos telos heap, kai apo arxi stack eos telos 
+   stack,den xriazome na exo ston pinaka dieuthinsis selidon pou den xrisimopoiei to
+   programa
+
+   ara exo 2 pointers
+
+   base  -> arxi tou text
+              ....
+   bound -> telos tou heap
+
+
+   base2 -> telos tou stack
+              .....
+   bound2 -> arxi tou stack
+
+   Ara exo mono tis address pou xriazome
+
+11)Miosi tou megethous pinaka (inverted page table)
+
+   Ftiaxno ena hash table me linked lists pou exi mono tis xrisimopoioumenes
+   addresses
+   *ean ton ftiaxo megalo 
+
+   key=virtual address
+   timi=virtual,physical
+
+12)Poliepipedoi pinakes metafrasis(methodos miosis tou pinaka)
+
+   Tha kano ton pinaka ,na exi 2 epipeda
+
+   px ean page size=4kb
+      tote apo 32bits address
+
+
+      20=address tis page   12=address mesa stin page
+
+      Arxikos pinakas=1mb
+
+      1 epipedo = xorizo ton tlb se 1024 komatia megethous 1024 to kathena
+
+
+      Kathe komati exi mia pliroforia sisxetismeni me auto,mou lei ean einai adio
+      i oxi(ean xrisimopoieite kapia address tou i oxi)
+
+      Apo to 20=address tis page,ta prota aristera 10 einai gia na to proto epipedo
+
+      Ean exi kati auto to komati pou dialexa,tote perno ta alla 10 bits kai pao 
+      sto deutero epipedo 
+
+28)Page replacent algorithms = krino pies pane sto disko
+     1)H diadikasia einai:
+       ean exo tin mnimi tote ok
+       ean den tin exo 
+        adiazo xoro gia na tin fortoso(ean xriazete)
+        tin fortono 
+       ean tin allaxa tote prepei na tin ananeoso kai sto disko
+       alios kratao tin palia ekdosi sto disko
+     2)to basiko kritirio gia na krino pies pane sto disko einai i sixnotita pou tis
+       xrisimopoio
+     3)O idanikos algorithmos alla mi ilopoiisimos den mporo na xero tis
+       epomenes entoles,einai kathe page frame pou einai stin mnimi einai
+       na xero meta apo poses entoles tha xrisimopoieithi,ara otan fault,bazo ston 
+       disko auto pou tha xrisimopoieithi teleuteo
+     4)Stous pio kato algorithmous theoro oti kamia page den einai stin ram arxika
+       oste na ftiaxno ton page table apo tin arxi,simfona me tin zitisi
+       = demand paging strategy
+   
+      *diabasma apo ton disko 10msec vs nanosecond apo ram
+
+    1)Not recently used page replacement algorithm NRU
+      (swap oti den xrisimopoieite sixna)
+     1)kathe page entry exi 2 bits 
+      modified(1 bit)=i entoli allaxe ta periexomena tis mnimi(=> thelo disk upadate)
+      referenced = i page entry exi xrisimopoiithi
+     2)Enimerosi tou page table xekinaei apo tin class0 ,meta otan pao na kano kati
+       ginete fault kai allazo class gia na to kano
+       (fault = refer se not referenced,fault=modifie se read only )
+   
+       Class 0: not referenced, not modified
+       Class 1: not referenced, modified
+       Class 2: referenced, not modified
+       Class 3: referenced, modified
+   
+       Etsi enimerono ta R,M bits.Episis me ton xrono to R epistrefi se 0 pali 
+       gia na mporo na blepo pies xriastika prosfata
+
+       Seira
+       class0(not referenced) -fault-> class2(referenced readoonly)-fault-> class3
+               
+       H class1 prokipti mono me epanamidenismo tou R se mnimi pou exi M=1
+     3)o algorithmos otan theli swap tote epilegi tin mnimi apo tis class me mikrotero
+       noumero idanika apo class0
+
+    2)FIFO page replacement algorithm
+      1)ftiaxno mia lista pou sto tail exo tin pio recent kai sto head exo tin pio 
+        palia,otan fault to head pai sto disko,gia na fortoso oti xriazome
+      2)problima einai oti mpori na balo sto disko kapia mnimi pou einai poli xrisimi
+        alla etixe na min xrisimopoeithi.Diladi tis antimetopizo oles os ises 
+
+    3)Second-change page replacement algorithm
+      1)FIFO alla prin petaxo to head(tin pio palia) elenxo to R tis ean einai =1 
+        tote tin bazo sto tail san na xrisimopoiithike tora
+        *second chance diladi prin tin petaxo
+      2)Otan tin bazo sto tail katharizo to R bit
+      3)Ean to proto head tou edosa eukeria,tote kitao to neo head,mexri na bro kapio
+        i lista einai arketa megali kai ta R ananeononte se 0 ,ara tha bro kapio.
+        Stin xiroteri periptosi tha bro to proto pou tou edosa eukeria kai tou
+        ebala R=0
+
+     4)The clock page replacement Algorithm
+       1)idio me to second chance mono pou exo dipla sindedesmeni lista=> kiklos
+       2)exo ena dikti sto head,kai otan fault to elenxo,ean exi R=0 to antikathisto
+         me tin nea mnimi,ean exi R=1 to kano clear to R proxorao kai kano head
+         to epomeno ktl
+     
+     5)The Least Recently Used (LRU) Page Replacement Algorithm
+       1)sto table entry kathe entry exi enan counter pou lei poses fores exi
+         xrisimopoiithi px se kathe xrisi auxano ton counter,
+         otan fault,svino autin pou exi xrisimopoiithi tis ligoteres
+    
+        *Einai poli kalo apo apopsi xrisis alla den lambani ipopsi tou to pote
+         px mpori na xrisimopoiisa mia mnimi 100 fores alla prin 1 ora
+       
+       2)Ylopoiisi tou LRU sto software(sinithos den ilopoieite o LRU sto hardware)
+         1)NRU algorithm ton lene otan einai sto software
+         2)ton counter ton krataei to litourgiko
+         3)episis o counter den allazi se kathe entoli,alla se kathe clock interrupt
+           (diladi oso sixna ananeoona ta R)
+         4)osa entrys exoun R =1 se autes megaloni o counter tous kata 1
+           (auti i lisi exi problima me ton xrono giauto kano to 5) )
+         5)O NRU dini tin lisi sto problima tou xronou os exis:
+           to bit pou prostheto to bazo sto rightmost kai episis petaxo ena apo ta
+           leftmost (shift aristera)
+   
+           Ara oti ebala prosfata exi megaliteri simasia apo oti ebala palia,
+           episis ta palia ta petao,ara epireazo poli tin timi tou counter
+         6)sinithos enas counter me 8 bits einai arketos gia to aging,px 
+           ean clock tick kathe 20msec me 8 bits piano mexri 160msec non used memory 
+           pou einai ok
+ 
+    6)The working set page replacement algorithm
+      1)locality reference = Sinithos oi processes xrisimopoioun poles
+                             fores ena sigekrimenes pages tous
+      2)working set = pages autes pou xrisimopiounte poli sixna
+      3)thrashing = program pou fault every few instructions => kolai
+      4)to litourgiko otan allazi process ean ipotheso oti xekinao apo 
+        katharo page table kathe fora,tha ginoun pola faults
+      5)Lisi(legete working model) = gia kathe process thimame to working set pages,
+               pou ixa prin allaxo process kai otan xanatrexo tin process to fortono
+               (to litourgiko ta kani auta)
+      6)Simbolismos  w(k,t)  
+       //t tixea xroniki stigmi,k oi most recent anafores pou kathorizoun to working set
+       Gia mikra k to w allazi,alla oso megalonei to k,epidi to w 
+       kai auto epanalambanete to working set statheropieite me max oles tis pages tou
+       programatos 
+      
+       *Gia na brisko kathe stigmi to working set prepei na oriso mia timi gia to k
+        diladi poses recent na do,oste na krino.
+
+      7)Afou balo timi sto k , kathe xroniki stigmi mporo na bro to working set,
+        ara otan fault,perno mia address pou den einai se auto kai evict(tin bazo disko)
+
+      8)Stin praxi to na thimame tis k teleutees kai otan fault apofasizo
+        einai poli argo,giati?
+ 
+      9)Lisi =anti na thimame tis k teleutees orizo ena xroniko diastima kai oses 
+              etrexan se auto(enoeite sto teleuteo xroniko diastima),tis theoro 
+              working set,diladi to k teleutees ginete t xronos 
+
+   
+        *epidi o epexergastis mpori na enalazi tis process se kathe process 
+         metrao ton xrono san na min ipirxe ali,giauto leo oti einai virtual time
+         px 30 msec virtual time mpori na einai 60msec ean ta 30msec ta pire mia
+         ali process
+
+      10)Gia na to kano auto se kathe entry pou xrisimopoio apothikeuo 
+         ton xrono (ton virtual) pou tin xrisimopiisa 
+         episis xrisimopoio to R bit (to opio kano clear kanonika opos kai stous alous)
+         to t einai megalitero apo ena clock tick pou kano clear
+
+      11)O algorithmos einai:
+         1)xekinao kanonika me R=0
+         2)clear to R kathe clock tick
+         3)ean fault
+           Scan all pages examining R bit:
+            if (R == 1) set time of last use to current virtual time
+            if (R == 0 and age > τ) remove this page
+            if (R == 0 and age ≤ τ) remember the smallest time 
+        
+           Opou age=trexon_time-time_apothikeumeno
+
+        4)Protereotita einai na bgalo tin R=0 kai age>t
+          ean den bro tote bgazo R=0 kai tin pio palia
+          ean oles R=1 tote bgazo mia tixea,kata protimisi mia clean page(oxi write dld)
+        
+         *clean page = mnimi pou den allaxe=> kai ston disko idia ine
+          dirty page = mnimi pou allaxe => theli update o diskos
+          Exi simasia giati protimao tis clean page na afero apo ton table,gia na min
+          xriazete na kano update ton disko.Ta clean/dirty ta blepo me to M bit
+        
+    7)WSClock Page Replacement Algorithm
+      1)beltiomeni ekdosi tou working set algorithm,xrisimopoieite sixna,
+        to problima tis pano einai oti kano scan olo ton page table otan fault
+      2)edo xrisimopoio kai to ean einai clean i dirty to page frame diladi kai to M
+      3)Kathe page frame pou xrisimopoiisa exi
+        1)time last used
+        2)R bit
+        3)M bit
+      4)Ta page frames mpenoun se mia kikliki lista kai xekinao apo 1 simio
+        Arxika i lista einai adia opos panta,gemizi me faults
+      5)Scan
+        1)ean R=1 tote einai working set ara den pai gia evict
+        2)ean gia R=0 age>t kai clean => evict
+        3)ean R=0 age>t kai dirty => shedule gia evict asinxrona kai sinexizo to scan
+        4)Ean kano kiklo px den brika 2) alla ekana asinxrona evict
+           sinexizo giati kapia apo tis asinxrones tha exi gini evict ara tha ine
+            clean => mou kani
+          Alios ean den ekana asinxrona evict,tote oles einai sto working set
+          => dialego mia clean kai evict,ean den iparxi clean tote evict autin 
+          pou ime diladi opou dixni to clock
+
+    8)sel 221 summary olon ton algorithmon
+
+  
+   *paging daemon = logismiko pou trexi ana periodous kai kani page clean up
+
+29)Local versus Global Allocation Policies
+
+  O xirismos ton pages mpori na gini local px gia mia diadikasia
+  i global => gia poles diadikasies
+
+  Otan global prepei
+  1)na dialego tin page pou tha figi apo tin mnimi,sigrinontas tis pages
+    apo diafores processes
+  2)to poses pages tha exi i kathe proces stin mnimi,exartate kai to to idos
+    tis process px ean megali(pola kb) logika xriazete perisoteres
+    prepei omos na prosexo na min perioriso poli tis pages mias process
+  3)PFF (page fault frequency)
+
+    Gia kathe process blepo posa page faults simbenoun px faults/second kai 
+    analoga auxano poses pages tis exo stin mnimi
+
+  4)Kapioi apo tous pano algorithmous mporoun na efarmostoun kai global px
+    FIFO,LRU 
+
+30)Load Control
+
+   otan gemizi i mnimi tote mpori na anagasto na bgalo oloklires processes =>
+   na min trexoun san suspended,kai na tis kano swap
+
+   meta na anakatataxo tis pages auton pou miname,mexri na adiasi kapos i mnimi
+   oste na epistrepsoun
+
+31)Page Size
+
+   Parolo pou to hardware orizi to page size,to litourgiko mpori na theori px os
+   page tou 2 pages,i 4 pages
+
+
+   megales pages => pio poli space waste (oso periseuei stin page meni keno)
+                    mirkoteros page table
+                    mikrotero TLB
+                    kaliteri taxitita pou tis perno apo ton disko
+                     (o diskos meta tin kefali mou dini ipolipa poli grigora)
+            
+   Genika epilego megales pages gia tous pano logous
+
+32)Separate Instruction and Data Spaces
+
+   Simerini ipologistes exoun 1 address space gia instructions kai data
+   
+   Tha mporouse auto omos na itan diaxorismeno se I-space kai D-space etsi oste
+   to paging na mporouse na gini anexartita,kai ixera ti einai oste na epelega ti 
+   thelo na pai sto disko
+
+33)Shared Pages
+
+  Yparxoun periptosis pou diaforetikes diergasies(ite i idia pou trexi poles fores)
+  mirazonte tmima tis physical memory,o logos einai oti mpori na thelo na mirazonte
+  dedomena
+
+  Mirazonte read only dedomena,i dedomena pou einai copy on write(ean einai writable)
+
+  1)Sharing code
+    px Thelo na fortoso stin physical memory read only kodika,pou einai koinoxristos
+       px trexoun to idio application 
+
+     Se sistimata pou to I space einai diaforetiko apo to D space auto ginete poli 
+     eukola(alla se ola ginete)
+ 
+    *mpori na xriazete na exo idikes domes gia na balo tis shared pages
+     to pos bgazo pages prepei na lambani ipopsi tou oti einai koinoxristes
+
+    px mirazonte kapia library pou sinithos idi trexi kai ine stin mnimi
+
+       Ena problima me tis shared libraries einai na kano to relocation 
+       opos epano diladi ean thelo jump 16,stin process na kano to jump
+       me ali base stin library 
+
+       Gia na min exo auto to problima me tis absolute addresses mporo na
+       po ston compiler na paragi exarxis relative addresses,o code autos 
+       legete position independent code
+
+  2)Sharing data
+
+    Sto fork arxika ola einai shared,kai ginete copy on write mono ean allaxi kati
+    apo ta koina
+
+    px thelo na kano pipe,ara se ena tmima tis physical memory o enas grafi kai o alos
+       to diabazi apo to idio simio
+
+     
+34)Mapped Files
+
+   Fortonete ena arxeio stin mnimi meso mia system call
+
+   H shared pages mporoun na xrisimopoioun auton ton mixanismo
+   Me mapped files mporo na prosomioso mia IO siskeui,px sto pipe,i exodos einai
+   i eisodos tou alou,kai einai ena mapped arxeio
+
+35)Implementation issues
+
+36)Operating system+paging
+  
+  1)process creation 
+    blepi poso megali einai i process
+    kataskeuazi ton page table tis process(desmeuei mnimi gia auton+ton arxikopoiei)
+    kai bazi se kapion register pointer pros ton page table
+    desmeuei xoro ston disko oste na mpori na kani swap kapia page tis
+    enimerothi o process table gia tin process me tis plirofories gia table+swap area
+
+  2)process execution
+    oso trexi i process o page table prepi na einai stin mnimi
+      (ektos ean gini swapped out) 
+
+  3)page fault 
+    ean fault prepi na pari apo register tin virtual address
+    na psaxi sto disko,na fortosi tin selida stin mnimi apo to disko
+    (isos antikathistontas kapia ali),kai meta na xanatrexi i entoli
+    (intruction backup den einai panta eukolo giati mpori na ixe mini stin mesi ktl)
+
+    *ean den tin vri sto disko segmentation fault
+
+  4)process termination 
+    svinete page table ,tlb anafores stin process
+    periexomena mnimis,swap area
+    kai sta koinoxrista enimeronete oste na miothi 1 pou ta eblepe 
+
+37)Page fault handling
+   
+   1. The hardware traps to the kernel, saving the program counter on the
+stack. On most machines, some information about the state of the
+current instruction is saved in special CPU registers.
+2. An assembly-code routine is started to save the general registers and
+other volatile information, to keep the operating system from destroy-
+ing it. This routine calls the operating system as a procedure.
+3. The operating system discovers that a page fault has occurred, and
+tries to discover which virtual page is needed. Often one of the hard-
+ware registers contains this information. If not, the operating system
+must retrieve the program counter, fetch the instruction, and parse it
+in software to figure out what it was doing when the fault hit.
+4. Once the virtual address that caused the fault is known, the system
+checks to see if this address is valid and the protection is consistent
+with the access. If not, the process is sent a signal or killed. If the ad-
+dress is valid and no protection fault has occurred, the system checks
+to see if a page frame is free. If no frames are free, the page re-
+placement algorithm is run to select a victim.
+5. If the page frame selected is dirty, the page is scheduled for transfer to
+the disk, and a context switch takes place, suspending the faulting
+process and letting another one run until the disk transfer has com-
+pleted. In any event, the frame is marked as busy to prevent it from
+being used for another purpose.
+6. As soon as the page frame is clean (either immediately or after it is
+written to disk), the operating system looks up the disk address where
+the needed page is, and schedules a disk operation to bring it in.
+While the page is being loaded, the faulting process is still suspended
+and another user process is run, if one is available.
+7. When the disk interrupt indicates that the page has arrived, the page
+tables are updated to reflect its position, and the frame is marked as
+being in the normal state.
+8. The faulting instruction is backed up to the state it had when it began
+and the program counter is reset to point to that instruction.
+9. The faulting process is scheduled, and the operating system returns to
+the (assembly-language) routine that called it.
+10. This routine reloads the registers and other state information and re-
+turns to user space to continue execution, as if no fault had occurred.
+
+
+38)Locking pages in memory
+   
+   kapies pages opos IO pages den thelo na ginoun swap giati px kapia dma mpori
+   na tis diabazi
+
+   gia na to kano auto kano lock tin page(pinning)
+
+   alos tropos einai na bazo to IO se kernel buffers gia asfalia
+
+39)Backing Store
+
+  sinithos ston disko exo mia partition pou tin lene swap
+
+  ekei einai eleutheros xoros xoris kapio filesystem,einai san free space
+
+  Oi pages mpenoun sinexomenes se seira analoga me ton arithmo tous
+
+  Iparxoun 2 tropoi otan xekinaei mia process
+   1)tin bazo swap kai page in pros mnimi otan fault
+   2)tin bazo memory kai page out otan den xrisimopoiounte oi pages
+
+   Gia na exo prosbasi stis selides ston disko prepi na exo ena disk map
+   gia ton disko(ean i swap area exi thesis gia oles tis physical addresses
+   kai autes pou lipoun einai kenes den to xriazome,alla gia ikonomia xorou
+   genika den afino kena=> ton xriazome)
+
+   page_table(fault)->disk map -> disk page (sto swap_area)
+
+  *sta windows to swap einai ena kanoniko arxeio tou sistimatos
+
+40)Separation of Policy and Mechanism
+
+  memory management system is divided into three parts:
+1. A low-level MMU handler. //machine dependand
+2. A page fault handler that is part of the kernel. //machine independante
+   otan gini fault auto lei ston external ti na kani
+3. An external pager running in user space.
+   auto px otan xekinaei i process ftiaxni ton page table ktl
+
+ 
+   user process page_fault => fault handler => external pager(pai disko tin ferni)
+   => fault handler => MMU handler (tou lei na auti elipe)  
+
+
+48)Segmentation
+   
+   Os tora exo 1 address space(0 eos max) gia kathe process
+
+   Me segmentation mpori mia process na exi pola address spaces ola xekinontas apo 
+   (0 eos max).Ta segments mporoun na megalonoun kai na mikrenoun
+
+   Etsi mpori na xoristi kalitera i mnimi,oste sxetika pragmata na pigenoun mazi
+
+   To linking ginete pio apla giati den exo mixed ta periexomena tis mnimis
+   Episis apo allages se 1 segment den allazoun oles oi addresses para mono tou
+   segment pou allaxe
+
+49)Addressing
+   Oi virtual addresses exoun epipleon bits gia na lene se pio segment anaferonte
+
+   px sto multics 34 bit address
+
+      18(pio segment)  6(pia selida)  10(word in page)
+
+50)checkerboarding or external fragmentation= epidi to megethos tou segment allazi
+   metaxi 2 segments stin mnimi mpori na exo axrisimopoiito xoro,to na balo olo
+   ton axrisimopoioto xoro mazi px stis pio psiles addresses legete fragmentation
+   px segment1 keno1 segment2 keno2 segment3
+
+       segment1 segment2 segment3 keno_12
+
+   Den xero pos epireazi ton programatisti afou kathe segment exi diko tou 
+   address space,pantos logika ean ipothesoume oti ta segments
+   kapos ta briski to litourgiko,me fragmentation tha ta briski pio eukola
+   
+   
+51)Basikos logoi tou segmentation
+   1)protection
+    einai i protection.Px mporo na exo ena data segment
+    pou einai executable kodikas kai na exo mono exec rights se olo auto
+ 
+   2)eukolo sharing tmimaton mnimis
+
+52)Paging /Segmentation
+
+                                       paging/segmentation
+   Need the programmer be aware         No Yes
+   that this technique is being used?            
+
+ 
+
+
+   How many linear address              1 Many
+   spaces are there? 
+
+   Can the total address space          Yes Yes
+   exceed the size of physical
+   memory? 
+
+   Can procedures and data be           No Yes
+   distinguished and separately
+   protected? 
+
+   Can tables whose size fluctuates    No Yes
+   be accommodated easily? 
+
+   Is sharing of procedures            No Yes
+   between users facilitated? 

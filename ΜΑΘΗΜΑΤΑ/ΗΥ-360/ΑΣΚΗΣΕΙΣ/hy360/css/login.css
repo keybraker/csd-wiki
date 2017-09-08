@@ -1,0 +1,42 @@
+body { 
+              font-family: 'Trebuchet MS', Verdana, Arial, sans-serif; 
+              font-size: 10pt;
+			  background-image:url('../images/books.png');
+			  background-size:100% 100%;
+} 
+
+#login-form { 
+              width: 300px; 
+              margin: 200 auto; 
+} 
+
+  
+#login-form fieldset { 
+              padding: 10px; 
+			  background-color:white;
+} 
+  
+#login-form legend { 
+              font-weight: bold; 
+              font-size: 13pt; 
+			  color:green;
+} 
+  
+#login-form label { 
+              display: block; 
+              height: 1.5em; 
+              background-color: #e7e7e7; 
+              padding: 10px 10px 0; 
+} 
+  
+#login-form input { 
+              margin-right: 20px; 
+              border: 1px solid #999; 
+              float: right; 
+              clear: right; 
+              background: #ccc; 
+} 
+  
+#login-form input:focus, #login-form input-hover { 
+              border: 1px solid #333; 
+} 

@@ -1,0 +1,214 @@
+1)Process = program pou trexi se diko tou address space 0 eos kapio max
+
+2)multiprograming=pola process pou enalasonte(to litourgiko ta enalasi se mi problepsimi seira)
+
+3)Process table = domi pou exi to lithourgiko gia stixia ton processes
+   1 entry(process control block)/process
+
+   *otidipote xriazete oste na mpori otan gini switch na trexi
+   *ola ta kato ta antigrafi to child me tin fork
+   
+   px mia entry mpori na exi:
+
+   Process management fields
+     Process ID 
+     Process Owner
+     Registers
+     Program counter
+     Program status word
+     Stack pointer
+     Process state
+     Priority
+     Scheduling parameters
+     Parent process
+     Process group
+     Signals
+     Time when process started
+     CPU time used
+     Children’s CPU time
+     Time of next alarm
+    
+   Memory management
+     Pointer to text segment info
+     Pointer to data segment info
+     Pointer to stack segment info
+  
+   File management
+     Root directory
+     Working directory
+     File descriptors
+     User ID
+     Group ID
+
+4)Process tree structure 
+   Mia process mpori na dimiourgisi child processes kai ta child alla processes
+   => ftiaxnete ena dentro
+
+  init process = root process (oles oi epomenes einai apogoni) xekinaei me to boot
+  process group = parent+oli apogoni tou(to dentro)
+
+  pid=1
+
+5)signal se process
+  Otan ena signal stali apo to keyboard px ctrl+z,tote auto pai se olo to process group
+   H kathe proces tou group kani oti theli me auto
+
+  *Alla kathe child prepei na orisi apo mono tou ti tha kani(ean oxi to default)
+   den arkei na to exi dilosi o parent,akoma kai prin to fork
+
+6)Process states
+   1)Running (actually using the CPU at that instant)
+     => Blocked i Ready  (apo running mpori na pai se 2 katastasis)
+   2)Ready (runnable; temporarily stopped to let another process run)
+     => Running
+   3)Blocked (unable to run until some external event happens)
+     suspend process => kratao address space(core image) + sono state ston process table
+                        gia na kano restart
+
+     Otan mia process prepei na gini suspend to operating system stelni ena alarm signal
+     stin process => sono state(sono registers sto stack tis process),kai xekinai enas
+     signal handler pou perimeni na akousi to katalilo signal gia na xanaxekinisi
+     px perimeni input scanf/apo pipe/socket read ktl
+     px suspend ctrl+z nomizo
+   
+     => Ready  
+
+   2),3) = suspended process
+
+7)Process orismoi
+  
+  1)foreground process = alilepidraei me ton xristi
+  2)background process(daemon) = trexi xoris na alilepidraei me xristi px elenxi mail
+  
+  3)Zombie = has completed execution,alla exi akoma entry ston process table
+     1)Ean gini wait apo ton parent/i termatisi o parent kanonika tote bgeni apo ton
+       process table 
+     2)ean den termatisi kanonika o parent,tote meni kai ginete child tis init
+       kai kapia stigmi i init tin katharizi   
+ 
+     *enas logos pou meni einai gia na thimame to exit code tis
+
+  4)Orphan: parent has finished or terminated while this process is still running  
+     => (parent i init)
+   
+
+8)Process termination
+  1)Normal exit (voluntary)  exit(0);
+  2)Error exit  (voluntary)  exit(1);
+  3)Fatal error (involuntary=den to epilegi i process)
+    exception px divide with zero
+  4)Killed by another process (involuntary)
+    kill(processID,SIGINT) 
+
+
+ *exit()
+  termatizete i process,eleutheronete oi resources kai mpeni se zombie state
+
+9)Child process create => fork (monadikos tropos sto unix) (CreateProcess sto win)
+ 1)exact clone of the calling process 
+    same memory image(Duplicate process image)
+      Program Text (segment .text)
+      Stack (ss)
+      PCB (eg. registers)
+      Data (segment .data)
+    same enviromenment strings,same open files
+  
+  2)o kodikas sinexizi akribos meta to fork gia to child
+  3)i nea process einai antigrafo tis palias,alla einai pliros anexartites 
+    exoun diaforetika address space 
+  4)gia logous exikonomisis poron,mpori na iparxi koinoxrista dedomena i open
+    files,alla auto mono otan kano apla read se auta,ean kapios write tote ftiaxno
+    antigrafa (copy mono otan write)
+  5)Otan termatizi o parent ta childs den termatizoun,trexoun kanonika
+
+  *ftiaxnonte eite apo to systima/ali process/kapion xristi
+
+   Ston parent i fork epistrefi to pid tou child.
+   Sto child i fork epistrefi 0
+   -1 ean error 
+
+   int main()
+   {
+     pid = fork();
+	switch(pid)
+	{
+	  case -1:
+	   perror(“fork failed”);
+	   exit(1);
+	  
+          case 0:  //0=> child process
+	   message = “This is the child”;
+	   n = 5;
+	   break;
+	
+          default:
+	   message = “This is the parent”;
+ 	   n = 3;
+	   break;
+	}
+   }
+
+   
+
+10)exec
+  exec => i process antikathistate apo autin pou dimiourgise,i nea exi to idio pid
+  Episis exoun to idia protereotita,idia open file descriptors(ektos kai po na ta klisi)
+  
+  sinithos fork+meta exec => klisi neou programatos
+
+
+  int main() 
+  {
+    printf(“Running ps with execlp\n”);
+    execlp(“ps”, “ps”, “ax”, 0);
+    printf(“Done.\n”); //auto den tha trexi pote giati i mama process termatizi
+    exit(0);
+  }
+
+
+11)wait for process
+  H parent process mpori na perimeni ta childs na teliosoun
+
+  Analoga me to posa exo kano ena for loop
+
+   wait(&stat_val);
+
+  Episis mporo na perimeno 1 sigekrimeni process na teliosi
+
+   waitpid(child_pid, (int *) 0, WNOHANG);
+
+
+13)Redirection
+   ./program < file.txt //stdin apo file   
+   ./program > file.txt //stdout se file
+
+   Mporo na kano redirection kai mesa sto programa,edo filename einai ena onoma
+   arxiou pou thelo na einai i stdin mou.Apo edo kai kato stdin einai auto.
+   freopen(filename, “r”, stdin); 
+
+   Px o xristis mpori na mou dosi ena filename na elenxo ean einai ola ok,
+      meta na anakateuthino esoterika to filename san stdin kai na trexo to 
+      program esoterika me mia execl ,san na einai kani  ./program < file.txt
+  
+   ./program1 file.txt = elenxos orismaton kai ./program < file.txt
+
+
+   #include <unistd.h>
+   #include <stdio.h>
+   #include <stdlib.h>
+   int main(int argc, char *argv[])
+   {
+     char *filename;
+     if (argc != 2) {
+       fprintf(stderr, “usage: useupper file\n”);
+       exit(1);
+     }
+     filename = argv[1];
+     if(!freopen(filename, “r”, stdin)) {
+       fprintf(stderr, “could not redirect stdin from file %s\n”, filename);
+       exit(2);
+     }
+     execl(“./upper”, “upper”, 0);
+     perror(“could not exec ./upper”);
+     exit(3);
+   }

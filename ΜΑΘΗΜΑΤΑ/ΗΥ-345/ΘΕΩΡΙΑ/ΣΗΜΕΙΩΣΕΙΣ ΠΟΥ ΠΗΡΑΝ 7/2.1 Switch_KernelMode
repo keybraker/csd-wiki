@@ -1,0 +1,113 @@
+Logoi gia na mpo sto kernel mode
+
+   1. System calls.
+   2. TLB misses.
+   3. Page faults.
+   4. I/O interrupts.
+   5. The CPU going idle=> switch
+
+1)System calls (pidixa ta ipolipa,enosi me oti ixa diavasi)
+   1)ena programa pou trexi theli kati apo to litourgiko px na diavasi ena arxeio
+     => kali tin katalili system call me parametrous => kernel mode kai meta epistrofi
+     pali se user mode
+
+   2)px count = read(fd, buffer, nbytes);  //c function
+      
+     fb= arxeio
+     buffer= pinakas bytes gia apothikeusi
+     nbytes = posa na diabaso gia na apothikeuso sto buffer
+
+     Ean error tote count=-1 kai global variable errno=-1
+
+   3)Diadikasia klisis
+     read(fd, buffer, nbytes); 
+
+     1)mpenoun ta orismata tis sto stack me anapodi seira
+     2)o kodikos tis se register
+     3)TRAP(einai instruction) gia switch se kernel mode
+     4)ektelo tin read system call 
+     5)o system call handler epistrefi=> pali user mode
+
+  px fork,exec,wait,waitpid,exit,open,close,mkdir,rmdir,chdir ktl
+
+
+2)user process page_fault 
+  =>trap to kernel(sono registers sto stack) kai apothikeui tin virtual address
+    pou ekane to fault
+  =>kalo fault handler
+     briski virtual address pou ekane to fault ean paranomi(invalid or oxi rights)=>kill signal
+     Ean einai ok(simeni oti einai sto disko),adiazi xoro stin mnimi ean xriazete(me kapio algorithmo)
+     call external pager kai suspend oso ton perimeno        
+ => external pager(pai disko tin ferni),kai interrupt oste na sinexisi o fault handler
+ => fault handler
+    enimeroni page table
+    o counter exi tin timi tis entolis me to fault
+    epanaferonte register ktl
+ => piso user space gia xanaektelis
+
+3)interupts/exceptions
+
+  1)exoterikes(exo apo ton epexergasti) (interupts)
+     I/O (px diktio/hard disk/pliktrologio/pontiki)
+
+     px o diskos tou ixa zitisi kati,to efere kai tora me stamataei giati to exi
+
+     *H allagi ginete molis teliosi i trexousa entoli pou trexi,kai meta switch
+
+  2)esoterikes(exceptions)
+     arithmitiki iperxilisi
+     dieresi me 0
+     page fault = thelo selida pou den iparxi stin mnimi
+       1)eite iparxi ston disko=> diakopi gia na mou tin feri to litourgiko
+       2)eite einai paranomi address den mou aniki
+
+4)Interrupts
+   IO controller-interrupt controller-CPU
+
+  1)Hardware = interrupt controller
+    1)IO controller stelni interrupt signal sto bus
+    2)Interrupt controller sto motherboard to blepei
+    3)Otan erthi i sira na exipiretithi
+     1)stelni stin CPU ton device number pou zitai interrupt
+        = index ston interrupt vector(pio kato ti einai auto)
+     2)sono tou registers sto stack(i se internal registers)
+        (sto kernel stack kalitera)
+        program counter+psw register (to elaxisto)        
+     3)switch to kernel mode
+     4)kalite o interrupt handler (software)
+     5)cpu lei interrupt controller oti mpori na dekti alo interrupt 
+   
+
+  2)software=Interrupt handler 
+
+   1)Save any not saved(by the interrupt controller hardware) registers+PSW
+   2)set context neo stack+TLB+page_table gia tin interrupt service-procedure
+   3)Acknowledge the interrupt controller.
+     If there is no centralized interrupt controller, reenable interrupts.
+   4)Copy the registers from where they were saved (possibly some stack)
+     to the process table
+   5)Run the interrupt-service procedure
+     extract information from the interrupting device controller’s registers.
+   6)Choose which process to run next
+   7)Set context for the next process (kapia me assembly)   
+     page_table+TLB 
+     Load its registers+PSW.
+   8)Start running the new process.
+
+   
+
+   *kostizi poli,poles entoles
+   
+   *Interrput vector = pinakas pou antistixizi device number me tin address tou
+     interrupt handler(interrupt-service-procedure=part of software driver tis device)
+     (Apothikeuete ite se hardware H stin mnimi(exo register pou dixni ekei))
+    
+   To interrupt kostizi changing MMU(memory management unit) contexts and
+   will probably invalidate most or all of the cache and TLB
+
+5)switch => alarm signal stin process => signal handeller meta sima=> xanaxekinaei
+
+  kratao address space(core image)
+  sono state tis ston process table
+  suspend process => kratao address space(core image) + sono state ston process table
+  kalo shedule

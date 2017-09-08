@@ -1,0 +1,325 @@
+1)Interprocess communication(IPC) 
+
+  1)pos tha gini i epikoinonia?
+  2)pos tha oristi seira(sinxronismos)
+     oste na min antagonizonte 
+     oste otan exartote i mia apo tin ali na ginonte se sosti sira
+
+2)2 problimata se shared data
+  1)i seira me tin opia exoun prosbasi sto dedomeno
+  2)to ti ginete se kathe bima,oste na telioni sosta to bima prin pao sto epomeno
+
+3)Sinxronismos frontizi gia ta pano
+
+4)race condition
+  den orizete i seira sosta(i den oloklironete to bima) kai i allagi se shared
+  data mpori gini me tixeo tropo px pia prolabe prota,kai na exo alo apotelesma
+  kathe fora
+
+  px mia process prepei na di kati kai meta na apofasisi(bima)
+     afou to di,mia ali process to allazi,kai i proti apofasizi me basi kati 
+     pou pleon den iparxi
+     px thesis sinema,opou to proto programa blepi keni kai kapios alos blepi 
+        keni kai telika pianoun kai oi 2 tin idia thesi
+
+  Edo to bima meni stin mesi,bima=blepo kai apofasizo
+
+5)critical regions
+  =
+  Ta problimatika simia einai ekei opou exo prosbasi se koina data
+
+  Tin oloklirosi tou bimatos tin epibalo me mutual exclusion 
+  diladi otan ego allazo to shared data mexri na po oti teliosa 
+  den exi prosbasi kanis
+  (gia na parameni omos i paralilia prepei i prosbasi sta koina data na klidonete
+   ton elaxisto xrono,oste na min kolane oi alles processes kai na epitinxanete
+   paralilia)
+  
+  Kanones gia sosto mutual exclusion
+  1)1 process max se critical region
+  2)einai anexartiti sistimatos px taxitita tou,cpus tou ktl
+  3)oxi block ektos critical region
+  4)oles oi process apoktoun kapote prosbasi sto shared data
+  
+
+5)Tropoi gia na petixo mutual exclusion
+
+6)Disabling interrupts => oxi alles interrupts,oute clock interupts => oxi switch
+
+  Mia lisi einai na dino tin dinatotita se mia process otan mpeni se critical
+  region na kani disable oles tis interrupts => tha afisi ton elenxo otan ekeini
+  tha exi teliosi me tin critical region
+  
+  Problimata
+  1)ean i process to ekmetaleuti?kai den epanaferi otan telioni tin critical ta
+    interrupts?
+  2)ean pola cpu,to disable tha gini mono gia to cpu pou einai i process,i alles cpu
+    tha mporoun prosbasi stin shared memory,poso malon pleon tora pou ola multicore
+
+  *to kernel kani disable tis interrupts otan kani kati simantiko pou den prepei 
+   na afisi stin mesi,alla gia mutual exclusion se user level den einai kali lisi
+
+7)Lock variables
+
+  exo mia metabliti pou otan to shared data einai se xrisi einai 1 kai otan den einai
+  einai 0
+
+  etsi mia process otan di 1 perimeni kai otan di 0 kani oti theli na kani
+
+  Problima = race condition,afou i lock variable einai shared data i idia
+    px process1 blepi 0 ara lei mpeno,kai protou mpi exi mpi mia ali
+       diladi mexri na diabaso kai apofasiso,exi allaxi
+
+  Edo to problima einai oti to 0 simeni mpite kai oi 2
+
+8)Strict Alternation(take turns)
+
+  Edo exo 2 process pou i kathemia epilegi pote mpeni
+  px 0 => mpeni i process0
+     1 => mpeni i process1
+
+  Problima = gia na kani kati i mia process prepei na kani kati kai i alli alios
+    kolane
+
+   Ean kolisoun logo tis critical region tote einai ok,alla mpori na kolisoun logo
+   tis noncritical kai auto parembeni me tous kanones
+
+   //busy waiting => to lock legete spin lock
+
+   while (TRUE) {
+     while (turn != 0);   //antistixa !=1 gia tin process1
+     critical region( );  
+     turn = 1;           //antistixa turn=0 gia tin process1
+     noncritical region( );
+   }
+   
+   px process0 grigori critical+noncritical,process1 argi non-critical
+
+   H process0 anagastika prepei na perimeni to non-critical komati tis process1 
+
+
+   Edo se 0 mpeni mono 1,se 1 mpeni mono i alli
+   Alla pernoun sires
+
+
+8)Peterson’s Solution 
+
+   To problima me to lock variable itan oti den ixera pios irthe protos
+   edo kratao auti tin pliroforia legontas oti endiaferome
+
+   Episis exo ali kataxorisi gia na pi i kathe mia oti endiaferete 
+
+   2 processes
+
+   pinakas interested me index tis processes(edo diloni i kathe process)
+
+   Dilono oti thelo na mpo,kai ean den exi dilosi oti theli na mpi kialos tote mpeno
+   
+   otan bgeno dilono oti den thelo na mpo
+   
+
+   #define FALSE 0
+#define TRUE 1
+#define N
+2 / * number of processes * /
+int turn;
+int interested[N]; / * whose turn is it? * /
+/ * all values initially 0 (FALSE) * /
+void enter region(int process);
+{
+int other; / * process is 0 or 1 * /
+}
+/ * number of the other process * /
+other = 1 − process;
+/ * the opposite of process * /
+interested[process] = TRUE;
+/ * show that you are interested * /
+tur n = process;
+/ * set flag * /
+while (turn == process && interested[other] == TRUE) / * null statement * / ;
+void leave region(int process)
+{
+interested[process] = FALSE;
+}
+
+
+9)The TSL Instruction  (Test and Set Lock)
+
+  Lock to kani to hardware(xrisimopoieite sixna otan pola cpu)
+
+  Entoli 
+    TSL RX,LOCK  
+
+  1)Apothikeuei ston RX register tin timi pou exi i LOCK address mnimis
+  2)basi os timi stin LOCK = 1
+  3)kani lock sto memory bus oste kamia cpu na min mpori na diabasi tin LOCK
+
+  enter region:
+    TSL REGISTER,LOCK  | copy lock to register and set lock to 1
+    CMP REGISTER,#0    | was lock zero?
+    JNE enter region   | if it was not zero, lock was set, so loop
+    RET                | retur n to caller; critical region entered
+  
+
+
+  leave region:
+    MOVE LOCK,#0    | store a 0 in lock
+    RET             | retur n to caller
+
+  
+
+  Me mutexes(pio kato ta mutex)
+
+ mutex lock:
+   TSL REGISTER,MUTEX  | copy mutex to register and set mutex to 1
+   CMP REGISTER,#0    | was mutex zero?
+   JZE ok             | if it was zero, mutex was unlocked, so return
+   CALL thread yield  | mutex is busy; schedule another thread
+   JMP mutex lock     | tr y again
+ ok:  RET             | retur n to caller; critical region entered
+
+
+ mutex unlock:
+  MOVE MUTEX,#0   | store a 0 in mutex
+  RET 
+
+10)Sleep and wait
+
+   To problima me tis eos tora lisis einai to busy waiting,diladi spatalane cpu
+   giauto xrisimopoio 
+
+   sleep(system call pou kani suspended tin process,eos otou
+         mia ali process tin xipnisi)
+
+   wakeup (xipnaei tin process pou kimate)
+
+11)The Producer-Consumer Problem (xrisimopoiei sleep/awake)
+
+   2 processes 1 shared buffer megethous N
+
+   producer puts on buffer
+   consumer removes from buffer
+
+   Ean buffer full => producer sleep , awake otan oxi-full 
+   Ean buffer empty => consumer sleep , awake otan oxi-empty(otan apo 0 pai px 1)
+
+   Ean o sinxronismos basizete mono sta sleep/awake mpori race condition
+   protou prolabi sleep pire to awake ,kai to signal xathike => kimate
+ 
+   px consumer blepi empty => pai sleep
+      producer bazi => stelni awake protou prolabi sleep o consumer
+
+   o consumer den perni pote to sleep,kathe fora xipnaei blepi ton counter pou ixe
+   diabasi => sleep (to awake den xanarxete pote)
+
+   episis o producer afou gemisi to buffer sleep kai autos kai kimounte gia panta
+
+   lisi sto pano problima einai ena wakeup waiting bit,pou simeni oti mia process
+   apothikeuei ean wake up signal,ara otan pai na sleep ean exi dexthi wait den
+   kimate,alla kani to bit pali 0
+
+   otan exo poles process tote tha xriazome pola wake up bits
+
+12)Semaphores
+
+   Exo enan counter pou metraei ta awakes
+   px 1 simeni oti exo ena awake 
+
+   Ean mia process di >0 tote mioni ton counter kata 1 kai meni awake
+   Ean di 0 tote pai sleep
+
+   Ola ginonte se mia atomic action(oi exo den blepoun ta endiamesa bimata)
+   check value
+   change it
+   and sleep(ean 0)
+   
+13)Me semaphores to Producer-Consumer Problem (xrisimopoiei sleep/awake)
+
+   Gia kathe ti koino exo kai 1 semaphore
+   3 koina
+   empty counter/full counter/o buffer(critical region)
+
+   H semaphore den epitrepei down otan 0,auto mporo na to xrisimopoiiso gia
+   2 logous
+   1)amibeos apoklismos(atomic)
+   2)sinxronismos (logiki tou programatos)
+     edo ean i semaphore exi full=0(empty) den mpori o consumer na pari
+     episis ean empty=0(full) den mpori o producer na pari
+
+   Prota kano down
+
+   #define N 100     / * number of slots in the buffer * /
+   typedef int semaphore;  / * semaphores are a special kind of int * /
+   semaphore mutex = 1;  / * controls access to critical region * /
+   semaphore empty = N;    / * counts empty buffer slots * /
+   semaphore full = 0;     / * counts full buffer slots * /
+
+
+   void producer(void)
+   {
+     int item;
+     while (TRUE) / * TRUE is the constant 1 * /
+     {    	
+	item = produce item( );  	/ * generate something to put in buffer * /
+	down(&empty);      	/ * decrement empty count * /
+	down(&mutex);           	/ * enter critical region * /
+	inser t item(item);    	/ * put new item in buffer * /
+	up(&mutex);            	/ * leave critical region * /
+	up(&full);             	/ * increment count of full slots * /
+      }
+    }
+
+    void consumer(void)
+    {
+	int item;
+      while (TRUE)  / * infinite loop * /
+      { 
+	down(&full);  / * decrement full count * /
+	down(&mutex);  / * enter critical region * /
+	item = remove item( );  / * take item from buffer * /
+	up(&mutex);   / * leave critical region * /
+	up(&empty);   / * increment count of empty slots * /
+	consume item(item);  / * do something with the item * /
+       }	
+     }
+
+14)mutex
+   Otan me niazi mono o amibeos apoklismos tote xrisimopoio mutex
+   (san semaphore mono pou den metrai oste na to xrisimopoiiso stin logiki tou
+    application)
+
+   To mutex exi mono 2 times 1 kai 0,me 1 mpeno stin critical region me 0 oxi
+
+   semaphore sv = 1;
+   loop forever {
+    down(sv);
+    critical code section;
+    up(sv);
+    noncritical code section;
+   }
+
+15)Monitors pidixa
+
+1)sockets = communication of processes akoma kai meso network
+           (enoeite kai se process 1 ipologisti)
+        
+2)server creates socket me kapio onoma kai perimeni client
+  to socket opos oles oi epikoinonies sta linux einai san na grafo se files
+  diladi exoun file descriptors 
+
+3)Basika
+  IP = four numbers <256 ,me telies xorismenes
+   ports < 1024 sinithos gia system processes ports
+   web servers akoune stin port 80
+   Genika iparxoun standar ports gia standar applications px web server/printer(515)
+
+4)Socket attributes
+  1)domain  =  network medium pou tha xrisimopoiei to socket px AF_INET = internet
+  2)type  =  stream/datagram  px sto internet TCP/UDP
+  3)protocol = protocolo epikoinonias px internet uses IP protocol
+               (sinithos bazo 0 pou simeni xrisimopoieise to default gia to domain/type)
+   
+  *Address = kathe socket exi addresses se format analoga me ton tipo tou px IP address
+    Gia to AF_UNIX address einai to struct sockaddr_un pou orizete sto sys/un.h
+    Gia AF_UNIX exo struct sockaddr_in pou irizete sto sys/un.h         
+   (sto linux to i address einai ena struct(sockaddr_un) orismeno sto netinet/in.h )

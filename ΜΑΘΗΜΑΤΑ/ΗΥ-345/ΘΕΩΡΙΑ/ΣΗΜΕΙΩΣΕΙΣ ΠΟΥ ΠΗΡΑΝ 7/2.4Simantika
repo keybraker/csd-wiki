@@ -1,0 +1,122 @@
+1)Polla switch prepei na exo otan exo processing me poli IO
+
+2)CPU burst = xroniko diastima pou trexi mia process mexri switch
+  IO burst = poso xrono theli to IO 
+
+3)Switch otan
+   blocked apo moni tis i process px xrisi IO
+   teliose to quantium tis
+
+4)Categories of scheduling algorithms(analoga me to peribalon xrisis epilego)
+  1)Batch
+    adiaforo gia to clock,exo ena sinolo ergasion na kano
+    den kano sixna diakopes,einai gia periptosis pou den perimeni kapios xristis
+    apla exo na kano mia doulia,xrisimopoiounte sto business world sixna
+    
+  2)Interactive
+    me niazi to clock,exo na exipiretiso xristes
+    xriazome preemption scheduling algorithm,exo xristes kai pola process
+    px servers i kai prosopikoi ipologistes   
+  
+  3)Real time
+    adiaforo sinithos gia to clock giati einai autorithmizomes (real time)
+    real time systems,me tin enia oti den rithmizo ton xrono ego,ala opos 
+    prokipti apo tis anages ton real time diergasion
+
+    px mixanima pou lambani apo aisthitires pliroforia
+
+5)Categories of scheduling algorithms(analoga me to peribalon xrisis epilego)
+  Geniki stoxoi
+   dikaioi
+   tiroun kanones px protereotitas
+   axiopioun olous tous porous
+  
+  1)Batch => doulies ana megalo xrono
+     maximize jobs per hour
+     xronos mexri na teliosi batch job
+
+    1)FIFO
+    2)FIFO me protereotita i pio sintomi
+    3)trexo panta tin pio sintomi
+
+  2)Interactive => alilepidra me xristi => doulies enalasonte oste na min kathistero xristi
+  3)Real time => den iparxi perithorio gia kathisterisi,prosarmozonte eno simbenoun
+     pragmata
+
+
+15)Interactive systems scheduling algorithms
+   Round-Robin Scheduling
+   Priority Scheduling
+   Multiple Queues
+   Shortest Process Next
+   Guaranteed Scheduling
+   Lottery Scheduling
+   Fair-Share Scheduling
+
+   *diaisthika i sosti lisi tha itan na exo protereotites pou kathorizoun to poso
+    xrono tha trexi i process,px ipsili => megalitero quantum time
+    alla den exo di tetio algorithmo
+
+16)Round-Robin Scheduling (poli sixna xrisimopoieite)
+
+   1)FIFO
+   2)H kathe mia trexi max quantum
+   3)Swith(pai telos ouras ean den teliose)
+     teliose
+     etrexe quantum 
+     block
+   4)quantum
+     ean megalo => oxi pola switch => unresponsive
+     ean poli mirko => poli kostos apo ta switch
+
+17)Priority Scheduling
+   1)protereotites =>trexi panta prota auti me tin megaliteri priority
+   2)mporo mioso protereotita(systima i xristis)+quantum => dikeosini
+   3)ta kritiria pou xrisimopoio einai poso piran apo to quantum time tous
+     ean piran ligo,simeni oti prokaloune block,ara tis theoro ipsilis protereotitas
+
+     px priority = 1/ f  opou f=pososto quantum pou trexane
+
+    *kindinos ean den allazo protereotita oi xamilis na min trexoun pote
+
+18)Mixi priority scheduling + Round-Robin Scheduling
+   Exo classes protereotitas kai se kathe class exo mia oura round robin
+   Panta epilego tis ipsilis protereotitas
+
+
+19)Multiple Queues
+   priority classes
+   Oi pio high priority trexoun protes alla trexoun ligotero
+ 
+   Max priority = 1 quantium,amesos xamiloteri 2 quantum ktl
+ 
+   Trexo process => tin bazo stin amesos xamiloteri class
+
+   Oi megales proccess pane ston pato alla otan trexoun,trexoun gia poli ora
+   (megalo quantum)
+   
+20)Shortest Process Next
+   Trexo prota tin pio sintomi(oste poli interactive to sistima)
+
+   Krino pia einai i pio grigori process me basi to istoriko tis
+
+21)Guaranteed Scheduling 
+
+  Mirazi tin cpu stous users se isa komatia
+  kai to kathe komati,se isa komatia stis processes
+
+  Ean kapia trexi parapano=> trexi meta ligotero oste ises
+
+22)Lottery Scheduling
+   
+   Epilego stin tixi,alla kapies exoun pio polous laxnous
+
+23)Fair share scheduling
+   cpu/xristes
+
+   px ean 2 xristes mirazonte tin cpu anexartita apo to poses process exi o kathenas
+     
+24)Policy Versus Mechanism
+   scheduling policy simeni oti i process mpori na dini parametrous ston 
+     scheduling mechanism,oste na krini me perisoteres plirofories
+

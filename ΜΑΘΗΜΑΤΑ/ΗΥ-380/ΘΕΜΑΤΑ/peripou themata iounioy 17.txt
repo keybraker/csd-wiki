@@ -1,0 +1,33 @@
+1o thema
+
+master theorem
+
+T(n) = T(n/4) = 2T(n/3) + 5n
+ktl
+(8 tetoia - 24 monades)
+
+2o thema
+
+quick select
+perigrafi me pseudokodika
+best case worst case average case
+
+(20 monades)
+
+3o thema
+
+
+4o thema
+
+kai to 8ema 4 rwtage ton taxytero algorithmo gia na vreis
+longest path an oi akmes pairnoun times sto sunolo {1,2,3,4,5}
+
+kai h apanthsh einai o dijstra
+
+5o thema
+a) perigrapste .. me mi tetrimmeno kato fragma
+(px kato fragma taxinomisis me sygkriseis)
+
+ß) P NP NP complete NP hard
+
+(15 monades)

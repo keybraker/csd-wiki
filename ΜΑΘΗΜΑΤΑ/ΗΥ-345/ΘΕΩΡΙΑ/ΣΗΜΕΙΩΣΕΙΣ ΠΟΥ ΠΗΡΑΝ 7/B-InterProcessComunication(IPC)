@@ -1,0 +1,479 @@
+1)critical sections = simia ston kodika pou allazoun koinoxrista data
+
+2)Inter process communication me 
+    Semaphores
+    Shared Memory
+    Message Queues(den diabasa)
+
+3)To problima einai i tautoxroni prosbasi se resources,pos tha mpi se mia 
+  seira oste na ta threads na tin xrisimopoioun enalax alla se sosti seira
+
+  Sinxronismos einai na ta balo se mia sosti seira.San na kano to paralilo
+  seiriako oso anafora tin prosbasi se koina resources
+
+  Gia tautoxrono thelo na enalasonte ta threads diladi na min desmeutete px
+  me lock mia resource parapano apo oso xriazete alios ta threads mplokaroun
+  kai xanete o paralilismos
+
+
+4)Sinartisis gia mia semaphore(sv i semaphore state)
+  *Binary mono tha do
+ 
+  P(sv)  //wait thimame pause
+    sv--  (ite amesa sv>0 ite wait(suspend process) for V kai meta sv--)
+   
+  V(sv)  //post 
+    sv++  (ean kapios perimeni xekinaei amesos(V->P ara telika 0),alios sv++)
+    
+
+5)O skopos einai na kano ton critical code,kai mono molis telioso na kano V 
+  oste na xekinisi i alli process
+
+  Process code,idios kai stis 2 process.
+  H sv einai koinoxristi.
+  Arxika kapia apo tis dio process prolabeni kai kani proti P.
+  Meta ginete o kiklos
+
+  semaphore sv = 1;
+  loop forever {
+    P(sv);
+    critical code section;
+    V(sv);
+    noncritical code section;
+  }
+  
+
+6)Semaphore functions(pernoun orismata arrays of semaphores,oxi apla 1 semaphore)
+
+  #include <sys/sem.h>
+  
+
+  int semget(key_t key, int num_sems, int sem_flags);
+  int semop(int sem_id, struct sembuf *sem_ops, size_t num_sem_ops);
+  int semctl(int sem_id, int sem_num, int command, ...);
+
+  1 key meso tou sistimatos antistixizete se 1 semaphore id
+
+  Seira xrisis 
+   create(semget)-> initialize(semctl)->change value(semop)->destroy (semctl)
+ 
+7)Create semaphore(i get Id ean iparxi idi)
+  int semget(key_t key, int num_sems, int sem_flags);
+    Key einai enas thetikos arithmos pou ego epilego(i ixa epilexi otan eftiaxa sema)
+    Ean den iparxi idi Create a new semaphore
+
+    return 
+      semaphore indentifier gia peretero xrisi(ite neas ean create i palias)
+      -1 ean error  
+  
+    num_sems  = posa semaphores tha ftiaxo sxedon panta 1
+
+    sem_flags = IPC_CREAT  //create ean den iparxi
+                IPC_CREAT | IPC_EXCL  //create mono ean den iparxi alios error
+                permisions ta lower 9 bit,san tin file permisions
+   
+   
+    *To key einai san filename pou anaparista mia resource,pou thelo na mirasto
+     Episis i epistrofi apo tin semget einai san FILE* 
+   
+8)Commands stin semaphore (initialize kai delete)
+
+  int semctl(int sem_id, int sem_num, int command, ...);
+
+   sem_id = semaphore intentifier apo to create 
+   sem_num = to index ean exo poles,sinithos 0 giati exo 1
+   command = action to take (ta basika einai init/delete)
+     1)SETVAL 
+         Initialise semaphore(prepei protou na tin xrisimopoiiso)
+         tin nea timi tin dino sto enum epipleon orisma
+     2)IPC_RMID
+         Used for deleting a semaphore identifier when it’s no longer required.
+
+     *kiala iparxoun alla ta 2 auta einai ta simantika
+
+   Proeretiko orisma(px otan SETVAL) ena union
+
+     union semun {   
+       int val;
+       struct semid_ds *buf;
+       unsigned short *array;
+     }
+    
+  
+    returns 0=> success
+            -1 => error
+
+9)Allagi timis tis
+  int semop(int sem_id, struct sembuf *sem_ops, size_t num_sem_ops);
+  
+  sem_id = semaphore id apo tin create
+  
+  sem_ops = pointer to array me structures 
+   
+     struct sembuf { 
+       short sem_num;   //index ston semaphore array,epidi exo mono 1 => 0
+       short sem_op;    //value pou tha prostheso stin semaphore (P=> -1,V=>+1)
+       short sem_flg;   //
+     }
+       
+  sem_flg  = SEM_UNDO(sinithos)
+     Lei sto litourgiko oti ean i process termatisi xoris na kani release? tin semaphore
+     to kani to litourgiko
+
+
+   *Oles ois allages pou kano me tin semop,px ean exo poles semaphores ginonte
+    tautoxrona se oles
+
+10)Paradiga 
+   Tha exo 2 process pou i mia tha tiponi X otan mpeni se critical kai otan bgeni
+   Kai i alli tha tiponi O otan mpeni kai otan bgeni
+
+   Exodos einai (zeugaria ana dio pou enalasonte logo P and V,
+                 epidi xekinisa me O exo XX sto telos epipleon?) 
+    
+    ./sem1
+    OOXXOOXXOOXXOOXXOOXXOOOOXXOOXXOOXXOOXXXX
+
+
+//Edo den exo pola process mono 1 process exo,pou kani P kai V
+//se mia semaphore
+//create -> initialize(edo me 1)-> P/V(10 fores) -> delete
+
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+#include <sys/sem.h>
+
+#include "semun.h"
+
+static int set_semvalue(void);
+static void del_semvalue(void);
+static int semaphore_p(void);
+static int semaphore_v(void);
+
+static int sem_id;
+
+
+int main(int argc, char *argv[])
+{
+    int i;
+    int pause_time;
+    char op_char = 'O';
+
+    srand((unsigned int)getpid());
+    
+    //create 1 semaphore 
+    //epilego diko mou key
+    //0666 | IPC_CREAT  ,create kai to 0666 einai gia permisions nomizo
+
+    sem_id = semget((key_t)1234, 1, 0666 | IPC_CREAT); 
+
+    if (argc > 1) {
+        if (!set_semvalue()) {  //initialize tin semaphore me union pio kato i fucntion
+            fprintf(stderr, "Failed to initialize semaphore\n");
+            exit(EXIT_FAILURE);
+        }
+        op_char = 'X';
+        sleep(2);
+    }
+
+/* Then we have a loop which enters and leaves the critical section ten times.
+ There, we first make a call to semaphore_p which sets the semaphore to wait, as
+ this program is about to enter the critical section. */
+
+    for(i = 0; i < 10; i++) {        
+
+        if (!semaphore_p()) exit(EXIT_FAILURE);
+        printf("%c", op_char);fflush(stdout);
+        pause_time = rand() % 3;
+        sleep(pause_time);
+        printf("%c", op_char);fflush(stdout);
+
+/* After the critical section, we call semaphore_v, setting the semaphore available,
+ before going through the for loop again after a random wait. After the loop, the call
+ to del_semvalue is made to clean up the code. */
+
+        if (!semaphore_v()) exit(EXIT_FAILURE);
+        
+        pause_time = rand() % 2;
+        sleep(pause_time);
+    }    
+
+    printf("\n%d - finished\n", getpid());
+
+    if (argc > 1) {    
+        sleep(10);
+        del_semvalue();
+    }
+        
+    exit(EXIT_SUCCESS);
+}
+
+/* The function set_semvalue initializes the semaphore using the SETVAL command in a
+ semctl call. We need to do this before we can use the semaphore. */
+
+static int set_semvalue(void)
+{
+    union semun sem_union;
+
+    sem_union.val = 1;
+    if (semctl(sem_id, 0, SETVAL, sem_union) == -1) return(0);
+    return(1);
+}
+
+/* The del_semvalue function has almost the same form, except the call to semctl uses
+ the command IPC_RMID to remove the semaphore's ID. */
+
+static void del_semvalue(void)
+{
+    union semun sem_union;
+    
+    if (semctl(sem_id, 0, IPC_RMID, sem_union) == -1)
+        fprintf(stderr, "Failed to delete semaphore\n");
+}
+
+/* semaphore_p changes the semaphore by -1 (waiting). */
+
+static int semaphore_p(void)
+{
+    struct sembuf sem_b;
+    
+    sem_b.sem_num = 0;
+    sem_b.sem_op = -1; /* P() */
+    sem_b.sem_flg = SEM_UNDO;
+    if (semop(sem_id, &sem_b, 1) == -1) {
+        fprintf(stderr, "semaphore_p failed\n");
+        return(0);
+    }
+    return(1);
+}
+
+/* semaphore_v is similar except for setting the sem_op part of the sembuf structure to 1,
+ so that the semaphore becomes available. */
+
+static int semaphore_v(void)
+{
+    struct sembuf sem_b;
+    
+    sem_b.sem_num = 0;
+    sem_b.sem_op = 1; /* V() */
+    sem_b.sem_flg = SEM_UNDO;
+    if (semop(sem_id, &sem_b, 1) == -1) {
+        fprintf(stderr, "semaphore_v failed\n");
+        return(0);
+    }
+    return(1);
+}
+  
+11)Shared Memory (processes mirazonte mnimi)
+   Ena tmima tis mnimis einai koinoxristo
+   Mia process to desmeuei(san na to ekane me malloc) kai oi alli px meso messages
+   matheni pio einai kai to xrisimopoiei kai ekeini
+
+   Den parexete sinxronismos,prepei na to kani o programatistis
+
+   #include <sys/shm.h> //automata ginonte kai ta sys/types.h kai sys/ipc.h
+
+   int shmget(key_t key, size_t size, int shmflg);  //create (oxi akoma prosbasimi,tin desmeuei to litourgiko)
+   void *shmat(int shm_id, const void *shm_addr, int shmflg); //epistrefo pointer se autin(eisago mnimi sto address space tis process)
+   int shmdt(const void *shm_addr); //tin bgazo apo to address space 
+   int shmctl(int shm_id, int cmd, struct shmid_ds *buf); //3 litourgies mia einai i delete memory me cmd=IPC_RMID
+   
+   
+
+12)Create (desmeuo mnimi)
+   int shmget(key_t key, size_t size, int shmflg);
+  
+    key = dikos mou arithmos opos kai sta semaphores to systima tha antistixisi 
+          mnimi kai tha mou epistrepsi to indentifier tis pou einai int
+
+    size = megethos mnimis se bytes
+
+    shmflg 
+     permisssions(px 0666) | IPC_CREAT (create ean den iparxi ----ignore ean iparxi,epistefi palias int)
+
+    returns = shared memory indetifier i -1 ean error
+
+13)Epistrefo pointer se autin (eisago tin mnimi sto address space tis process)
+   (Alios den mporo na exo prosbasi se mnimi ektos address space)
+
+   void *shmat(int shm_id, const void *shm_addr, int shmflg);
+
+   shm_id = indentifier tis shared memory apo tin epistrofi tis shmget
+
+   shm_addr = pou tha balo tin mnimi auti sto address space tis process 
+              NULL sxedon panta => to sistima epilegi mono tou
+
+   shmflg = SHM_RND , which, in conjunction with shm_addr 
+            controls the address at which the shared memory is attached
+            and SHM_RDONLY which makes the attached memory read-only ???
+
+   Epistrefi pointer sto proto byte tis mnimis san malloc
+   
+14)Exago memory apo to memory space tis process
+
+   int shmdt(const void *shm_addr); //o pointer se autin apo to shmat
+
+   Den eleutherono tin mnimi apla tin bgazo apo to address space
+
+15)Control shared memory
+
+   int shmctl(int shm_id, int cmd, struct shmid_ds *buf);
+
+   shm_id = id apo tin shmget
+
+   cmd =
+     IPC_STAT     
+        Sets the data in the shmid_ds structure to reflect the values
+        associated with the shared memory.
+
+     IPC_SET
+        Sets the values associated with the shared memory to those provided
+        in the shmid_ds data structure, if the process has permission to do so.
+
+     IPC_RMID 
+        Deletes the shared memory segment
+  
+   buf = struct me times modes and permissions gia tin shared memory
+
+   0=> success -1=> error 
+
+16)Paradigma
+
+   Exo dio progamata   shm1.c kai shm2.c 
+
+   To shm1.c tha ftiaxi tin shared memory
+   Kai to shm2.c tha grafi se autin
+
+
+/*Desmeuei tin mnimi me IPC_CREAT bit specified. */
+
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
+#include <sys/shm.h>
+
+#include "shm_com.h"
+
+int main()
+{
+    int running = 1;
+    void *shared_memory = (void *)0;
+    struct shared_use_st *shared_stuff;
+    int shmid;
+
+    srand((unsigned int)getpid());    
+
+    shmid = shmget((key_t)1234, sizeof(struct shared_use_st), 0666 | IPC_CREAT);
+
+    if (shmid == -1) {
+        fprintf(stderr, "shmget failed\n");
+        exit(EXIT_FAILURE);
+    }
+
+/* We now make the shared memory accessible to the program. */
+
+    shared_memory = shmat(shmid, (void *)0, 0);
+    if (shared_memory == (void *)-1) {
+        fprintf(stderr, "shmat failed\n");
+        exit(EXIT_FAILURE);
+    }
+
+    printf("Memory attached at %X\n", (int)shared_memory);
+
+/* The next portion of the program assigns the shared_memory segment to shared_stuff,
+ which then prints out any text in written_by_you. The loop continues until end is found
+ in written_by_you. The call to sleep forces the consumer to sit in its critical section,
+ which makes the producer wait. */
+
+    shared_stuff = (struct shared_use_st *)shared_memory;
+    shared_stuff->written_by_you = 0;
+    while(running) {
+        if (shared_stuff->written_by_you) {
+            printf("You wrote: %s", shared_stuff->some_text);
+            sleep( rand() % 4 ); /* make the other process wait for us ! */
+            shared_stuff->written_by_you = 0;
+            if (strncmp(shared_stuff->some_text, "end", 3) == 0) {
+                running = 0;
+            }
+        }
+    }
+
+/* Lastly, the shared memory is detached and then deleted. */
+
+    if (shmdt(shared_memory) == -1) {
+        fprintf(stderr, "shmdt failed\n");
+        exit(EXIT_FAILURE);
+    }
+
+    if (shmctl(shmid, IPC_RMID, 0) == -1) {
+        fprintf(stderr, "shmctl(IPC_RMID) failed\n");
+        exit(EXIT_FAILURE);
+    }
+
+    exit(EXIT_SUCCESS);
+}
+
+--------------------------------------------------------------------------
+shm2.c
+
+/* Autos den ftiaxni perni tin idi */
+
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
+#include <sys/shm.h>
+
+#include "shm_com.h"
+
+int main()
+{
+    int running = 1;
+    void *shared_memory = (void *)0;
+    struct shared_use_st *shared_stuff;
+    char buffer[BUFSIZ];
+    int shmid;
+
+    shmid = shmget((key_t)1234, sizeof(struct shared_use_st), 0666 | IPC_CREAT);
+
+    if (shmid == -1) {
+        fprintf(stderr, "shmget failed\n");
+        exit(EXIT_FAILURE);
+    }
+
+    shared_memory = shmat(shmid, (void *)0, 0);
+    if (shared_memory == (void *)-1) {
+        fprintf(stderr, "shmat failed\n");
+        exit(EXIT_FAILURE);
+    }
+
+    printf("Memory attached at %X\n", (int)shared_memory);
+
+    shared_stuff = (struct shared_use_st *)shared_memory;
+    while(running) {
+        while(shared_stuff->written_by_you == 1) {
+            sleep(1);            
+            printf("waiting for client...\n");
+        }
+        printf("Enter some text: ");
+        fgets(buffer, BUFSIZ, stdin);
+        
+        strncpy(shared_stuff->some_text, buffer, TEXT_SZ);
+        shared_stuff->written_by_you = 1;
+
+        if (strncmp(buffer, "end", 3) == 0) {
+                running = 0;
+        }
+    }
+
+    if (shmdt(shared_memory) == -1) {
+        fprintf(stderr, "shmdt failed\n");
+        exit(EXIT_FAILURE);
+    }
+    exit(EXIT_SUCCESS);
+}

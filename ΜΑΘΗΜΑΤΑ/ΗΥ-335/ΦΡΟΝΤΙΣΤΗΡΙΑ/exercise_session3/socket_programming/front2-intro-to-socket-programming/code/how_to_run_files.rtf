@@ -1,0 +1,61 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf340
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww14460\viewh9100\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \uc0\u927 \u948 \u951 \u947 \u943 \u949 \u962  \u947 \u953 \u945  \u964 \u959  \u960 \u969 \u962  \u957 \u945  \u964 \u961 \u941 \u958 \u949 \u964 \u949  \u964 \u945  \u945 \u961 \u967 \u949 \u943 \u945 :\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 									(C programming)  \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - \
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+TCP echo: \
+\
+gcc tcp_echo_client.c -o client_tcp\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 gcc tcp_echo_server.c -o server_tcp\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+\uc0\u928 \u961 \u974 \u964 \u945  \u964 \u961 \u941 \u967 \u949 \u964 \u949  \u964 \u959 \u957  server \u954 \u945 \u953  \u963 \u964 \u951 \u957  \u963 \u965 \u957 \u949 \u967 \u949 \u953 \u945  \u964 \u959 \u957  client.\
+\
+./server_tcp 1242 <- \uc0\u960 \u945 \u943 \u961 \u957 \u949 \u953  \u969 \u962  \u972 \u961 \u953 \u963 \u956 \u945  \u964 o port \u963 \u964 \u959  \u959 \u960 \u959 \u943 \u959  \u952 \u945  \u945 \u954 \u959 \u973 \u949 \u953  | \u913 \u957  \u948 \u949 \u957  \u948 \u974 \u963 \u949 \u964 \u949  port \u945 \u954 \u959 \u973 \u949 \u953  \u963 \u964 \u959  default port 7\
+\
+./client_tcp IP_of_Server message port_of_server |  \uc0\u928 \u961 \u959 \u963 \u959 \u967 \u942  \u963 \u964 \u959  message \u956 \u951 \u957  \u945 \u966 \u942 \u963 \u949 \u964 \u949  \u954 \u949 \u957 \u972  \u952 \u945  \u964 \u959  \u952 \u949 \u969 \u961 \u942 \u963 \u949 \u953  \u969 \u962  \u940 \u955 \u955 \u959  argument | \u913 \u957  \u948 \u949 \u957  \u948 \u974 \u963 \u949 \u964 \u949  port \u952 \u945  \u960 \u961 \u959 \u963 \u960 \u945 \u952 \u942 \u963 \u949 \u953  \u957 \u945  \u963 \u965 \u957 \u948 \u949 \u952 \u949 \u943  \u963 \u964 \u959  default echo port 7\
+\
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #\
+\
+UDP echo: (C programming)\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 gcc udp_client.c -o client_udp\
+gcc udp_server.c -o server_udp\
+\
+./server_udp IP_to_bind port_to_listen\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 ./client_udp IP_of_server port_of_server\
+\
+\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 (Python programming)\
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - \
+\
+python TCP_echo_client.py IP_of_server port_of_server | 1  argument IP of server | 2 argument port of server\
+\
+python TCP_echo_server.py  port_to_listen \
+\
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #\
+\
+python udp_client.py IP_of_server port_of_server\
+\
+python udp_server.py IP_of_server_to_bind port_of_server_to_bind\
+}

@@ -1,0 +1,21 @@
+body { 
+              font-family: 'Trebuchet MS', Verdana, Arial, sans-serif; 
+              font-size: 10pt; 
+} 
+
+#f1 { 
+              padding: 10px; 
+			  margin: auto;
+			  width: 800px;
+			  background-color: lightGrey;
+} 
+  
+legend { 
+              font-weight: bold; 
+              font-size: 20pt; 
+} 
+
+#login-form { 
+              width: 300px; 
+              margin: 200 auto; 
+} 

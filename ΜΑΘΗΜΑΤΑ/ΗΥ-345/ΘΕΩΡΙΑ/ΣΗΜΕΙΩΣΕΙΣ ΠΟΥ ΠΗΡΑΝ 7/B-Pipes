@@ -1,0 +1,356 @@
+1)Pipe = epikoinonia process
+
+2)cmd1 | cmd2  //sto shell=> output cmd1 = inout cmd2
+
+  Edo tin doulia tin kani to shell,auto ftiaxni tin pipe
+
+3)Passing data between 2 processes
+
+  #include <stdio.h>
+  FILE *popen(const char *command, const char *open_mode);
+  int pclose(FILE *stream_to_close);
+
+  open_mode= "r" or "w"
+  command=to programa pou thelo na trexo
+
+  Ena programa ean theli ite na stili data ite na diabasi data apo ena
+  alo programa,to trexi kai sindeei se auto mia pipe.
+  Auto to kani i popen diladi nea process me pipe se autin.
+
+  Gia na diavaso apo kapio programa xrisimopio kanonika bibliothikes tis
+  stdio.px fread,fwrite
+
+  Den mporo na stilo kai na diavaso apo ena programa,tha kano ite to ena
+  ite to alo.
+  Ean thelo bidirectional communication thelo 2 pipes ??
+  
+  Gia to alo programa to pipe einai san na min iparxi,auto xrisimopoiei
+  kanonika ta stdin kai stdout tou.
+
+  Gia na kliso tin pipe pclose.H pclose einai san wait kai close,diladi
+  i pipe klini mono otan exi teliosi i process pou anixa.
+
+  H popen xrisimopoiei to shell.Kato ta arnitika kai thetika,
+  episis xrisi tis system call pipe gia na min kano xrisi tou shell
+
+5)Reading from other program with pipe
+  Trexo to uname -a(emfanizi plirofories gia xristi),
+  me pipe se auto kai tipono tin exodo tou
+
+  #include <unistd.h>
+  #include <stdlib.h>
+  #include <stdio.h>
+  #include <string.h>
+
+
+  int main()
+  {
+    FILE *read_fp;
+    char buffer[BUFSIZ + 1];
+    int chars_read;
+    memset(buffer, ‘\0’, sizeof(buffer)); //san malloc logika
+    read_fp = popen(“uname -a”, “r”);
+    if (read_fp != NULL) {
+      chars_read = fread(buffer, sizeof(char), BUFSIZ, read_fp);
+      if (chars_read > 0) {
+        printf(“Output was:-\n%s\n”, buffer);
+      }
+      pclose(read_fp);
+      exit(EXIT_SUCCESS);
+    }
+    exit(EXIT_FAILURE);
+  }
+
+6)Writing to other program with pipe
+  To od -c perni strings kai ta tiponi kapos
+  Auto pou kano einai san na egrafa $echo “Once upon a time, there was...” | od -c
+
+  #include <unistd.h>
+  #include <stdlib.h>
+  #include <stdio.h>
+  #include <string.h>
+  int main()
+  {
+    FILE *write_fp;
+    char buffer[BUFSIZ + 1];
+    sprintf(buffer, “Once upon a time, there was...\n”);
+    write_fp = popen(“od -c”, “w”);
+    if (write_fp != NULL) {
+      fwrite(buffer, sizeof(char), strlen(buffer), write_fp);
+      pclose(write_fp);
+      exit(EXIT_SUCCESS);
+    }
+    exit(EXIT_FAILURE);
+  }
+
+7)Me xrisi mikrou buffer kai epanalambanomeno diavasma
+  (pano ixa buffer pou ta xorouse ola)
+
+  #include <unistd.h>
+  #include <stdlib.h>
+  #include <stdio.h>
+  #include <string.h>
+
+  int main()
+  {
+    FILE *read_fp;
+    char buffer[BUFSIZ + 1]; //BUFSIZ einai stathera apo bibliothiki
+    int chars_read;
+    memset(buffer, ‘\0’, sizeof(buffer));
+    read_fp = popen(“ps ax”, “r”);
+    if (read_fp != NULL) {
+      chars_read = fread(buffer, sizeof(char), BUFSIZ, read_fp);
+      while (chars_read > 0) {
+        buffer[chars_read – 1] = ‘\0’;
+        printf(“Reading %d:-\n %s\n”, BUFSIZ, buffer);
+        chars_read = fread(buffer, sizeof(char), BUFSIZ, read_fp);
+      }
+    pclose(read_fp);
+    exit(EXIT_SUCCESS);
+    }
+    exit(EXIT_FAILURE);
+  }
+
+
+  Edo diavazo oso xorai o buffer kai oso menoun xaraktires xanadiabazo  
+ 
+8)popen xrisimopoei to shell,diladi tin nea process tin trexi to shell
+
+  Thetika = epitrepei poliplokes shell commands me pola orismata na ektelounte pio eukola?
+
+  Arnitika = trexo epipleon tin process tou shell kathe fora
+
+9)Pipe system call(apeuthias sto litourgiko)
+  Edo den milao gia nea processes edo apla pros to paron,i pipe dimiourgi dio nea
+  file descriptors kai grafo ston [1] kai diavazo apo to [0]
+
+  Exontas mia pipe mpori mia process na grafi se autin kai i idia i kapia alli
+  process na diavazi apo tin alli(to xrisimo einai na diabazi kapia ali)
+
+  #include <unistd.h>
+  int pipe(int file_descriptor[2]);
+  
+  Perni ena pinaka me 2 int,ftiaxni 2 nea filedescriptors pou antistixoun logika
+  se kapio int o kathenas,esoterika ston system file table.
+  (kathe file descriptor exi id)
+  Oti grafo ston file_descriptor[1] mporo na to diabaso apo to file_descriptor[0]  
+  H eggrafi ginete me tis low level byte sinartisis read kai write (den ginete alios
+  giati exo file descriptors oxi file streams)
+
+  panta grafo [1] diavazo apo to [0],alios error
+
+  Ean error epistrefi -1(kai errno=-1) alios epistrefi 0
+
+  Grafo se oura,diladi oti grafo prota to diavazo prota fifo
+  Douleuoun me krimeno buffer
+
+  #include <unistd.h>
+  #include <stdlib.h>
+  #include <stdio.h>
+  #include <string.h>
+
+  int main()
+  {
+    int data_processed;
+    int file_pipes[2];
+    const char some_data[] = “123”;
+    char buffer[BUFSIZ + 1];
+    memset(buffer, ‘\0’, sizeof(buffer));
+    if (pipe(file_pipes) == 0) 
+    {
+      data_processed = write(file_pipes[1], some_data, strlen(some_data));
+      printf(“Wrote %d bytes\n”, data_processed);
+      data_processed = read(file_pipes[0], buffer, BUFSIZ);
+      printf(“Read %d bytes: %s\n”, data_processed, buffer);
+      exit(EXIT_SUCCESS);
+    }
+    exit(EXIT_FAILURE);
+  }
+ 
+10)Pipe across a fork (sindeei 2 process pou paraxtikan me fork)
+   Edo tha ftiaxo mia pipe,meta tha kano fork,kai tha stilo apo to parent sto child
+
+   #include <unistd.h>
+   #include <stdlib.h>
+   #include <stdio.h>
+   #include <string.h>
+
+   int main()
+   {
+     int data_processed;
+     int file_pipes[2];
+     const char some_data[] = “123”;
+     char buffer[BUFSIZ + 1];
+     pid_t fork_result;
+     memset(buffer, ‘\0’, sizeof(buffer));
+     if (pipe(file_pipes) == 0) {
+       fork_result = fork();
+       if (fork_result == -1) {
+         fprintf(stderr, “Fork failure”);
+         exit(EXIT_FAILURE);
+       }
+       if (fork_result == 0) { //parent
+         data_processed = read(file_pipes[0], buffer, BUFSIZ);
+         printf(“Read %d bytes: %s\n”, data_processed, buffer);
+         exit(EXIT_SUCCESS);
+       }
+       else { //child
+         data_processed = write(file_pipes[1], some_data,
+         strlen(some_data));
+         printf(“Wrote %d bytes\n”, data_processed);
+       }
+     }
+     exit(EXIT_SUCCESS);
+   } 
+  
+11)Pipe metaxi 2 diaforetikon processes me exec 
+   pipe,meta fork,o parent kali to exec,to child grafi,to programa apo to exec
+   diabazi
+
+   To file description(enas int) pou eftiaxe to pipe,tha to stilo sto programa 
+   exec san orisma tis gramis entolon argv[1],oste na mpori to programa apo to
+   exec na grafi
+
+   Tha einai xorismenos o kodikas se 2 arxeia
+   
+   pipe3.c
+
+   #include <unistd.h>
+   #include <stdlib.h>
+   #include <stdio.h>
+   #include <string.h>
+
+   int main()
+   {
+     int data_processed;
+     int file_pipes[2];
+     const char some_data[] = “123”;
+     char buffer[BUFSIZ + 1];
+     pid_t fork_result;
+     memset(buffer, ‘\0’, sizeof(buffer));
+     if (pipe(file_pipes) == 0) {
+       fork_result = fork();
+       if (fork_result == (pid_t)-1) {
+         fprintf(stderr, “Fork failure”);
+         exit(EXIT_FAILURE);
+       }
+       if (fork_result == 0) {
+         sprintf(buffer, “%d”, file_pipes[0]);
+         //to buffer(enas int mono) edo einai argument tou kaloumeno programatos diladi 
+         //sto pipe4 einai to argv[1] (to 0 einai to "pipe4")
+         (void)execl(“pipe4”, “pipe4”, buffer, (char *)0); 
+         exit(EXIT_FAILURE);
+       }
+       else {
+         data_processed = write(file_pipes[1], some_data,
+         strlen(some_data));
+         printf(“%d - wrote %d bytes\n”, getpid(), data_processed);
+       }
+    }
+    exit(EXIT_SUCCESS);
+  }
+
+
+   pipe4.c (child code)
+
+   #include <unistd.h>
+   #include <stdlib.h>
+   #include <stdio.h>
+   #include <string.h>
+
+   int main(int argc, char *argv[])
+   {
+     int data_processed;
+     char buffer[BUFSIZ + 1];
+     int file_descriptor;
+     memset(buffer, ‘\0’, sizeof(buffer));
+     sscanf(argv[1], “%d”, &file_descriptor);
+     data_processed = read(file_descriptor, buffer, BUFSIZ);
+     printf(“%d - read %d bytes: %s\n”, getpid(), data_processed, buffer);
+     exit(EXIT_SUCCESS);
+   }
+
+12)Otan kano read tote kolai i process kai perimeni na diabasi
+   Ean to pao na diabaso apo termatismeno process => klisto file descriptor
+   epistrefi amesos me timi epistrefis 0(diabase 0 data) den kolai omos
+
+13)Os tora eprepe na dino os orisma ton file descriptor,me auton to tropo omos 
+   mporo na ftiaxo pipe se programata dika mou diladi pou perimenoun os orisma
+   ton file descriptor
+
+   Anti na kano auto,tha exo sigekrimenes times gia file descriptor eite 0 i 1
+   kai den tha xriazete na balo orismata
+
+15)Pipes as stdin/stdout
+   
+   #include <unistd.h>
+   int dup(int file_descriptor);
+   int dup2(int file_descriptor_one, int file_descriptor_two);
+
+   Se kathe process 
+     stdin exi file descriptor = 0
+     stdout exi file descriptor = 1
+     stderr  = 2
+     pipe file descriptor = 3     
+
+   Paradigma pou kani ta exis:
+   1)pipe
+   2)fork 
+   3)child klini tin stdin tou,close(0) meta dump file_pipes[0] ginete i stdin
+     meta execlp -> telika exo mia process me stdin tin pipe[0]
+
+     o parent grafi stin pipe[1] ara to programa tis execlp diavazi san na ta eperne
+     apo tin stdout
+
+
+    #include <unistd.h>
+    #include <stdlib.h>
+    #include <stdio.h>
+    #include <string.h>
+
+
+    int main()
+    {
+      int data_processed;
+      int file_pipes[2];
+      const char some_data[] = “123”;
+      pid_t fork_result;
+      if (pipe(file_pipes) == 0) {
+        fork_result = fork();
+        if (fork_result == (pid_t)-1) {
+          fprintf(stderr, “Fork failure”);
+          exit(EXIT_FAILURE);
+        }
+       if (fork_result == (pid_t)0) {
+         close(0);
+         dup(file_pipes[0]);
+         close(file_pipes[0]);
+         close(file_pipes[1]);
+         execlp(“od”, “od”, “-c”, (char *)0);
+         exit(EXIT_FAILURE);
+       }
+       else {
+         close(file_pipes[0]);
+         data_processed = write(file_pipes[1], some_data,
+         strlen(some_data));
+         close(file_pipes[1]);
+         printf(“%d - wrote %d bytes\n”, (int)getpid(), data_processed);
+       }
+    }
+    exit(EXIT_SUCCESS);
+  }
+    
+  Otan kano fork ta file descriptors menoun koina
+   (px exo 2 file_pipes[0] ena ston parent kai ena sto child,alla einai to idio file)
+  Me tin execl ta perni i execl afou i palia xanete
+
+
+16)dump2 = Duplicates one file descriptor, making them aliases, and then deleting the old file descriptor.
+   #include <unistd.h>
+   int dup2(int fildes, int fildes2);    //o fildes2 duplicate ston fildes px  dup(2,1) //ean 1 einai i stdout kai thelo na tin kano duplicate kai meta close tin stdout
+
+   int fildes 	 The source file descriptor. This remains open after the call to dup2.
+   int fildes2 	 The destination file descriptor. This file descriptor will point to the same file as filedes after this call returns.
+   return value  dup2 returns the value of the second parameter (fildes2) upon success. A negative return value means that an error occured. 
+
+Emina 573 named pipes:fifos

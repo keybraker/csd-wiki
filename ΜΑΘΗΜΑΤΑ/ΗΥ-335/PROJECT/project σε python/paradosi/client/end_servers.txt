@@ -1,0 +1,4 @@
+www.google.com, google
+www.mit.edu, mit
+www.grnet.gr, grnet
+www.bbc.co.uk, bbc-uk

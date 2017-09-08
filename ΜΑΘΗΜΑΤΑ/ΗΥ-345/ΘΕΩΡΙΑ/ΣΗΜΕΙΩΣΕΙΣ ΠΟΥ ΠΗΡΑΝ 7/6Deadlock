@@ -1,0 +1,325 @@
+1)Deadlock = oles locked,kai to unlock prepei na to kani kapia apo tis locked
+
+  Deadlock = A set of processes is deadlocked if each process in the set is waiting
+             for an event that only another process in the set can cause
+
+  *Enoite oti prepei na trexoun oi processes enalax,oxi na telioni i mia kai 
+   meta i alli,ean siriako => den exo deadlocks afou trexi 1 process kathe fora
+
+2)Resource dead lock
+
+  px 2 processes i kathemia gia na xekolisi perimeni to na eleutherothi mia resource
+
+
+  P1 exi to scanner kai perimeni ton printer
+  P2 exi ton printer kai perimeni to scanner
+
+3)Mono otan simbenoun ta 4 mpori na simbi deadlock (alios den simbeni pote)
+  xana gia pithano lathos katanoisis
+
+  1)Mutual exclusion 
+     Resource max se 1 process
+
+  2)Hold-and-wait 
+     process pou exi 1 resource mpori na zitisi mia alli
+     diladi ego lock,kai zitao access se alli pou mpori lock
+     (ean den simbeni auto tote oles tha afinan prota pia exoun lock
+      kai meta tha pianane kapia ali resource)
+
+  3)No-preemption condition
+    Mono i idia i process pou exi tin resource mpori na tin eleutherosi
+    (den mporo na tis tin pari diladi ali process)
+
+  4)Circular wait condition
+    Prepi na iparxi kiklos
+
+    Directed graphs for deadlock detection
+
+    A1,A2 processes
+    R1,R2 resources
+
+    A ->R   A waits for R
+    A<-R    A has R
+
+    Sxediazontas to directed graph ean kiklos => deadlock
+
+    px
+
+    To A1 zitaei tin R1 pou tin exi to A2 
+    kai A2 zitaei tin R2 pou tin exi to A1
+
+     A1->R1->A2
+       <-R2<-
+
+   Ose process simetexoun ston kiklo ginonte deadlocked
+
+
+4)Deadlock prevention(basikos tropos antimetopisis deadlock)
+
+   Den epitrepo toulaxiston 1 apo ta 4 pou prepi na simboun
+
+   1)oxi mutual exclusion
+
+     ean mia resource tin kano na mporoune oli na exoun prosbasi se autin tautoxrona
+     => oxi deadlock pithano
+
+     px read only data
+
+     Episis alos tropos einai na min epitrepo na diekdikoun mia non-premmetate 
+     resource pano apo 1 process
+
+     px ton printer den ton xrisimopoioun poles process alla mono 1 o printer deamon
+        pou perni apo ena simio pou afinoun oti theloun na tipothi oi processes
+        = spooling
+     
+
+    2)oxi hold and wait
+
+      anti na zitao mia mia,tis zitao oles mazi oses thelo,ean mporoun na mou 
+      dothoun oles mazi tote kano oti thelo alios perimeno
+
+      *problima oti process den xeroun apo prin ti tha xriastoun
+       episis den ginete megisti axiopiisi ton resources afou desmeuonte
+
+    3)oxi no-preemption condition
+
+      meso virtuallization tis no-preemption resource ,me kapia pou einai
+      preemption resource
+
+      px anti printer apeuthias pao ston disko kai tipono
+
+   4)oxi Circular Wait 
+
+      1)apeto mia process na exi max 1 resource => 
+         prin piasi epomeni kani release
+        (den douleuei auto ean px i process kani mia megeli doulia me 1 resource
+         tha prepei na tin perimeni na teliosi)
+      2)orizo seira stis resources px 1 printer 2 scanner ktl
+        kai oi processes panta pernoun prota tin resource pou proigite
+        => pote kiklos  
+
+        mia paralagi tou pano einai mia process na min mpori na pari lower apo
+        auto pou idi exi
+      
+         (kai sta 2 tou 2) enoite oti oi processes mporoun na kanoun kiklous 
+           px ean 1 eos 10,otan pane sto teleuteo tous na pane pali stin arxi)
+
+      To problima me auto einai oti einai diskolo na bris mia seira pou ikanopoiei
+      oles tis processes
+
+4)Ena deadlock mpori na exartate apo tin seira pou epilegete na trexoun oi
+  process i opoia einai mi problepsimi(tin kathorizi to litourgiko)
+
+  
+  sel 442 paradigma pou oi idies energies apo 3 process odigoune se deadlock
+  eno me ali seira den odigoun
+
+
+  sel 442 sto sxima exo kiklo => dead lock
+
+  kai tropos na ginoun  alla xoris dead lock
+
+5)Tropoi antimetopisis tou deadlock
+
+  1)Just ignore the problem. Maybe if you ignore it, it will ignore you.
+     Ostrich algorithm 
+     Gia otan simbeni spania
+  2)Detection and recovery. Let them occur, detect them, and take action.
+  3)Dynamic avoidance by careful resource allocation.
+  4)Prevention, by structurally negating one of the four conditions.
+
+
+6)Detection and recovery
+
+7)Detection static (diladi otan zitao oti thelo ola mazi)
+
+  1)Detection me 1 type of apo kathe tipo resource
+     => xrisimopoio algorithmo pou briski kiklous se directed graphs
+  2)Detection me >1 type apo kathe tipo resource 
+    
+    p1...pn    n processes
+    e1...em    m klasis
+
+    E = existing resource vector
+    px E1=2 simeni oti exo 2 antikeimena tipou 1
+
+    A= availible resource vector
+    px A1=2  //simeni oti exo 2 eleuthera antikeimena tipou 1
+
+    C = current allocation matrix
+        Cij = posa tipou j exi h i process
+    R = request matrix
+        Rij = posa tipou j theli h i process
+
+    Osa tipou j xrisimopoiounte + auta pou einai availiable Aj = ola j pou iparxoun Ej
+      SCij(gia ola ta i)  +Aj= Ej    
+
+    sle 448
+
+    E->C=>A
+    A,R elenxo
+
+    Xekinao apo to E vector pou einai oles oi siskeues
+    C pinakas(mou to dinoun) grami=process,me siskeues pou xrisimopoiei
+      => ipologizo vector A pies menoun diladi 
+    R pinakas(mou to dinoun)
+       => blepontas A,R elenxo ean kapia grami tou R mpori na ikanopoiithi
+          tote tin ikanopoio kai eleutherono tis resourses
+          Ean mporo na to kano auto gia kathe grami => oxi deadlock
+
+8)Recovery
+  1)Recovery through Preemption => perno biea apo tin process tin resource
+  2)Recovery through Rollback  => katagrafo tin state mias process periodika
+     se ena file,kai otan deadlock tin grizo piso se state prin desmeusi tin resource
+  3)Recovery though killing the process => 
+     kill a process in the cycle(isos na lithi)
+     kill a process outside the cycle pou exi resource pou theli kapia ston cycle
+     idanika kill a process pou mporo na tin xanatrexo(pou den exi kani diladi kati
+     mi anestrepsimo)
+
+9)Deadlock avoidance 
+
+   A printer I1  A I3 ton afini
+   A plotter I2  A I4 to afini
+ 
+   B request plotter  I5-I7
+   B request printer  I6-I8
+
+   unsafe einai mia state otan
+   A exi R1 kai zitaei R2
+   kai
+   B exi R2 kai zitaei R1
+   
+
+10)Safe and unsafe states
+
+   sel 452 sxima
+
+   Exo enan arithmo apo free resources diaforetikon tipon
+
+   Kathe fora exo to athrisma tis protis stilis kai mou menoun oi ipolipes
+
+   Me basi tis ipolipes prepei na mporoun na teliosoun oles oi diadikasies 
+   pernontas kathe fora to maximun ton resources pou mporoun na paroun
+
+   px xekinao apo autin pou mpori na pari ta max,telioni kai me oti meni 
+      to kano gia tin epomeni,prepei na pernoun ta max kai telika na teliosoun oles
+
+   Ean bro tropo pernontas to maximun kathe fora na teliosoun tote leo oti i state
+   einai safe
+
+   Alios unsafe   
+
+11)The Banker’s Algorithm for a Single Resource
+
+   O algorithmos protou dosi mia resource elenxi ean auto odigi se safe state i oxi
+
+   ean ton odigi se safe state tin dini alios oxi
+   
+12)The Banker’s Algorithm for Multiple Resources
+
+   kano pali to idio alla tora to kano gia rows 
+    
+   Total system resources are:
+A B C D
+6 5 7 6
+
+Available system resources are:
+A B C D
+3 1 1 2
+
+Processes (currently allocated resources):
+   A B C D
+P1 1 2 2 1
+P2 1 0 3 3
+P3 1 2 1 0
+
+Processes (maximum resources):
+   A B C D
+P1 3 3 2 2
+P2 1 2 3 4
+P3 1 3 5 0
+
+Need = maximum resources - currently allocated resources
+Processes (possibly needed resources):
+   A B C D
+P1 2 1 0 1
+P2 0 2 0 1
+P3 0 1 4 0
+
+
+    P1 acquires 2 A, 1 B and 1 D more resources, achieving its maximum
+        [available resource: <3 1 1 2> - <2 1 0 1> = <1 0 1 1>]
+        The system now still has 1 A, no B, 1 C and 1 D resource available
+    P1 terminates, returning 3 A, 3 B, 2 C and 2 D resources to the system
+        [available resource: <1 0 1 1> + <3 3 2 2> = <4 3 3 3>]
+        The system now has 4 A, 3 B, 3 C and 3 D resources available
+    P2 acquires 2 B and 1 D extra resources, then terminates, returning all its resources
+        [available resource: <4 3 3 3> - <0 2 0 1> + <1 2 3 4> = <5 3 6 6>]
+        The system now has 5 A, 3 B, 6 C and 6 D resources
+    P3 acquires 1 B and 4 C resources and terminates
+        [available resource: <5 3 6 6> - <0 1 4 0> + <1 3 5 0> = <6 5 7 6>]
+        The system now has all resources: 6 A, 5 B, 7 C and 6 D
+    Because all processes were able to terminate, this state is safe
+
+
+
+  O algorithmos den einai praktika xrisimos giati oi processes den xeroun
+  apo prin tis maximun resources pou tha xrisimopoiisoun
+  Episis o arithmos ton processes den einai statheros
+
+13)Paradigma pithanou deadlock me semaphores
+  
+  3 bimata
+
+   1. Request the resource.
+   2. Use the resource.
+   3. Release the resource.
+
+   Ean den mporo na paro to resource perimeno(sleep kai periodika elenxo)
+
+   void process A(void) {
+	down(&resource 1);
+	down(&resource 2);
+	use both resources( );
+	up(&resource 2);
+	up(&resource 1);
+	} 
+    void process B(void) {
+	down(&resource 1);
+	down(&resource 2);
+	use both resources( );
+	up(&resource 2);
+	up(&resource 1);
+	} 
+
+    Xoris pithano deadlock
+
+    void process A(void) {
+	down(&resource 1);
+	down(&resource 2);
+	use both resources( );
+	up(&resource 2);
+	up(&resource 1);
+	}
+    void process B(void) {
+	down(&resource 2);
+	down(&resource 1);
+	use both resources( );
+	up(&resource 1);
+	up(&resource 2);
+	}
+
+	Pithano deadlock
+
+14)Two-Phase Locking = arxika kani ola ta klidomata ena ena kai meta arxizi kai
+    sto telos kani ola ta release
+
+15)communication deadlock = den perimeno resource alla kapio event kai deadlock
+
+16)starvation =Ta locks prepei na dinonte me kapia seira px first-come-first-served
+   gia na pernoun oles
+
+
+17)livelock =  apo eugenia i mia process dini protereotita stin ali me apotelesma
+     kamia na min mpori na kani lock

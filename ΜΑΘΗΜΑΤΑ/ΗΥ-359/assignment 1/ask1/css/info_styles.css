@@ -1,0 +1,98 @@
+.menu_nav {text-transform: uppercase;margin: 0 auto;display:inline;list-style-type:none}
+    .active  {display: block;text-align: center;color: white;padding: 14px 16px;text-decoration: none; background-color: #000000;}
+    .active1 {display: block;text-align: center;color: white;padding: 14px 16px;text-decoration: none; background-color: #FFBE00;}
+    .active2 {display: block;text-align: center;color: white;padding: 14px 16px;text-decoration: none; background-color: #FFCE00;}
+    .active3 {display: block;text-align: center;color: white;padding: 14px 16px;text-decoration: none; background-color: #FFDE00;}
+    
+    h1{
+      text-align:center;
+      color: #fff;
+    }
+
+    article{
+      font-family: 'Helvetica', 'Arial', sans-serif;
+      font-size: 11pt;
+      color: white;
+      text-align: center;
+      /*border: 1px solid black;*/
+      margin-top: 10%;
+      margin-bottom: 10%;
+      margin-left: 10%;
+      margin-right: 10%;
+      width: 80%;
+    }
+
+    footer {
+      padding: 1em;
+      color: white;
+      clear: left;
+      text-align: center;
+      clear: both;
+      margin-bottom: 0;
+    }     
+
+    figure { 
+      float: right; 
+      -webkit-transition: all 0.7s ease; 
+      -moz-transition: all 1s ease;
+      position: relative;
+    }
+
+    figcaption { 
+      text-align: center; 
+      display: block;
+      background: #ff8300; 
+      font-size: 16px; 
+      font-style: italic; 
+    }
+
+    figure:active {
+      outline: none;
+      -webkit-transform: scale(1.5); 
+      -moz-transform: scale(1.5);
+    }
+
+    .imager {
+        float: left;
+    }
+    .imager img {
+        float: left;
+        height: 350px;
+        width: 350px;
+    }
+    .articler {
+        float: left;
+    }
+    .titler {
+        font-weight: bold;
+        font-size: 200%;
+    }
+
+    @media only screen and (max-width: 480px) {
+        article {float:center;}
+        
+        .imager {
+            float: center;
+            -webkit-transition: all 0.7s ease; 
+              -moz-transition: all 1s ease;
+              position: relative;
+        }
+        .imager img {
+            float: center;
+            height: 250px;
+            width: 250px;
+            -webkit-transition: all 0.7s ease; 
+              -moz-transition: all 1s ease;
+              position: relative;
+        }
+        .articler {
+            float: center;
+        }
+        .titler {
+            font-weight: bold;
+            font-size: 200%;
+            -webkit-transition: all 0.7s ease; 
+              -moz-transition: all 1s ease;
+              position: relative;
+        }
+    }

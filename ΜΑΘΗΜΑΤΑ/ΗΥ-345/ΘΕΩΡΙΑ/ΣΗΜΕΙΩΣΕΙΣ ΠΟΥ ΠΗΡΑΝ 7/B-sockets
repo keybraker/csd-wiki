@@ -1,0 +1,307 @@
+1)sockets = communication of processes akoma kai meso network
+           (enoeite kai se process 1 ipologisti)
+        
+2)server creates socket me kapio onoma kai perimeni client
+  to socket opos oles oi epikoinonies sta linux einai san na grafo se files
+  diladi exoun file descriptors 
+
+3)Basika
+  IP = four numbers <256 ,me telies xorismenes
+   ports < 1024 sinithos gia system processes ports
+   web servers akoune stin port 80
+   Genika iparxoun standar ports gia standar applications px web server/printer(515)
+
+4)Socket attributes
+  1)domain  =  network medium pou tha xrisimopoiei to socket px AF_INET = internet
+  2)type  =  stream/datagram  px sto internet TCP/UDP
+  3)protocol = protocolo epikoinonias px internet uses IP protocol
+               (sinithos bazo 0 pou simeni xrisimopoieise to default gia to domain/type)
+   
+  *Address = kathe socket exi addresses se format analoga me ton tipo tou px IP address
+    Gia to AF_UNIX address einai to struct sockaddr_un pou orizete sto sys/un.h
+    Gia AF_UNIX exo struct sockaddr_in pou irizete sto sys/un.h         
+   (sto linux to i address einai ena struct(sockaddr_un) orismeno sto netinet/in.h )
+
+5)Domain
+  AF_UNIX        UNIX internal (file system sockets)(auto gia 1 computer)
+  AF_INET        ARPA Internet protocols (UNIX network sockets)(auto internet,otan to bazo to protocol theorite to IP)
+  AF_ISO         ISO standard protocols
+  AF_NS          Xerox Network Systems protocols
+  AF_IPX         Novell IPX protocol
+  AF_APPLETALK   Appletalk DDS
+
+  Ta basika:  
+  AF_INET = internet (to protocol tou domain internet einai to IP)
+  AF_UNIX = file input/output protocol (gia processes se ena computer)
+            addresses = filenames
+
+     *Otan ftiaxno ena socket AF_UNIX ftiaxnete ena file sto current directory
+      me onoma tou tin addrees pio pano to onomasa server_socket (logika kai ston client kai ston server)
+
+   
+6)Type
+  SOCK_STREAM   //gia streams px TCP episis to AF_UNIX sinithos einai SOCK_STREAM
+  SOCK_DGRAM    //gia datagram px UDP 
+  
+  Stream sockets(px TCP)
+    Ta data stelnonte se bytes se paketa reliable
+
+7)Socket
+
+  Server
+   0)remove old sockets px sto path mporo na exo arxio me idio onoma
+   1)create socket
+   2)initiliaze address struct 
+     px 
+      address.sun_family = AF_UNIX;
+      strcpy(address.sun_path,"/home/talos/sockets/socket"); //auto tha balo kai ston client san onoma gia na sindetho
+   3)bind address sto socket
+   4)listen => (anigo port)
+   5)monino loop me accept mesa
+   6)write/read
+   7)close
+
+  Client
+   1)create socket me ton tipo tou
+   2)arxikopoiisi address(simfona me tin address pou thelo na sindetho)
+   3)sindsi connect(client_socket,struct address,sizeof(struct address))
+   4)Metafora dedomenon  read/write
+   5)close
+   
+   
+8)Gia epikoinonia sta sockets me bytes(den xero ean ginete kai alios)
+  #include <unistd.h>
+  
+
+  size_t read(int fildes, void *buf, size_t nbytes);
+    Diabase apo to file descriptor(fildes)
+      (to socket exi file descriptor san na itan file)
+    nbytes kai balta ston buf 
+  
+9)Paradigma server
+  
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <stdio.h>
+#include <sys/un.h>
+#include <unistd.h>
+#include <stdlib.h>
+
+int main()
+{
+    int server_sockfd, client_sockfd;
+    int server_len, client_len;
+    struct sockaddr_un server_address;
+    struct sockaddr_un client_address;
+
+    unlink("server_socket");  //remove possible old sockets
+    server_sockfd = socket(AF_UNIX, SOCK_STREAM, 0); //create unnamed socket
+
+    //Afou arxikopoiiso tin address tou (arxikopoio ena struct)
+    //meta perno to megethos tou struct 
+    //Bind  = deno ena socket me mia address 
+    //orismata = socket + struct(gia tin address) + sizeof(struct)
+
+    server_address.sun_family = AF_UNIX;
+    strcpy(server_address.sun_path, "server_socket");
+    server_len = sizeof(server_address);
+
+    bind(server_sockfd, (struct sockaddr *)&server_address, server_len);
+
+    listen(server_sockfd, 5);//orizo port tin 5
+    
+    while(1) {
+        char ch;
+
+        printf("server waiting\n");
+
+        client_len = sizeof(client_address);
+        //i accept kani tin sindesi kai arxikopoiei to struct tou client
+        //pernontas tis plirofories apo ton client
+        client_sockfd = accept(server_sockfd, 
+            (struct sockaddr *)&client_address, &client_len);
+
+       //epikoinonia
+        read(client_sockfd, &ch, 1);
+        ch++;
+        write(client_sockfd, &ch, 1);
+        close(client_sockfd);
+    }
+}
+
+10)Paradigma client  
+
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <stdio.h>
+#include <sys/un.h>
+#include <unistd.h>
+#include <stdlib.h>
+
+int main()
+{
+    int sockfd;
+    int len;
+    struct sockaddr_un address;
+    int result;
+    char ch = 'A';
+
+/*  Create a socket for the client.  */
+
+    sockfd = socket(AF_UNIX, SOCK_STREAM, 0);
+
+/*  Name the socket, as agreed with the server.  */
+
+    address.sun_family = AF_UNIX;
+    strcpy(address.sun_path, "server_socket");
+    len = sizeof(address);
+
+/*  Now connect our socket to the server's socket.  */
+
+    result = connect(sockfd, (struct sockaddr *)&address, len);
+
+    if(result == -1) {
+        perror("oops: client1");
+        exit(1);
+    }
+
+/*  We can now read/write via sockfd.  */
+
+    write(sockfd, &ch, 1);
+    read(sockfd, &ch, 1);
+    printf("char from server = %c\n", ch);
+    close(sockfd);
+    exit(0);
+}
+
+10)Create socket
+   
+   #include <sys/types.h>
+   #include <sys/socket.h>
+   int socket(int domain, int type, int protocol); 
+
+   domain = pano pinakas px AF_UNIX (gia local) AF_INET gia (internet)
+   type = SOCK_STREAM i SOCK_DGRAM
+   protocol = sinithos 0 bazo,pou simeni xrisimopoise to default protocol 
+              gia to domain+type pou ebala   
+ 
+   returns = descriptor pou einai san low-level file descriptor
+
+11)Addresses(ena struct analoga me to domain tou socket)
+   Name-address(i path ean AF_UNIX)-port(ean AF_INET)
+
+   Den desmeuo xoro ego gia to struct,iparxi idi.Alla anagastika
+   nomizo xrisimopoio ta onomata 
+   
+   struct sockaddr_un server_address;
+   struct sockaddr_un client_address;
+
+
+   1)AF_UNIX 
+      H address gia ena socket einai ena struct pou orizete sto sys/un.h
+ 
+      struct sockaddr_un {
+        sa_family_t  sun_family;  //bazo AF_UNIX
+        char  sun_path[];  //pathname
+      };
+
+     To pathname to onoma tou file pou antistixi sto socket(onoma tou socket)
+     path+filename nomizo (pantos sigoura filename)
+
+     *to sa_family_t orizete kai auto sto sys/un.h (short int einai)
+           
+   2)AF_INET
+
+      struct sockaddr_in
+      {
+        short int  sin_family;    //bazo AF_INET
+        unsigned short int sin_port; //bazo port number
+        struct in_addr sin_addr;  //IP(internet address) tou socket
+      };
+
+     struct in_addr {
+       unsigned long int  s_addr;  //32 bit,4 arithmoi <256 o kathenas
+     };
+
+12)Arxikopoiisi tou socket socket (Edo to arxikopoio)
+
+   #include <sys/socket.h>
+   int bind(int socket, const struct sockaddr *address, size_t address_len);
+
+   socket = san file descriptor pou epestrepse i socket()
+   address = to strcut pou arxikopoisa
+   address_len = to megethos tou struct pou prokipti apo sizeof()
+
+   0=> ola ok
+   -1 => error kai errno mia apo tis kato times
+
+  Kapioi Error codes 
+   EBADF The file descriptor is invalid.
+   ENOTSOCK The file descriptor doesn’t refer to a socket.  
+   EINVAL The file descriptor refers to an already-named socket.
+   EADDRNOTAVAIL The address is unavailable.
+   EADDRINUSE The address has a socket bound to it already.
+
+13)Sindesi me port/dimiourgia pending ouras
+  (opios theli na sindethi mpori na mpeni stin oura) 
+   
+   #include <sys/socket.h>
+   int listen(int socket, int backlog);
+
+   H oura exi max megethos backlog(sinithos 5).Ean gemisi oi client ginonte refused
+
+   0 ola ok
+   -1 error 
+
+14)Block gia connect me client
+ 
+   #include <sys/socket.h>
+   int accept(int socket, struct sockaddr *address, size_t *address_len);
+
+   Dimiourgia ston server socket tou client(idiou tipou me to socket tou server)
+   H address arxikopoieite otan ftiaxnete i sindesi den tin arxikopoio ego opos
+   tou server
+   
+   //ean den me niazi i address tou client mporo na balo NULL sto address
+   address = i metabliti tou struct   client_address
+   address_len = sizeof tis address tou client
+
+   Epistrefi ton file descriptor tou neou socket
+
+   *iparxi tropos na min kano block na dexome mono ean iparxi kapio stin oura
+    int flags = fcntl(socket, F_GETFL, 0);
+    fcntl(socket, F_SETFL, O_NONBLOCK|flags);
+
+15)Request connection (client-side)   
+   Block o client 
+  
+   #include <sys/socket.h>
+   int connect(int socket, const struct sockaddr *address, size_t address_len);
+
+   socket tou client pou exo ftiaxi
+   address tou client pou exo arxikopoiisi
+   address_len  sizeof tis address autis
+
+   H address pou exo ftiaxi prepei na exoun idio path kai type me auto pou xrisimopoiisa
+   ston server (nomizo)
+
+   0 ola ok
+   -1 error errno times
+
+   EBADF An invalid file descriptor was passed in socket .
+   EALREADY A connection is already in progress for this socket.
+   ETIMEDOUT A connection timeout has occurred.
+   ECONNREFUSED The requested connection was refused by the server.
+
+   Ean stalthi signal ston client,tote to connect ginete asinxrona kai den ginete 
+   block.Ean gini asinxroni sindesi xrisimopoio tin select gia na elenxo ean exi gini 
+   i sindesi
+
+16)Close socket
+   close(socket)   (san na klino file descriptor)
+
+   close kano kai ston client kai sto server
+
+   Sto server kano close otan i read epistrepsi 0
+
+

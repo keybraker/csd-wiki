@@ -1,0 +1,147 @@
+1)race condition => den oloklironete to bima
+  Lisi = mututal exclusion
+
+2)Kanones gia sosto mutual exclusion
+  1)1 process max se critical region
+  2)einai anexartiti sistimatos px taxitita tou,cpus tou ktl
+  3)oxi block ektos critical region
+  4)oles oi process apoktoun kapote prosbasi sto shared data
+  
+
+3)Tropoi gia na petixo mutual exclusion
+
+4)Disabling switches  => oxi alles interrupts,oute clock interupts
+  =>tha ta kani meta enable?
+  =>mono 1 cpu tha to tiri...
+
+5)Lock variables => den douleuoun einai kai autes shared data
+
+6)Strict Alternation(take turns)
+  Problima px 1 megalo noncritical=> i alli tha tin perimeni
+   eno den tha einai se kritikal
+  
+  while (TRUE) {
+     while (turn != 0);   //antistixa !=1 gia tin process1
+     critical region( );  
+     turn = 1;           //antistixa turn=0 gia tin process1
+     noncritical region( );
+   }
+
+   //busy waiting => to lock legete spin lock
+
+7)Peterson’s Solution 
+
+  pinakas_endiaferon  1 index/process
+
+  leo oti endiaferome 
+
+  void enter region(int process);
+  {
+     other = 1 − process;
+     interested[process] = TRUE;  //leo oti endiaferome
+     turn = process;    //perno tin trexon sira
+     while (turn == process && interested[other] == TRUE) / * null statement * / ;
+  }
+  void leave region(int process)
+  {
+     interested[process] = FALSE;  //den endiaferome pleon
+  }
+
+
+9)The TSL Instruction  (Test and Set Lock)
+
+  Lock to kani to hardware(xrisimopoieite sixna otan pola cpu)
+  
+  read+write ginonte paketo
+
+  enter region:
+    diabazo lock
+    ean itan 0=>loop perimeno
+    alios to kano 1 kai mpeno critical region
+    RET                | retur n to caller; critical region entered
+
+10)Sleep(suspend)/wakeup (system calls) => oxi busy waiting
+
+11)The Producer-Consumer Problem (xrisimopoiei sleep/awake)
+   Ean o sinxronismos basizete mono sta sleep/awake mpori race condition
+   protou prolabi sleep pire to awake ,kai to signal xathike => kimate
+
+   lisi=na thimame ta wakeups(semaphores) 
+
+12)Semaphores
+
+   Exo enan counter pou metraei ta awakes
+   px 1 simeni oti exo ena awake 
+
+   Ean mia process di >0 tote mioni ton counter kata 1 kai meni awake
+   Ean di 0 tote pai sleep
+
+   Ola ginonte se mia atomic action(oi exo den blepoun ta endiamesa bimata)
+   check value
+   change it
+   and sleep(ean 0)
+   
+13)Me semaphores to Producer-Consumer Problem (xrisimopoiei sleep/awake)
+
+   Gia kathe ti koino exo kai 1 semaphore
+   3 koina
+   empty counter/full counter/o buffer(critical region)
+   prota down kai meta tin critical region up
+
+   H semaphore den epitrepei down otan 0,auto mporo na to xrisimopoiiso gia
+   2 logous
+   1)amibeos apoklismos(atomic)
+   2)sinxronismos (logiki tou programatos)
+     edo ean i semaphore exi full=0(empty) den mpori o consumer na pari
+     episis ean empty=0(full) den mpori o producer na pari
+   
+   semaphore mutex = 1;  
+   semaphore empty = N;  
+   semaphore full = 0;   
+
+   down(&empty);     //gia na mpo elenxo ean down
+   down(&mutex);           	
+   inser t item(item);    	
+   up(&mutex);            	
+   up(&full);             
+
+14)mutex
+   Otan me niazi mono o amibeos apoklismos tote xrisimopoio mutex
+   (san semaphore mono pou den metrai oste na to xrisimopoiiso stin logiki tou
+    application)
+
+   To mutex exi mono 2 times 1 kai 0,me 1 mpeno stin critical region me 0 oxi
+
+   semaphore sv = 1;
+   loop forever {
+    down(sv);
+    critical code section;
+    up(sv);
+    noncritical code section;
+   }
+
+15)Monitors pidixa
+
+1)sockets = communication of processes akoma kai meso network
+           (enoeite kai se process 1 ipologisti)
+        
+2)server creates socket me kapio onoma kai perimeni client
+  to socket opos oles oi epikoinonies sta linux einai san na grafo se files
+  diladi exoun file descriptors 
+
+3)Basika
+  IP = four numbers <256 ,me telies xorismenes
+   ports < 1024 sinithos gia system processes ports
+   web servers akoune stin port 80
+   Genika iparxoun standar ports gia standar applications px web server/printer(515)
+
+4)Socket attributes
+  1)domain  =  network medium pou tha xrisimopoiei to socket px AF_INET = internet
+  2)type  =  stream/datagram  px sto internet TCP/UDP
+  3)protocol = protocolo epikoinonias px internet uses IP protocol
+               (sinithos bazo 0 pou simeni xrisimopoieise to default gia to domain/type)
+   
+  *Address = kathe socket exi addresses se format analoga me ton tipo tou px IP address
+    Gia to AF_UNIX address einai to struct sockaddr_un pou orizete sto sys/un.h
+    Gia AF_UNIX exo struct sockaddr_in pou irizete sto sys/un.h         
+   (sto linux to i address einai ena struct(sockaddr_un) orismeno sto netinet/in.h )

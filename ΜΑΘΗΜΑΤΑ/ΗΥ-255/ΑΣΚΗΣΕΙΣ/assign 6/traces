@@ -1,0 +1,63 @@
+
+  traces
+  John Rambo
+  rambo@csd.uoc.gr
+  hy255
+  as6
+
+
+0x80481e8 <readString>:         push   %ebp         # save old ebp
+0x80481e9 <readString+1>:       mov    %esp,%ebp    # make esp the ebp
+0x80481eb <readString+3>:       sub    $0x38,%esp   # allocate space for local vars
+0x80481ee <readString+6>:       movl   $0x0,0xfffffff8(%ebp)  # i = 0
+0x80481f5 <readString+13>:      mov    0x80b051c,%eax         # copy retaddr
+0x80481fa <readString+18>:      mov    %eax,(%esp)            # store retaddr
+0x80481fd <readString+21>:      call   0x8048d20 <getc>       # call fgetc(stdin)
+0x8048202 <readString+26>:      mov    %eax,0xfffffffc(%ebp)  # c = char
+0x8048205 <readString+29>:      cmpl   $0xffffffff,0xfffffffc(%ebp)  # if (c == EOF)
+0x8048209 <readString+33>:      je     0x8048220 <readString+56>     # break
+0x804820b <readString+35>:      cmpl   $0xa,0xfffffffc(%ebp)         # if (c == '\n')
+0x804820f <readString+39>:      je     0x8048220 <readString+56>     # break
+0x8048211 <readString+41>:      mov    0xfffffff8(%ebp),%eax  # copy i to eax
+0x8048214 <readString+44>:      mov    0xfffffffc(%ebp),%edx  # copy c to edx
+0x8048217 <readString+47>:      mov    %dl,0xffffffda(%ebp,%eax,1)  # buf[i] = c
+0x804821b <readString+51>:      incl   0xfffffff8(%ebp)             # i++
+0x804821e <readString+54>:      jmp    0x80481f5 <readString+13>    # read next
+0x8048220 <readString+56>:      mov    0xfffffff8(%ebp),%eax  # copy i to eax
+0x8048223 <readString+59>:      movb   $0x0,0xffffffda(%ebp,%eax,1) # buf[i] = 0
+0x8048228 <readString+64>:      movl   $0x0,0xfffffff8(%ebp)      # i = 0
+0x804822f <readString+71>:      jmp    0x8048246 <readString+94>  # for loop comparison
+0x8048231 <readString+73>:      mov    0xfffffff8(%ebp),%eax        # copy
+0x8048234 <readString+76>:      mov    %eax,%edx                    # i
+0x8048236 <readString+78>:      add    0x8(%ebp),%edx               # 
+0x8048239 <readString+81>:      mov    0xfffffff8(%ebp),%eax        #
+0x804823c <readString+84>:      movzbl 0xffffffda(%ebp,%eax,1),%eax # s[i] = buf[i]
+0x8048241 <readString+89>:      mov    %al,(%edx)                   #
+0x8048243 <readString+91>:      incl   0xfffffff8(%ebp)             # i++
+0x8048246 <readString+94>:      cmpl   $0x1d,0xfffffff8(%ebp)     # if (i <= 29)
+0x804824a <readString+98>:      jle    0x8048231 <readString+73>  # next loop
+0x804824c <readString+100>:     leave  
+0x804824d <readString+101>:     ret  
+
+
+data section
+------------
+grade:  0x80b006c
+
+bss section
+-----------
+Name:   0x80b1bd8
+
+readString stack frame
+----------------------
++----------+----------------------+
+| ebp - 38 | buf[30] \            |
+| ebp -  8 | i        }local vars |
+| ebp -  4 | c       /            |
+| ebp      | callees ebp          |
+| ebp +  4 | retaddr: 0x0804829b  |
+| ebp +  8 | Name:    0x080b1bd8  |
++----------+----------------------+
+ebp - esp = 0x38 = 56
+
+

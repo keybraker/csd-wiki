@@ -1,0 +1,343 @@
+1)processes = program run on its memory space
+
+  Poli xristes,kathe xristis pola programata,kathe programa isos pola process,kathe process isos pola thread
+
+2)processes exoun
+  id    //monadikos arithmos 1-65555,to 1 einai desmeumeno stin process init,ta ipolipa kanoun kiklo kathe fora perno to epomeno id
+  code  //read only komati kai shared
+  data  //ta prosorina data tis sigekrimenis klisis
+  libraries //read only kai shared
+  file descriptors //arxia pou sxetizonte me mia process
+
+3)Mia process exi stack,episis exi enviromental variables kai executation thread
+
+4)ps -ef blepo process table
+
+  xristis pid time(pou tin etrexa) tty(terminal pou tin etrexa px tty1) command(pou tin etrexa)
+
+5)ps ax   => blepo to STAT tis kathe process,to STAT perigrafi tin process px ean sleeping multithreaded kai sto foreground exo STAT=sl+
+           iparxoun poles pithanes times gia to STAT
+
+  S  //Sleeping me signal or input mpori na xipnisi
+  R  //Running or in running queue
+  D  //Uninterruptible Sleep (Waiting). Usually waiting for input or output to complete.
+  T  //Stopped. Usually stopped by shell job control 
+  Z  //Defunct or “zombie” process.
+  N  //Low priority task, “nice.”
+  W  //Paging. (Not for Linux kernel 2.6 onwards.)
+  s  //Process is a session leader.
+  +  //Process is in the foreground process group(trexi tora den perimeni)
+  l  //Process is multithreaded.
+  <  //High priority task. 
+
+
+6)init=process manager pid=1 
+  auti einai i root process olon
+
+7)parent process -> child process
+  PPID to pid tou parent
+  
+  Ean o parent exi stamatisi tote san parent fenete i init ara to PPID=1
+  
+8)Kathe process exi priority,aftes me ipsili trexoun pio sixna
+  Oi priorities metrounte me to nice value default einai to 0
+  Programata pou stamatane apo mona tous px perimenoun input theorounte 
+  kala programata kai exoun high priority
+  Ta programata pou xrisimopoioun ton epexergasti diarkos exoun low priority
+
+  ps -1  //blepo to NI column
+   
+  nice program & => orizo to nice tou program na einai +10
+
+  renice value pid => orizo to nice tis process me pid 
+
+9)O linux process scheduler stamatai tin process opote krini xoris na rotisi tin process
+
+10)Create new process apo tin C xrisimopoiontas to shell automata
+
+   #include <stdlib.h>
+   int system (const char *string);
+
+   To na kalesto tin system isodinami me to na egrafa sto shell
+   sh -c string
+
+   #include <stdlib.h>
+   #include <stdio.h>
+   int main()
+   {
+     printf(“Running ps with system\n”);
+     system(“ps ax”);   //edo trexo tin process ps me orisma ax,san entoli tou shell
+     printf(“Done.\n”);
+     exit(0);
+   }
+
+   *ean egrafa system(“ps ax &”); => tha tipona amesos Done protou teliosi i process
+    sto pano paradigma to Done tiponete mono otan teliosi i process
+  
+   Den xrisimopoio tin system genika,giati trexi to shell automata,iparxoun
+   ali tropoi xoris na xrisimopoio to shell
+
+11)exec 
+   1)sinolo sinartiseon pou kanoun to idio pragma me alla orismata
+   2)exec => i process antikathistate apo autin pou dimiourgise,i nea exi to idio pid
+     Episis exoun to idio nice,idia open file descriptors(ektos kai po na ta klisi)
+
+   #include <unistd.h>
+   
+   char **environ;
+
+   int execl(const char *path, const char *arg0, ..., (char *) 0);//0 san orisma
+   int execlp(const char *file, const char *arg0, ..., (char *) 0);
+   int execle(const char *path, const char *arg0, ..., (char *) 0, char *const envp[]);
+   int execv(const char *path, char *const argv[]);
+   int execvp(const char *file, char *const argv[]);
+   int execve(const char *path, char *const argv[], char *const envp[]);
+   
+   *oses exoun path to orizo kata tin klisi,oses den exoun psaxnoun sto PATH 
+    enviromental variable
+
+   *epistrefoun -1 mono ean error,kanoun kai tin errno=-1
+
+	#include <unistd.h>
+	
+        //pinakas me onoma programatos+orismata
+	char *const ps_argv[] = {“ps”, “ax”, 0};
+	
+        //pinakas me PATH,TERM orismeno apo emena
+	char *const ps_envp[] = {“PATH=/bin:/usr/bin”, “TERM=console”, 0};
+	
+        //Oles kanoun to idio me tin diafora tou pos orizo to path
+
+	execl(“/bin/ps”, “ps”, “ax”, 0);  /* assumes ps is in /bin */
+	execlp(“ps”, “ps”, “ax”, 0);      /* assumes /bin is in PATH */
+	execle(“/bin/ps”, “ps”, “ax”, 0, ps_envp); /* passes own environment */	
+	
+	execv(“/bin/ps”, ps_argv);
+	execvp(“ps”, ps_argv);
+	
+        execve(“/bin/ps”, ps_argv, ps_envp); //auti einai i pio sinithismeni
+
+  px klisi ps ax,me
+
+   #include <unistd.h>
+   #include <stdio.h>
+   #include <stdlib.h>
+   int main() 
+   {
+     printf(“Running ps with execlp\n”);
+     execlp(“ps”, “ps”, “ax”, 0);
+     printf(“Done.\n”); //auto den tha trexi pote giati i mama process termatizi
+     exit(0);
+    }
+
+13)Duplicate process image (ftiaxno pola process)
+   Exo mia process pou trexi,kalontas to fork() ftiaxno ali mia process pou trexi.
+   Kai oi 2 einai oloidies,alla einai diaforetikes,kai oi dio tha trexoun ton kodika
+   Mporo na to fantasto san 1 process pou apo ekeino to simio kai meta einai 2 
+   xena programata.Oi deuteri process antigrafi ola to image tis protis,diladi 
+   dedomena kodika ktl,
+   den ta mirazonte!Apo to simio pou ginete to fork() antigrafi kai meta ali poria.
+
+   H fork epistrefi diaforetikes times sto child kai ali ston parent
+
+   Ston parent i fork epistrefi to pid tou child.
+   Sto child i fork epistrefi 0
+   -1 ean error & errno=-1 //global variable
+
+   Etsi mporo kai xexorizo pion kodika na ektelesi to child kai pion o parent
+   pera apo ton koino kodika
+   
+   #include <sys/types.h>
+   #include <unistd.h>
+   
+   pid_t fork(void);
+
+   px
+
+    #include <sys/types.h>
+    #include <unistd.h> 
+    #include <stdio.h>
+    #include <stdlib.h>
+
+    int main()
+    {
+	pid_t pid;
+	char *message;
+	int n;
+	printf(“fork program starting\n”);
+	pid = fork();
+	switch(pid)
+	{
+	  case -1:
+	   perror(“fork failed”);
+	   exit(1);
+	  
+          case 0:  //0=> child process
+	   message = “This is the child”;
+	   n = 5;
+	   break;
+	
+          default:
+	   message = “This is the parent”;
+ 	   n = 3;
+	   break;
+	}
+        for(; n > 0; n--)
+        {
+	  puts(message);
+	  sleep(1);
+	}
+	exit(0);
+    }
+   
+14)fork kai exec
+   H exec ftiaxni ena process pou exi diko tou kodika kai i palia petheni to pid einai tis palias pou pethane
+     *diladi o kodikas meta tin exec den tha klithi pote
+   H fork ftiaxni ena process pou mirazonte ton epomeno kodika,alla exi alo pid pleon
+
+   H child process trexi mono oso trexi i parent
+   
+15)Wait for process
+   
+   #include <sys/types.h>
+   #include <sys/wait.h>
+
+   pid_t wait(int *stat_loc);
+
+   px o idios kodikas mono pou bazo exit codes kai wait
+
+
+   #include <sys/types.h>
+   #include <sys/wait.h>
+   #include <unistd.h>
+   #include <stdio.h>
+   #include <stdlib.h>
+
+   int main()
+   {
+	pid_t pid;
+	char *message;
+	int n;
+	int exit_code;
+	printf(“fork program starting\n”);
+	pid = fork();
+	switch(pid)
+	{
+	  case -1:
+	    perror(“fork failed”);
+	    exit(1);
+	  case 0:
+	    message = “This is the child”;
+	    n = 5;
+	    exit_code = 37;
+	    break;
+	  default:
+	    message = “This is the parent”;
+	    n = 3;
+	    exit_code = 0;
+	    break;
+	}
+	for(; n > 0; n--)
+        {
+	  puts(message);
+	  sleep(1);
+        }     
+        if(pid != 0) //extra kodikas pou trexi mono ston parent kai ton kani na perimeni
+        { 
+	  int stat_val;
+	  pid_t child_pid;
+	  child_pid = wait(&stat_val); //edo kolaei kai perimeni na teliosi to child
+	  printf(“Child has finished: PID = %d\n”, child_pid);
+
+	  if(WIFEXITED(stat_val))
+	    printf(“Child exited with code %d\n”, WEXITSTATUS(stat_val));
+	  else
+	   printf(“Child terminated abnormally\n”);
+	}
+	exit(exit_code);
+  }
+ 
+  Macros tis sys/wait.h gia na ermineuo to exit_code tou child
+
+   WIFEXITED(stat_val) Nonzero if the child is terminated normally.
+   WEXITSTATUS(stat_val) If WIFEXITED is nonzero, this returns child exit code.
+   WIFSIGNALED(stat_val) Nonzero if the child is terminated on an uncaught signal.
+   WTERMSIG(stat_val) If WIFSIGNALED is nonzero, this returns a signal number.
+   WIFSTOPPED(stat_val) Nonzero if the child has stopped.
+   WSTOPSIG(stat_val) If WIFSTOPPED is nonzero, this returns a signal number.
+ 
+16)wait for specific process
+   Edo kano wait eos otou i sigekrimeni process termatisi
+   Xrisimopoiite episis apla gia na paro info gia to ean exi termatisi i oxi to child
+
+     #include <sys/types.h>
+     #include <sys/wait.h>
+
+     pid_t waitpid(pid_t pid, int *stat_loc, int options);
+   
+     *pid=pid tou child pou perimeno (ean -1 tote dexome ola ta childs san tin wait)
+      stat_loc = status info tou child
+      options = exo poles epiloges px WNOHANG pou simeni min perimenis kai i xrisi tis
+          WNOHANG einai aplos gia na paro plirofories gia to ean exi termatisi i oxi
+          to child
+
+     px  pid_t state=waitpid(child_pid, (int *) 0, WNOHANG);
+     
+         state:
+            0 ean child trexi
+            child_pid ean terminated or stopped
+            -1 ean error kai errno=-1
+
+
+17)Process states
+   Zombie: has completed execution, still has an entry in the process table
+   Orphan: parent has finished or terminated while this process is still running(parent i init)
+   Daemon: runs as a background process, not under the direct control of an interactive user
+
+17)Zombie processes
+   1)wait ston parent =>child akoma kai ean teliosi prepei na apothikeuo ton exit code
+     kai alla stixia gia tin process px to pid tou child => 
+     auto simeni oti ena child teliomeno iparxi akoma sto table san process 
+     = zompie process
+   2)Ean o parent termatisi normal tha stamatisi na iparxi kai i termatismeni child 
+     Ean omos o parent den termatisi normal => child process ginete pedi tis init
+     zompie process xoris kamia pleon xrisimotita
+   3)H init katharizi tis zompie processes kapia stigmi alla mexri tote trone porous
+   4)H zompie process ston ps -al fenete me ton xaraktirismo zombie i defunct
+   5)H zompie pabi na iparxi otan teliosi kai o parent
+   6)
+   
+18)Redirection
+   ./program < file.txt //stdin apo file   
+   ./program > file.txt //stdout se file
+
+   Mporo na kano redirection kai mesa sto programa,edo filename einai ena onoma
+   arxiou pou thelo na einai i stdin mou.Apo edo kai kato stdin einai auto.
+   freopen(filename, “r”, stdin); 
+
+   Px o xristis mpori na mou dosi ena filename na elenxo ean einai ola ok,
+      meta na anakateuthino esoterika to filename san stdin kai na trexo to 
+      program esoterika me mia execl ,san na einai kani  ./program < file.txt
+  
+   ./program1 file.txt = elenxos orismaton kai ./program < file.txt
+
+
+   #include <unistd.h>
+   #include <stdio.h>
+   #include <stdlib.h>
+   int main(int argc, char *argv[])
+   {
+     char *filename;
+     if (argc != 2) {
+       fprintf(stderr, “usage: useupper file\n”);
+       exit(1);
+     }
+     filename = argv[1];
+     if(!freopen(filename, “r”, stdin)) {
+       fprintf(stderr, “could not redirect stdin from file %s\n”, filename);
+       exit(2);
+     }
+     execl(“./upper”, “upper”, 0);
+     perror(“could not exec ./upper”);
+     exit(3);
+   }   

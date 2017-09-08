@@ -1,0 +1,538 @@
+1)3 basikes arxitektonikes
+  1)shared memory pola CPU(isos kai multicore kapia)
+  2)CPU+Memory anexartita meso interconnect enomena,oste minimata
+  3)CPU+Memory anexartita meso internet enomena,oste minimata
+    Diafores me to 2
+    einai pliri ipologistes(to pano einai mono cpu/ram kai isos diskos) 
+    enomeni apomakrismena sixna internet(to pano einai px se domatio)
+      me pio xamiles taxitites me kartes diktiou(oxi interconnect opos pano)
+    isos trexoun alo litourgiko(oi pano trexoun to idio litourgiko)  
+      exoun alo filesystem,to kathena isos alo administrator  
+
+
+Diafores ton pano (multiprocessors/multicomputers/distirbuted)
+
+Operating system => mono distributed isos diaforetiko,kai me polous admin anexartitous
+periferiaka => mono distributed den ta mirazete(clusters isos atomikous diskous)
+topothesia => idio chip/idio room/isos worldwide
+node = cpu/cpu+ram+netInterface/complete computer
+epikoinonia= shared ram/interconnection/kanoniko network
+
+2)Shared memory multiprocessor (Ram shared(share data))
+  Xriazonte epipleon apo to litourgiko
+    process synchronization
+    resource management
+    scheduling
+
+3)Multiprocessor Hardware
+  1)UMA (uniform memory access)
+    kathe lexi tis mnimi prospelasete me tin ida taxitita
+    eos 100 cpus
+  2)NUMA (non-uniform memory access)
+    iparxoun tmimata tis mnimi pou prospelasonte pio arga px meso diktiou
+
+  Kai stis 2 periptosis exo 1 address space gia olous tous processors
+
+
+4)UMA me bus  eos 32 cpus
+
+  1)eos 2-3 cpus alios mpoukoni to bus
+
+   CPU1 CPU2   shared_Memory
+    ------------------ //bus
+  
+  2)idio me to pano alla CPU1,CPU2 private cache
+    
+    stin cache ferno otan thelo mia word ferno oloklires chache lines,
+    sinithos 32 eos 64 bytes
+
+    prin grapso se kati sto cache enimerono meso bus oti prokite na grapso oste
+    ola ta alla antitipa na theorounte out of date (cache-coherence protocol)
+
+  3)idio me to 2),alla kathe cpu exi kai private memory
+
+    stin private memory mpenoun mono read-only data
+
+5)UMA crossbar switches (alios megalonoun poli i sindesis)
+
+  aplo sel 522
+
+6)UMA Multiprocessors Using Multistage Switching Networks
+
+  einai san poliplektis
+
+  i kathe cpu meso switches pai stin mnimi pou theli na pai
+
+  Minima = module,address,opcode,value
+
+
+
+7)NUMA multiprocessors
+
+  1 address space
+
+  Access stin local memory grigori,access to remote memory pio argi
+  
+  stin remote ginete me LOAD/STORE instructions
+
+  sto interconnect pao ean den to exo se kamia mnimi mou
+
+  iparxi enas directory pou exi plirofories gia to ti einai pou
+
+
+8)Multicore chips
+
+  Se ena chip vazo parapano apo 1 cpu
+  o logos einai oti den mporo na mikreno tin mikroarxitectoniki aperiorista
+  + oti zestenonte poli
+
+
+  Me pola transistors
+
+  mporo na balo poli cache 4-32mb alla meta apo kapio simio allazi poli ligo
+  to posoto epitixias  px apo 99 se 99.5
+ 
+  episis mporo na balo pio polous cores
+
+  px intel xeon 2651
+     12 cores
+     L1 32KB,L2 256KB,L3 30MB(to L3 einai shared,eno ta alla private)
+
+  to shared cache einai mia diafora apo alla multiprocessors sistimata
+  
+  meso snooping(blepo pote allazi kati) frontizete oste na blepoun oli tin idia mnimi
+  ta idia data diladi
+
+  episis sixna auta ta chips exoun kai allous cores gia audio decoder,video ktl
+
+9)Multicore chips
+
+  para polous cores ana chip px 100 ,1000 ktl
+
+  problimata me cache 
+    memory coherency wall 
+    (oso pio polous bazo toso pio diskola tha einai oli enimeromeni os ta updated data)
+    diskola stin kataskeui
+    diskola ston programatismo
+  
+  to pithanotero gia polous cpus einai na exoume anti shared cache memory,
+  minimita metaxi ton cores
+
+  i mpori na exoume kai mixis,px to max pou to cache cohencency douleuei px 16
+  se omades kai na exo poles teties 16-ades pou stelnoun minimata
+
+  gpus = > thousounds of cores,gia mikroipologismous paralila
+           oxi katalila gia siriakes doulies
+
+  kataliles gia data parallelism alla oxi gia task parallelism
+
+10)Heterogeneous Multicores = gpu+cpus se 1 chip
+
+11)Multiprocessor Operating System Types
+   3 idi
+
+12)1 operating system/CPU
+
+   to sxima opos prin
+
+   cpu1 cpu2     Memory_xorismeni_se_tmimata_1/cpu   IO 
+   OS1   OS2
+   -------------------------------- //bus
+
+   Miazi san xexoristi ipologistes alla mirazonte IO kai memory
+
+   O kathe processor exi to diko tou komati stin mnimi ean 4 cpu=> 4 isa komatia
+   => pali edo o xristis1 mpori na min theli mnimi,eno o 2 na theli poli
+   o kathe xristis kani login se 1 cpu 
+   => den mirazete i doulia panta px xristis 2 zitai pola
+   i kathe cpu exi tis dikes tis process(den mirazonte to forto)
+
+   to basiko mionektima einai oti den mirazete to forto analoga me tin xrisi
+   
+
+13)Master-Slave Multiprocessors
+
+   edo 1 cpu px i cpu1 exi to OS(MASTER) kai oi alles cpus(SLAVES) trexoun mono 
+   user processes 
+   
+   episis i mnimi einai eniea kai oxi xorismeni opos prin
+   
+   problima = 1 cpu pou exi to OS ean balo polous slaves den tha prolabeni
+     na diaxei to forto sosta
+
+14)Symmetric Multiprocessors
+
+   edo to litourgiko den iparxi olo se ena core,alla tmimata tou mirazonte stous
+   cores,diladi einai spameno to litourgiko,ola auta ta tmimata prepei na sinxronizonte
+   giauto stin mnimi iparxi tmima tou litourgikou pou kani locks analoga me to pios
+   cpu exi prosbasi se shared data
+
+   problima einai o sinxronismos oste na douleuoun paralila kai sosta xoris px locks
+   megala
+
+   
+15)sinxronismo
+   Xrisimopoieite TSL entoles pou klidonoun to bus gia mutual exclusion
+   
+
+
+16)scheduling 
+
+   time sharing gia unrelated threads
+  
+   Scheduling multiple related threads
+at the same time across multiple CPUs is called space sharing.
+
+
+25)Multicomputers(clusters/cows)
+   multiprocessors = ean megalosoun(polas cores) poli akribenoun 
+                     episis exi orio to poso mporoun na megalosoun
+   
+   multicomputers => oxi shared memory
+
+   cloud computing ftiaxnete me clusters
+
+   stoxos einai na exoun kales diepafes diktiou oste na stelnoun grigora messages
+   (alla se microseconds vs nanoseconds(multiprocessors))
+
+   multicomputer node(headless workstation)
+    cpu(isos multiprocess)
+    memory
+    disk (oxi panta)
+    network interface(network board )
+     (san network card alla pio sintheti gia grigores metafores)
+
+   H sindesmologia ton nodes pikili
+
+   px sel 547
+   
+   star/grid ktl
+
+   Store-and-forward packet switching
+     messages are broken into packets. Packets
+     move from one switch to another
+     This scheme has increasing latency (delay)
+     problem because of store-and-forwarding
+     in intermediate switches
+
+   Circuit switching : a path is established from
+     the source to the destination. Once this path
+     is setup bits are pumped from source to
+     destination with no buffering in the
+     intermediate switches
+     may need some set up phase but then
+     the transfer is fast
+    *wormhole routing = paralagi tou,spai packet se subpackets
+     kai xekinao protou kathoriso pliros to path
+ 
+26)interface boards(san kartes diktiou pou sindeonte)
+
+   Otan einai sinthetes me cpu legonte network processors
+  
+   Exoun
+    ram (giati metaferonte dedomena poli grigora kai den thelo na ta xaso)
+    isos cpu 
+    isos dma
+
+   Dexonte kai stelnoun paketa
+
+   
+27)550-551 pidixa
+
+  
+28)Remote Direct Memory Access (remote dma)
+
+   => data stelnonte metaxi ipologiston (memory enos stin interface tou allou )
+      o receiver kani polling,kai otan allaxi ena byte pou tou exi stili o sender
+      katalabeni oti nea data
+
+29)user level communication
+   
+   oi processes se diaforetikous ipologistes epikoinonoun stelnontas minimata
+   
+
+   2 basikes sinartisis
+
+   Send(addr=ipologistis+port, data_pointer) 
+     addr = process stin opia stelni(se pion ipologisti pao kai se pia port)
+ 
+   Receive(addr,data_pointer) 
+     addr = pios kai pou perimeni minima (cpu number+process port sinithos)
+     
+
+30)Blocking calls
+
+   Mexri na pari to minima o receiver h autos pou kani to send ginete blocked
+   (den ektelei epomeni entoli px suspended i process pou stelni)
+   meta to receive h send ginete unblocked
+
+31)Non blocking calls(asynchronous calls)
+
+   Sender stelni kai sinexizi na trexi kanonika i epomeni entoli pou ixe na kani
+
+   Problima
+   Den xeri pote teliose i apostoli oste na xalasi to buffer pou exi to minima pou
+   "estile"
+
+   Lisi1
+    to kernel krataei ena copy tou message opote iparxi panta 
+    alla auto kathisteri giati kathe minima antigrafete prota sto kernel
+
+   Lisi2
+    interrupt the sender otan pige to minima => diskolo sto programatismo kai race 
+    conditions
+
+   Lisi3
+     copy on write(diladi ftiaxno copy mono ean xrisimopoiiso ton buffer prin pai
+     to minima)
+
+32)Sinolika diladi 4 epiloges 
+
+   1. Blocking send (CPU idle during message transmission) //sinithismeni
+   2. Nonblocking send with copy (CPU time wasted for the extra copy).
+   3. Nonblocking send with interrupt (makes programming difficult).
+   4. Copy on write (extra copy probably needed eventually).
+
+33)Receive mpori na einai kai auti blocking i non-blocking
+
+   non-blocking receive => lei sto kernel pou einai to buffer kai epistrefi
+    
+   Ena interrupt mpori pi pote eftase to minima
+   H
+   xrisi mia poll procedure gia na pari to minima
+   H 
+   pop-up thread
+   H 
+   na exo enan hadler pou perni kai epexergazete to minima //active messages
+
+34)Remote Procedure Call
+
+   dinoun dinatotita xirismou(klisi sinartisis) tou enos ipologisti meso enos alou,oxi
+   apla apostoli minimatos
+
+   RPC => o enas ipologistis kali sinartisi pou einai se alo ipologisti
+   (o programatistis tin kali apla san sinartisi,to pos taxideuoun ta orismata
+    kai epistrefomes times den asxolite me auta o programatistis)
+   autos pou kali arxika einai o client,o alos einai o server   
+   
+   
+   server stub/client stub = procedures pou xrisimopoiounte gia na fenete i RPC san
+     mia kanoniki local sinartisi
+
+   Bimata
+   1)Clien call-> calls  client stub (opou bazi tis parametrous tis RPC)
+   2)client stub paketari tis parametrous se 1 minima(marshalling),kai kani
+     system call gia na stali to minima
+   3)stelnete to minima apo to kernel tou client
+   
+   4)server stub exontas kalesi receive,perni to minima apo kernel tou server
+   5)ginete i klisi
+   6)gia to return ginete to anapodo
+
+
+   Problimata
+   1)Den mporo na pernao os orismata pointers,alla by value
+   (o logos einai oti o server den mpori na bri ta data afou einai ston client
+    kai se alo address space)(ean einai apli pointers px se integers mporo na
+    paro ton integer)
+  
+   2)globals => den iparxoun ston server => den mporo na xrisimopoio sinartisis me 
+     globals
+   
+   3)Yparxi diskolia sto na bri tous types ton parametron?
+
+35)Distributed Shared Memory = dini tin entiposi shared memory
+
+   H logiki pou douleuei einai otan den exo sto mixanima kati stelnete automata
+   minima kai to perno(gia to xristi einai san na to ixe sto mixanima tou)
+
+   Mia shared memory mpori na ilopoieite
+   hardware (multiprocessors)
+   operating system
+   application level
+
+   Pages tis shared memory iparxoun diaskorpismenes sta diafora mixanimata
+
+   Replication = oi read only pages,mporoun na iparxoun local diples triples ktl
+     gia logous taxititas
+
+     episis mporo na kano replication se oles tis pages,arkei otan allazo kapia
+     na ftiaxno kai ta alla antitipa
+
+     Consistency => 
+      1)protou allaxo mia page pou exi antitipa leo stous alous ipologistes
+        na petaxoun ta topika tous antigrafa
+      2)alos tropos einai san trascaction me lock na ta allaxo ola mazi
+      3)alos tropos einai ean do oti mia page exi enimerothi,na stelnonte me minimata
+        oi words pou allaxan
+
+   False sharing
+
+     To na xekiniso apostoli argi,alla to na stilo ligo perisotera data den exi
+     megali diafora,sixna exo megaliteres selides
+   
+     auto legete false sharing
+
+     Ean omos exo poli megales selides tote iperfotono to diktio
+
+     Idika ean kati xriazonte px 2 ipologistes tote auto mpori na pigeni apo ton 
+     enan ston alon diarkos
+
+     complilers prospathoun na min simbenoun tetia problimata
+
+36)Multicomputer Scheduling
+
+
+42)DISTRIBUTED SYSTEMS
+
+43)Middleware = software layer pano apo to litourgiko pou epitrepi sta sistimata
+    (pou pithanon exoun alo litourgio) na sinergazonte
+
+   *san operating system tou distributed system
+
+44)Network
+  
+  LANs = LocalArea Networks (px ktiria sindedemena)
+   
+  WANs = Wide Area Networks (px internet)
+
+45)Erthenet (LAN technology)
+  Gia polous ipologistes mporo na bazo switch sto diktio,gia na miononte collisions
+  Mporo na enono pola erthenet me bridges
+  
+46)Internet
+   2 types of computers
+    hosts +routers
+
+47)Network Services
+   
+  Connection-oriented service = sindedemenoi
+  connectionless service = stelnoun minimata
+
+  
+
+48)Connection
+    Reliable message stream 
+    Reliable byte stream 
+    Unreliable connection 
+
+
+   Connectionless
+    Unreliable datagram 
+    Acknowledged datagram 
+    Request-reply(stelno datagram kai perno apantisi)
+
+49)Network Protocol = kanones epikoinonias
+
+50)tcp/ip protocol stack
+
+   application (HTTP,FTTP ...)
+   transport (TCP,UDP)
+   internet (IP,ARP....)
+   network interface (erthenet)
+
+  IP(internet protocol)
+    datagram protocol =>not reliable ( eos 64kb datagram ),xorismeno se packets
+    IP address = monadikos arithmos sindesis ston internet(32bit address)
+    Packet=header+src_ip+dest_ip
+    
+
+  TCP (Transmission Control Protocol)
+    reliable
+
+
+
+51)UDP VS TCP
+   1)UDP stelni ta data amesos 
+     TCP kani congestion control kai krini pote tha ta stili
+     (px ean oloi oi dromoi einai full mpori na perimeni kai na ta stili pio meta)
+
+   2)UDP unreliable => stelni ta data mia fora
+     TCP reliable => ean den labi apodixi oti ta data pigane,ta xanastelni
+      *se real time sistimata pou epitrepete na xathi meros ton data
+     (px live video transmission),den exi noima ean xathike kati na pai meta afou
+       pleon den xriazete
+
+   3)UDP connectionless(den argo me to na ftiaxo tin sindesi,stelno apla ta data)
+     TCP connection
+
+   4)UDP stateless
+     TCP state(prokimenou na gini sosti i metafora ton dedomenon,
+     kratao tin katastasi tis metaforas oste na xero ti lipi ktl)
+
+   5)UDP 8 bytes header/segment
+     TCP 20 bytes header/segment
+   
+   *acknowledged datagram service xoris sindesi alla me acknowledged(reliable)
+    
+52)DNS(domain system name) -> 
+
+   names->to IPs
+
+
+53)Document-Based Middleware
+
+  URL (Uniform Resource Locator)=monadiki address selidas sto internet
+
+  1. The browser asks DNS for the IP address of www.minix3.org.
+2. DNS replies with 66.147.238.215.
+3. The browser makes a TCP connection to port 80 on 66.147.238.215.
+4. It then sends a request asking for the file getting-started/index.html.
+5. The www.minix3.org server sends the file getting-started/index.html.
+6. The browser displays all the text in getting-started/index.html.
+7. Manwhile, the browser fetches and displays all images on the page.
+8. The TCP connection is released.
+
+54)File-System-Based Middleware
+
+  stoxos to internet na einai san ena   big file system 
+    (epano itan san linked documents) 
+
+55)Transfer model
+   
+
+   upload/download model
+     perno to arxio to kano oti thelo
+     kai meta to xanaanebazo ston server(ean to allaxa)
+ 
+    *prepei download/upload olokliro to arxeio,episis sinxronismos giati
+     oso to allazo,kapios mpori na kani to idio,sto palio arxeio
+
+   remote access model
+     meni ston server , kai meso request/reply kano oti thelo me auto
+     (tin epexergasia tin kani o server)
+
+56)Directory hierarchy
+
+   Exo file servers me filesystems (directories kai files)
+   Exo views tou filesystem ,diladi den blepoun oli tin idia domi(directories/files)
+
+   root(ean exo) einai ekei pou to kathe directory tou einai enas file server
+
+57)Naming Transparency
+
+   location transparency => to path px /server1/dir1/dir2/x exi onomata oxi
+     sigekrimenous ipologistes/topothesies,diladi mpori na allaxi ipologistis
+     pou to parexi alla parola auta na isxiei to path
+
+
+   location independence => to file mpori na allazi servers pou einai apothikeumeno
+     alla o tropos pou exo prosbasi se auto na min allazi
+    (me paths pou exoun ton server den ginete auto)
+
+     Gia location independence thelo single name space gia oles tis machines
+
+
+58)Semantics of File Sharing
+
+   sequential consistency = ta writes na grafonte me tin seira pou ginonte
+    kai na paragete 1 apotelesma
+
+   session semantics = i allages ginonte mono otan teliosi o xristis diladi close
+     to arxio
+
+    (ean allazoun 2 ena arxeio tautoxrona opos sto download/upload einai pithano
+     prepi na dialexo 1 px ton teleuteo ,i me kapio alo kritirio)
+
+   Alos tropos einai na to kano lock kai na min mpori alos na to katebasi,mexri
+   na teliosi autos pou to exi 

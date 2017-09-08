@@ -1,0 +1,80 @@
+.menu_nav {text-transform: uppercase;margin: 0 auto;display:inline;list-style-type:none}
+        .active  {display: block;text-align: center;color: white;padding: 14px 16px;text-decoration: none; background-color: #FFCE00;}
+        .active1 {display: block;text-align: center;color: white;padding: 14px 16px;text-decoration: none; background-color: #000000;}
+        .active2 {display: block;text-align: center;color: white;padding: 14px 16px;text-decoration: none; background-color: #FFCE00;}
+        .active3 {display: block;text-align: center;color: white;padding: 14px 16px;text-decoration: none; background-color: #FFDE00;}
+    
+        h1{
+          text-align:center;
+          color: #fff;
+        }
+
+        .images{
+          /*border: 1px solid black;*/
+          margin-top: 10%;
+          margin-bottom: 10%;
+          margin-left: 10%;
+          margin-right: 10%;
+          width: 80%;
+        }
+
+        footer {
+          padding: 1em;
+          color: white;
+          clear: left;
+          text-align: center;
+          clear: both;
+          margin-bottom: 0;
+        } 
+
+        figure { 
+          height: 280px;
+          width: 280px; 
+          float: left; 
+          -webkit-transition: all 0.7s ease; 
+          -moz-transition: all 1s ease;
+          position: relative;
+        }
+
+        figcaption { 
+          text-align: center; 
+          display: block;
+          background: #ff8300; 
+          font-size: 12px; 
+          font-style: italic; 
+        }
+
+        figure img { 
+          width: 100%; /* Scale down */
+        }
+
+        figure:hover {
+            -webkit-transform: rotate(720deg); -moz-transform: rotate(-360deg);
+        }
+
+        figure:focus {
+            outline: none;
+            -webkit-transform: scale(1.5); 
+            -moz-transform: scale(1.5);
+            -webkit-box-shadow: 10px 10px 2px #000; -moz-box-shadow: 10px 10px 2px #ff8300;
+            z-index: 9999;
+        }
+
+        @media only screen and (max-width: 480px) {
+            figure { 
+              height: 210px;
+              width: 210px; 
+              float: left; 
+              -webkit-transition: all 0.7s ease; 
+              -moz-transition: all 1s ease;
+              position: relative;
+            }
+
+            figure:focus {
+                outline: none;
+                -webkit-transform: scale(1.5); 
+                -moz-transform: scale(1.5);
+                -webkit-box-shadow: 10px 10px 2px #000; -moz-box-shadow: 10px 10px 2px #ff8300;
+                z-index: 9999;
+            }
+        }

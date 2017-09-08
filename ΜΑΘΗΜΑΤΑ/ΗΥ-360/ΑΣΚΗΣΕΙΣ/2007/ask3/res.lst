@@ -1,0 +1,405 @@
+SQL> @q1
+
+FNAME                LNAME                                                      
+-------------------- --------------------                                       
+Firstname8           Lastname8                                                  
+Firstname15          Lastname15                                                 
+Firstname18          Lastname18                                                 
+Firstname28          Lastname28                                                 
+Firstname38          Lastname38                                                 
+Firstname48          Lastname48                                                 
+
+6 γραμμές επιλέχθηκαν.
+
+SQL> @q2
+
+   CNUMBER                                                                      
+----------                                                                      
+       360                                                                      
+       365                                                                      
+       370                                                                      
+       375                                                                      
+       395                                                                      
+       400                                                                      
+       520                                                                      
+       525                                                                      
+       530                                                                      
+       535                                                                      
+       715                                                                      
+
+   CNUMBER                                                                      
+----------                                                                      
+       720                                                                      
+       780                                                                      
+       785                                                                      
+       790                                                                      
+       795                                                                      
+
+16 γραμμές επιλέχθηκαν.
+
+SQL> @q3
+
+FNAME                LNAME                CNAME                                 
+-------------------- -------------------- --------------------                  
+Firstname1           Lastname1            Coursename1                           
+Firstname1           Lastname1            Coursename2                           
+Firstname10          Papadopoulos         Coursename19                          
+Firstname10          Papadopoulos         Coursename20                          
+Firstname11          Lastname11           Coursename21                          
+Firstname11          Lastname11           Coursename22                          
+Firstname12          Lastname12           Coursename23                          
+Firstname12          Lastname12           Coursename24                          
+Firstname13          Lastname13           Coursename25                          
+Firstname13          Lastname13           Coursename26                          
+Firstname14          Lastname14           Coursename27                          
+
+FNAME                LNAME                CNAME                                 
+-------------------- -------------------- --------------------                  
+Firstname14          Lastname14           Coursename28                          
+Firstname15          Lastname15           Coursename29                          
+Firstname15          Lastname15           Coursename30                          
+Firstname15          Lastname15           Coursename9                           
+Firstname16          Lastname16           Coursename31                          
+Firstname16          Lastname16           Coursename32                          
+Firstname17          Lastname17           Coursename33                          
+Firstname17          Lastname17           Coursename34                          
+Firstname18          Lastname18           Coursename35                          
+Firstname18          Lastname18           Coursename36                          
+Firstname19          Lastname19           Coursename37                          
+
+FNAME                LNAME                CNAME                                 
+-------------------- -------------------- --------------------                  
+Firstname19          Lastname19           Coursename38                          
+Firstname2           Lastname2            Coursename3                           
+Firstname2           Lastname2            Coursename4                           
+Firstname20          Lastname20           Coursename10                          
+Firstname20          Lastname20           Coursename39                          
+Firstname20          Lastname20           Coursename40                          
+Firstname21          Lastname21           Coursename41                          
+Firstname21          Lastname21           Coursename42                          
+Firstname22          Lastname22           Coursename43                          
+Firstname22          Lastname22           Coursename44                          
+Firstname23          Lastname23           Coursename45                          
+
+FNAME                LNAME                CNAME                                 
+-------------------- -------------------- --------------------                  
+Firstname23          Lastname23           Coursename46                          
+Firstname24          Lastname24           Coursename47                          
+Firstname24          Lastname24           Coursename48                          
+Firstname25          Lastname25           Coursename49                          
+Firstname25          Lastname25           Coursename50                          
+Firstname26          Lastname26           Coursename51                          
+Firstname26          Lastname26           Coursename52                          
+Firstname27          Lastname27           Coursename53                          
+Firstname27          Lastname27           Coursename54                          
+Firstname28          Lastname28           Coursename55                          
+Firstname28          Lastname28           Coursename56                          
+
+FNAME                LNAME                CNAME                                 
+-------------------- -------------------- --------------------                  
+Firstname29          Lastname29           Coursename57                          
+Firstname29          Lastname29           Coursename58                          
+Firstname3           Lastname3            Coursename5                           
+Firstname3           Lastname3            Coursename6                           
+Firstname30          Lastname30           Coursename59                          
+Firstname30          Lastname30           Coursename60                          
+Firstname31          Lastname31           Coursename61                          
+Firstname31          Lastname31           Coursename62                          
+Firstname32          Lastname32           Coursename63                          
+Firstname32          Lastname32           Coursename64                          
+Firstname33          Lastname33           Coursename65                          
+
+FNAME                LNAME                CNAME                                 
+-------------------- -------------------- --------------------                  
+Firstname33          Lastname33           Coursename66                          
+Firstname34          Lastname34           Coursename67                          
+Firstname34          Lastname34           Coursename68                          
+Firstname34          Lastname34           Coursename69                          
+Firstname35          Lastname35           Coursename70                          
+Firstname36          Lastname36           Coursename71                          
+Firstname36          Lastname36           Coursename72                          
+Firstname37          Lastname37           Coursename73                          
+Firstname37          Lastname37           Coursename74                          
+Firstname38          Lastname38           Coursename75                          
+Firstname38          Lastname38           Coursename76                          
+
+FNAME                LNAME                CNAME                                 
+-------------------- -------------------- --------------------                  
+Firstname39          Lastname39           Coursename77                          
+Firstname39          Lastname39           Coursename78                          
+Firstname39          Lastname39           Coursename79                          
+Firstname4           Lastname4            Coursename7                           
+Firstname4           Lastname4            Coursename8                           
+Firstname40          Lastname40           Coursename80                          
+Firstname41          Lastname41           Coursename81                          
+Firstname41          Lastname41           Coursename82                          
+Firstname42          Papadopoulos         Coursename83                          
+Firstname42          Papadopoulos         Coursename84                          
+Firstname43          Lastname43           Coursename85                          
+
+FNAME                LNAME                CNAME                                 
+-------------------- -------------------- --------------------                  
+Firstname43          Lastname43           Coursename86                          
+Firstname44          Lastname44           Coursename87                          
+Firstname44          Lastname44           Coursename88                          
+Firstname44          Lastname44           Coursename89                          
+Firstname45          Lastname45           Coursename90                          
+Firstname46          Lastname46           Coursename91                          
+Firstname46          Lastname46           Coursename92                          
+Firstname47          Lastname47           Coursename93                          
+Firstname47          Lastname47           Coursename94                          
+Firstname48          Lastname48           Coursename95                          
+Firstname48          Lastname48           Coursename96                          
+
+FNAME                LNAME                CNAME                                 
+-------------------- -------------------- --------------------                  
+Firstname49          Lastname49           Coursename97                          
+Firstname49          Lastname49           Coursename98                          
+Firstname49          Lastname49           Coursename99                          
+Firstname5           Lastname5                                                  
+Firstname50          Lastname50           Coursename100                         
+Firstname6           Lastname6            Coursename11                          
+Firstname6           Lastname6            Coursename12                          
+Firstname7           Lastname7            Coursename13                          
+Firstname7           Lastname7            Coursename14                          
+Firstname8           Lastname8            Coursename15                          
+Firstname8           Lastname8            Coursename16                          
+
+FNAME                LNAME                CNAME                                 
+-------------------- -------------------- --------------------                  
+Firstname9           Lastname9            Coursename17                          
+Firstname9           Lastname9            Coursename18                          
+
+101 γραμμές επιλέχθηκαν.
+
+SQL> @q4
+
+FNAME                LNAME                                                      
+-------------------- --------------------                                       
+Firstname1           Lastname1                                                  
+Firstname10          Lastname10                                                 
+Firstname11          Lastname11                                                 
+Firstname12          Papadopoulos                                               
+Firstname13          Lastname13                                                 
+Firstname14          Lastname14                                                 
+Firstname15          Lastname15                                                 
+Firstname16          Lastname16                                                 
+Firstname17          Lastname17                                                 
+Firstname18          Lastname18                                                 
+Firstname19          Lastname19                                                 
+
+FNAME                LNAME                                                      
+-------------------- --------------------                                       
+Firstname2           Lastname2                                                  
+Firstname20          Lastname20                                                 
+Firstname21          Lastname21                                                 
+Firstname22          Lastname22                                                 
+Firstname23          Lastname23                                                 
+Firstname24          Lastname24                                                 
+Firstname25          Lastname25                                                 
+Firstname26          Lastname26                                                 
+Firstname27          Lastname27                                                 
+Firstname28          Lastname28                                                 
+Firstname29          Lastname29                                                 
+
+FNAME                LNAME                                                      
+-------------------- --------------------                                       
+Firstname3           Lastname3                                                  
+Firstname30          Lastname30                                                 
+Firstname31          Lastname31                                                 
+Firstname32          Lastname32                                                 
+Firstname33          Lastname33                                                 
+Firstname34          Lastname34                                                 
+Firstname35          Lastname35                                                 
+Firstname36          Lastname36                                                 
+Firstname37          Lastname37                                                 
+Firstname38          Lastname38                                                 
+Firstname39          Lastname39                                                 
+
+FNAME                LNAME                                                      
+-------------------- --------------------                                       
+Firstname4           Lastname4                                                  
+Firstname40          Lastname40                                                 
+Firstname41          Lastname41                                                 
+Firstname42          Lastname42                                                 
+Firstname43          Lastname43                                                 
+Firstname44          Papadopoulos                                               
+Firstname45          Lastname45                                                 
+Firstname46          Lastname46                                                 
+Firstname47          Lastname47                                                 
+Firstname5           Lastname5                                                  
+Firstname52          Lastname52                                                 
+
+FNAME                LNAME                                                      
+-------------------- --------------------                                       
+Firstname53          Lastname53                                                 
+Firstname54          Lastname54                                                 
+Firstname55          Lastname55                                                 
+Firstname56          Lastname56                                                 
+Firstname57          Lastname57                                                 
+Firstname58          Lastname58                                                 
+Firstname59          Lastname59                                                 
+Firstname6           Lastname6                                                  
+Firstname60          Lastname60                                                 
+Firstname61          Lastname61                                                 
+Firstname62          Lastname62                                                 
+
+FNAME                LNAME                                                      
+-------------------- --------------------                                       
+Firstname63          Lastname63                                                 
+Firstname64          Lastname64                                                 
+Firstname65          Lastname65                                                 
+Firstname66          Lastname66                                                 
+Firstname67          Lastname67                                                 
+Firstname68          Lastname68                                                 
+Firstname69          Lastname69                                                 
+Firstname7           Lastname7                                                  
+Firstname70          Lastname70                                                 
+Firstname71          Lastname71                                                 
+Firstname72          Lastname72                                                 
+
+FNAME                LNAME                                                      
+-------------------- --------------------                                       
+Firstname73          Lastname73                                                 
+Firstname74          Lastname74                                                 
+Firstname75          Lastname75                                                 
+Firstname76          Lastname76                                                 
+Firstname77          Lastname77                                                 
+Firstname78          Lastname78                                                 
+Firstname79          Lastname79                                                 
+Firstname8           Lastname8                                                  
+Firstname80          Lastname80                                                 
+Firstname81          Lastname81                                                 
+Firstname82          Lastname82                                                 
+
+FNAME                LNAME                                                      
+-------------------- --------------------                                       
+Firstname83          Lastname83                                                 
+Firstname84          Lastname84                                                 
+Firstname85          Lastname85                                                 
+Firstname86          Lastname86                                                 
+Firstname87          Lastname87                                                 
+Firstname88          Lastname88                                                 
+Firstname89          Lastname89                                                 
+Firstname9           Lastname9                                                  
+Firstname90          Lastname90                                                 
+Firstname91          Lastname91                                                 
+Firstname96          Papadopoulos                                               
+
+FNAME                LNAME                                                      
+-------------------- --------------------                                       
+Firstname97          Lastname97                                                 
+
+89 γραμμές επιλέχθηκαν.
+
+SQL> @q5
+
+       IID                                                                      
+----------                                                                      
+       131                                                                      
+       132                                                                      
+       133                                                                      
+       134                                                                      
+       135                                                                      
+       136                                                                      
+       137                                                                      
+       138                                                                      
+       139                                                                      
+       140                                                                      
+
+10 γραμμές επιλέχθηκαν.
+
+SQL> @q6
+
+       SID                                                                      
+----------                                                                      
+      1010                                                                      
+      1042                                                                      
+      1043                                                                      
+      1044                                                                      
+      1045                                                                      
+      1046                                                                      
+      1073                                                                      
+      1074                                                                      
+      1075                                                                      
+      1076                                                                      
+      1083                                                                      
+
+       SID                                                                      
+----------                                                                      
+      1084                                                                      
+      1085                                                                      
+      1086                                                                      
+      1093                                                                      
+      1094                                                                      
+      1095                                                                      
+      1096                                                                      
+
+18 γραμμές επιλέχθηκαν.
+
+SQL> @q7
+
+FNAME                LNAME                                                      
+-------------------- --------------------                                       
+Firstname10          Papadopoulos                                               
+Firstname15          Lastname15                                                 
+Firstname20          Lastname20                                                 
+Firstname25          Lastname25                                                 
+Firstname30          Lastname30                                                 
+
+SQL> @q8
+
+FNAME                LNAME                                                      
+-------------------- --------------------                                       
+Firstname1           Lastname1                                                  
+Firstname10          Papadopoulos                                               
+Firstname11          Lastname11                                                 
+Firstname12          Lastname12                                                 
+Firstname13          Lastname13                                                 
+Firstname14          Lastname14                                                 
+Firstname16          Lastname16                                                 
+Firstname17          Lastname17                                                 
+Firstname18          Lastname18                                                 
+Firstname19          Lastname19                                                 
+Firstname2           Lastname2                                                  
+
+FNAME                LNAME                                                      
+-------------------- --------------------                                       
+Firstname21          Lastname21                                                 
+Firstname22          Lastname22                                                 
+Firstname23          Lastname23                                                 
+Firstname24          Lastname24                                                 
+Firstname25          Lastname25                                                 
+Firstname26          Lastname26                                                 
+Firstname27          Lastname27                                                 
+Firstname28          Lastname28                                                 
+Firstname29          Lastname29                                                 
+Firstname3           Lastname3                                                  
+Firstname30          Lastname30                                                 
+
+FNAME                LNAME                                                      
+-------------------- --------------------                                       
+Firstname31          Lastname31                                                 
+Firstname32          Lastname32                                                 
+Firstname33          Lastname33                                                 
+Firstname36          Lastname36                                                 
+Firstname37          Lastname37                                                 
+Firstname38          Lastname38                                                 
+Firstname4           Lastname4                                                  
+Firstname41          Lastname41                                                 
+Firstname42          Papadopoulos                                               
+Firstname43          Lastname43                                                 
+Firstname46          Lastname46                                                 
+
+FNAME                LNAME                                                      
+-------------------- --------------------                                       
+Firstname47          Lastname47                                                 
+Firstname48          Lastname48                                                 
+Firstname6           Lastname6                                                  
+Firstname7           Lastname7                                                  
+Firstname8           Lastname8                                                  
+Firstname9           Lastname9                                                  
+
+39 γραμμές επιλέχθηκαν.
+
+SQL> spool off

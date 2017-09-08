@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="css/tiv_styles.css">
+	<script type="text/javascript" src="js/tiv.js"></script>
+	<script type="text/javascript" src="js/exif.js"></script>
+	<script async defer src="https://maps.googleapis.com/maps/api/js"></script>
+</head>
+
+<body background="sierrafhdhb.jpg">
+
+	<header>
+		<title>TIV</title>
+		<meta charset="UTF-8">
+		<h1 style="text-align:center; margin-bottom: 5%;">Titled Image Viewer</h1>
+	</header>
+
+	<div id="allimages">
+
+
+	</div>
+
+	<div id="maps">
+
+
+	</div>
+
+	<div id="bigimages" >
+
+
+	</div>
+
+	<div id="info">
+
+
+	</div>
+
+	<form name="uploadForm">
+		<p>
+			<input id="images" type="file"
+			webkitdirectory mozdirectory directory name="myFiles"
+			onchange="exec();" multiple/>
+			<span id="list"></span>
+		</form>
+
+		<footer>
+			<hr>
+			<p style="text-align:center; color: white;">
+				<small> Copyrights by Ioannis Tsiakkas <br />1995 - 2016</small></p>
+			</footer>
+
+		</body>
+		</html>

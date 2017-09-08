@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="css/tiv_styles.css">
+	<script type="text/javascript" src="js/tiv.js"></script>
+</head>
+
+<body background="Vaporwave.png">
+
+	<header></header>
+
+	<form class="first">
+
+		<div class="imgcontainer">
+			<img src="Avatar.png" alt="Avatar" class="avatar">
+		</div>
+
+		<div class="container">
+			<label><b>Username</b></label>
+			<input type="username" placeholder="Enter Username" name="uname" required>
+
+			<label><b>Email</b></label>
+			<input type="email" placeholder="Enter Email" name="email" required>
+
+			<label><b>Password</b></label>
+			<input type="password" placeholder="Enter Password" name="psw" required>
+
+			<label><b>Confirm Password</b></label>
+			<input type="password2" placeholder="Retype Password" name="psw2" required>
+
+			<label><b>Name</b></label>
+			<input type="text" placeholder="Enter Name" name="name" required>
+
+			<label><b>Surname</b></label>
+			<input type="text" placeholder="Enter Surname" name="sname" required>
+
+			<label><b>Birthday</b></label>
+			<input type="text" placeholder="Enter Birthdate" name="bday" required>
+
+			<button type="submit">Sing Up</button>
+		</div>
+		
+	</form>
+
+	<div class="container"></div>
+	<div class="container"></div>
+	<div class="container"></div>
+	<div class="container"></div>
+	<div class="container"></div>
+	<div class="container"></div>
+	<div class="container"></div>
+	<div class="container"></div>
+
+	<form class="second">
+
+		<div class="container">
+
+			<label><b><br><br>Gender<br></b></label>
+			<input type="radio" name="gender" value="male" required> Male<br>
+			<input type="radio" name="gender" value="female" required> Female<br>
+			<input type="radio" name="gender" value="other" required> Other<br>
+
+			<label><b><br>Country<br></b></label>
+			<select>
+				<option value="Greece" title="Greece">Greece</option>
+				<option value="Belgium" title="Belgium">Belgium</option>
+				<option value="Brazil" title="Brazil">Brazil</option>
+				<option value="Chile" title="Chile">Chile</option>
+				<option value="China" title="China">China</option>
+				<option value="Cyprus" title="Cyprus">Cyprus</option>
+				<option value="Denmark" title="Denmark">Denmark</option>
+				<option value="Finland" title="Finland">Finland</option>
+				<option value="France" title="France">France</option>
+				<option value="Germany" title="Germany">Germany</option>
+				<option value="India" title="India">India</option>
+				<option value="Italy" title="Italy">Italy</option>
+				<option value="Jamaica" title="Jamaica">Jamaica</option>
+				<option value="Japan" title="Japan">Japan</option>
+			</select>
+
+			<label><b><br><br>City<br></b></label>
+			<textarea minlength="2" maxlength="50" required></textarea>
+
+			<label><b><br><br>More info<br></b></label>
+			<textarea maxlength="500"></textarea>
+
+			<label><b><br><br>Upload a profile picture</b></label>
+			<div name="uploadForm">
+				<p>
+					<input id="images" type="file"
+					webkitdirectory mozdirectory directory name="myFiles"
+					onchange="exec();" multiple/>
+					<span id="list"></span>
+				</div>
+
+			</div>
+		</form>
+
+		<footer>
+			<p style="text-align:center; color: white;">
+				<small> Copyrights by Ioannis Tsiakkas <br />1995 - 2016</small>
+			</p>
+		</footer>
+
+	</body>
+	</html>
