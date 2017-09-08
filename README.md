@@ -57,13 +57,5 @@
 
 #### ΠΡΟΓΡΑΜΜΑΤΑ
 
-### ΧΕΙΜΕΡΙΝΟ
-
-<object data="https://github.com/keybraker/Computer-Science-Department-Wiki/blob/master/ΠΡΟΓΡΑΜΜΑΤΑ/WROLOGIO_PROGRAMMA_XEIMERINOY_E3AMHNOY_2017-18_ekdosh_8-9-2017.pdf" type="application/pdf" width="700px" height="700px">
-    <embed src="https://github.com/keybraker/Computer-Science-Department-Wiki/blob/master/ΠΡΟΓΡΑΜΜΑΤΑ/WROLOGIO_PROGRAMMA_XEIMERINOY_E3AMHNOY_2017-18_ekdosh_8-9-2017.pdf">
-        This browser does not support PDFs. Please download the PDF to view it: <a href="https://github.com/keybraker/Computer-Science-Department-Wiki/blob/master/ΠΡΟΓΡΑΜΜΑΤΑ/WROLOGIO_PROGRAMMA_XEIMERINOY_E3AMHNOY_2017-18_ekdosh_8-9-2017.pdf">Download PDF</a>.</p>
-    </embed>
-</object>
-
-### ΕΑΡΙΝΟ
-[embed]https://github.com/keybraker/Computer-Science-Department-Wiki/blob/master/ΠΡΟΓΡΑΜΜΑΤΑ/Didaskalies_propt._kai_metapt.mathimatwn_Tmhma_Episthmhs_Ypologistwn_akad.etos_2017-18.pdf[/embed]
+### [ΧΕΙΜΕΡΙΝΟ](https://github.com/keybraker/Computer-Science-Department-Wiki/blob/master/README.md)
+### [ΕΑΡΙΝΟ](https://github.com/keybraker/Computer-Science-Department-Wiki/blob/master/ΠΡΟΓΡΑΜΜΑΤΑ/Didaskalies_propt._kai_metapt.mathimatwn_Tmhma_Episthmhs_Ypologistwn_akad.etos_2017-18.pdf)
