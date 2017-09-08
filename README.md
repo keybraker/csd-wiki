@@ -58,7 +58,8 @@
 #### ΠΡΟΓΡΑΜΜΑΤΑ
 
 ### ΧΕΙΜΕΡΙΝΟ
-![alt text](https://github.com/keybraker/Computer-Science-Department-Wiki/blob/master/ΠΡΟΓΡΑΜΜΑΤΑ/WROLOGIO PROGRAMMA XEIMERINOY E3AMHNOY 2017-18_ekdosh_8-9-2017.pdf)
+![alt text](https://github.com/keybraker/Computer-Science-Department-Wiki/blob/master/ΠΡΟΓΡΑΜΜΑΤΑ/WROLOGIO%20PROGRAMMA XEIMERINOY%20E3AMHNOY%202017-18_ekdosh_8-9-2017.pdf)
 
 ### ΕΑΡΙΝΟ
-![alt text](https://github.com/keybraker/Computer-Science-Department-Wiki/blob/master/ΠΡΟΓΡΑΜΜΑΤΑ/Didaskalies propt. kai metapt. mathimatwn_Tmhma Episthmhs Ypologistwn_akad. etos 2017-18.pdf)
+![alt text](https://github.com/keybraker/Computer-Science-Department-Wiki/blob/master/ΠΡΟΓΡΑΜΜΑΤΑ/Didaskalies%20propt.%20kai metapt.
+mathimatwn_Tmhma%20Episthmhs%20Ypologistwn_akad.%20etos%202017-18.pdf)
