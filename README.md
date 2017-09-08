@@ -55,4 +55,10 @@
 3. [(ΗΥ-359) Διαδικτυακός Προγραμματισμός](https://github.com/keybraker/Computer-Science-Department-Wiki/blob/master/ΜΑΘΗΜΑΤΑ/ΗΥ-359/(ΗΥ-359).md)
 4. [(HY-364) Αλληλεπίδραση Ανθρώπου-Υπολογιστή ~ παλιό (HY-464)](https://github.com/keybraker/Computer-Science-Department-Wiki/blob/master/ΜΑΘΗΜΑΤΑ/ΗΥ-364/(ΗΥ-364).md)
 
-#### SEMESTERS
+#### ΠΡΟΓΡΑΜΜΑΤΑ
+
+### ΧΕΙΜΕΡΙΝΟ
+![alt text](https://github.com/keybraker/Computer-Science-Department-Wiki/blob/master/ΠΡΟΓΡΑΜΜΑΤΑ/WROLOGIO PROGRAMMA XEIMERINOY E3AMHNOY 2017-18_ekdosh_8-9-2017.pdf)
+
+### ΕΑΡΙΝΟ
+![alt text](https://github.com/keybraker/Computer-Science-Department-Wiki/blob/master/ΠΡΟΓΡΑΜΜΑΤΑ/Didaskalies propt. kai metapt. mathimatwn_Tmhma Episthmhs Ypologistwn_akad. etos 2017-18.pdf)
