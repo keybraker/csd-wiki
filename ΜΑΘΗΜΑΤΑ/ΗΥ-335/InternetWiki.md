@@ -13,8 +13,8 @@
 
 # Services of the internet 
 1. _[RTT: Round Trip Time](https://en.wikipedia.org/wiki/Round-trip_delay_time)_
-2. _[DHT: Distributed hash table](https://en.wikipedia.org/wiki/Distributed_hash_table)_
-3. _[MSS: Maximum Segment Size](https://en.wikipedia.org/wiki/Maximum_segment_size)_
+2. _[MSS: Maximum Segment Size](https://en.wikipedia.org/wiki/Maximum_segment_size)_
+3. _[DHT: Distributed hash table](https://en.wikipedia.org/wiki/Distributed_hash_table)_
 4. _[]()_
 5. _[]()_
 6. _[]()_
