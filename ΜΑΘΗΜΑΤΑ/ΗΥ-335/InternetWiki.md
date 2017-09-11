@@ -11,8 +11,9 @@
 10. _[Go-Back-N](https://en.wikipedia.org/wiki/Go-Back-N_ARQ)_
 11. _[SR: Selective Repeat](https://en.wikipedia.org/wiki/Selective_Repeat_ARQ)_
 12. _[DHCP: Dynamic Host Configuration Protocol [Plug-and-Play Protocol]](https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol)_
-13. _[]()_
-14. _[]()_
+13. _[IPv4: Internet Protocol Version 4](https://en.wikipedia.org/wiki/IPv4)_
+14. _[IPv6: Internet Protocol Version 6](https://en.wikipedia.org/wiki/IPv6)_
+15. _[]()_
 
 # Services of the internet 
 1. _[RTT: Round Trip Time](https://en.wikipedia.org/wiki/Round-trip_delay_time)_
