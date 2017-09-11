@@ -8,8 +8,11 @@
 7. _[BitTorrent: A P2P Protocol ](https://en.wikipedia.org/wiki/BitTorrent)_
 8. _[UDP: User Datagram Protocol](https://en.wikipedia.org/wiki/User_Datagram_Protocol)_
 9. _[TCP: Transmition Control Protocol](https://en.wikipedia.org/wiki/Transmission_Control_Protocol)_
-10. _[]()_
-11. _[]()_
+10. _[Go-Back-N](https://en.wikipedia.org/wiki/Go-Back-N_ARQ)_
+11. _[DHCP: Dynamic Host Configuration Protocol [Plug-and-Play Protocol]](https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol)_
+12. _[]()_
+13. _[]()_
+14. _[]()_
 
 # Services of the internet 
 1. _[RTT: Round Trip Time](https://en.wikipedia.org/wiki/Round-trip_delay_time)_
