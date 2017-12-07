@@ -53,6 +53,7 @@
 1. [(ΗΥ-330) Εισαγωγή στη Θεωρία Τηλεπικοινωνιακών Συστημάτων](https://github.com/keybraker/Computer-Science-Department-Wiki/blob/master/ΜΑΘΗΜΑΤΑ/ΗΥ-330/(ΗΥ-330).md)
 2. [(ΗΥ-352) Τεχνολογία Λογισμικού](https://github.com/keybraker/Computer-Science-Department-Wiki/blob/master/ΜΑΘΗΜΑΤΑ/ΗΥ-352/(ΗΥ-352).md)
 3. [(ΗΥ-359) Διαδικτυακός Προγραμματισμός](https://github.com/keybraker/Computer-Science-Department-Wiki/blob/master/ΜΑΘΗΜΑΤΑ/ΗΥ-359/(ΗΥ-359).md)
+4. [(HY-454) Ανάπτυξη Έξυπνων Διεπαφών και Παιχνιδιών](https://github.com/keybraker/Computer-Science-Department-Wiki/blob/master/ΜΑΘΗΜΑΤΑ/ΗΥ-454/(ΗΥ-454).md)
 4. [(HY-364) Αλληλεπίδραση Ανθρώπου-Υπολογιστή ~ παλιό (HY-464)](https://github.com/keybraker/Computer-Science-Department-Wiki/blob/master/ΜΑΘΗΜΑΤΑ/ΗΥ-364/(ΗΥ-364).md)
 5. [(HY-302) Διδακτική της Πληροφορικής](https://github.com/keybraker/Computer-Science-Department-Wiki/blob/master/ΜΑΘΗΜΑΤΑ/ΗΥ-302/(ΗΥ-302).md)
 
