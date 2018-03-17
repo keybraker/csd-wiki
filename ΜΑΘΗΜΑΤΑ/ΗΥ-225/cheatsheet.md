@@ -42,7 +42,7 @@ $31	=	$ra    	Return Address
 ```
 Type	    31-26(6)    25-21(5)  20-16(5)  15-11(5)  10-06(5)   05-00(6)
 R-Type      opcode        $rs       $rt	      $rd      shamt      funct
-I-Type	    opcode  	  $rs	  $rt	  imm
+I-Type	    opcode  	  $rs	    $rt	      imm
 J-Type	    opcode  	 target
 ```
 
