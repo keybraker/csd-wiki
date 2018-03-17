@@ -41,10 +41,24 @@ $31	=	$ra    	Return Address
 ## MIPS Instructions (used in hy225)
 
 ```
-add     $rd,  $rs,  $rt   
-addi    $rd,  $rs,  $rt   
-sub     $rd,  $rs,  $rt 
+add     $rd,  $rs,  $rt   // $rd = $rs + $rt 
+addi    $rd,  $rs,  Imm   // add Immediate (can take negative values, no need for subi) 
+sub     $rd,  $rs,  $rt   // $rd = $rs - $rt 
 
-slti    $rd,  $rs,  $rt 
+sll     $rd,  $rs,  Imm   // shift less logical (shift 2 means adding x2 zeros in the end
+                             resulting in multiplying the number by 2^2=4)
 
+beq     $rd,  $rs,  label // branch if equal
+bne     $rd,  $rs,  label // branch if not equal
+
+lw     $rd,  Imm($rx)     // $rd,  $rx,  Imm -> $rd = $rx[Imm]
+sw     $rs,  Imm($rx)     // $rs,  $rx,  Imm -> $rx[Imm] = $rs
+
+slt     $rd,  $rs,  $rt   // set less than 
+slti    $rd,  $rs,  Imm   // set less than Immediate   
+
+j       target            // jump target
+jr      $rs               // jump register
+jal     target            // jump and link (essential instruction of MIPS, core 
+                             of calling procedures and returning back to caller)
 ```
