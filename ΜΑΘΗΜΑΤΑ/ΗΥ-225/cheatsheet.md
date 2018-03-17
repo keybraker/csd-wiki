@@ -51,8 +51,8 @@ sll     $rd,  $rs,  Imm   // shift less logical (shift 2 means adding x2 zeros i
 beq     $rd,  $rs,  label // branch if equal
 bne     $rd,  $rs,  label // branch if not equal
 
-lw     $rd,  Imm($rx)     // $rd,  $rx,  Imm -> $rd = $rx[Imm]
-sw     $rs,  Imm($rx)     // $rs,  $rx,  Imm -> $rx[Imm] = $rs
+lw      $rd,  Imm($rx)    // $rd,  $rx,  Imm -> $rd = $rx[Imm]
+sw      $rs,  Imm($rx)    // $rs,  $rx,  Imm -> $rx[Imm] = $rs
 
 slt     $rd,  $rs,  $rt   // set less than 
 slti    $rd,  $rs,  Imm   // set less than Immediate   
@@ -61,4 +61,21 @@ j       target            // jump target
 jr      $rs               // jump register
 jal     target            // jump and link (essential instruction of MIPS, core 
                              of calling procedures and returning back to caller)
+```
+
+## MIPS code
+
+instructions starting with "." are directives to the compiler:
+```
+.asciiz declares that what follows, is an ASCII string
+```
+```
+.data   declares that what follows, is data and not commands
+```
+```
+.text   declares that what follows, are commands and not data
+```
+```
+.globl  declares that what follows, are labels that should
+            be stored in the global array
 ```
