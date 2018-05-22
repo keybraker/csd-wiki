@@ -109,4 +109,8 @@ instructions starting with "." are directives to the compiler:
 Addresses on MIPS, are **Byte Addressable**, which means that addresses
 are referring to **Bytes** in memory.
 
-
+Big
+Markdown | Less | Pretty
+--- | --- | ---
+*Still* | `renders` | **nicely**
+1 | 2 | 3
