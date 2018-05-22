@@ -109,8 +109,12 @@ instructions starting with "." are directives to the compiler:
 Addresses on MIPS, are **Byte Addressable**, which means that addresses
 are referring to **Bytes** in memory.
 
-Big
-Markdown | Less | Pretty
---- | --- | ---
-*Still* | `renders` | **nicely**
-1 | 2 | 3
+## Big-Endian και Little-Endian Machines
+
+Big-Endian και Little-Endian Machines have both MS -> LS but Big also saves strings in that manner whereas Little in the opposite direction.
+
+BIG | LITTLE 
+--- | --- 
+*k-a-t-e* | *e-t-a-k* 
+*v-e-n-i* | *i-n-e-v* 
+*s-\0- -*    | *- -\0-s* 
