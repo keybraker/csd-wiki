@@ -1,3 +1,11 @@
+## Procedure calls
+The **caller** function and the **callee** function are connected as one calls the other.<br>
+Who's responsibility is it to save variables before and after procedure calls ?<br>
+
+There are two types of variables:<br>
+**Temporary registers:** $t0-$t9 ($8-$15 και $24-$25), *it's the caller's responsibility to save the useful value before calling the new procedure ("callersaved")*<br>
+**Saved registers:** $s0 - $s7 ($16-$23), *it's the callee's responsibility to save the old value each of all the saved registers before it changes them ("callee-saved")*<br>
+
 # MIPS Cheat Sheet
 The essential knowledge for MIPS (hy225)
 
