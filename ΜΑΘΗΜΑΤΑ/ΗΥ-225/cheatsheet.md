@@ -118,3 +118,13 @@ BIG | LITTLE
 *k-a-t-e* | *e-t-a-k* 
 *v-e-n-i* | *i-n-e-v* 
 *s-\0- -*    | *- -\0-s* 
+
+## How do jump and branch instructions work ?
+
+Jump and Branch instructions are I-format and the basic execution is as follows:<br>
+**PC_new := (PC_br + 4) + 4 * ImmOffset (signed)**
+
+**PC_new:** *is the new address the proccessor will execute next*<br>
+**PC_br:** *is the address same as the address of the jump/branch instruction*<br>
+**ImmOffset:** *is the the standart 16 bits of the I-format*<br>
+
