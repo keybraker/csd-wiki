@@ -1,11 +1,3 @@
-## Procedure calls
-The **caller** function and the **callee** function are connected as one calls the other.<br>
-Who's responsibility is it to save variables before and after procedure calls ?<br>
-
-There are two types of variables:<br>
-**Temporary registers:** $t0-$t9 ($8-$15 και $24-$25), *it's the caller's responsibility to save the useful value before calling the new procedure ("callersaved")*<br>
-**Saved registers:** $s0 - $s7 ($16-$23), *it's the callee's responsibility to save the old value each of all the saved registers before it changes them ("callee-saved")*<br>
-
 # MIPS Cheat Sheet
 The essential knowledge for MIPS (hy225)
 
@@ -136,3 +128,12 @@ Jump and Branch instructions are I-format and the basic execution is as follows:
 **PC_br:** *is the address same as the address of the jump/branch instruction*<br>
 **ImmOffset:** *is the the standart 16 bits of the I-format*<br>
 
+## Procedure calls
+The **caller** function and the **callee** function are connected as one calls the other.<br>
+Who's responsibility is it to save variables before and after procedure calls ?<br>
+
+There are two types of variables:<br>
+**Temporary registers:** $t0-$t9 ($8-$15 και $24-$25), *it's the caller's responsibility to save the useful value before calling the new procedure ("callersaved")*<br>
+**Saved registers:** $s0 - $s7 ($16-$23), *it's the callee's responsibility to save the old value each of all the saved registers before it changes them ("callee-saved")*<br>
+
+## Register File (RF) Πολύπορτο Αρχείο Καταχωρητών
