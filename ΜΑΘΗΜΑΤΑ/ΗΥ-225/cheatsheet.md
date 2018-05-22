@@ -129,6 +129,7 @@ Jump and Branch instructions are I-format and the basic execution is as follows:
 **ImmOffset:** *is the the standart 16 bits of the I-format*<br>
 
 ## Procedure calls
+
 The **caller** function and the **callee** function are connected as one calls the other.<br>
 Who's responsibility is it to save variables before and after procedure calls ?<br>
 
