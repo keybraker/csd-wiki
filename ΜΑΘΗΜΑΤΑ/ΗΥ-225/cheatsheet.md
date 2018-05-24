@@ -155,4 +155,5 @@ There are 5 states of MIPS's pipeline:
 5. **WB:** **W**rite **B**ack
 
 Although the flow is going from left to right, there are two exceptions:
-**Write Back** which writes data back to the Register File (RF) mid flow and **next PC calculation** which is decided between the increased PC or the branch address from the Data Memory stage.
+1. **Write Back** which writes data back to the Register File (RF) mid flow
+2. **Next PC calculation** which is decided between the increased PC or the branch address from the Data Memory stage.
