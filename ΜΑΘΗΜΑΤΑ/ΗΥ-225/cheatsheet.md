@@ -111,7 +111,7 @@ are referring to **Bytes** in memory.
 
 ## Big-Endian και Little-Endian Machines
 
-Big-Endian και Little-Endian Machines have both MS -> LS but Big also saves strings in that manner whereas Little in the opposite direction.
+Big-Endian and Little-Endian Machines have both (left) MS -> LS (right), they also store number in this fashion (left to right) but Big saves strings in that manner, whereas Little in the opposite direction.
 
 BIG | LITTLE 
 --- | --- 
