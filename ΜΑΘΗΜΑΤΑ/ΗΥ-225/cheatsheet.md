@@ -116,12 +116,12 @@ Big-Endian and Little-Endian Machines have both (left) MS -> LS (right), they al
 ### This is the byte order of Big and Little endian
 word | BIG | LITTLE 
 --- | --- | --- 
-12 | *0-1-2-3* | *3-2-1-0*  
-16 | *4-5-6-7* | *7-6-5-4* 
-20 | *8-9-10-11* | *11-10-9-8* 
-24 | *k-a-t-e* | *e-t-a-k* 
-28 | *v-e-n-i* | *i-n-e-v* 
-32 | *s-\0- -*    | *- -\0-s* 
+0 | *0-1-2-3* | *3-2-1-0*  
+4 | *4-5-6-7* | *7-6-5-4* 
+8 | *8-9-10-11* | *11-10-9-8* 
+12 | *k-a-t-e* | *e-t-a-k* 
+16 | *v-e-n-i* | *i-n-e-v* 
+20 | *s-\0- -*    | *- -\0-s* 
 
 ## How do jump and branch instructions work ?
 
