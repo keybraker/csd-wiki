@@ -145,3 +145,11 @@ There are two types of variables:<br>
 Although called a "file", a register file is not related to disk files. 
 A register file is a small set of high-speed storage cells inside the CPU.
 With a 32 registers of 32 bit size each.
+
+# Pipeline
+⋅⋅* There are 5 states of MIPS's pipeline:
+1. **IF:** **I**nstruction **F**etch
+2. **ID:** **I**nstruction **D**ecode
+3. **EX:** **Ex**ecute or address calculation
+4. **MEM:** Data **Mem**ory
+5. **WB:** **W**rite **B**ack
