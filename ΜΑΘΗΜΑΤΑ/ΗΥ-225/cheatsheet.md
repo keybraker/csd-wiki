@@ -142,3 +142,6 @@ There are two types of variables:<br>
 **Saved registers:** $s0 - $s7 ($16-$23), *it's the callee's responsibility to save the old value each of all the saved registers before it changes them ("callee-saved")*<br>
 
 ## Register File (RF) Πολύπορτο Αρχείο Καταχωρητών
+Although called a "file", a register file is not related to disk files. 
+A register file is a small set of high-speed storage cells inside the CPU.
+With a 32 registers of 32 bit size each.
