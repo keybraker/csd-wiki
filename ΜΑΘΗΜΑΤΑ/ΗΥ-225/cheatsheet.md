@@ -147,9 +147,12 @@ A register file is a small set of high-speed storage cells inside the CPU.
 With a 32 registers of 32 bit size each.
 
 # Pipeline
-   There are 5 states of MIPS's pipeline:
+There are 5 states of MIPS's pipeline:
 1. **IF:** **I**nstruction **F**etch
 2. **ID:** **I**nstruction **D**ecode
 3. **EX:** **Ex**ecute or address calculation
 4. **MEM:** Data **Mem**ory
 5. **WB:** **W**rite **B**ack
+
+Although the flow is going from left to right, there are two exceptions:
+**Write Back** which writes data back to the Register File (RF) mid flow and **next PC calculation** which is decided between the increased PC or the branch address from the Data Memory stage.
