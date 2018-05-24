@@ -157,3 +157,10 @@ There are 5 states of MIPS's pipeline:
 Although the flow is going from left to right, there are two exceptions:
 1. **Write Back** which writes data back to the Register File (RF) mid flow
 2. **Next PC calculation** which is decided between the increased PC or the branch address from the Data Memory stage.
+
+For a pipeline to be implemented in a processor architecture, state memories have to be added, so that every state of the five above, can work individually. 
+1. **IF/ID** 
+2. **ID/EX** 
+3. **EX/MEM** 
+4. **MEM/WB**
+These memories, work as checkpoints of the pipeline, for every single state to a percentile of the work, of one instruction.
