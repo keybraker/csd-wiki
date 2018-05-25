@@ -164,3 +164,7 @@ For a pipeline to be implemented in a processor architecture, state memories hav
 3. **EX/MEM** 
 4. **MEM/WB**
 These memories, work as checkpoints of the pipeline, for every single state to a percentile of the work, of one instruction.
+
+## Pipeline Hazards
+1. **Structural** hazard is the impotence of the hardware to support a certain combination of istructions.
+2. **Data** hazard is when the pipeline has to wait, a certain amount of cycles, because it's waiting for another instruction to finish.
