@@ -171,6 +171,6 @@ These memories, work as checkpoints of the pipeline, for every single state to a
 3. **Control** hazard is when the pipeline has to take a decision upon the outcome of an instructions whilst it is being executed.
 
 ## Dependencies
-1. **RAW: ** **R**ead **A**fter **W**rite *which is write and then read*.
-2. **WAW: ** **W**rite **A**fter **W**rite *which is write and then write*.
-3. **WAR: ** **W**rite **A**fter **R**ead *which is read and then write*.
+1. **RAW:** **R**ead **A**fter **W**rite *(or write and then read)*.
+2. **WAW:** **W**rite **A**fter **W**rite *(or write and then write)*.
+3. **WAR:** **W**rite **A**fter **R**ead *(or read and then write)*.
