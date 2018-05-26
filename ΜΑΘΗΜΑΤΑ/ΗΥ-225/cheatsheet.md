@@ -168,3 +168,9 @@ These memories, work as checkpoints of the pipeline, for every single state to a
 ## Pipeline Hazards
 1. **Structural** hazard is the impotence of the hardware to support a certain combination of istructions.
 2. **Data** hazard is when the pipeline has to wait, a certain amount of cycles, because it's waiting for another instruction to finish.
+3. **Control** hazard is when the pipeline has to take a decision upon the outcome of an instructions whilst it is being executed.
+
+## Dependencies
+1. **RAW** **R**ead **A**fter **W**rite.
+2. **WAW** **W**rite **A**fter **W**rite.
+3. **WAR** **W**rite **A**fter **R**ead.
