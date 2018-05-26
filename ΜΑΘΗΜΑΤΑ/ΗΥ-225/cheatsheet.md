@@ -170,16 +170,13 @@ These memories, work as checkpoints of the pipeline, for every single state to a
 2. **Data** hazard is when the pipeline has to wait, a certain amount of cycles, because it's waiting for another instruction to finish.
 3. **Control** hazard is when the pipeline has to take a decision upon the outcome of an instructions whilst it is being executed.
 
-## Dependencies
+## [Dependencies](https://en.wikipedia.org/wiki/Hazard_(computer_architecture)#Read_after_write_(RAW) "wiki examples")
 1. **RAW:** **R**ead **A**fter **W**rite *(or write and then read)*.<br>
-   **Example:**<br>
-   i1. R2 <- R1 + R3<br>
-   i2. R4 <- R2 + R3<br>
+   i1. **R2** <- R1 + R3<br>
+   i2. R4 <- **R2** + R3<br>
 2. **WAW:** **W**rite **A**fter **W**rite *(or write and then write)*.<br>
-   **Example:**<br>
-   i2. R2 <- R1 + R3<br>
-   i2. R2 <- R1 + R3<br>
+   i2. **R2** <- R1 + R3<br>
+   i2. **R2** <- R1 + R3<br>
 3. **WAR:** **W**rite **A**fter **R**ead *(or read and then write)*.<br>
-   **Example:**<br>
-   i1. R4 <- R1 + R5<br>
-   i2. R5 <- R1 + R2<br>
+   i1. R4 <- R1 + **R5**<br>
+   i2. **R5** <- R1 + R2<br>
