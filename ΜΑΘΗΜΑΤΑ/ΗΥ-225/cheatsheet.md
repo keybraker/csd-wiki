@@ -180,3 +180,10 @@ These memories, work as checkpoints of the pipeline, for every single state to a
 3. **WAR:** **W**rite **A**fter **R**ead *(or read and then write)*.<br>
    R4 <- R1 + **R5**<br>
    **R5** <- R1 + R2<br>
+
+1. **RAW:**<br>
+   *in this dependency you have to wait and there is no way to speed it up*
+2. **WAW:**<br>
+   *in this ~~dependency~~ you have to deactivate the first write in order to only keep the lader one*
+3. **WAR:**<br>
+   *in this ~~dependency~~ you have to keep a copy of the old value in order to give it to the one will come later*
