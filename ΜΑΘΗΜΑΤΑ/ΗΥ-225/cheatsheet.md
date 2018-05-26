@@ -172,11 +172,11 @@ These memories, work as checkpoints of the pipeline, for every single state to a
 
 ## [Dependencies](https://en.wikipedia.org/wiki/Hazard_(computer_architecture)#Read_after_write_(RAW) "wiki examples")
 1. **RAW:** **R**ead **A**fter **W**rite *(or write and then read)*.<br>
-   i1. **R2** <- R1 + R3<br>
-   i2. R4 <- **R2** + R3<br>
+   **R2** <- R1 + R3<br>
+   R4 <- **R2** + R3<br>
 2. **WAW:** **W**rite **A**fter **W**rite *(or write and then write)*.<br>
-   i2. **R2** <- R1 + R3<br>
-   i2. **R2** <- R1 + R3<br>
+   **R2** <- R1 + R3<br>
+   **R2** <- R1 + R3<br>
 3. **WAR:** **W**rite **A**fter **R**ead *(or read and then write)*.<br>
-   i1. R4 <- R1 + **R5**<br>
-   i2. **R5** <- R1 + R2<br>
+   R4 <- R1 + **R5**<br>
+   **R5** <- R1 + R2<br>
