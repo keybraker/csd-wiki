@@ -182,8 +182,8 @@ These memories, work as checkpoints of the pipeline, for every single state to a
    **R5** <- R1 + R2<br>
 
 1. **RAW:**<br>
-   *in this dependency you have to wait and there is no way to speed it up*
+   *in this **dependency you have to wait and there is no way to speed it up***
 2. **WAW:**<br>
-   *in this ~~dependency~~ you have to deactivate the first write in order to only keep the lader one*
+   *to solve this dependency you have to **deactivate the first write in order to only keep the lader one***
 3. **WAR:**<br>
-   *in this ~~dependency~~ you have to keep a copy of the old value in order to give it to the one will come later*
+   *to solve this dependency you have to **keep a copy of the old value in order to give it to the one will come later***
