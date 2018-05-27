@@ -184,6 +184,23 @@ These memories, work as checkpoints of the pipeline, for every single state to a
 1. **RAW:**<br>
    *in this **dependency you have to wait and there is no way to speed it up***
 2. **WAW:**<br>
-   *to solve this dependency you have to **deactivate the first write in order to only keep the lader one***
+   *to solve this dependency you have to **cancel the first write in order to only keep the lader one***
 3. **WAR:**<br>
    *to solve this dependency you have to **keep a copy of the old value in order to give it to the one will come later***
+
+## Pipeline Jumps and Branches
+Our pipeline will execute instructions although having fetched a branch or jump instruction. Given the probability of correctly executing the instruction on PC+4, although unaware if it has to get executed, saves us 2 clock cycles, while executing them wrongfully as the same effect as doing nothing at all (the only downside to not doing anything at all is the increase in power consumption).
+
+If the branch is true and we have to jump (something that will be determined on the third part of our pipeline after the ALU has given its output), our pipeline will cancel the last two instructions by making all the control bits to null (0) in order to skip everything they made (this is possible because the instruction or not on the store phase of the pipeline so they have not stored nor altered any register or memory values).
+
+## Pipeline cost per false prediction
+instruction | execution time (cc*)
+--- | --- 
+general | 1~
+load that is followed by dependent
+instruction | 2~
+failed branches | 1~
+successfull branches** | 3~
+
+* clock cycles
+** success means that our prefetched PC+4 instructions are wrongfully executed
