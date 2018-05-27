@@ -235,5 +235,15 @@ The problem here lands in the fact that you may have more than two diffrent CP i
 
 > CPIaverage = ( N*A* / N*instructions* ) * CPI*A* + ( N*B* / N*instructions* ) * CPI*B*
 
-And through simple mathematics we get:<br>
-**t*exec* = N*instructions* * CPI*average* * T*clock***
+And through simple mathematics we get: **t*exec* = N*instructions* * CPI*average* * T*clock***
+
+# Memory Hierarchy
+
+name | meaning 
+--- | --- 
+**SRAM** | **S**tatic **R**andom **A**ccess **M**emory 
+**DRAM** | **D**ynamic **R**andom **A**ccess **M**emory 
+**SDRAM** | **S**yncronous **D**ynamic **R**andom **A**ccess **M**emory 
+**DDRRAM** | **D**ouble **Data**ata **R**ATE  **R**andom **A**ccess **M**emory 
+
+*In todays market when you buy a DDRAM you buy a **S**yncronous **D**ynamic **D**ouble **Data**ata **R**ATE **R**andom **A**ccess* **M**emory *
