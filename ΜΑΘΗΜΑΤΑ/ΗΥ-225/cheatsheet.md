@@ -17,12 +17,12 @@ Name | Meaning | Postitive | Negative
 
 t*eff* = hit_ratio * t*hit* + miss_ratio * t*miss* = t*hit* + miss_ratio * t*miss_penalty*
 
->t*eff*: *effective access time*<br> 
->hit_ratio: *percentage of correct accesses*<br>
->t*hit*: *the time it takes for a hit to get the data*<br>
->miss_ratio: *percentage of incorrect accesses*<br>
->t*miss*: *the time it takes for a miss to get the data*<br>
->t*miss_penalty*: *tmiss - thit, the extra time it takes<br>
+>* **t*eff***: *effective access time*<br> 
+>* **hit_ratio**: *percentage of correct accesses*<br>
+>* **t*hit***: *the time it takes for a hit to get the data*<br>
+>* **miss_ratio**: *percentage of incorrect accesses*<br>
+>* **t*miss***: *the time it takes for a miss to get the data*<br>
+>* **t*miss_penalty***: *tmiss - thit, the extra time it takes<br>
 >to access the data after a miss (miss penalty)*<br>
 
 Cache level | Size | Speed
@@ -256,10 +256,10 @@ It basically stores branches that it believes will be seccessfull with a probabi
 
 t*exec* = N*instructions* * CPI*average* * T*clock*
 
->texec: time of execution<br> 
->Ninstructions: Number of instructions<br>
->CPIaverage: Clocks per instruction on average<br>
->Tclock: Time it takes for on clock cycle to finish<br>
+>* **t*exec***: time of execution<br> 
+>* **N*instructions***: Number of instructions<br>
+>* **CPI*average***: Clocks per instruction on average<br>
+>* **T*clock***: Time it takes for on clock cycle to finish<br>
 
 In the real world an architecture has more than instructions that may take more or less clocks to execute, lets take an example of an architecture with two sets of instructions A and B (which take diffrent ammounts of clocks to finish). 
 
