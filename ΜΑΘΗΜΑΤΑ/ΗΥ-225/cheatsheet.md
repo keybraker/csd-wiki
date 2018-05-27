@@ -199,7 +199,7 @@ instruction | execution<br>time (cc*)
 general | 1~
 load that is followed by<br>dependent instruction | 2~
 failed branches (1/3) | 1~
-successfull branches (2/3)** | 3~
+successfull branches** (2/3) | 3~
 jump*** | 2~
 ```
 *  clock cycles
@@ -208,3 +208,9 @@ jump*** | 2~
    Knowing that it is a jump withought the use of the ALU to determine it we can 
    know it one cycle prior to a successfull branch so one less cycle is lost
 ```
+
+## Pipeline Branch Target Buffer (BTB)
+Is a small memory (cache-like catalog) that keeps a registry of where the program flow will go to.
+Making branch predictions more accurate as, memory of previous jumps and branches are stored.
+It basically stores branches that it believes will be seccessfull with a probability of over 50%.
+(*This way of storing data has been refined after years of research to achieve 90-98% accuracy*)
