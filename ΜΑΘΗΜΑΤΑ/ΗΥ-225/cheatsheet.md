@@ -194,13 +194,17 @@ Our pipeline will execute instructions although having fetched a branch or jump 
 If the branch is true and we have to jump (something that will be determined on the third part of our pipeline after the ALU has given its output), our pipeline will cancel the last two instructions by making all the control bits to null (0) in order to skip everything they made (this is possible because the instruction or not on the store phase of the pipeline so they have not stored nor altered any register or memory values).
 
 ## Pipeline cost per false prediction
-instruction | execution time (cc*)
+instruction | execution<br>time (cc*)
 --- | --- 
 general | 1~
-load that is followed by<br> dependent instruction | 2~
+load that is followed by<br>dependent instruction | 2~
 failed branches | 1~
 successfull branches** | 3~
+jump*** | 2~
 ```
 * clock cycles
 ** success means that our prefetched PC+4 instructions are wrongfully executed
+** as jump instructions are basically true branches you will always lose one cycle.
+   Knowing that it is a jump withought the use of the ALU to determine it we can 
+   know it one cycle prior to a successfull branch so one less cycle is lost
 ```
