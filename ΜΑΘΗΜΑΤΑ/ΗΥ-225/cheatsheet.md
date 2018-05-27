@@ -198,11 +198,11 @@ instruction | execution<br>time (cc*)
 --- | --- 
 general | 1~
 load that is followed by<br>dependent instruction | 2~
-failed branches | 1~
-successfull branches** | 3~
+failed branches (1/3) | 1~
+successfull branches (2/3)** | 3~
 jump*** | 2~
 ```
-* clock cycles
+*  clock cycles
 ** success means that our prefetched PC+4 instructions are wrongfully executed
 ** as jump instructions are basically true branches you will always lose one cycle.
    Knowing that it is a jump withought the use of the ALU to determine it we can 
