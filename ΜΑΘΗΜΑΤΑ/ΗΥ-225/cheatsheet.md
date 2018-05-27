@@ -222,7 +222,7 @@ It basically stores branches that it believes will be seccessfull with a probabi
 
 t*exec* = N*instructions* * CPI*average* * T*clock*
 
->texec: time of execution 
->Ninstructions: Number of instructions
->CPIaverage: Clocks per instruction on average
->Tclock: Time it takes for on clock cycle to finish
+>texec: time of execution<br> 
+>Ninstructions: Number of instructions<br>
+>CPIaverage: Clocks per instruction on average<br>
+>Tclock: Time it takes for on clock cycle to finish<br>
