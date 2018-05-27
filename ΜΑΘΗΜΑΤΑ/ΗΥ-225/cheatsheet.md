@@ -128,7 +128,7 @@ word | BIG | LITTLE
 Jump and Branch instructions are I-format and the basic execution is as follows:<br>
 **PC_new := (PC_br + 4) + 4 * ImmOffset (signed)**
 
-**PC_new:** *is the new address the proccessor will execute next*<br>
+**PC_new:** *is the new address the processor will execute next*<br>
 **PC_br:** *is the address same as the address of the jump/branch instruction*<br>
 **ImmOffset:** *is the the standart 16 bits of the I-format*<br>
 
@@ -270,3 +270,5 @@ Cache level | Size | Speed
 *L1* | 16-64 KB | 2 ns
 *L2* | 256KB-2MB |3 ns
 *L3* | 2-16MB | 10 ns
+
+> Assebmly programmers do only know about the 32 registers not the caches, caches are processor controlled and not assembler controlled.
