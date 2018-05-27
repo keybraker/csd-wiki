@@ -277,6 +277,9 @@ Cache level | Size | Speed
 > Assebmly programmers do only know about the 32 registers not the caches,<br> caches are processor controlled and not assembler controlled.
 > A cache must always now the source of the data it has stored but also the data itself.
 
+A cache has two parts
+> * **Tag (Address)**
+> * **Data**
 
 
 
@@ -294,5 +297,5 @@ Cache level | Size | Speed
 
 ### *ΜΑΝΟΛΗΣ ΚΑΤΕΒΑΙΝΗΣ QUOTES*
 > *Σκάσε και μέτρα*<br>
-> *Των φρονήμων τα παιδιά, πριν πεινάσουν μαγειρεύουν*<br>
+> *των φρονίμων τα παιδιά πριν πεινάσουν μαγειρεύουν *<br>
 > *Μεγάλη μνήμη άρα και αργή*<br>
