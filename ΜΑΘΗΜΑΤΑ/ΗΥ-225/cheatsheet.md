@@ -212,5 +212,5 @@ jump*** | 2~
 ## Pipeline Branch Target Buffer (BTB)
 Is a small memory (cache-like catalog) that keeps a registry of where the program flow will go to.
 Making branch predictions more accurate as, memory of previous jumps and branches are stored.
-It basically stores branches that it believes will be seccessfull with a probability of over 50%.
-(*This way of storing data has been refined after years of research to achieve 90-98% accuracy*)
+It basically stores branches that it believes will be seccessfull with a probability of over 50%.<br>
+(*This way of storing data has been refined after years of research and now achieves 90-98% accuracy*)
