@@ -239,11 +239,11 @@ And through simple mathematics we get: **t*exec* = N*instructions* * CPI*average
 
 # Memory Hierarchy
 
-name | meaning 
---- | --- 
-**SRAM** | **S**tatic **R**andom **A**ccess **M**emory 
-**DRAM** | **D**ynamic **R**andom **A**ccess **M**emory 
-**SDRAM** | **S**yncronous **D**ynamic **R**andom **A**ccess **M**emory 
-**DDRRAM** | **D**ouble **Data**ata **R**ATE  **R**andom **A**ccess **M**emory 
+name | meaning | properties
+--- | --- | ---
+**SRAM** | **S**tatic **R**andom **A**ccess **M**emory | uses alot more energy<br>and costs more than DRAM(x6)<br>than DRAM but is alot faster (x100)
+**DRAM** | **D**ynamic **R**andom **A**ccess **M**emory | uses alot more energy<br>and costs more than DRAM(x6)<br>than DRAM but is alot faster (x100)
+**SDRAM** | **S**yncronous **D**ynamic **R**andom **A**ccess **M**emory | uses alot more energy<br>and costs more than DRAM(x6)<br>than DRAM but is alot faster (x100)
+**DDRRAM** | **D**ouble **D**ata **R**ATE  **R**andom **A**ccess **M**emory | uses alot more energy<br>and costs more than DRAM(x6)<br>than DRAM but is alot faster (x100)
 
-*In todays market when you buy a DDRAM you buy a **S**yncronous **D**ynamic **D**ouble **Data**ata **R**ATE **R**andom **A**ccess* **M**emory *
+*In todays market when you buy a DDRAM you buy a **S**yncronous **D**ynamic **D**ouble **D**ata **R**ATE **R**andom **A**ccess* **M**emory*
