@@ -224,7 +224,7 @@ t*exec* = N*instructions* * CPI*average* * T*clock*
 
 >texec: time of execution<br> 
 >Ninstructions: Number of instructions<br>
->CPIaverage: Clocks per instruction on average<br>wawwwwwww
+>CPIaverage: Clocks per instruction on average<br>
 >Tclock: Time it takes for on clock cycle to finish<br>
 
 There is a case, in which an architecture has two types of instructions, lets say A, and B which take diffrent ammounts of clocks to finish. This means that we have to re-evaluate the equation to this one:
