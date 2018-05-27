@@ -1,3 +1,37 @@
+# Memory Hierarchy
+
+Name | Meaning | Postitive | Negative
+--- | --- | --- | ---
+**SRAM** | **S**tatic **R**andom **A**ccess **M**emory | faster than DRAM | consumes more power and costs more
+**DRAM** | **D**ynamic **R**andom **A**ccess **M**emory |slower than SRAM | consumes less power and costs less
+**SDRAM** | **S**yncronous **D**ynamic **R**andom **A**ccess **M**emory | double the speed of DRAM | -
+**DDRRAM** | **D**ouble **D**ata **R**ate  **R**andom **A**ccess **M**emory | synchronized to a specific clock speed | -
+
+*In todays market when you buy a DDRAM you buy a **S**yncronous **D**ynamic **D**ouble **D**ata **R**ate **R**andom **A**ccess* **M**emory*
+
+## Memories have what we call locality which is split in to two categories:
+>* **Temporal**: *refers to the reuse of specific data, and/or resources, within a relatively small time duration* 
+>* **Special**: *refers to the use of data elements within relatively close storage locations*
+
+# Average Memory Access
+
+t*eff* = hit_ratio * t*hit* + miss_ratio * t*miss* = t*hit* + miss_ratio * t*miss_penalty*
+
+>t*eff*: *effective access time*<br> 
+>hit_ratio: *percentage of correct accesses*<br>
+>t*hit*: *the time it takes for a hit to get the data*<br>
+>miss_ratio: *percentage of incorrect accesses*<br>
+>t*miss*: *the time it takes for a miss to get the data*<br>
+>t*miss_penalty*: *tmiss - thit, the extra time it takes<br>
+>to access the data after a miss (miss penalty)*<br>
+
+Cache level | Size | Speed
+--- | --- | --- 
+*Registers* | 128 Bytes | 0.3 ns
+*L1* | 16-64 KB | 2 ns
+*L2* | 256KB-2MB |3 ns
+*L3* | 2-16MB | 10 ns
+
 # MIPS Cheat Sheet
 The essential knowledge for MIPS (hy225)
 
@@ -236,14 +270,3 @@ The problem here lands in the fact that you may have more than two diffrent CP i
 > CPIaverage = ( N*A* / N*instructions* ) * CPI*A* + ( N*B* / N*instructions* ) * CPI*B*
 
 And through simple mathematics we get: **t*exec* = N*instructions* * CPI*average* * T*clock***
-
-# Memory Hierarchy
-
-name | meaning | properties
---- | --- | ---
-**SRAM** | **S**tatic **R**andom **A**ccess **M**emory | uses alot more energy<br>and costs more than DRAM(x6)<br>than DRAM but is alot faster (x100)
-**DRAM** | **D**ynamic **R**andom **A**ccess **M**emory | uses alot more energy<br>and costs more than DRAM(x6)<br>than DRAM but is alot faster (x100)
-**SDRAM** | **S**yncronous **D**ynamic **R**andom **A**ccess **M**emory | uses alot more energy<br>and costs more than DRAM(x6)<br>than DRAM but is alot faster (x100)
-**DDRRAM** | **D**ouble **D**ata **R**ATE  **R**andom **A**ccess **M**emory | uses alot more energy<br>and costs more than DRAM(x6)<br>than DRAM but is alot faster (x100)
-
-*In todays market when you buy a DDRAM you buy a **S**yncronous **D**ynamic **D**ouble **D**ata **R**ATE **R**andom **A**ccess* **M**emory*
