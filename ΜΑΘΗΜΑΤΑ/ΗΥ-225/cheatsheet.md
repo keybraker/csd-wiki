@@ -237,7 +237,9 @@ The problem here lands in the fact that you may have more than two diffrent CP i
 
 And through simple mathematics we get: **t*exec* = N*instructions* * CPI*average* * T*clock***
 
-# Memory Hierarchy
+# Memories
+
+## Memory Hierarchy
 
 Name | Meaning | Postitive | Negative
 --- | --- | --- | ---
@@ -252,8 +254,7 @@ Name | Meaning | Postitive | Negative
 >* **Temporal**: *refers to the reuse of specific data, and/or resources, within a relatively small time duration* 
 >* **Special**: *refers to the use of data elements within relatively close storage locations*
 
-# Average Memory Access
-
+## Average Memory Access
 t*eff* = hit_ratio * t*hit* + miss_ratio * t*miss* = t*hit* + miss_ratio * t*miss_penalty*
 
 >* **t*eff***: *effective access time*<br> 
@@ -264,6 +265,8 @@ t*eff* = hit_ratio * t*hit* + miss_ratio * t*miss* = t*hit* + miss_ratio * t*mis
 >* **t*miss_penalty***: *tmiss - thit, the extra time it takes<br>
 >to access the data after a miss (miss penalty)*<br>
 
+# Cache Memory 
+
 Cache level | Size | Speed
 --- | --- | --- 
 *Registers* | 128 Bytes | 0.3 ns
@@ -271,4 +274,25 @@ Cache level | Size | Speed
 *L2* | 256KB-2MB |3 ns
 *L3* | 2-16MB | 10 ns
 
-> Assebmly programmers do only know about the 32 registers not the caches, caches are processor controlled and not assembler controlled.
+> Assebmly programmers do only know about the 32 registers not the caches,<br> caches are processor controlled and not assembler controlled.
+> A cache must always now the source of the data it has stored but also the data itself.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# *ΜΑΝΟΛΗΣ ΚΑΤΕΒΑΙΝΗΣ QUOTES*
+> *Σκάσε και μέτρα*
+> *Των φρονήμων τα παιδιά, πριν πεινάσουν μαγειρεύουν*
+> *Μεγάλη μνήμη άρα και αργή*
