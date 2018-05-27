@@ -197,10 +197,10 @@ If the branch is true and we have to jump (something that will be determined on 
 instruction | execution time (cc*)
 --- | --- 
 general | 1~
-load that is followed by dependent
-instruction | 2~
+load that is followed by<br> dependent instruction | 2~
 failed branches | 1~
 successfull branches** | 3~
-
+```
 * clock cycles
 ** success means that our prefetched PC+4 instructions are wrongfully executed
+```
