@@ -215,3 +215,5 @@ Making branch predictions more accurate as, memory of previous jumps and branche
 It basically stores branches that it believes will be seccessfull with a probability of over 50%.<br>
 (*This way of storing data has been refined after years of research and now achieves 95-98% accuracy.*
  *This means that 95-98% of the branches will take 1 cc, and 2-5% will take 3cc*)
+
+# Processor performance (CPI)
