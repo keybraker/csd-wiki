@@ -1,7 +1,3 @@
-
-
-
-
 # MIPS Cheat Sheet
 The essential knowledge for MIPS (hy225)
 
@@ -306,8 +302,15 @@ As we have made our cache to store blocks rather than lines, accessing it will h
 > * ***In comparison to before the diffrence lies in the simple fact that we now have 1K blocks rather than 4K lines.* 
     As the 2 most LS bits refere to the byte in word, we still have no use for them, but this time rather than useing the whole  12 LS  bits we separate them to the 10 MS and the 2 LS. This change is made because we have less number of blobks than cache lines and need less bits to access them. To find the cache block address we use the 10 MS bits and to find the word in the block the 2 LS**
 
-Cache level | Size | Speed
---- | --- | --- 
+18 bits tag value |MS| | | | | | | | | | |LS|DC|DC|
+--- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+
+18 bits tag value |MS| | | | | | | | |LS|X|X|DC|DC|
+--- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+
+>* **MS-LS**: cache address<br> 
+>* **DC**: don't care bits<br> 
+>* **X**: are the bits that tell us which word in block 2^2 = 4 words<br> 
 
 
 
