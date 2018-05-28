@@ -1,3 +1,7 @@
+
+
+
+
 # MIPS Cheat Sheet
 The essential knowledge for MIPS (hy225)
 
@@ -349,7 +353,31 @@ LRU
 * **Write-back:** *initially, writing is done only to the cache. The write to the backing store is postponed until the modified content is about to be replaced by another cache block.*
 
 ## Virtual Memory
-In computer science Virtual Memory is a memory management technique that provides an ***idealized abstraction of the storage resources that are actually available on a given machine*** which ***creates the illusion to users of a very large (main) memory, that is not existant or if it is, it is not theirs exclusivly***."
+In computer science Virtual Memory is a memory management technique that provides an 
+* ***idealized abstraction of the storage resources that are actually available on a given machine** which*
+* ***creates the illusion to users of a very large (main) memory, that is not existant or if it is, it is not theirs exclusively***.
+
+Although being another part of the memory hierarchy, communication (data transfer) between Main Memory and Disk is not done with blocks, but with pages. Pages for blocks are what blocks are for words. As Memory becomes bigger and slower we want to make as little transfers as possible, so bigger chunks of memory have to be tranfered at once as the cost of spacially close data is transfered faster than in separate parts. 
+
+> ***Block line:*** *32-256Bytes* <br>
+> ***Page:*** *4-16KBytes*
+
+###### TMYN: although increasing, page size has come to a stoll as manufacturers, want to have backwards compatebility and don't increase the page size in retrospect to todays hardware
+
+## Fully associative 
+
+### Advantages
+> * ***Fully associative cache structure provides us the flexibility of placing memory block in any of the cache lines and hence full utilization of the cache.*** <br>
+> * ***The placement policy provides better cache hit rate.*** <br>
+> * ***It offers the flexibility of utilizing a wide variety of replacements algorithms if a cache miss occurs.*** <br>
+
+### Advantages
+> * ***The placement policy is slow as it takes time to iterate through all the lines.*** <br>
+> * ***The placement policy is power hungry as it has to iterate over entire cache set to locate a block.*** <br>
+> * ***The most expensive of all methods, due to the high cost of associative-comparison hardware.*** <br>
+
+
+
  
 
 ### *ΜΑΝΟΛΗΣ ΚΑΤΕΒΑΙΝΗΣ QUOTES*
