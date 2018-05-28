@@ -277,7 +277,8 @@ A cache has two parts<br>
 **Data** | ***32 bits*** | **holds the data of a word**
 
 > * **The hash function used is the following: (place in cache) = (address of main memory) modulo (size of cache).**
-> * **Pay attention to the Tag size being *18 bits*. Our processor is a 32 bit one, and as the level 1 cache is 16KB in size there is a set amount of values important to us. As the two most LS bits refere to the byte in word, we don't store it, and as our hash function uses modulo to break the system memory in MEM SIZE / CACHE SIZE fragments, we don't need the following 12 LS bits as they are the same as the physical address of the cache**
+> * **We have to have a way to match the main memory to the cache. Our processor is a 32 bit one, and as the level 1 cache is 16KB in size there is a set amount of values important to us. This is done by using a hash function that uses modulo to break the system memory in (MAIN MEM SIZE / CACHE SIZE) fragments. As the 2 most LS bits refere to the byte in word, we don't store them, after that we need the following 12 LS bits as they are the same as the physical address of the cache and are unique for every line in current modulo**
+> * **Pay attention to the Tag size being *18 bits*. Having used the 14 most LS bits to determine the address of the cache line in correlation to the main memory it's not time to save the rest of the main address as the tag in the current line 32-14=18**
 > * **As you may have noticed the tag size is 19 bits not 18 bits, this is because of the added information we need for the valid bit
 to know if the data is correct and not noise in order to not lose any of the 2^18 in addressing capacity.**
 > * **The following L1 cache is of size 16KB (4 words) and as you may have understant the 32 bits data reffer to the whole 16KB os size without the tags.**
@@ -294,8 +295,16 @@ t*eff* = t*hit* + miss_ratio * t*miss_penalty*
 >* **t*miss_penalty***: *tmiss - thit, the extra time it takes<br>
 >to access the data after a miss (miss penalty)*<br>
 
+## Techniques used to speedup cache efficiency and accesstime
+> * **Blocks are multi-line word lines, in our case a block consists of 4 words.**
+> * **When data is not found in current level cache, the request sent to the higher level is of a block containing the desired data. By doing this we have in mind the spacial locality of the programs, as the next line may be accessed shortly after the current one.**
+> * **16KB Direct Mapped with a block size of 4 words (16 bytes) which means 4K words are 1K blocks this means that the number of tags are less, which speedsup operations. Not only that but getting a block is much faster than getting two separate accesses of 2 words (as gettings the near by data is fast)**
+> * **Blocks as everything in computer science is aligned, so for example 16-17, 18-19, ... are some pairs, this means that in general you get a speedup but there is a downside, which is that rather than replacing one cache line at a time we replace two.**
 
-
+As we have made our cache to store blocks rather than lines, accessing it will have to be modified as well:
+**Tag (Address)** | ***19 bits*** | **holds the address of the data**
+--- | --- | --- 
+**Data** | ***32 bits*** | **holds the data of a word**
 
 
 
@@ -308,3 +317,4 @@ t*eff* = t*hit* + miss_ratio * t*miss_penalty*
 > *Σκάσε και μέτρα*<br>
 > *των φρονίμων τα παιδιά πριν πεινάσουν μαγειρεύουν*<br>
 > *Μεγάλη μνήμη άρα και αργή*<br>
+> *Είναι σταγόνα εν το ωκεανό*<br>
