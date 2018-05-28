@@ -277,7 +277,7 @@ A cache has two parts<br>
 **Data** | ***32 bits*** | **holds the data of a word**
 
 > * **The hash function used is the following: (place in cache) = (address of main memory) modulo (size of cache).**
-> * **We have to have a way to match the main memory to the cache. Our processor is a 32 bit one, and as the level 1 cache is 16KB in size there is a set amount of values important to us. This is done by using a hash function that uses modulo to break the system memory in (MAIN MEM SIZE / CACHE SIZE) fragments. As the 2 most LS bits refere to the byte in word, we don't store them, after that we need the following 12 LS bits as they are the same as the physical address of the cache and are unique for every line in current modulo**
+> * **We have to find a way to match the main memory to the cache. Our processor is a 32 bit one, and as the level 1 cache is 16KB in size there is a set amount of values important to us. This is done by using a hash function that uses modulo to break the system memory in (MAIN MEM SIZE / CACHE SIZE) fragments. As the 2 most LS bits refere to the byte in word, we don't store them, after that we need the following 12 LS bits as they are the same as the physical address of the cache and are unique for every line in current modulo**
 > * **Pay attention to the Tag size being *18 bits*. Having used the 14 most LS bits to determine the address of the cache line in correlation to the main memory it's not time to save the rest of the main address as the tag in the current line 32-14=18**
 > * **As you may have noticed the tag size is 19 bits not 18 bits, this is because of the added information we need for the valid bit
 to know if the data is correct and not noise in order to not lose any of the 2^18 in addressing capacity.**
@@ -303,7 +303,11 @@ t*eff* = t*hit* + miss_ratio * t*miss_penalty*
 
 As we have made our cache to store blocks rather than lines, accessing it will have to be modified as well:
 
-> * ** *In comparison to before the diffrence lies in the simple fact that we now have 1K blocks rather than 4K lines* We have to have a way to match the main memory to the cache. Our processor is a 32 bit one, and as the level 1 cache is 16KB in size there is a set amount of values important to us. This is done by using a hash function that uses modulo to break the system memory in (MAIN MEM SIZE / CACHE SIZE) fragments. As the 2 most LS bits refere to the byte in word, we don't store them, after that we need the following 12 LS bits as they are the same as the physical address of the cache and are unique for every line in current modulo**
+> * ***In comparison to before the diffrence lies in the simple fact that we now have 1K blocks rather than 4K lines.* 
+    As the 2 most LS bits refere to the byte in word, we still have no use for them, but this time rather than useing the whole  12 LS  bits we separate them to the 10 MS and the 2 LS. This change is made because we have less number of blobks than cache lines and need less bits to access them. To find the cache block address we use the 10 MS bits and to find the word in the block the 2 LS**
+
+Cache level | Size | Speed
+--- | --- | --- 
 
 
 
