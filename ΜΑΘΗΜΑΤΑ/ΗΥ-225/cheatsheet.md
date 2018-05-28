@@ -1,5 +1,6 @@
-
-
+## Virtual Memory
+In computer science Virtual Memory is a memory management technique that provides an ***idealized abstraction of the storage resources that are actually available on a given machine*** which ***creates the illusion to users of a very large (main) memory, that is not existant or if it is, it is not theirs exclusivly***."
+ 
 # MIPS Cheat Sheet
 The essential knowledge for MIPS (hy225)
 
