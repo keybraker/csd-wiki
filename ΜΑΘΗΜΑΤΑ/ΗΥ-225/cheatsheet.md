@@ -322,7 +322,7 @@ As we have made our cache to store blocks rather than lines, accessing it will h
 In this way, we increase the spacial locality with the tradeoff being the smaller size, as 2-way associativity halves our cache size from 1K Blocks to 512  Blocks. 
 * These pairs are called sets, and in our case there are 512 sets
 
-> Using this kind of organisation means wee have to change the way we access the cache once again. The corallation between memory and cache is now done by the 9 most LS bits for the address as the 1 MS bit gives us the two diffrent ways two go, so we ignore it.
+> Using this kind of organization means wee have to change the way we access the cache once again. The corallation between memory and cache is now done by the 9 most LS bits for the address as the 1 MS bit gives us the two diffrent ways two go, so we ignore it.
 
 18 bits tag value |MS| | | | | | | | | | |LS|DC|DC|
 --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -344,9 +344,11 @@ LRU
 >> For a 4-way associative it is not that simple, as 2! = 2 which can be done with 1 bit, but where we have to have 4! = 24 for which we need a whole circuit.
 
 #### A technque that is proven to be very effective aswell is random access, which is used for >2-way. Lets take the 4-way for example, in this case it would basically choose one of the two 2-way sets in random and perform an LRU on that one.  
+#### In direct-mapped cache, each location in main memory can go in only one entry in the cache. Therefore, a direct-mapped cache can also be called a "one-way set associative" cache.
 
-
-
+## Writing policies
+* **Write-Through:** *write is done synchronously both to the cache and to the backing store.*
+* **Write-back:** *initially, writing is done only to the cache. The write to the backing store is postponed until the modified content is about to be replaced by another cache block.*
 
 
 ### *ΜΑΝΟΛΗΣ ΚΑΤΕΒΑΙΝΗΣ QUOTES*
@@ -354,3 +356,4 @@ LRU
 > *των φρονίμων τα παιδιά πριν πεινάσουν μαγειρεύουν*<br>
 > *Μεγάλη μνήμη άρα και αργή*<br>
 > *Είναι σταγόνα εν το ωκεανό*<br>
+> *Δεν περνάς κυρά Μαρία*<br>
