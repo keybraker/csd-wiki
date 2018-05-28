@@ -392,7 +392,7 @@ Physical Addresses are 32 bits aswell, with the 2 LS bits being the byte in the 
 MS 18 | 12 LS
 --- | --- 
 
-* The 12 LS bits are the same between the virtual and physical addresses, but the MS bits have to go through a Table that is of size 2^20 = 1048576 = 1MB in size, and find the physical address it referees to. <br>
+* The 12 LS bits are the same between the virtual and physical addresses, but the MS bits have to go through a **Page Table** that is of size 2^20 = 1048576 = 1MB in size, and find the physical address it referees to. <br>
 * This Table is 18 bits in size with extra bits being the Valid, Protection, Dirty and Reference (LRU) bits <br>
 > * **Valid**: *tells us if the current address is valid or not (if it exists or not)*
 > * **Protection**: *tells us what kind of access we have rwx*
@@ -413,7 +413,12 @@ Process ID | Virtual Address | Physical Address
 
 Our page size has to be >= Way size which is the reason we want bigger page sizes. If not done you can have different pointers pointing to the same physical memory. If you have two different pointers, pointing to the same physical memory, but pointing to different entries in the cache, then you will be in trouble. This happens because memory mapping is done page by page. So both pointers will have the same offset into a page, but the page numbers can be different. One pointer can have an even page number, one an odd page number. If your cache is bigger than a page, for example two pages, then two pointers with an even and an odd page numbers would point to different cache entries, exactly what we want to avoid.
 
- 
+## Safety between users and kernel
+Processors have a bit to tell them whether they are in Kernel Mode or User Mode. This is especially important as we have to separate user from kernel code and not let the user run kernel code. Users between themselfs cannot run as other processes as he cannot change his Page table to another Page table (for he has not a Kernel Access to do so).
+
+### Communication between processes
+Communication between processes lets say linux pipes, is achived by mapping one virtual address from both processes to the same physical address. 
+
 
 ### *ΜΑΝΟΛΗΣ ΚΑΤΕΒΑΙΝΗΣ QUOTES*
 > *Σκάσε και μέτρα*<br>
