@@ -9,7 +9,7 @@ The essential knowledge for MIPS (hy225)
 
 ```
 $0	=	0       Immediate 0					                               
-$1	=	$at     assembler temporary			                             
+$1	=	$at     assembler temporary			                               
 $2	=	$v0 \	Procedure					                         
 $3	=	$v1 /	Return Values				                          
 $4	=	$a0 \								                          
@@ -388,3 +388,4 @@ In a Fully associative cache, the cache is organized into a single cache set wit
 > *Μεγάλη μνήμη άρα και αργή*<br>
 > *Είναι σταγόνα εν το ωκεανό*<br>
 > *Δεν περνάς κυρά Μαρία*<br>
+> *Τι κάνει νιάου νιάου στα κεραμίδια*<br>
