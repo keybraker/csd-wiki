@@ -317,7 +317,7 @@ As we have made our cache to store blocks rather than lines, accessing it will h
 >* **DC**: don't care bits<br> 
 >* **X**: are the bits that tell us which word in block 2^2 = 4 words<br> 
 
-## Set associative cache
+## Set Associative Cache
 * Our cache after the modifications we made to it, has become a 1K blocks in size. As we wanted to speed it up even more we introduced set associativity. Set associative cache can be of multiple ways, 2-way, 4-way, 8-way, etc (at 8-ways we reach a limit in speedup as after that we see a decline in performance as program sizes tend to be smaller for such a big associativity). 
 * Lets take for example the 2-way associativity, what we basically do is, we break the cache in two diffrent caches with their only diffrence being one bit. 
 * As you understand one cache block can now be stored in two diffrent places rather than one. This means that if a new block want to come to the cache, and the one way is occupied but not the other, it will be stored in the other way. 
@@ -348,7 +348,7 @@ LRU
 #### A technque that is proven to be very effective aswell is random access, which is used for >2-way. Lets take the 4-way for example, in this case it would basically choose one of the two 2-way sets in random and perform an LRU on that one.  
 #### In direct-mapped cache, each location in main memory can go in only one entry in the cache. Therefore, a direct-mapped cache can also be called a "one-way set associative" cache.
 
-## Writing policies
+## Writing Policies
 * **Write-Through:** *write is done synchronously both to the cache and to the backing store.*
 * **Write-back:** *initially, writing is done only to the cache. The write to the backing store is postponed until the modified content is about to be replaced by another cache block.*
 
@@ -364,7 +364,9 @@ Although being another part of the memory hierarchy, communication (data transfe
 
 ###### TMYN: although increasing, page size has come to a stoll as manufacturers, want to have backwards compatebility and don't increase the page size in retrospect to todays hardware
 
-## Fully associative 
+## Fully Associative 
+
+In a Fully associative cache, the cache is organized into a single cache set with multiple cache lines. A memory block can occupy any of the cache lines.
 
 ### Advantages
 > * ***Fully associative cache structure provides us the flexibility of placing memory block in any of the cache lines and hence full utilization of the cache.*** <br>
