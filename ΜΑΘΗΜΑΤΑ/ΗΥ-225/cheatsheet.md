@@ -1,6 +1,3 @@
-## Virtual Memory
-In computer science Virtual Memory is a memory management technique that provides an ***idealized abstraction of the storage resources that are actually available on a given machine*** which ***creates the illusion to users of a very large (main) memory, that is not existant or if it is, it is not theirs exclusivly***."
- 
 # MIPS Cheat Sheet
 The essential knowledge for MIPS (hy225)
 
@@ -351,6 +348,9 @@ LRU
 * **Write-Through:** *write is done synchronously both to the cache and to the backing store.*
 * **Write-back:** *initially, writing is done only to the cache. The write to the backing store is postponed until the modified content is about to be replaced by another cache block.*
 
+## Virtual Memory
+In computer science Virtual Memory is a memory management technique that provides an ***idealized abstraction of the storage resources that are actually available on a given machine*** which ***creates the illusion to users of a very large (main) memory, that is not existant or if it is, it is not theirs exclusivly***."
+ 
 
 ### *ΜΑΝΟΛΗΣ ΚΑΤΕΒΑΙΝΗΣ QUOTES*
 > *Σκάσε και μέτρα*<br>
