@@ -281,6 +281,10 @@ A cache has two parts
 > * **Tag (Address)**
 > * **Data**
 
+### The following L1 cache is of size 16KB (4 words) and as you may have understant the 32 bits data reffer to the whole 16KB os size without the tags.
+Tag | Data 
+--- | --- 
+*Address* | 32 Bits
 
 
 
@@ -297,5 +301,5 @@ A cache has two parts
 
 ### *ΜΑΝΟΛΗΣ ΚΑΤΕΒΑΙΝΗΣ QUOTES*
 > *Σκάσε και μέτρα*<br>
-> *των φρονίμων τα παιδιά πριν πεινάσουν μαγειρεύουν *<br>
+> *των φρονίμων τα παιδιά πριν πεινάσουν μαγειρεύουν*<br>
 > *Μεγάλη μνήμη άρα και αργή*<br>
