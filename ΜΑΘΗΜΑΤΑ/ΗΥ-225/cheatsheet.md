@@ -283,7 +283,8 @@ to know if the data is correct and not noise in order to not lose any of the 2^1
 > * **The following L1 cache is of size 16KB (4 words) and as you may have understant the 32 bits data reffer to the whole 16KB os size without the tags.**
 
 ## Average Memory Access
-t*eff* = hit_ratio * t*hit* + miss_ratio * t*miss* = t*hit* + miss_ratio * t*miss_penalty*
+t*eff* = hit_ratio * t*hit* + miss_ratio * t*miss* =><br>
+t*eff* = t*hit* + miss_ratio * t*miss_penalty*
 
 >* **t*eff***: *effective access time*<br> 
 >* **hit_ratio**: *percentage of correct accesses*<br>
