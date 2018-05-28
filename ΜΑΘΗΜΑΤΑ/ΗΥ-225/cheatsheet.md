@@ -302,10 +302,8 @@ t*eff* = t*hit* + miss_ratio * t*miss_penalty*
 > * **Blocks as everything in computer science is aligned, so for example 16-17, 18-19, ... are some pairs, this means that in general you get a speedup but there is a downside, which is that rather than replacing one cache line at a time we replace two.**
 
 As we have made our cache to store blocks rather than lines, accessing it will have to be modified as well:
-**Tag (Address)** | ***19 bits*** | **holds the address of the data**
---- | --- | --- 
-**Data** | ***32 bits*** | **holds the data of a word**
 
+> * ** *In comparison to before the diffrence lies in the simple fact that we now have 1K blocks rather than 4K lines* We have to have a way to match the main memory to the cache. Our processor is a 32 bit one, and as the level 1 cache is 16KB in size there is a set amount of values important to us. This is done by using a hash function that uses modulo to break the system memory in (MAIN MEM SIZE / CACHE SIZE) fragments. As the 2 most LS bits refere to the byte in word, we don't store them, after that we need the following 12 LS bits as they are the same as the physical address of the cache and are unique for every line in current modulo**
 
 
 
