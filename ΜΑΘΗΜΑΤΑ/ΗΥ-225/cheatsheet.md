@@ -1,7 +1,3 @@
-## Multilevel Page Table
-As processes vary in size smaller processes would use alot memory they don't need, this problem is solved by multilevel page tables.
-Those tables 
-
 # MIPS Cheat Sheet
 The essential knowledge for MIPS (hy225)
 
@@ -421,6 +417,12 @@ Processors have a bit to tell them whether they are in Kernel Mode or User Mode.
 ### Communication between processes
 Communication between processes lets say linux pipes, is achived by mapping one virtual address from both processes to the same physical address. 
 
+## Multilevel Page Table
+As processes vary in size smaller processes would use alot memory they don't need, this problem is solved by multilevel page tables.
+Those tables work in a very strict manner as they use multiple hash tables. 
+1. From the 32 bits we take the first 10 MS bits to look in the first level 1024 size hash table, if they are legal.
+2. If it is legal I take the next 10 MS bits to check on the next level 1024 size hash table, to which I was directed from the previous level.
+3. If found this page table will point to the physical address for us to access it.
 
 ### *ΜΑΝΟΛΗΣ ΚΑΤΕΒΑΙΝΗΣ QUOTES*
 > *Σκάσε και μέτρα*<br>
