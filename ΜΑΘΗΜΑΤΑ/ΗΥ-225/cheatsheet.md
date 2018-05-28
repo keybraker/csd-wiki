@@ -1,4 +1,4 @@
-Our page size has to be >= Way size which is the reason we want bigger page sizes. If not done you can have different pointers pointing to the same physical memory. If you have two different pointers, pointing to the same physical memory, but pointing to different entries in the cache, then you will be in trouble. This happens because memory mapping is done page by page. So both pointers will have the same offset into a page, but the page numbers can be different. One pointer can have an even page number, one an odd page number. If your cache is bigger than a page, for example two pages, then two pointers with an even and an odd page numbers would point to different cache entries, exactly what we want to avoid.
+
 
 # MIPS Cheat Sheet
 The essential knowledge for MIPS (hy225)
