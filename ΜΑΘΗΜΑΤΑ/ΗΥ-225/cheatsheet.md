@@ -392,9 +392,13 @@ Physical Addresses are 32 bits aswell, with the 2 LS bits being the byte in the 
 MS 18 | 12 LS
 --- | --- 
 
-The 12 LS bits are the same between the virtual and physical addresses, but the MS bits have to go through a Table that is of size 2^20 = 1048576 = 1MB in size, and find the physical address it referees to. <br>
-This Table is 18+4 bits in size with is 3 LS bits being the Valid, Protection, Dirty and Reference (LRU) bits <br>
-But a table of size 1MB in the main memory is very slow, so we created a cache called **Translation Lookaside Buffer (TLB)** which has a soul purpose of caching a small amount *~ 16-64* of **entries** (pairs) of pairs, from virtual addresses to physical addresses.
+* The 12 LS bits are the same between the virtual and physical addresses, but the MS bits have to go through a Table that is of size 2^20 = 1048576 = 1MB in size, and find the physical address it referees to. <br>
+* This Table is 18 bits in size with extra bits being the Valid, Protection, Dirty and Reference (LRU) bits <br>
+> * **Valid**: *tells us if the current address is valid or not (if it exists or not)*
+> * **Protection**: *tells us what kind of access we have rwx*
+> * **Dirty**: *tells us if the processor changed the value*
+> * **Reference**: *gives us information for the LRU to swap or not from memory for a new value*
+* But a table of size 1MB in the main memory is very slow, so we created a cache called **Translation Lookaside Buffer (TLB)** which has a soul purpose of caching a small amount *~ 16-64* of **entries** (pairs) of pairs, from virtual addresses to physical addresses.
 
 Process ID | Virtual Address | Physical Address
 --- | --- | --- 
