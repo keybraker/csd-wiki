@@ -1,4 +1,4 @@
-
+Our page size has to be >= Way size which is the reason we want bigger page sizes. If not done you can have different pointers pointing to the same physical memory. If you have two different pointers, pointing to the same physical memory, but pointing to different entries in the cache, then you will be in trouble. This happens because memory mapping is done page by page. So both pointers will have the same offset into a page, but the page numbers can be different. One pointer can have an even page number, one an odd page number. If your cache is bigger than a page, for example two pages, then two pointers with an even and an odd page numbers would point to different cache entries, exactly what we want to avoid.
 
 # MIPS Cheat Sheet
 The essential knowledge for MIPS (hy225)
@@ -381,8 +381,8 @@ Although being another part of the memory hierarchy, communication (data transfe
 All programs work wth virtual addresses (a processor is not capable of creating because the hardware doesn't allow it). A virtual address is 32 bits in size. <br>
 > * **12 LS bits** *tell me **where** in the page I am* **2^12 = 4096 virtual blocks in virtual page**
 > * **20 MS bits** *tell me **which** page* **2^20 = 1048576 virtual pages**
-
-MS 20 | 12 LS
+ 	
+MS 20 | 12 LS   
 --- | --- 
 
 Physical Addresses are 32 bits aswell, with the 2 LS bits being the byte in the word, so for us only 32 MS bits are of importance.<br>
@@ -403,9 +403,11 @@ Process ID | Virtual Address | Physical Address
 | B | 13 | 3
 | ... | ... | ... 
 
-##### This cache is fully associative as it is really small, and we want it to be fast
+##### This cache is fully associative as it is really small, and we want it to be fast and with a small miss ratio
 
+## Page size >= Way size ?
 
+Our page size has to be >= Way size which is the reason we want bigger page sizes. If not done you can have different pointers pointing to the same physical memory. If you have two different pointers, pointing to the same physical memory, but pointing to different entries in the cache, then you will be in trouble. This happens because memory mapping is done page by page. So both pointers will have the same offset into a page, but the page numbers can be different. One pointer can have an even page number, one an odd page number. If your cache is bigger than a page, for example two pages, then two pointers with an even and an odd page numbers would point to different cache entries, exactly what we want to avoid.
 
  
 
