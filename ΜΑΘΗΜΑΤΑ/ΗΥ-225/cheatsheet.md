@@ -1,7 +1,5 @@
 
 
-
-
 # MIPS Cheat Sheet
 The essential knowledge for MIPS (hy225)
 
@@ -348,6 +346,20 @@ LRU
 #### A technque that is proven to be very effective aswell is random access, which is used for >2-way. Lets take the 4-way for example, in this case it would basically choose one of the two 2-way sets in random and perform an LRU on that one.  
 #### In direct-mapped cache, each location in main memory can go in only one entry in the cache. Therefore, a direct-mapped cache can also be called a "one-way set associative" cache.
 
+## Fully Associative 
+
+In a Fully associative cache, the cache is organized into a single cache set with multiple cache lines. A memory block can occupy any of the cache lines.
+
+### Advantages
+> * ***Fully associative cache structure provides us the flexibility of placing memory block in any of the cache lines and hence full utilization of the cache.*** <br>
+> * ***The placement policy provides better cache hit rate.*** <br>
+> * ***It offers the flexibility of utilizing a wide variety of replacements algorithms if a cache miss occurs.*** <br>
+
+### Advantages
+> * ***The placement policy is slow as it takes time to iterate through all the lines.*** <br>
+> * ***The placement policy is power hungry as it has to iterate over entire cache set to locate a block.*** <br>
+> * ***The most expensive of all methods, due to the high cost of associative-comparison hardware.*** <br>
+
 ## Writing Policies
 * **Write-Through:** *write is done synchronously both to the cache and to the backing store.*
 * **Write-back:** *initially, writing is done only to the cache. The write to the backing store is postponed until the modified content is about to be replaced by another cache block.*
@@ -364,19 +376,34 @@ Although being another part of the memory hierarchy, communication (data transfe
 
 ###### TMYN: although increasing, page size has come to a stoll as manufacturers, want to have backwards compatebility and don't increase the page size in retrospect to todays hardware
 
-## Fully Associative 
+## Virtual Addresses 
 
-In a Fully associative cache, the cache is organized into a single cache set with multiple cache lines. A memory block can occupy any of the cache lines.
+All programs work wth virtual addresses (a processor is not capable of creating because the hardware doesn't allow it). A virtual address is 32 bits in size. <br>
+> * **12 LS bits** *tell me **where** in the page I am* **2^12 = 4096 virtual blocks in virtual page**
+> * **20 MS bits** *tell me **which** page* **2^20 = 1048576 virtual pages**
 
-### Advantages
-> * ***Fully associative cache structure provides us the flexibility of placing memory block in any of the cache lines and hence full utilization of the cache.*** <br>
-> * ***The placement policy provides better cache hit rate.*** <br>
-> * ***It offers the flexibility of utilizing a wide variety of replacements algorithms if a cache miss occurs.*** <br>
+MS 20 | 12 LS
+--- | --- 
 
-### Advantages
-> * ***The placement policy is slow as it takes time to iterate through all the lines.*** <br>
-> * ***The placement policy is power hungry as it has to iterate over entire cache set to locate a block.*** <br>
-> * ***The most expensive of all methods, due to the high cost of associative-comparison hardware.*** <br>
+Physical Addresses are 32 bits aswell, with the 2 LS bits being the byte in the word, so for us only 32 MS bits are of importance.<br>
+> * **12 LS bits** *tell me **where** in the page* **2^12 = 4096 physical blocks in physical page**
+> * **18 MS bits** *tell me **which** page* **2^18 = 262144 physical pages**
+
+MS 18 | 12 LS
+--- | --- 
+
+The 12 LS bits are the same between the virtual and physical addresses, but the MS bits have to go through a Table that is of size 2^20 = 1048576 = 1MB in size, and find the physical address it referees to. <br>
+This Table is 18+4 bits in size with is 3 LS bits being the Valid, Protection, Dirty and Reference (LRU) bits <br>
+But a table of size 1MB in the main memory is very slow, so we created a cache called **Translation Lookaside Buffer (TLB)** which has a soul purpose of caching a small amount *~ 16-64* of **entries** (pairs) of pairs, from virtual addresses to physical addresses.
+
+Process ID | Virtual Address | Physical Address
+--- | --- | --- 
+| ... | ... | ... 
+| A | 13 | 7
+| B | 13 | 3
+| ... | ... | ... 
+
+##### This cache is fully associative as it is really small, and we want it to be fast
 
 
 
