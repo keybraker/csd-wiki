@@ -1,3 +1,5 @@
+
+
 # MIPS Cheat Sheet
 The essential knowledge for MIPS (hy225)
 
@@ -268,8 +270,9 @@ Cache level | Size | Speed
 
 A cache has two parts<br>
 
-**Tag (Address)** | ***19 bits*** | **holds the address of the data**
+**Valid Bit** | ***1 bit*** | **Tells us if current cache line/block is valid**
 --- | --- | --- 
+**Tag (Address)** | ***18 bits*** | **holds the address of the data**
 **Data** | ***32 bits*** | **holds the data of a word**
 
 > * **The hash function used is the following: (place in cache) = (address of main memory) modulo (size of cache).**
@@ -312,7 +315,35 @@ As we have made our cache to store blocks rather than lines, accessing it will h
 >* **DC**: don't care bits<br> 
 >* **X**: are the bits that tell us which word in block 2^2 = 4 words<br> 
 
+## Set associative cache
+* Our cache after the modifications we made to it, has become a 1K blocks in size. As we wanted to speed it up even more we introduced set associativity. Set associative cache can be of multiple ways, 2-way, 4-way, 8-way, etc (at 8-ways we reach a limit in speedup as after that we see a decline in performance as program sizes tend to be smaller for such a big associativity). 
+* Lets take for example the 2-way associativity, what we basically do is, we break the cache in two diffrent caches with their only diffrence being one bit. 
+* As you understand one cache block can now be stored in two diffrent places rather than one. This means that if a new block want to come to the cache, and the one way is occupied but not the other, it will be stored in the other way. 
+In this way, we increase the spacial locality with the tradeoff being the smaller size, as 2-way associativity halves our cache size from 1K Blocks to 512  Blocks. 
+* These pairs are called sets, and in our case there are 512 sets
 
+> Using this kind of organisation means wee have to change the way we access the cache once again. The corallation between memory and cache is now done by the 9 most LS bits for the address as the 1 MS bit gives us the two diffrent ways two go, so we ignore it.
+
+18 bits tag value |MS| | | | | | | | | | |LS|DC|DC|
+--- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+
+18 bits tag value |MS| | | | | | | | |LS|X|X|DC|DC|
+--- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+
+19 bits tag value |MS| | | | | | | |LS|X|X|DC|DC|
+--- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+
+## Replacement Policy
+A set assiociative cache is a cache that has one place for more than one blocks (set) which means that we need a replacement Policy if congestion occurs. To choose what to replace, there are many techniques, one famous and well established is to look at the past, which is a very good inticator of what will happen, this is called Least Recently Used or LRU. 
+
+LRU
+> **2-way**
+>>  To achive this a single bit is used, to indicate **0 as left** and **1 as right**. So that the next time I come here and get a miss I will replace the !(bit) which will be the older of the two.
+
+> **4-way**
+>> For a 4-way associative it is not that simple, as 2! = 2 which can be done with 1 bit, but where we have to have 4! = 24 for which we need a whole circuit.
+
+#### A technque that is proven to be very effective aswell is random access, which is used for >2-way. Lets take the 4-way for example, in this case it would basically choose one of the two 2-way sets in random and perform an LRU on that one.  
 
 
 
