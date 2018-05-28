@@ -1,3 +1,7 @@
+
+
+
+
 # MIPS Cheat Sheet
 The essential knowledge for MIPS (hy225)
 
@@ -254,17 +258,6 @@ Name | Meaning | Postitive | Negative
 >* **Temporal**: *refers to the reuse of specific data, and/or resources, within a relatively small time duration* 
 >* **Special**: *refers to the use of data elements within relatively close storage locations*
 
-## Average Memory Access
-t*eff* = hit_ratio * t*hit* + miss_ratio * t*miss* = t*hit* + miss_ratio * t*miss_penalty*
-
->* **t*eff***: *effective access time*<br> 
->* **hit_ratio**: *percentage of correct accesses*<br>
->* **t*hit***: *the time it takes for a hit to get the data*<br>
->* **miss_ratio**: *percentage of incorrect accesses*<br>
->* **t*miss***: *the time it takes for a miss to get the data*<br>
->* **t*miss_penalty***: *tmiss - thit, the extra time it takes<br>
->to access the data after a miss (miss penalty)*<br>
-
 # Cache Memory 
 
 Cache level | Size | Speed
@@ -277,17 +270,28 @@ Cache level | Size | Speed
 > Assebmly programmers do only know about the 32 registers not the caches,<br> caches are processor controlled and not assembler controlled.
 > A cache must always now the source of the data it has stored but also the data itself.
 
-A cache has two parts
-> * **Tag (Address)**
-> * **Data**
+A cache has two parts<br>
 
-### The following L1 cache is of size 16KB (4 words) and as you may have understant the 32 bits data reffer to the whole 16KB os size without the tags.
-Tag | Data 
---- | --- 
-*Address* | 32 Bits
+**Tag (Address)** | ***19 bits*** | **holds the address of the data**
+--- | --- | --- 
+**Data** | ***32 bits*** | **holds the data of a word**
 
+> * **The hash function used is the following: (place in cache) = (address of main memory) modulo (size of cache).**
+> * **Pay attention to the Tag size being *18 bits*. Our processor is a 32 bit one, and as the level 1 cache is 16KB in size there is a set amount of values important to us. As the two most LS bits refere to the byte in word, we don't store it, and as our hash function uses modulo to break the system memory in MEM SIZE / CACHE SIZE fragments, we don't need the following 12 LS bits as they are the same as the physical address of the cache**
+> * **As you may have noticed the tag size is 19 bits not 18 bits, this is because of the added information we need for the valid bit
+to know if the data is correct and not noise in order to not lose any of the 2^18 in addressing capacity.**
+> * **The following L1 cache is of size 16KB (4 words) and as you may have understant the 32 bits data reffer to the whole 16KB os size without the tags.**
 
+## Average Memory Access
+t*eff* = hit_ratio * t*hit* + miss_ratio * t*miss* = t*hit* + miss_ratio * t*miss_penalty*
 
+>* **t*eff***: *effective access time*<br> 
+>* **hit_ratio**: *percentage of correct accesses*<br>
+>* **t*hit***: *the time it takes for a hit to get the data*<br>
+>* **miss_ratio**: *percentage of incorrect accesses*<br>
+>* **t*miss***: *the time it takes for a miss to get the data*<br>
+>* **t*miss_penalty***: *tmiss - thit, the extra time it takes<br>
+>to access the data after a miss (miss penalty)*<br>
 
 
 
