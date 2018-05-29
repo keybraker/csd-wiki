@@ -1,5 +1,7 @@
 
 
+### Problems with multilevel memories and DMAs
+The problem is that the DMA talks to main memory (DRAM) but if data is being edit in cache the copy in main memory is out-of-date, this is a problem and has to be solved. **This problem is called memory-cache coherence.**
 
 # MIPS Cheat Sheet
 The essential knowledge for MIPS (hy225)
@@ -436,7 +438,7 @@ There are two values which express these exact observations:
 ###### It is more cost-efficient to request more as 4 individual request will take 40ns+40ns+40ns+40ns = 160ns whereas 4 combined will take 40ns+10ns+10ns+10ns = 70ns to be delivered thus increasing the throughput.
 
 ### Interleaving 
-One technique of parallel memory reads/writes is interleaving which is a design made to compensate for the relatively slow speed of dynamic random-access memory (DRAM) or core memory, by spreading memory addresses evenly across memory banks. That way, contiguous memory reads and writes are using each memory bank in turn, resulting in higher memory throughputs due to reduced waiting for memory banks to become ready for desired operations.
+One technique of parallel memory reads/writes is interleaving which is a design made to compensate for the relatively slow speed of dynamic random-access memory (DRAM), by spreading memory addresses evenly across memory banks. That way, contiguous memory reads and writes are using each memory bank in turn, resulting in higher memory throughputs due to reduced waiting for memory banks to become ready for desired operations.
 ###### Interleaving is a technique not only used in memories (like SDRAM) but also on PCI-X bus which has made communication between processors-memory-I/O faster and more efficient keeping the bus busy at all times. This technique on the bus was called Split Transaction. Nowadays networks are used and not busses.
 
 # I/O
@@ -456,6 +458,19 @@ Communication between devices with diffrent speeds inderlies many problems which
 * **Interrupt** 
 > In this technique the I/O makes an interupt to the processor, telling it it has new data for him to process.
 
+## Direct Mapped Memory (DMA)
+DMA is a technique used between I/O and processor to make communication between them more efficient.<br>
+As I/O devices are operating in a much slower speed than the processor, they have buffers (4KBytes) and a controller called DMA.
+1. They take requests from the processor, of what and where to store it in memory
+> * physical address to write to <br>
+> * size of data you want to copy <br>
+> * address from I/O buffer <br>
+> * go status <br>
+>> This DMA is ambidrome as data can be ordered to flow from or to an I/O device or to memory 
+2. When go_status bit is turned to true by the processor, cpy is initiated, without the processor
+4. And then the processor can read the whole chunk uninterupted at his higher speed of operation.
+###### As memory from I/O devices is not cacheble the speedup is large
+
 ### *ΜΑΝΟΛΗΣ ΚΑΤΕΒΑΙΝΗΣ QUOTES*
 > *Σκάσε και μέτρα*<br>
 > *Των φρονίμων τα παιδιά πριν πεινάσουν μαγειρεύουν*<br>
@@ -463,3 +478,4 @@ Communication between devices with diffrent speeds inderlies many problems which
 > *Είναι σταγόνα εν το ωκεανό*<br>
 > *Δεν περνάς κυρά Μαρία*<br>
 > *Τι κάνει νιάου νιάου στα κεραμίδια*<br>
+> *Και τι διαβάζει; Μπαρμπούτσαλα*<br>
