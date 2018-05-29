@@ -1,5 +1,6 @@
 
 
+
 # MIPS Cheat Sheet
 The essential knowledge for MIPS (hy225)
 
@@ -438,8 +439,22 @@ There are two values which express these exact observations:
 One technique of parallel memory reads/writes is interleaving which is a design made to compensate for the relatively slow speed of dynamic random-access memory (DRAM) or core memory, by spreading memory addresses evenly across memory banks. That way, contiguous memory reads and writes are using each memory bank in turn, resulting in higher memory throughputs due to reduced waiting for memory banks to become ready for desired operations.
 ###### Interleaving is a technique not only used in memories (like SDRAM) but also on PCI-X bus which has made communication between processors-memory-I/O faster and more efficient keeping the bus busy at all times. This technique on the bus was called Split Transaction. Nowadays networks are used and not busses.
 
-# Memory-Mapped I/O
+# I/O
+
+## Memory-Mapped I/O
 Memory-mapped I/O uses the same address space to address both memory and I/O devices. The memory and registers of the I/O devices are mapped to (associated with) address values. So when an address is accessed by the CPU, it may refer to a portion of physical RAM, or it can instead refer to memory of the I/O device. Thus, the CPU instructions used to access the memory can also be used for accessing devices.
+
+## Communication between processors memory and I/O
+Communication between devices with diffrent speeds inderlies many problems which have to be solved.
+* **state and data registers** 
+> Communication with non-cachebale I/O like the keyboard is done with **state and data registers** (**and not memory**), the processor reads from the keyboard only when the keyboard writes *true* in the status register. When the processor read the data it turns the states register to the *false*, and waits until the status beomes *true* again. This is done to solve the problem of writing the word "aaron" for wxample as the first two letters are *a*.
+* **Polling** 
+> Here the processor is the one asking the I/O if anything new has come.
+* **Busy Wait** 
+> With this technique the computer is always in a loop, watching whether anything changes. This is not very efficient as I/O as the keyboard may write several words in the span of minutes, which in cpu time is equivalent to years, thus making it a very bad practice for most practises except some who have to communicate very fast like lock on multiprocessor programs.
+* **Interrupt** 
+> In this technique. system timers are being used to interupt the processor. This timers are operating on a 50-120 MHz frequency which equals to 20-8ms. This is the time every program runs until it is stopped so that another one runs.
+>> (This frequency is not very long for the cpu nor is it distinquishable by a human observer, in order to give the user the illusion of programs running simultaneously)
 
 ### *ΜΑΝΟΛΗΣ ΚΑΤΕΒΑΙΝΗΣ QUOTES*
 > *Σκάσε και μέτρα*<br>
