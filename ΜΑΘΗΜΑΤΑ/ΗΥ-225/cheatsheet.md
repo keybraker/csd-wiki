@@ -1,7 +1,5 @@
 
 
-### Problems with multilevel memories and DMAs
-The problem is that the DMA talks to main memory (DRAM) but if data is being edit in cache the copy in main memory is out-of-date, this is a problem and has to be solved. **This problem is called memory-cache coherence.**
 
 # MIPS Cheat Sheet
 The essential knowledge for MIPS (hy225)
@@ -470,6 +468,9 @@ As I/O devices are operating in a much slower speed than the processor, they hav
 2. When go_status bit is turned to true by the processor, cpy is initiated, without the processor
 4. And then the processor can read the whole chunk uninterupted at his higher speed of operation.
 ###### As memory from I/O devices is not cacheble the speedup is large
+
+### Problems with multilevel memories and DMAs
+The problem is that the DMA talks to main memory (DRAM) but if data is being edit in cache the copy in main memory is out-of-date, this is a problem and has to be solved. **This problem is called memory-cache coherence.**
 
 ### *ΜΑΝΟΛΗΣ ΚΑΤΕΒΑΙΝΗΣ QUOTES*
 > *Σκάσε και μέτρα*<br>
