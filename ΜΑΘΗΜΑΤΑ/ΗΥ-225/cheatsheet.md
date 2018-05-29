@@ -470,7 +470,17 @@ As I/O devices are operating in a much slower speed than the processor, they hav
 ###### As memory from I/O devices is not cacheble the speedup is large
 
 ### Problems with multilevel memories and DMAs
-The problem is that the DMA talks to main memory (DRAM) but if data is being edit in cache the copy in main memory is out-of-date, this is a problem and has to be solved. **This problem is called memory-cache coherence.**
+The problem is that the DMA talks to main memory (DRAM) but if data is being edit in cache the copy in main memory is out-of-date, this is a problem and has to be solved. **This problem is called cache coherence.** This problem is not only present between DMAs and memory but caches themselves. <br>
+The problem has many protocols used to keep cache coherent acros multiple processors with multiple caches, but the most famous are:
+**M***odified* **S***hared* **I***nvalid* **( MSI )** 
+* **M***odified* : *Dirty* & *Exclusive, which means that only I have a copy of this value because I altered it*
+> **write-invalidate** *means that when one processor writes a shared value he has to invalidate the other processors copies, by telling them to invalidate it* 
+> **write-update** *means that when one processor writes a shared value he has to update the other processors copies, by telling them the new value so they update their copies* 
+* **S***hared* : *Clean* & *Shared, which means that I have data that is shared but all of us have the same copy* 
+* **I***nvalid* : *Nothing* 
+***
+* **O***wmed* : *Dirty* & *Shared, which means that it is dirty only towards the main memory*
+* **E***xclusive* : *Clean* & *Exclusive, which means that only I have a copy of this value*
 
 ### *ΜΑΝΟΛΗΣ ΚΑΤΕΒΑΙΝΗΣ QUOTES*
 > *Σκάσε και μέτρα*<br>
