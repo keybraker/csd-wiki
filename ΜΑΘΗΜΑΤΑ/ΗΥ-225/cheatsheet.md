@@ -471,21 +471,21 @@ As I/O devices are operating in a much slower speed than the processor, they hav
 
 ### Problems with multilevel memories and DMAs
 The problem is that the DMA talks to main memory (DRAM) but if data is being edit in cache the copy in main memory is out-of-date, this is a problem and has to be solved. **This problem is called cache coherence.** This problem is not only present between DMAs and memory but caches themselves. <br>
-The problem has many protocols used to keep cache coherent acros multiple processors with multiple caches, but the most famous are: <br>
+Many protocols are used to keep cache coherent accros multiple processors with multiple caches, but the most famous are: <br>
 
-**M***odified* **S***hared* **I***nvalid* **( MSI )** 
-**M***odified* (**O***wmed*) **E***xclusive* **S***hared* **I***nvalid* **( MoESI )** 
+1. **M***odified* **S***hared* **I***nvalid* **( MSI )** <br>
+2. **M***odified* (**O***wmed*) **E***xclusive* **S***hared* **I***nvalid* **( MoESI )** 
 
-* **M***odified* : *Dirty* & *Exclusive, which means that only I have a copy of this value because I altered it*
-> **write-invalidate** *means that when one processor writes a shared value he has to invalidate the other processors copies, by telling them to invalidate it* 
+* **Modified** : *Dirty* & *Exclusive, which means that multiple have it but only I have the latest value because I altered it*
+> **write-invalidate** *means that when one processor writes a shared value he has to invalidate the other processors copies, by telling them to invalidate it* <br>
 > **write-update** *means that when one processor writes a shared value he has to update the other processors copies, by telling them the new value so they update their copies* 
-* **S***hared* : *Clean* & *Shared, which means that I have data that is shared but all of us have the same copy* 
-* **I***nvalid* : *Nothing* 
+* **Shared** : *Clean* & *Shared, which means that I have data that is shared but all of us have the same copy* 
+* **Invalid** : *Nothing* 
 ***
-* **O***wned* : *Dirty* & *Shared, which means that it is dirty only towards the main memory*
-* **E***xclusive* : *Clean* & *Exclusive, which means that only I have a copy of this value*
+* **Owned** : *Dirty* & *Shared, which means that it is dirty only towards the main memory*
+* **Exclusive** : *Clean* & *Exclusive, which means that only I have a copy of this value*
 
-### *ΜΑΝΟΛΗΣ ΚΑΤΕΒΑΙΝΗΣ QUOTES*
+###### *ΜΑΝΟΛΗΣ ΚΑΤΕΒΑΙΝΗΣ QUOTES*
 > *Σκάσε και μέτρα*<br>
 > *Των φρονίμων τα παιδιά πριν πεινάσουν μαγειρεύουν*<br>
 > *Μεγάλη μνήμη άρα και αργή*<br>
