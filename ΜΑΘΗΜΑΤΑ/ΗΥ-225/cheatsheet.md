@@ -1,3 +1,5 @@
+
+
 # MIPS Cheat Sheet
 The essential knowledge for MIPS (hy225)
 
@@ -424,9 +426,24 @@ Those tables work in a very strict manner as they use multiple hash tables.
 2. If it is legal I take the next 10 MS bits to check on the next level 1024 size hash table, to which I was directed from the previous level.
 3. If found this page table will point to the physical address for us to access it.
 
+## Memory speed
+On all memory architectures, it is a good practise to request, more information close to each-other as spacial locality is present.
+There are two values which express these exact observations:
+> * **Start-up cost**: *which is the time spent from when the request was sent, processed by the ram and finally sent to the bus.*
+> * **Throughput**: *which is the amount of data that can be sent on certain request.*
+
+###### It is more cost-efficient to request more as 4 individual request will take 40ns+40ns+40ns+40ns = 160ns whereas 4 combined will take 40ns+10ns+10ns+10ns = 70ns to be delivered thus increasing the throughput.
+
+### Interleaving 
+One technique of parallel memory reads/writes is interleaving which is a design made to compensate for the relatively slow speed of dynamic random-access memory (DRAM) or core memory, by spreading memory addresses evenly across memory banks. That way, contiguous memory reads and writes are using each memory bank in turn, resulting in higher memory throughputs due to reduced waiting for memory banks to become ready for desired operations.
+###### Interleaving is a technique not only used in memories (like SDRAM) but also on PCI-X bus which has made communication between processors-memory-I/O faster and more efficient keeping the bus busy at all times. This technique on the bus was called Split Transaction. Nowadays networks are used and not busses.
+
+# Memory-Mapped I/O
+Memory-mapped I/O uses the same address space to address both memory and I/O devices. The memory and registers of the I/O devices are mapped to (associated with) address values. So when an address is accessed by the CPU, it may refer to a portion of physical RAM, or it can instead refer to memory of the I/O device. Thus, the CPU instructions used to access the memory can also be used for accessing devices.
+
 ### *ΜΑΝΟΛΗΣ ΚΑΤΕΒΑΙΝΗΣ QUOTES*
 > *Σκάσε και μέτρα*<br>
-> *των φρονίμων τα παιδιά πριν πεινάσουν μαγειρεύουν*<br>
+> *Των φρονίμων τα παιδιά πριν πεινάσουν μαγειρεύουν*<br>
 > *Μεγάλη μνήμη άρα και αργή*<br>
 > *Είναι σταγόνα εν το ωκεανό*<br>
 > *Δεν περνάς κυρά Μαρία*<br>
