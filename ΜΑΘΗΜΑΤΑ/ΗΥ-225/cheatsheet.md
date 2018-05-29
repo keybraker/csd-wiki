@@ -449,12 +449,12 @@ Communication between devices with diffrent speeds inderlies many problems which
 * **state and data registers** 
 > Communication with non-cachebale I/O like the keyboard is done with **state and data registers** (**and not memory**), the processor reads from the keyboard only when the keyboard writes *true* in the status register. When the processor read the data it turns the states register to the *false*, and waits until the status beomes *true* again. This is done to solve the problem of writing the word "aaron" for wxample as the first two letters are *a*.
 * **Polling** 
-> Here the processor is the one asking the I/O if anything new has come.
+> Here the processor is the one asking the I/O if anything new has come. System timers are being used to interupt the I/O, those timers are operating on a 50-120 Hz frequency which equals to 20-8ms. This is the time every program runs until it is stopped so that another one runs.
+>> (This frequency is not very long for the cpu nor is it distinguishable by a human observer, in order to give the user the illusion of multiple programs running simultaneously)
 * **Busy Wait** 
 > With this technique the computer is always in a loop, watching whether anything changes. This is not very efficient as I/O as the keyboard may write several words in the span of minutes, which in cpu time is equivalent to years, thus making it a very bad practice for most practises except some who have to communicate very fast like lock on multiprocessor programs.
 * **Interrupt** 
-> In this technique. system timers are being used to interupt the processor. This timers are operating on a 50-120 MHz frequency which equals to 20-8ms. This is the time every program runs until it is stopped so that another one runs.
->> (This frequency is not very long for the cpu nor is it distinquishable by a human observer, in order to give the user the illusion of programs running simultaneously)
+> In this technique the I/O makes an interupt to the processor, telling it it has new data for him to process.
 
 ### *ΜΑΝΟΛΗΣ ΚΑΤΕΒΑΙΝΗΣ QUOTES*
 > *Σκάσε και μέτρα*<br>
