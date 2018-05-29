@@ -482,7 +482,7 @@ The problem has many protocols used to keep cache coherent acros multiple proces
 * **S***hared* : *Clean* & *Shared, which means that I have data that is shared but all of us have the same copy* 
 * **I***nvalid* : *Nothing* 
 ***
-* **O***wmed* : *Dirty* & *Shared, which means that it is dirty only towards the main memory*
+* **O***wned* : *Dirty* & *Shared, which means that it is dirty only towards the main memory*
 * **E***xclusive* : *Clean* & *Exclusive, which means that only I have a copy of this value*
 
 ### *ΜΑΝΟΛΗΣ ΚΑΤΕΒΑΙΝΗΣ QUOTES*
