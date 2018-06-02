@@ -44,6 +44,7 @@
 
 #### ΔΕΥΤΕΡΟ ΕΞΑΜΗΝΟ
 1. [(HY-340) Γλώσσες και Μεταφραστές](https://github.com/keybraker/Computer-Science-Department-Wiki/blob/master/ΜΑΘΗΜΑΤΑ/ΗΥ-340/(ΗΥ-340).md)
+1. [(HY-342) Παράλληλος Προγραμματισμός](https://github.com/keybraker/Computer-Science-Department-Wiki/blob/master/ΜΑΘΗΜΑΤΑ/ΗΥ-342/(ΗΥ-342).md)
 2. [(ΗΥ-380) Αλγόριθμοι και Πολυπλοκότητα](https://github.com/keybraker/Computer-Science-Department-Wiki/blob/master/ΜΑΘΗΜΑΤΑ/ΗΥ-380/(ΗΥ-380).md)
 3. [(ΗΥ-335) Δίκτυα Υπολογιστών](https://github.com/keybraker/Computer-Science-Department-Wiki/blob/master/ΜΑΘΗΜΑΤΑ/ΗΥ-335/(ΗΥ-335).md)
 
