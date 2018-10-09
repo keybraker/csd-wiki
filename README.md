@@ -6,7 +6,7 @@
 1. [(ΗΥ-100) Εισαγωγή στην Επιστήμη Υπολογιστών C](https://github.com/keybraker/Computer-Science-Department-Wiki/blob/master/ΜΑΘΗΜΑΤΑ/ΗΥ-100/(ΗΥ-100).md)
 2. (ΗΥ-120) Ψηφιακή Σχεδίαση
 3. [(ΗΥ-110) Απειροστικός Λογισμός Ι](https://github.com/keybraker/Computer-Science-Department-Wiki/blob/master/ΜΑΘΗΜΑΤΑ/ΗΥ-110/(ΗΥ-110).md)
-4. (ΗΥ-112) Φυσική Ι
+4. [(ΗΥ-112) Φυσική Ι](https://www.csd.uoc.gr/~hy112/)
 5. (ΗΥ-108) Αγγλικά Ι
 
 #### ΔΕΥΤΕΡΟ ΕΞΑΜΗΝΟ
