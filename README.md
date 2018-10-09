@@ -60,8 +60,8 @@
 
 ## ΠΡΟΓΡΑΜΜΑΤΑ
 
-1. [ΧΕΙΜΕΡΙΝΟ](https://github.com/keybraker/Computer-Science-Department-Wiki/blob/master/ΠΡΟΓΡΑΜΜΑΤΑ/WROLOGIO_PROGRAMMA_XEIMERINOY_E3AMHNOY_2017-18_ekdosh_12-9-2017.pdf)
-2. [ΕΑΡΙΝΟ](https://github.com/keybraker/Computer-Science-Department-Wiki/blob/master/ΠΡΟΓΡΑΜΜΑΤΑ/Didaskalies_propt._kai_metapt.mathimatwn_Tmhma_Episthmhs_Ypologistwn_akad.etos_2017-18.pdf)
+1. [ΧΕΙΜΕΡΙΝΟ](https://www.csd.uoc.gr/CSD/uploaded_files/WROLOGIO%20PROGRAMMA%20XEIMERINOY%20E3AMHNOY%202018-19_ekdosh%209-10-2018.pdf)
+2. [ΕΑΡΙΝΟ]()
 
 ## ΣΥΝΔΕΣΜΟΙ
 
