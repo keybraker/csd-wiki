@@ -60,8 +60,8 @@
 
 ## Ε1 & Ε2
 
-1. (ΗΥ-112) Φυσική Ι + [(ΜΕΜ-293) Θεωρία Βελτιστοποίησης](http://users.tem.uoc.gr/~gkarali/optimization.html) + [(ΒΙΟΛ-405) Εφαρμοσμένη Οικολογία και Διαχείριση](http://www.biology.uoc.gr/el/department-courses/986)
-2. (ΗΥ-112) Φυσική Ι + [(ΜΕΜ-203) ΕΥΚΛΕΙΔΕΙΑ ΓΕΩΜΕΤΡΙΑ](http://users.math.uoc.gr/~jplatis/MEM203-2018-19.html) + [(ΒΙΟΛ-405) Εφαρμοσμένη Οικολογία και Διαχείριση](http://www.biology.uoc.gr/el/department-courses/986)
+1. [(ΗΥ-112) Φυσική Ι](https://www.csd.uoc.gr/~hy112/) + [(ΜΕΜ-293) Θεωρία Βελτιστοποίησης](http://users.tem.uoc.gr/~gkarali/optimization.html) + [(ΒΙΟΛ-405) Εφαρμοσμένη Οικολογία και Διαχείριση](http://www.biology.uoc.gr/el/department-courses/986)
+2. [(ΗΥ-112) Φυσική Ι](https://www.csd.uoc.gr/~hy112/) + [(ΜΕΜ-203) ΕΥΚΛΕΙΔΕΙΑ ΓΕΩΜΕΤΡΙΑ](http://users.math.uoc.gr/~jplatis/MEM203-2018-19.html) + [(ΒΙΟΛ-405) Εφαρμοσμένη Οικολογία και Διαχείριση](http://www.biology.uoc.gr/el/department-courses/986)
 ## ΠΡΟΓΡΑΜΜΑΤΑ
 
 1. [ΧΕΙΜΕΡΙΝΟ](https://www.csd.uoc.gr/CSD/uploaded_files/WROLOGIO%20PROGRAMMA%20XEIMERINOY%20E3AMHNOY%202018-19_ekdosh%209-10-2018.pdf)
