@@ -1,3 +1,8 @@
+**Disclaimer:**
+> Any addition information you want to contribute, either send me @ iantsiakkas at gmail dot com or better create a pull request.
+
+***
+
 # [Computer Science Department @ UoC Absolute User Manual](http://www.csd.uoc.gr/index.jsp?content=courses_catalog&openmenu=demoAcc3&lang=gr)
 
 ### ΠΡΩΤΟ ΕΤΟΣ
