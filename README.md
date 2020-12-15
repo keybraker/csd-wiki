@@ -1,11 +1,6 @@
-**Disclaimer:**
-> Any addition information you want to contribute, either send me @ iantsiakkas at gmail dot com or better create a pull request.
+# [Computer Science Department](http://www.csd.uoc.gr) @ [UOC](https://www.uoc.gr) Absolute User Manual
 
-***
-
-# [Computer Science Department @ UoC Absolute User Manual](http://www.csd.uoc.gr/index.jsp?content=courses_catalog&openmenu=demoAcc3&lang=gr)
-
-### ΠΡΩΤΟ ΕΤΟΣ
+### 1 ΕΤΟΣ
 
 #### ΠΡΩΤΟ ΕΞΑΜΗΝΟ
 1. [(ΗΥ-100) Εισαγωγή στην Επιστήμη Υπολογιστών C](https://github.com/keybraker/Computer-Science-Department-Wiki/blob/master/ΜΑΘΗΜΑΤΑ/ΗΥ-100/(ΗΥ-100).md)
@@ -23,7 +18,7 @@
 
 ***
 
-### ΔΕΥΤΕΡΟ ΕΤΟΣ
+### 2 ΕΤΟΣ
 
 #### ΠΡΩΤΟ ΕΞΑΜΗΝΟ
 1. [(ΗΥ-217) Πιθανότητες](https://github.com/keybraker/Computer-Science-Department-Wiki/blob/master/ΜΑΘΗΜΑΤΑ/ΗΥ-217/(ΗΥ-217).md)
@@ -41,7 +36,7 @@
 
 ***
 
-### ΤΡΙΤΟ ΕΤΟΣ
+### 3 ΕΤΟΣ
 
 #### ΠΡΩΤΟ ΕΞΑΜΗΝΟ
 1. [(ΗΥ-345) Λειτουργικά Συστήματα](https://github.com/keybraker/Computer-Science-Department-Wiki/blob/master/ΜΑΘΗΜΑΤΑ/ΗΥ-345/(ΗΥ-345).md)
@@ -55,7 +50,7 @@
 
 ***
 
-### ΤΕΤΑΡΤΟ ΕΤΟΣ
+### 4 ΕΤΟΣ
 1. [(ΗΥ-330) Εισαγωγή στη Θεωρία Τηλεπικοινωνιακών Συστημάτων](https://github.com/keybraker/Computer-Science-Department-Wiki/blob/master/ΜΑΘΗΜΑΤΑ/ΗΥ-330/(ΗΥ-330).md)
 2. [(ΗΥ-352) Τεχνολογία Λογισμικού](https://github.com/keybraker/Computer-Science-Department-Wiki/blob/master/ΜΑΘΗΜΑΤΑ/ΗΥ-352/(ΗΥ-352).md)
 3. [(ΗΥ-359) Διαδικτυακός Προγραμματισμός](https://github.com/keybraker/Computer-Science-Department-Wiki/blob/master/ΜΑΘΗΜΑΤΑ/ΗΥ-359/(ΗΥ-359).md)
@@ -63,13 +58,9 @@
 4. [(HY-364) Αλληλεπίδραση Ανθρώπου-Υπολογιστή ~ παλιό (HY-464)](https://github.com/keybraker/Computer-Science-Department-Wiki/blob/master/ΜΑΘΗΜΑΤΑ/ΗΥ-364/(ΗΥ-364).md)
 5. [(HY-302) Διδακτική της Πληροφορικής](https://github.com/keybraker/Computer-Science-Department-Wiki/blob/master/ΜΑΘΗΜΑΤΑ/ΗΥ-302/(ΗΥ-302).md)
 
-## Ε1 & Ε2
+### Ε1 & Ε2 [αναλυτικά](http://www.csd.uoc.gr/index.jsp?content=courses_catalog&openmenu=demoAcc3&lang=gr)
 1. [(ΗΥ-112) Φυσική Ι](https://www.csd.uoc.gr/~hy112/) + [(ΜΕΜ-293) Θεωρία Βελτιστοποίησης](http://users.tem.uoc.gr/~gkarali/optimization.html) + [(ΒΙΟΛ-405) Εφαρμοσμένη Οικολογία και Διαχείριση](http://www.biology.uoc.gr/el/department-courses/986)
 2. [(ΗΥ-112) Φυσική Ι](https://www.csd.uoc.gr/~hy112/) + [(ΜΕΜ-203) Ευκλείδεια Γεωμετρία](http://users.math.uoc.gr/~jplatis/MEM203-2018-19.html) + [(ΒΙΟΛ-405) Εφαρμοσμένη Οικολογία και Διαχείριση](http://www.biology.uoc.gr/el/department-courses/986)
-## ΠΡΟΓΡΑΜΜΑΤΑ
-
-1. [ΧΕΙΜΕΡΙΝΟ](https://www.csd.uoc.gr/CSD/uploaded_files/WROLOGIO%20PROGRAMMA%20XEIMERINOY%20E3AMHNOY%202018-19_ekdosh%209-10-2018.pdf)
-2. ΕΑΡΙΝΟ
 
 ## ΣΥΝΔΕΣΜΟΙ
 
@@ -79,6 +70,31 @@
 
 ## ΑΛΥΣΙΔΕΣ
 
-![alt text](https://github.com/keybraker/Computer-Science-Department-Wiki/blob/master/ΑΛΥΣΙΔΕΣ.jpg)
+| Code   | course Name                        | ECTS | Prerequisites                                                         | Suggested |
+| :----- | :--------------------------------- | :--- | :-------------------------------------------------------------------- | :-------- |
+| HY-100 | Introduction to Computer Science   | 8    | -                                                                     | -         |
+| HY-108 | English I                          | 4    | -                                                                     | -         |
+| HY-109 | English II                         | 4    | HY-108                                                                | -         |
+| HY-110 | Calculus I                         | 8    | -                                                                     | -         |
+| HY-118 | Discrete Mathematics               | 6    | -                                                                     | -         |
+| HY-119 | Linear Algebra                     | 6    | -                                                                     | -         |
+| HY-120 | Digital Design                     | 8    | -                                                                     | -         |
+| HY-150 | Programming                        | 8    | -                                                                     | -         |
+| HY-180 | Logic                              | 6    | -                                                                     | -         |
+| HY-208 | English III                        | 4    | HY-109                                                                | -         |
+| HY-209 | English IV                         | 4    | HY-208                                                                | -         |
+| HY-215 | Applied  Mathematics for Engineers | 8    | HY-110                                                                | -         |
+| HY-217 | Probability                        | 6    | HY-110 or MATH-102                                                    | -         |
+| HY-225 | Computer Organization              | 8    | HY-120                                                                | -         |
+| HY-240 | Data Structures                    | 8    | HY-100, HY-150                                                        | HY-118    |
+| HY-252 | Object-Oriented Programming        | 8    | HY-150                                                                | -         |
+| HY-255 | Software  Technology Laboratory    | 6    | HY-150 or HY-100                                                      | -         |
+| HY-280 | Theory  of Computation             | 6    | -                                                                     | -         |
+| HY-335 | Computer Networks                  | 6    | HY-118 or HY-217                                                      | -         |
+| HY-340 | Languages and Compilers            | 8    | HY-280 and HY-240 or HY-255                                           | HY-225    |
+| HY-345 | Operating Systems                  | 8    | HY-240, HY-255                                                        | HY-225    |
+| HY-360 | Files and Databases                | 8    | HY-240 and {HY-118 or HY-180}                                         | -         |
+| HY-380 | Algorithms and Complexity          | 8    | HY-118, HY-240                                                        | -         |
+| HY-498 | Bachelor΄s Thesis                  | 18   | Successful completion of all core courses<br>of the first four semesters | -         |
 
-hacker123
+> hacker123
