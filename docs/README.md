@@ -1,4 +1,4 @@
-## [Computer Science Department](http://www.csd.uoc.gr)at [UoC](https://www.uoc.gr)
+## [Computer Science Department](http://www.csd.uoc.gr) at [UoC](https://www.uoc.gr)
 
 ### Πρώτο έτος
 
@@ -63,13 +63,14 @@
    1. [(ΗΥ-112) Φυσική Ι](https://www.csd.uoc.gr/~hy112/) + [(ΜΕΜ-293) Θεωρία Βελτιστοποίησης](http://users.tem.uoc.gr/~gkarali/optimization.html) + [(ΒΙΟΛ-405) Εφαρμοσμένη Οικολογία και Διαχείριση](http://www.biology.uoc.gr/el/department-courses/986)
    2. [(ΗΥ-112) Φυσική Ι](https://www.csd.uoc.gr/~hy112/) + [(ΜΕΜ-203) Ευκλείδεια Γεωμετρία](http://users.math.uoc.gr/~jplatis/MEM203-2018-19.html) + [(ΒΙΟΛ-405) Εφαρμοσμένη Οικολογία και Διαχείριση](http://www.biology.uoc.gr/el/department-courses/986)
 
-## ΣΥΝΔΕΣΜΟΙ
+***
 
+### Σύνδεσμοι
 1. [Students Web](https://student.cc.uoc.gr)
 2. [Webmail](https://webmail.edu.uoc.gr/imp/login.php?Horde=gb8de6ia39rnf090m0gfsmsbh4)
 3. [elearn](https://elearn.uoc.gr/my/)
 
-## ΑΛΥΣΙΔΕΣ
+### Αλυσίδες
 
 | Code   | course Name                        | ECTS | Prerequisites                                                         | Suggested |
 | :----- | :--------------------------------- | :--- | :-------------------------------------------------------------------- | :-------- |
