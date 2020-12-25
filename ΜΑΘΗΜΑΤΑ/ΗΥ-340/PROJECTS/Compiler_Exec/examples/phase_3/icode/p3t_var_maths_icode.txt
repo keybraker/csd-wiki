@@ -1,0 +1,8 @@
+#  |     Operation      |       Result       |     Argument_1     |     Argument_2     | Label | Line
+-----------------------------------------------------------------------------------------------------
+  0|                 ADD|       _avril.0[P:2]|              x[P:0]|              y[P:1]|     -1|    1
+  1|            MULTIPLY|       _avril.0[P:2]|              z[P:3]|              w[P:4]|     -1|    2
+  2|           SUBSTRACT|       _avril.0[P:2]|              t[P:5]|              s[P:6]|     -1|    3
+  3|              DIVIDE|       _avril.0[P:2]|              u[P:7]|              v[P:8]|     -1|    4
+  4|             MODULUS|       _avril.0[P:2]|              r[P:9]|             l[P:10]|     -1|    5
+  5|               NO_OP|          (not used)|          (not used)|          (not used)|     -1|    7

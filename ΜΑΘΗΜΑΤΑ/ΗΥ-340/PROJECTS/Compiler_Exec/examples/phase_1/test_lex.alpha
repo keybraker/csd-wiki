@@ -1,0 +1,38 @@
+/* /*nested comments1 */ */
+/* /*nested comments2 */ */
+/* /*nested /*some more nested comments*/ comments /*nested comments3 */ */ /*nested comments3 */ */
+
+string = "tralala\n\t";
+quoteInString = "\"foo\"-\"bar\""
+commentsInString = "/*(**)/**/lala/ / ///****";
+
+function /*some comment*/ foo() {
+	print(::string);
+	print(1 + 2 * 3 / 4 % 5);
+	local y = 123.456;
+	for(local /*another comment here*/ i = 0; i < 10; ++i) {
+		if (::string == quoteInString)
+			y += 5.4;
+		else if (y > 1000)
+			break;
+		local t_a_b_l_e = [1, 2, 3];
+		if (t_a_b_l_e)
+			continue;
+		else
+			return t_a_b_l_e..f(5); // line comment1
+// line comment2
+	}
+}
+
+//This is a valid line comment /* /* 
+
+
+/* This is a valid comment
+	/*
+// and this is not a line comment
+// so the following closes the previous opening comment
+// */  and the same for this
+	/*
+	*/
+*/
+

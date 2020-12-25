@@ -1,0 +1,50 @@
+a = 1;
+++a;
+--a;
+a++;
+a--;
+
+n = pi = 3.14159265358979323846;
+nl = "\n";
+a = "";
+
+for(local i=0; i<1; ++i){
+//for loop;
+   if(i!=2){
+      b = 1.2;
+      local a = b;
+	print(::a, nl);
+
+   }
+   else
+      ::n=123.123456;
+}
+
+while ( yy >= 3) {
+   if ( yy and 1 == true)
+      break;
+   else if ( 4 % yy == false)
+      continue;
+   else {
+      yy_underline--;
+      return;
+   }
+}
+
+
+function Node (){
+	return [
+		{"New": (function (arg) { return arg;})},	
+		{a:"a"}
+	];
+}
+
+function Node2 (arg1, arg2, arg3){
+	return [ [1], [2] ];
+}
+
+Node();
+Node2(a,2,3,4,5, Node().new());
+
+pinakas..i = 5;
+pinakas[i] = 3.45

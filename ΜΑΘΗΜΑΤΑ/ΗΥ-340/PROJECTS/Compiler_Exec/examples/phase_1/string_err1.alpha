@@ -1,0 +1,10 @@
+"print new line \n"
+
+"string with 2 slashes and double quote\\\""
+
+"string with ASCII enter
+"
+
+"Illegal escape char(\\m) \m"
+
+"Illegal string (without final double quote) with 2 slashes and double quota\\\"

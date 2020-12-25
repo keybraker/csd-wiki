@@ -1,0 +1,9 @@
+/*function g(){
+	local i = 9;
+	local u = (-i) * 9;
+	return -u;
+}*/
+
+
+x+y * x-y;
+x/y * x%y;

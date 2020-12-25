@@ -1,0 +1,34 @@
+#  |     Operation      |       Result       |     Argument_1     |     Argument_2     | Label | Line
+-----------------------------------------------------------------------------------------------------
+  0|   TABLE_SET_ELEMENT|                   3|              a[P:0]|                   3|      0|    1
+  1|   TABLE_GET_ELEMENT|       _avril.0[P:1]|              a[P:0]|                   3|      0|    1
+  2|   TABLE_GET_ELEMENT|       _avril.0[P:1]|              a[P:0]|                   3|      0|    2
+  3|   TABLE_GET_ELEMENT|       _avril.1[P:2]|              a[P:0]|                   3|      0|    2
+  4|   TABLE_SET_ELEMENT|       _avril.1[P:2]|       _avril.0[P:1]|                   4|      0|    2
+  5|   TABLE_GET_ELEMENT|       _avril.2[P:3]|       _avril.0[P:1]|                   4|      0|    2
+  6|   TABLE_GET_ELEMENT|       _avril.0[P:1]|              a[P:0]|                   3|      0|    3
+  7|   TABLE_GET_ELEMENT|       _avril.1[P:2]|       _avril.0[P:1]|                   4|      0|    3
+  8|   TABLE_GET_ELEMENT|       _avril.2[P:3]|       _avril.1[P:2]|                   4|      0|    3
+  9|   TABLE_GET_ELEMENT|       _avril.3[P:4]|       _avril.2[P:3]|                   4|      0|    3
+ 10|   TABLE_SET_ELEMENT|       _avril.3[P:4]|              a[P:0]|                   r|      0|    3
+ 11|   TABLE_GET_ELEMENT|       _avril.4[P:5]|              a[P:0]|                   r|      0|    3
+ 12|   TABLE_GET_ELEMENT|       _avril.0[P:1]|              a[P:0]|                   r|      0|    4
+ 13|   TABLE_SET_ELEMENT|       _avril.0[P:1]|              a[P:0]|                   r|      0|    4
+ 14|   TABLE_GET_ELEMENT|       _avril.1[P:2]|              a[P:0]|                   r|      0|    4
+ 15|   TABLE_GET_ELEMENT|       _avril.0[P:1]|              a[P:0]|                   r|      0|    5
+ 16|   TABLE_GET_ELEMENT|       _avril.1[P:2]|              a[P:0]|                   r|      0|    5
+ 17|   TABLE_GET_ELEMENT|       _avril.2[P:3]|       _avril.1[P:2]|                   q|      0|    5
+ 18|   TABLE_SET_ELEMENT|       _avril.2[P:3]|       _avril.0[P:1]|                   q|      0|    5
+ 19|   TABLE_GET_ELEMENT|       _avril.3[P:4]|       _avril.0[P:1]|                   q|      0|    5
+ 20|   TABLE_GET_ELEMENT|       _avril.0[P:1]|              a[P:0]|                   r|      0|    6
+ 21|   TABLE_GET_ELEMENT|       _avril.1[P:2]|       _avril.0[P:1]|                   q|      0|    6
+ 22|   TABLE_GET_ELEMENT|       _avril.2[P:3]|       _avril.1[P:2]|                   r|      0|    6
+ 23|   TABLE_GET_ELEMENT|       _avril.3[P:4]|       _avril.2[P:3]|                   s|      0|    6
+ 24|   TABLE_SET_ELEMENT|                  12|       _avril.3[P:4]|                   3|      0|    6
+ 25|   TABLE_GET_ELEMENT|       _avril.4[P:5]|       _avril.3[P:4]|                   3|      0|    6
+ 26|   TABLE_GET_ELEMENT|       _avril.0[P:1]|              a[P:0]|                   3|      0|    7
+ 27|   TABLE_GET_ELEMENT|       _avril.1[P:2]|       _avril.0[P:1]|                   q|      0|    7
+ 28|   TABLE_GET_ELEMENT|       _avril.2[P:3]|       _avril.1[P:2]|                   4|      0|    7
+ 29|                CALL|          (not used)|       _avril.2[P:3]|          (not used)|     -1|    7
+ 30|    GET_RETURN_VALUE|       _avril.3[P:4]|          (not used)|          (not used)|     -1|    7
+ 31|               NO_OP|          (not used)|          (not used)|          (not used)|     -1|    8

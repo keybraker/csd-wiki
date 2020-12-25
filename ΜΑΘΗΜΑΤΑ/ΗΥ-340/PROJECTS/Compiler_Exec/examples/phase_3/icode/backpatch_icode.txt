@@ -1,0 +1,97 @@
+#  |     Operation      |       Result       |     Argument_1     |     Argument_2     | Label |
+------------------------------------------------------------------------------------------------
+1:   		 ASSIGN |		   f | 		        1 |	    (not used) |   -   |
+2:   		 ASSIGN |		 _t0 | 		        f |	    (not used) |   -   |
+3:   		 ASSIGN | 		   e | 		      _t0 |	    (not used) |   -   |
+4:   		 ASSIGN | 		 _t1 | 		        e |	    (not used) |   -   |
+5:   		 ASSIGN | 		   d | 		      _t1 |	    (not used) |   -   |
+6:   		 ASSIGN | 		 _t2 | 		        d |	    (not used) |   -    |
+7:    		 ASSIGN | 		   c | 		      _t2 |	    (not used) |   -   |
+8:   		 ASSIGN | 		 _t3 | 		        c |	    (not used) |   -   |
+9:   		 ASSIGN | 		   b | 		      _t3 |	    (not used) |   -   |
+10:  		 ASSIGN | 		 _t4 | 		        b |	    (not used) |   -   |
+11:  		 ASSIGN | 		   a | 		      _t4 |	    (not used) |   -   |
+12:  		 ASSIGN | 		 _t5 | 		        a |	    (not used) |   -   |
+13:  		IF_LESS |	  (not used) |			a | 		     b |  19   |
+14:  		   JUMP |	  (not used) |	       (not used) |	    (not used) |  15   |
+15: 	     IF_GREATER |	  (not used) |			c |		     d |  17   |
+16:  		   JUMP |	  (not used) |	       (not used) |	    (not used) |  21   |
+17:  		IF_LESS |	  (not used) |		        e |	 	     f |  19   |
+18:  		   JUMP |	  (not used) |	       (not used) |	    (not used) |  21   |
+19:  		 ASSIGN | 		 _t5 |		     TRUE |	    (not used) |   -   |
+20:  		   JUMP |	  (not used) |	       (not used) |	    (not used) |  23   |
+21:  		 ASSIGN |	         _t5 |              FALSE |	    (not used) |   -   |
+22:  		 ASSIGN |                  x |		      _t5 |	    (not used) |   -   |
+23:  		 ASSIGN | 		 _t6 |		        x |	    (not used) |   -   |
+24:  		  IF_EQ |	  (not used) |		        x |  		  TRUE |  28   |
+25:  		   JUMP |	  (not used) |	       (not used) |	    (not used) |  26   |
+26:  		  IF_EQ |	  (not used) |		        x |               TRUE |  30   |
+27:  		   JUMP |	  (not used) |	       (not used) |	    (not used) |  28   |
+28:  		  IF_EQ |	  (not used) |		        a |               TRUE |  30   |
+29:  		   JUMP |	  (not used) |	       (not used) |	    (not used) |  32   |
+30:  		 ASSIGN | 		 _t3 |		     TRUE | 	    (not used) |   -   |
+31:  		   JUMP |	  (not used) |	       (not used) |	    (not used) |  33   |
+32:  		 ASSIGN |  		 _t3 | 		    FALSE | 	    (not used) |   -   |
+33:  		 ASSIGN | 		   y |		      _t3 | 	    (not used) |   -   |
+34: 		 ASSIGN |		 _t4 |			y | 	    (not used) |   -   |
+35:  		  IF_EQ |	  (not used) |	       	        x | 		  TRUE |  37   |
+36:  		   JUMP |	  (not used) |	       (not used) |	    (not used) |  45   |
+37:  	      FUNCSTART |	  (not used) |	             $_f0 | 	    (not used) |   -   |
+38:              RETURN |	       FALSE |	       (not used) |	    (not used) |   -   |
+39:             FUNCEND |	  (not used) |	             $_f0 |	    (not used) |   -   |
+40:               PARAM |	  (not used) |                  2 |	    (not used) |   -   |
+41:  		   CALL |	  (not used) |	             $_f0 |	    (not used) |   -   |
+42:  	      GETRETVAL |	  (not used) |	              _t0 |	    (not used) |   -   |
+43: 		  IF_EQ |	  (not used) |	              _t0 | 		  TRUE |  52   |
+44:  		   JUMP |	  (not used) |	       (not used) |	    (not used) |  45   |
+45:  	      FUNCSTART |	  (not used) |	             $_f1 |	    (not used) |   -   |
+46:  		 RETURN |	  (not used) |	             TRUE |	    (not used) |   -   |
+47:  		FUNCEND |	  (not used) |	             $_f1 |	    (not used) |   -   |
+48:  		  IF_EQ |	  (not used) |		     TRUE |               TRUE |  50   |
+49:  		   JUMP |	  (not used) |	       (not used) |	    (not used) |  52   |
+50:  		 ASSIGN | 		_t1  |		     TRUE |	    (not used) |   -   |
+51:   		   JUMP |	  (not used) |	       (not used) |	    (not used) |  53   |
+52:  		 ASSIGN |		_t1  |		    FALSE |	    (not used) |   -   |
+53:  		 ASSIGN |		   x |		      _t1 |	    (not used) |   -   |
+54:  		 ASSIGN | 		 _t2 |			x |	    (not used) |   -   |
+55:  		  IF_EQ |	  (not used) |			a | 		  TRUE |  63   |
+56:  		   JUMP |	  (not used) |	       (not used) |	    (not used) |  57   |
+57:  		  IF_EQ |	  (not used) |			b |  		  TRUE |  63   |
+58:  		   JUMP |	  (not used) |	       (not used) |	    (not used) |  59   |
+59:  		 ASSIGN |		   y |			x |	    (not used) |   -   |
+60:  		 ASSIGN |		 _t1 | 			y |	    (not used) |   -   |
+61:  		  IF_EQ |	  (not used) |		      _t1 | 		  TRUE |  63   |
+62:  		   JUMP |	  (not used) |	       (not used) |	    (not used) |  83   |
+63:  		 ASSIGN | 		   i |			0 |	    (not used) |   -   |
+64:  		 ASSIGN |		 _t3 | 			i |  	    (not used) |   -   |
+65:  		IF_LESS |	  (not used) |			i |  		     5 |  67   |
+66:  		   JUMP |	  (not used) |	       (not used) |	    (not used) |  79   |
+67:  		  IF_EQ |	  (not used) | 		   	a |		 TRUE  |  72   |
+68:  		   JUMP |	  (not used) |	       (not used) |	    (not used) |  79   |
+69:  		    ADD |		   i |    		i |		     1 |   -   |
+70:  		 ASSIGN | 		 _t6 |			i |  	    (not used) |   -   |
+71:  		   JUMP |	  (not used) |	       (not used) |	    (not used) |  65   |
+72:  		  PARAM |	  (not used) |			i |  	    (not used) |   -   |
+73:  		   CALL |	  (not used) |		    print |  	    (not used) |   -   |
+74:  	      GETRETVAL |	  (not used) |		      _t7 |  	    (not used) |   -   |
+75:  		   JUMP |	  (not used) |	       (not used) |	    (not used) |  69   |
+76:  		    ADD |		   i |			i |		     1 |   -   |
+77:  		 ASSIGN |		 _t0 |			i |  	    (not used) |   -   |
+78:  		   JUMP |	  (not used) |	       (not used) |	    (not used) |  69   |
+79:  		  PARAM |	  (not used) |	       		y |  	    (not used) |   -   |
+80:  		   CALL |	  (not used) |		    print |  	    (not used) |   -   |
+81:   	      GETRETVAL |	  (not used) |		      _t0 |  	    (not used) |   -   |
+82:  		   JUMP |	  (not used) |	       (not used) |	    (not used) |  95   |
+83:  		  IF_EQ |	  (not used) |		        y |		  TRUE |  95   |
+84:  		   JUMP |	  (not used) |	       (not used) |	    (not used) |  85   |
+85:  		  IF_EQ |	  (not used) |			y | 		  TRUE |  89   |
+86:  		   JUMP |	  (not used) |	       (not used) |	    (not used) |  87   |
+87:  		 ASSIGN |		 _t1 |		     TRUE |  	    (not used) |   -   |
+88:  		   JUMP |	  (not used) |	       (not used) |	    (not used) |  90   |
+89:  		 ASSIGN |		 _t1 |		  FALSE   |  	    (not used) |   -   |
+90:  		  PARAM |	  (not used) |		      _t1 |  	    (not used) |   -   |
+91:  		   CALL |	  (not used) |		    print |  	    (not used) |   -   |
+92:  	      GETRETVAL |	  (not used) | 		      _t2 |  	    (not used) |   -   |
+93:  		   JUMP |	  (not used) |	       (not used) |	    (not used) |  95   |
+94:  		   JUMP |	  (not used) |	       (not used) |	    (not used) |  83   |
+

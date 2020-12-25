@@ -1,0 +1,37 @@
+/*
+The proper output must be:
+(zero)
+(zero)(one)
+(zero)(one)(two)
+(zero)(one)(two)(Three)
+*/
+nl = "\n";
+
+function F(){
+	print("(zero)");
+	
+	function F(){
+		print("(one)");
+		
+		function F(){
+			print("(two)");
+			
+			function F(){
+				print("(Three)");
+				return ::F;			//call gloabl F;
+			}
+			return F;
+		}
+		return F;
+	}
+	return F;
+}
+
+F();		//print -> (zero)
+print(nl);
+F()();		//print -> (zero)(one)
+print(nl);
+F()()();	//print -> (zero)(one)(two)
+print(nl);
+F()()()();	//print -> (zero)(one)(two)(Three)
+

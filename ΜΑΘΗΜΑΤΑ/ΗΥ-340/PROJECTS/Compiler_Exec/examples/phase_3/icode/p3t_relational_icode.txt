@@ -1,0 +1,116 @@
+#  |     Operation      |       Result       |     Argument_1     |     Argument_2     | Label | Line
+
+-----------------------------------------------------------------------------------------------------
+
+  0|              ASSIGN|             l[P:11]|                   0|          (not used)|      0|    1
+
+  1|              ASSIGN|      _avril.0[P:12]|             l[P:11]|          (not used)|      0|    1
+
+  2|              ASSIGN|             k[P:10]|      _avril.0[P:12]|          (not used)|      0|    1
+
+  3|              ASSIGN|      _avril.1[P:13]|             k[P:10]|          (not used)|      0|    1
+
+  4|              ASSIGN|              j[P:9]|      _avril.1[P:13]|          (not used)|      0|    1
+
+  5|              ASSIGN|      _avril.2[P:14]|              j[P:9]|          (not used)|      0|    1
+
+  6|              ASSIGN|              i[P:8]|      _avril.2[P:14]|          (not used)|      0|    1
+
+  7|              ASSIGN|      _avril.3[P:15]|              i[P:8]|          (not used)|      0|    1
+
+  8|              ASSIGN|              h[P:7]|      _avril.3[P:15]|          (not used)|      0|    1
+
+  9|              ASSIGN|      _avril.4[P:16]|              h[P:7]|          (not used)|      0|    1
+
+ 10|              ASSIGN|              g[P:6]|      _avril.4[P:16]|          (not used)|      0|    1
+
+ 11|              ASSIGN|      _avril.5[P:17]|              g[P:6]|          (not used)|      0|    1
+
+ 12|              ASSIGN|              f[P:5]|      _avril.5[P:17]|          (not used)|      0|    1
+
+ 13|              ASSIGN|      _avril.6[P:18]|              f[P:5]|          (not used)|      0|    1
+
+ 14|              ASSIGN|              e[P:4]|      _avril.6[P:18]|          (not used)|      0|    1
+
+ 15|              ASSIGN|      _avril.7[P:19]|              e[P:4]|          (not used)|      0|    1
+
+ 16|              ASSIGN|              d[P:3]|      _avril.7[P:19]|          (not used)|      0|    1
+
+ 17|              ASSIGN|      _avril.8[P:20]|              d[P:3]|          (not used)|      0|    1
+
+ 18|              ASSIGN|              c[P:2]|      _avril.8[P:20]|          (not used)|      0|    1
+
+ 19|              ASSIGN|      _avril.9[P:21]|              c[P:2]|          (not used)|      0|    1
+
+ 20|              ASSIGN|              b[P:1]|      _avril.9[P:21]|          (not used)|      0|    1
+
+ 21|              ASSIGN|     _avril.10[P:22]|              b[P:1]|          (not used)|      0|    1
+
+ 22|              ASSIGN|              a[P:0]|     _avril.10[P:22]|          (not used)|      0|    1
+
+ 23|              ASSIGN|     _avril.11[P:23]|              a[P:0]|          (not used)|      0|    1
+
+ 24|          IF_GREATER|          (not used)|              a[P:0]|              b[P:1]|     27|    3
+
+ 25|              ASSIGN|      _avril.1[P:13]|               false|          (not used)|     -1|    3
+
+ 26|                JUMP|          (not used)|          (not used)|          (not used)|     28|    3
+
+ 27|              ASSIGN|      _avril.1[P:13]|                true|          (not used)|     -1|    3
+
+ 28|             IF_LESS|          (not used)|              c[P:2]|              d[P:3]|     31|    3
+
+ 29|              ASSIGN|      _avril.3[P:15]|               false|          (not used)|     -1|    3
+
+ 30|                JUMP|          (not used)|          (not used)|          (not used)|     32|    3
+
+ 31|              ASSIGN|      _avril.3[P:15]|                true|          (not used)|     -1|    3
+
+ 32| IF_GREATER_OR_EQUAL|          (not used)|              e[P:4]|              f[P:5]|     35|    3
+
+ 33|              ASSIGN|      _avril.5[P:17]|               false|          (not used)|     -1|    3
+
+ 34|                JUMP|          (not used)|          (not used)|          (not used)|     36|    3
+
+ 35|              ASSIGN|      _avril.5[P:17]|                true|          (not used)|     -1|    3
+
+ 36|                 AND|      _avril.6[P:18]|      _avril.3[P:15]|      _avril.5[P:17]|     -1|    3
+
+ 37|                  OR|      _avril.7[P:19]|      _avril.1[P:13]|      _avril.6[P:18]|     -1|    3
+
+ 38|    IF_LESS_OR_EQUAL|          (not used)|              g[P:6]|              h[P:7]|     41|    3
+
+ 39|              ASSIGN|      _avril.9[P:21]|               false|          (not used)|     -1|    3
+
+ 40|                JUMP|          (not used)|          (not used)|          (not used)|     42|    3
+
+ 41|              ASSIGN|      _avril.9[P:21]|                true|          (not used)|     -1|    3
+
+ 42|                 NOT|     _avril.10[P:22]|              i[P:8]|          (not used)|     -1|    3
+
+ 43|            IF_EQUAL|          (not used)|     _avril.10[P:22]|              j[P:9]|     46|    3
+
+ 44|              ASSIGN|     _avril.12[P:24]|               false|          (not used)|     -1|    3
+
+ 45|                JUMP|          (not used)|          (not used)|          (not used)|     47|    3
+
+ 46|              ASSIGN|     _avril.12[P:24]|                true|          (not used)|     -1|    3
+
+ 47|                 AND|     _avril.13[P:25]|      _avril.9[P:21]|     _avril.12[P:24]|     -1|    3
+
+ 48|                  OR|     _avril.14[P:26]|      _avril.7[P:19]|     _avril.13[P:25]|     -1|    3
+
+ 49|                 NOT|     _avril.15[P:27]|             k[P:10]|          (not used)|     -1|    3
+
+ 50|        IF_NOT_EQUAL|          (not used)|     _avril.15[P:27]|             l[P:11]|     53|    3
+
+ 51|              ASSIGN|     _avril.17[P:29]|               false|          (not used)|     -1|    3
+
+ 52|                JUMP|          (not used)|          (not used)|          (not used)|     54|    3
+
+ 53|              ASSIGN|     _avril.17[P:29]|                true|          (not used)|     -1|    3
+
+ 54|                  OR|     _avril.18[P:30]|     _avril.14[P:26]|     _avril.17[P:29]|     -1|    3clear
+
+ 55|               NO_OP|          (not used)|          (not used)|          (not used)|     -1|    5
+

@@ -1,0 +1,209 @@
+/* Something (who knows what this is) */
+DEBUG = false;
+
+// Utility constants
+nl = "\n";
+// Utility functions
+function println() {
+	local argc = totalarguments();
+	for (local i = 0; i < argc; ++i)
+		::print(argument(i));
+	::print(::nl);
+}
+function nothing(){}
+dprintln = nothing;
+if (DEBUG) {
+	::dprintln = ::println;
+}
+
+// //////////// alpha Objects /////////////// //
+/* _f_ is a function which operates on members of the object _obj_.
+ * _f_ should return true or false in order to continue or stop
+ * iterating over the given object. _closure_ is passed to f in every call.
+ * _f_ is called like
+ *     should_continue = f(closure, object_member_key, object_memeber);
+ */
+function objectforeach(obj, f, closure) {
+	local keys = ::objectmemberkeys(obj);
+	local keys_length = ::objecttotalmembers(keys);
+	local go_on = true;
+	for (local i = 0; go_on and i < keys_length; ++i) {
+		local key = keys[i];
+		go_on = f(closure, key, obj[key]);
+	}
+}
+function objecthaskey(obj, key) {
+	local closure = [{"has_key": false}, {"key": key}];
+	objectforeach(obj, (function(closure, key, val) {
+		::dprintln("closure.has_key(", closure.has_key, ") = key(",
+				key, ") == closure.key(", closure.key, ") -> ",
+				(key == closure.key));
+		return not (closure.has_key = key == closure.key);}),
+		closure);
+	::dprintln("closure = ", closure);
+	return closure.has_key;
+}
+function objecthas(obj, val) {
+	local closure = [{"has": false}, {"val": val}];
+	objectforeach(obj, (function(closure, key, val) {
+		return not (closure.has = val == closure.val);}),
+		closure);
+	return closure.has;
+}
+/* _predicate_ is called like:
+ *    preicate(closure, object_member_key, object_member)
+ * If it returns true, then searhing ends and the object
+ * for which _predicate_ returned true is returned (by
+ * this function).
+ */
+function objectfind(obj, predicate, closure) {
+	local fclosure = [
+		  { "closure": closure }
+		, { "predicate": predicate }
+	];
+	objectforeach(obj, (function(fclosure, key, val) {
+			local result = true;
+			if (fclosure.predicate(fclosure.closure, key, val)) {
+				fclosure.result = val;
+				result = false; // stop iterating
+			}
+			return result;
+		}),
+		fclosure);
+	return fclosure.result;
+}
+function objectfindif(obj, predicate, closure) {
+	return objectfind(obj, predicate, closure) != nil;
+}
+
+// //////////////////// Tables //////////////////// //
+function table_append(table, obj) {
+	table["__data"][table["__nextIndex"]++] = obj;
+}
+/*
+ * should_continue=f(closure, key, val); 
+ */
+function table_foreach(table, f, closure) { 
+	local tclosure = [ { "f": f }, { "closure": closure} ];
+	objectforeach(table["__data"], (function(closure, key, val) {
+			return closure.f(closure.closure, key, val);
+		}),
+		tclosure); 
+}
+function table_find(table, predicate, closure) {
+	return objectfind(table["__data"], predicate, closure);
+}
+function table_findif(table, predicate, closure) {
+	return objectfindif(table["__data"], predicate, closure);
+}
+
+function createTable() {
+	return [
+		  { "append"      : table_append  }
+		, { "foreach"     : table_foreach }
+		, { "find"        : table_find    }
+		, { "findif"      : table_findif  }
+		// state
+		, { "__nextIndex" : 0             }
+		, { "__data"      : []            }
+	];
+}
+
+
+// ///////////////////// Desires ////////////////// //
+// find in-depth (including delegatees too) if a desire
+// understands a message
+function desire_understands(desire, message) {
+	local result = objecthaskey(desire, message);
+	if (not result)
+		result = desire["__delegatees"]..findif(
+				(function(closure, key, delegatee) {
+					return delegatee..understands(closure.message);
+				})
+				, [{"message": message}]);
+	return result;
+}
+// send a message to a desire
+function desire_send(self, methodname, arguments) {
+	local result = nil;
+	if (objecthaskey(self, methodname))
+		result = self[methodname](self, arguments);
+	else {
+		local delegatee = self["__delegatees"]..find(
+				  (function(closure, key, delegatee) {
+					return delegatee..understands(closure.message);
+					})
+				, [{"message": methodname}]);
+		if (delegatee)
+			result = delegatee..send(methodname, arguments);
+	}
+	return result;
+}
+// Create a basic desire
+function createDesire() {
+	return [
+		// State
+		  { "__delegatees": createTable() }
+		// methods
+		, { "send": desire_send }
+		, { "delegate": (function (self, delegatee) {
+				self["__delegatees"]..append(delegatee);
+			})}
+		, { "understands": desire_understands }
+	];
+}
+
+
+father = createDesire();
+father.poo = (function(){ ::println("father poo called."); });
+
+mother = createDesire();
+mother.poo = (function(){ ::println("mother poo called."); });
+
+fother = createDesire();
+fother.loo = (function(){ ::println("fother loo called."); });
+
+mather = createDesire();
+mather.loo = (function(){ :: println( "mather loo called." ) ; } ) ;
+
+choild = createDesire();
+choild..delegate(father);
+
+granchoild = createDesire();
+granchoild..delegate(choild);
+
+
+
+
+methodname = "poo";
+methodargs = nil;
+function play_with_granchoild() {
+	granchoild..send(methodname, methodargs);
+}
+
+
+////////////////////////////
+::print("---------------------------\nShould print \"father poo called.\": ");
+play_with_granchoild();
+
+////////////////////////////
+choild..delegate(mother);
+::print("---------------------------\nShould print \"father poo called.\": ");
+play_with_granchoild();
+
+
+
+
+methodname = "loo";
+methodargs = nil;
+////////////////////////////
+granchoild..delegate(fother);
+::print("---------------------------\nShould print \"fother loo called.\": ");
+play_with_granchoild();
+
+
+////////////////////////////
+granchoild..delegate(mather);
+::print("---------------------------\nShould print \"fother loo called.\": ");
+play_with_granchoild();
+

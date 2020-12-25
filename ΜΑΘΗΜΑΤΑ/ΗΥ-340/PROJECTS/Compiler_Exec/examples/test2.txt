@@ -1,0 +1,7 @@
+function f(){
+    lala = 1;
+    return 5;
+}
+
+t2 = [{"l" : f()}];
+print(t2.l);

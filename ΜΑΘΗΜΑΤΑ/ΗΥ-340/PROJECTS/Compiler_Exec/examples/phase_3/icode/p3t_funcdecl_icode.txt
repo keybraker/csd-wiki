@@ -1,0 +1,33 @@
+#  |     Operation      |       Result       |     Argument_1     |     Argument_2     | Label | Line
+-----------------------------------------------------------------------------------------------------
+  0|                JUMP|          (not used)|          (not used)|          (not used)|      6|    2
+  1|      FUNCTION_START|          (not used)| iamafunction@1[P:0]|          (not used)|     -1|    2
+  2|                 ADD|       _avril.0[L:0]|              a[A:0]|              b[A:1]|     -1|    3
+  3|              RETURN|          (not used)|                   8|          (not used)|     -1|    4
+  4|           SUBSTRACT|       _avril.0[L:0]|                   9|                   0|     -1|    5
+  5|        FUNCTION_END|          (not used)| iamafunction@1[P:0]|          (not used)|     -1|    6
+  6|                JUMP|          (not used)|          (not used)|          (not used)|      9|    8
+  7|      FUNCTION_START|          (not used)|   iamnothing@7[P:0]|          (not used)|     -1|    8
+  8|        FUNCTION_END|          (not used)|   iamnothing@7[P:0]|          (not used)|     -1|    8
+  9|                JUMP|          (not used)|          (not used)|          (not used)|     15|   10
+ 10|      FUNCTION_START|          (not used)|_avrilfunc.0@10[P:1]|          (not used)|     -1|   10
+ 11|           SUBSTRACT|       _avril.0[L:0]|                  10|                   0|     -1|   10
+ 12|              RETURN|          (not used)|                  12|          (not used)|     -1|   10
+ 13|           SUBSTRACT|       _avril.0[L:0]|                  11|                   0|     -1|   10
+ 14|        FUNCTION_END|          (not used)|_avrilfunc.0@10[P:1]|          (not used)|     -1|   10
+ 15|              ASSIGN|    ihavenoname[P:0]|_avrilfunc.0@10[P:1]|          (not used)|      0|   10
+ 16|              ASSIGN|       _avril.0[P:1]|    ihavenoname[P:0]|          (not used)|      0|   10
+ 17|                JUMP|          (not used)|          (not used)|          (not used)|     20|   12
+ 18|      FUNCTION_START|          (not used)|_avrilfunc.1@18[P:2]|          (not used)|     -1|   12
+ 19|        FUNCTION_END|          (not used)|_avrilfunc.1@18[P:2]|          (not used)|     -1|   12
+ 20|                JUMP|          (not used)|          (not used)|          (not used)|     30|   14
+ 21|      FUNCTION_START|          (not used)|_avrilfunc.2@21[P:2]|          (not used)|     -1|   14
+ 22|                JUMP|          (not used)|          (not used)|          (not used)|     29|   14
+ 23|      FUNCTION_START|          (not used)|_avrilfunc.3@23[L:0]|          (not used)|     -1|   14
+ 24|           PARAMETER|          (not used)|                   4|          (not used)|     -1|   14
+ 25|           PARAMETER|          (not used)|                   3|          (not used)|     -1|   14
+ 26|                CALL|          (not used)| iamafunction@0[P:0]|          (not used)|     -1|   14
+ 27|    GET_RETURN_VALUE|       _avril.0[L:0]|          (not used)|          (not used)|     -1|   14
+ 28|        FUNCTION_END|          (not used)|_avrilfunc.3@23[L:0]|          (not used)|     -1|   14
+ 29|        FUNCTION_END|          (not used)|_avrilfunc.2@21[P:2]|          (not used)|     -1|   14
+ 30|               NO_OP|          (not used)|          (not used)|          (not used)|     -1|   18

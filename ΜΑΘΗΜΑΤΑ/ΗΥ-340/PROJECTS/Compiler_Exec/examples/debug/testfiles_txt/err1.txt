@@ -1,0 +1,19 @@
+/*
+    Test file for the final phase of HY-340: Languages & Compilers
+    Computer science dpt, University of Crete, Greece
+*/
+
+function executor (a) {
+    f = (function(a){return(function(a){return(function(a){return(function(a){return a();});});});});
+    print(f(a)(a)(a)(a), "\n");
+}
+
+t = [ { "tablefunc" : (function() { return (function(){return 3; }); }) }, { "tablefunc2" : (function(){return 4;}) } ];
+
+executor(print);
+executor(t.tablefunc);
+executor(t.tablefunc2);
+executor(t.tablefunc());
+executor(t.tablefunc()());	//run time error
+
+

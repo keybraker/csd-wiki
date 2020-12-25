@@ -1,0 +1,51 @@
+#  |     Operation      |       Result       |     Argument_1     |     Argument_2     | Label | Line
+-----------------------------------------------------------------------------------------------------
+  0|        TABLE_CREATE|       _avril.0[P:0]|          (not used)|          (not used)|     -1|    1
+  1|        TABLE_CREATE|       _avril.0[P:0]|          (not used)|          (not used)|     -1|    3
+  2|   TABLE_SET_ELEMENT|                   1|       _avril.0[P:0]|                   0|     -1|    3
+  3|   TABLE_SET_ELEMENT|                   2|       _avril.0[P:0]|                   1|     -1|    3
+  4|   TABLE_SET_ELEMENT|                   3|       _avril.0[P:0]|                   2|     -1|    3
+  5|        TABLE_CREATE|       _avril.0[P:0]|          (not used)|          (not used)|     -1|    5
+  6|        TABLE_CREATE|       _avril.1[P:1]|          (not used)|          (not used)|     -1|    5
+  7|   TABLE_SET_ELEMENT|               hello|       _avril.1[P:1]|                   0|     -1|    5
+  8|   TABLE_SET_ELEMENT|                 lol|       _avril.1[P:1]|                   1|     -1|    5
+  9|        TABLE_CREATE|       _avril.2[P:2]|          (not used)|          (not used)|     -1|    5
+ 10|        TABLE_CREATE|       _avril.3[P:3]|          (not used)|          (not used)|     -1|    5
+ 11|   TABLE_SET_ELEMENT|               false|       _avril.3[P:3]|                   0|     -1|    5
+ 12|   TABLE_SET_ELEMENT|                true|       _avril.3[P:3]|                   1|     -1|    5
+ 13|   TABLE_SET_ELEMENT|       _avril.0[P:0]|       _avril.3[P:3]|                   2|     -1|    5
+ 14|   TABLE_SET_ELEMENT|                   5|       _avril.3[P:3]|                   3|     -1|    5
+ 15|   TABLE_SET_ELEMENT|       _avril.1[P:1]|       _avril.3[P:3]|                   4|     -1|    5
+ 16|   TABLE_SET_ELEMENT|       _avril.2[P:2]|       _avril.3[P:3]|                   5|     -1|    5
+ 17|                JUMP|          (not used)|          (not used)|          (not used)|     21|    7
+ 18|      FUNCTION_START|          (not used)|_avrilfunc.0@18[P:4]|          (not used)|     -1|    7
+ 19|        TABLE_CREATE|       _avril.0[L:0]|          (not used)|          (not used)|     -1|    7
+ 20|        FUNCTION_END|          (not used)|_avrilfunc.0@18[P:4]|          (not used)|     -1|    7
+ 21|        TABLE_CREATE|       _avril.0[P:4]|          (not used)|          (not used)|     -1|    8
+ 22|   TABLE_SET_ELEMENT|                   1|       _avril.0[P:4]|                   0|     -1|    8
+ 23|   TABLE_SET_ELEMENT|                   2|       _avril.0[P:4]|                   1|     -1|    8
+ 24|   TABLE_SET_ELEMENT|                   3|       _avril.0[P:4]|                   2|     -1|    8
+ 25|        TABLE_CREATE|       _avril.1[P:5]|          (not used)|          (not used)|     -1|    8
+ 26|   TABLE_SET_ELEMENT|                   2|       _avril.1[P:5]|                   1|     -1|    8
+ 27|   TABLE_SET_ELEMENT|               false|       _avril.1[P:5]|                bool|     -1|    8
+ 28|   TABLE_SET_ELEMENT|          lib::print|       _avril.1[P:5]|                   5|     -1|    8
+ 29|        TABLE_CREATE|       _avril.2[P:2]|          (not used)|          (not used)|     -1|    9
+ 30|   TABLE_SET_ELEMENT|                   5|       _avril.2[P:2]|                   4|     -1|    9
+ 31|   TABLE_SET_ELEMENT|                  18|       _avril.2[P:2]|                   2|     -1|    9
+ 32|   TABLE_SET_ELEMENT|_avrilfunc.0@18[P:4]|       _avril.2[P:2]|                lulz|     -1|    9
+ 33|   TABLE_SET_ELEMENT|       _avril.0[P:4]|       _avril.2[P:2]|                 wot|     -1|    9
+ 34|   TABLE_SET_ELEMENT|       _avril.1[P:5]|       _avril.2[P:2]|                 wut|     -1|    9
+ 35|                JUMP|          (not used)|          (not used)|          (not used)|     40|   11
+ 36|      FUNCTION_START|          (not used)|        four@36[P:6]|          (not used)|     -1|   11
+ 37|              ASSIGN|           four[A:0]|                   4|          (not used)|      0|   11
+ 38|              ASSIGN|       _avril.0[L:0]|           four[A:0]|          (not used)|      0|   11
+ 39|        FUNCTION_END|          (not used)|        four@36[P:6]|          (not used)|     -1|   11
+ 40|        TABLE_CREATE|       _avril.0[P:6]|          (not used)|          (not used)|     -1|   11
+ 41|   TABLE_SET_ELEMENT|        four@36[P:6]|       _avril.0[P:6]|                   4|     -1|   11
+ 42|        TABLE_CREATE|       _avril.1[P:7]|          (not used)|          (not used)|     -1|   11
+ 43|   TABLE_SET_ELEMENT|       _avril.0[P:6]|       _avril.1[P:7]|                   4|     -1|   11
+ 44|        TABLE_CREATE|       _avril.2[P:8]|          (not used)|          (not used)|     -1|   11
+ 45|   TABLE_SET_ELEMENT|       _avril.1[P:7]|       _avril.2[P:8]|                   4|     -1|   11
+ 46|        TABLE_CREATE|       _avril.3[P:3]|          (not used)|          (not used)|     -1|   11
+ 47|   TABLE_SET_ELEMENT|       _avril.2[P:8]|       _avril.3[P:3]|                   4|     -1|   11
+ 48|               NO_OP|          (not used)|          (not used)|          (not used)|     -1|   14

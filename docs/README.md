@@ -23,7 +23,7 @@
 * 1 εξάμηνο
    1. [(ΗΥ-217) Πιθανότητες](https://github.com/keybraker/Computer-Science-Department-Wiki/blob/master/ΜΑΘΗΜΑΤΑ/ΗΥ-217/(ΗΥ-217).md)
    2. [(ΗΥ-240) Δομές Δεδομένων](https://github.com/keybraker/Computer-Science-Department-Wiki/blob/master/ΜΑΘΗΜΑΤΑ/ΗΥ-240/(ΗΥ-240).md)
-   3. [(ΗΥ-252) Αντικειμενοστραφής Προγραμματισμός JAVA](https://github.com/keybraker/Computer-Science-Department-Wiki/blob/master/ΜΑΘΗΜΑΤΑ/ΗΥ-252/(ΗΥ-252).md)
+   3. [(ΗΥ-252) Αντικειμενοστραφής Προγραμματισμός Java](https://github.com/keybraker/Computer-Science-Department-Wiki/blob/master/ΜΑΘΗΜΑΤΑ/ΗΥ-252/(ΗΥ-252).md)
    4. [(ΗΥ-280) Θεωρία Υπολογισμού](https://github.com/keybraker/Computer-Science-Department-Wiki/blob/master/ΜΑΘΗΜΑΤΑ/ΗΥ-280/(ΗΥ-280).md)
    5. (ΗΥ-208) Αγγλικά ΙΙΙ
 

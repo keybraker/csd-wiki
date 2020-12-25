@@ -1,0 +1,41 @@
+#  |     Operation      |       Result       |     Argument_1     |     Argument_2     | Label | Line
+-----------------------------------------------------------------------------------------------------
+  0|              ASSIGN|              e[P:4]|               false|          (not used)|      0|    2
+  1|              ASSIGN|       _avril.0[P:5]|              e[P:4]|          (not used)|      0|    2
+  2|              ASSIGN|              d[P:3]|       _avril.0[P:5]|          (not used)|      0|    2
+  3|              ASSIGN|       _avril.1[P:6]|              d[P:3]|          (not used)|      0|    2
+  4|              ASSIGN|              c[P:2]|       _avril.1[P:6]|          (not used)|      0|    2
+  5|              ASSIGN|       _avril.2[P:7]|              c[P:2]|          (not used)|      0|    2
+  6|              ASSIGN|              b[P:1]|       _avril.2[P:7]|          (not used)|      0|    2
+  7|              ASSIGN|       _avril.3[P:8]|              b[P:1]|          (not used)|      0|    2
+  8|              ASSIGN|              a[P:0]|       _avril.3[P:8]|          (not used)|      0|    2
+  9|              ASSIGN|       _avril.4[P:9]|              a[P:0]|          (not used)|      0|    2
+ 10|                CALL|          (not used)|              e[P:4]|          (not used)|     -1|    4
+ 11|    GET_RETURN_VALUE|       _avril.0[P:5]|          (not used)|          (not used)|     -1|    4
+ 12|                CALL|          (not used)|              e[P:4]|          (not used)|     -1|    4
+ 13|    GET_RETURN_VALUE|       _avril.1[P:6]|          (not used)|          (not used)|     -1|    4
+ 14|                CALL|          (not used)|       _avril.1[P:6]|          (not used)|     -1|    4
+ 15|    GET_RETURN_VALUE|       _avril.2[P:7]|          (not used)|          (not used)|     -1|    4
+ 16|           PARAMETER|          (not used)|       _avril.2[P:7]|          (not used)|     -1|    4
+ 17|           PARAMETER|          (not used)|              d[P:3]|          (not used)|     -1|    4
+ 18|           PARAMETER|          (not used)|              c[P:2]|          (not used)|     -1|    4
+ 19|           PARAMETER|          (not used)|              b[P:1]|          (not used)|     -1|    4
+ 20|           PARAMETER|          (not used)|              a[P:0]|          (not used)|     -1|    4
+ 21|                CALL|          (not used)|       _avril.0[P:5]|          (not used)|     -1|    4
+ 22|    GET_RETURN_VALUE|       _avril.3[P:8]|          (not used)|          (not used)|     -1|    4
+ 23|                JUMP|          (not used)|          (not used)|          (not used)|     28|    7
+ 24|      FUNCTION_START|          (not used)|_avrilfunc.0@24[P:10]|          (not used)|     -1|    7
+ 25|                CALL|          (not used)|              b[A:1]|          (not used)|     -1|    7
+ 26|    GET_RETURN_VALUE|       _avril.0[L:0]|          (not used)|          (not used)|     -1|    7
+ 27|        FUNCTION_END|          (not used)|_avrilfunc.0@24[P:10]|          (not used)|     -1|    7
+ 28|                CALL|          (not used)|              a[P:0]|          (not used)|     -1|    7
+ 29|    GET_RETURN_VALUE|       _avril.0[P:5]|          (not used)|          (not used)|     -1|    7
+ 30|                CALL|          (not used)|              b[P:1]|          (not used)|     -1|    7
+ 31|    GET_RETURN_VALUE|       _avril.1[P:6]|          (not used)|          (not used)|     -1|    7
+ 32|                CALL|          (not used)|       _avril.1[P:6]|          (not used)|     -1|    7
+ 33|    GET_RETURN_VALUE|       _avril.2[P:7]|          (not used)|          (not used)|     -1|    7
+ 34|           PARAMETER|          (not used)|       _avril.2[P:7]|          (not used)|     -1|    7
+ 35|           PARAMETER|          (not used)|       _avril.0[P:5]|          (not used)|     -1|    7
+ 36|                CALL|          (not used)|_avrilfunc.0@24[P:10]|          (not used)|     -1|    7
+ 37|    GET_RETURN_VALUE|       _avril.3[P:8]|          (not used)|          (not used)|     -1|    7
+ 38|               NO_OP|          (not used)|          (not used)|          (not used)|     -1|   11

@@ -1,0 +1,28 @@
+#  |     Operation      |       Result       |     Argument_1     |     Argument_2     | Label | Line
+-----------------------------------------------------------------------------------------------------
+  0|              ASSIGN|              a[P:0]|                   3|          (not used)|      0|    1
+  1|              ASSIGN|       _avril.0[P:1]|              a[P:0]|          (not used)|      0|    1
+  2|              ASSIGN|              b[P:2]|                   6|          (not used)|      0|    2
+  3|              ASSIGN|       _avril.0[P:1]|              b[P:2]|          (not used)|      0|    2
+  4|              ASSIGN|              c[P:3]|                   9|          (not used)|      0|    3
+  5|              ASSIGN|       _avril.0[P:1]|              c[P:3]|          (not used)|      0|    3
+  6|              ASSIGN|              d[P:4]|                  54|          (not used)|      0|    4
+  7|              ASSIGN|       _avril.0[P:1]|              d[P:4]|          (not used)|      0|    4
+  8|              ASSIGN|              c[P:3]|              d[P:4]|          (not used)|      0|    6
+  9|              ASSIGN|       _avril.0[P:1]|              c[P:3]|          (not used)|      0|    6
+ 10|              ASSIGN|              b[P:2]|       _avril.0[P:1]|          (not used)|      0|    6
+ 11|              ASSIGN|       _avril.1[P:5]|              b[P:2]|          (not used)|      0|    6
+ 12|              ASSIGN|              a[P:0]|       _avril.1[P:5]|          (not used)|      0|    6
+ 13|              ASSIGN|       _avril.2[P:6]|              a[P:0]|          (not used)|      0|    6
+ 14|                 ADD|       _avril.0[P:1]|              c[P:3]|              d[P:4]|     -1|    8
+ 15|            MULTIPLY|       _avril.1[P:5]|                  -1|       _avril.0[P:1]|     -1|    8
+ 16|           SUBSTRACT|       _avril.2[P:6]|              a[P:0]|              b[P:2]|     -1|    8
+ 17|            MULTIPLY|       _avril.3[P:7]|       _avril.1[P:5]|       _avril.2[P:6]|     -1|    8
+ 18|            MULTIPLY|       _avril.4[P:8]|                  -1|       _avril.3[P:7]|     -1|    8
+ 19|            MULTIPLY|       _avril.5[P:9]|                  -1|              b[P:2]|     -1|    8
+ 20|             MODULUS|      _avril.6[P:10]|       _avril.4[P:8]|       _avril.5[P:9]|     -1|    8
+ 21|              ASSIGN|              b[P:2]|      _avril.6[P:10]|          (not used)|      0|    8
+ 22|              ASSIGN|      _avril.7[P:11]|              b[P:2]|          (not used)|      0|    8
+ 23|              ASSIGN|              a[P:0]|      _avril.7[P:11]|          (not used)|      0|    8
+ 24|              ASSIGN|      _avril.8[P:12]|              a[P:0]|          (not used)|      0|    8
+ 25|               NO_OP|          (not used)|          (not used)|          (not used)|     -1|   10

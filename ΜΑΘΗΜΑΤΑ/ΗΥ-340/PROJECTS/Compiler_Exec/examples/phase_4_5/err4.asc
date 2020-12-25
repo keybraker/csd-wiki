@@ -1,0 +1,24 @@
+/*
+    Test file for the final phase of HY-340: Languages & Compilers
+    Computer science dpt, University of Crete, Greece
+
+
+    run time error: Stack overflow!
+*/
+
+function left (func) {
+    print("Func: ", func, " left\n");
+    f = func;
+    func = 999;
+    return f(left);
+}
+
+function right (func) {
+    print("Func: ", func, " right\n");
+    f = func;
+    func = 999;
+    another = "lala";
+    return f(right);
+}
+
+right(left);

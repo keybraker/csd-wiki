@@ -1,0 +1,12 @@
+function Power(base, exponent) {
+	
+	if (exponent < 0)
+		return -1;
+	
+	if (exponent == 0)
+		return 1;
+	
+	return base * Power(base, exponent - 1);
+}
+
+print("2^32 must be 4,294,967,296: >", Power(2,32), "<\n");
