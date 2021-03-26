@@ -68,36 +68,34 @@
 ### Σύνδεσμοι
 
 1. [Students Web](https://student.cc.uoc.gr)
-2. [Webmail](https://webmail.edu.uoc.gr/imp/login.php?Horde=gb8de6ia39rnf090m0gfsmsbh4)
-3. [elearn](https://elearn.uoc.gr/my/)
+2. [Webmail](https://webmail.edu.uoc.gr)
+3. [UoC-eLearn](https://elearn.uoc.gr)
 
 ### Αλυσίδες
 
-| Code   | course Name                        | ECTS | Prerequisites                                                         | Suggested |
-| :----- | :--------------------------------- | :--- | :-------------------------------------------------------------------- | :-------- |
-| HY-100 | Introduction to Computer Science   | 8    | -                                                                     | -         |
-| HY-108 | English I                          | 4    | -                                                                     | -         |
-| HY-109 | English II                         | 4    | HY-108                                                                | -         |
-| HY-110 | Calculus I                         | 8    | -                                                                     | -         |
-| HY-118 | Discrete Mathematics               | 6    | -                                                                     | -         |
-| HY-119 | Linear Algebra                     | 6    | -                                                                     | -         |
-| HY-120 | Digital Design                     | 8    | -                                                                     | -         |
-| HY-150 | Programming                        | 8    | -                                                                     | -         |
-| HY-180 | Logic                              | 6    | -                                                                     | -         |
-| HY-208 | English III                        | 4    | HY-109                                                                | -         |
-| HY-209 | English IV                         | 4    | HY-208                                                                | -         |
-| HY-215 | Applied  Mathematics for Engineers | 8    | HY-110                                                                | -         |
-| HY-217 | Probability                        | 6    | HY-110 or MATH-102                                                    | -         |
-| HY-225 | Computer Organization              | 8    | HY-120                                                                | -         |
-| HY-240 | Data Structures                    | 8    | HY-100, HY-150                                                        | HY-118    |
-| HY-252 | Object-Oriented Programming        | 8    | HY-150                                                                | -         |
-| HY-255 | Software  Technology Laboratory    | 6    | HY-150 or HY-100                                                      | -         |
-| HY-280 | Theory  of Computation             | 6    | -                                                                     | -         |
-| HY-335 | Computer Networks                  | 6    | HY-118 or HY-217                                                      | -         |
-| HY-340 | Languages and Compilers            | 8    | HY-280 and HY-240 or HY-255                                           | HY-225    |
-| HY-345 | Operating Systems                  | 8    | HY-240, HY-255                                                        | HY-225    |
-| HY-360 | Files and Databases                | 8    | HY-240 and {HY-118 or HY-180}                                         | -         |
-| HY-380 | Algorithms and Complexity          | 8    | HY-118, HY-240                                                        | -         |
+| Code   | course Name                        | ECTS | Prerequisites                                                            | Suggested |
+| :----- | :--------------------------------- | :--- | :----------------------------------------------------------------------- | :-------- |
+| HY-100 | Introduction to Computer Science   | 8    | -                                                                        | -         |
+| HY-108 | English I                          | 4    | -                                                                        | -         |
+| HY-109 | English II                         | 4    | HY-108                                                                   | -         |
+| HY-110 | Calculus I                         | 8    | -                                                                        | -         |
+| HY-118 | Discrete Mathematics               | 6    | -                                                                        | -         |
+| HY-119 | Linear Algebra                     | 6    | -                                                                        | -         |
+| HY-120 | Digital Design                     | 8    | -                                                                        | -         |
+| HY-150 | Programming                        | 8    | -                                                                        | -         |
+| HY-180 | Logic                              | 6    | -                                                                        | -         |
+| HY-208 | English III                        | 4    | HY-109                                                                   | -         |
+| HY-209 | English IV                         | 4    | HY-208                                                                   | -         |
+| HY-215 | Applied  Mathematics for Engineers | 8    | HY-110                                                                   | -         |
+| HY-217 | Probability                        | 6    | HY-110 or MATH-102                                                       | -         |
+| HY-225 | Computer Organization              | 8    | HY-120                                                                   | -         |
+| HY-240 | Data Structures                    | 8    | HY-100, HY-150                                                           | HY-118    |
+| HY-252 | Object-Oriented Programming        | 8    | HY-150                                                                   | -         |
+| HY-255 | Software  Technology Laboratory    | 6    | HY-150 or HY-100                                                         | -         |
+| HY-280 | Theory  of Computation             | 6    | -                                                                        | -         |
+| HY-335 | Computer Networks                  | 6    | HY-118 or HY-217                                                         | -         |
+| HY-340 | Languages and Compilers            | 8    | HY-280 and HY-240 or HY-255                                              | HY-225    |
+| HY-345 | Operating Systems                  | 8    | HY-240, HY-255                                                           | HY-225    |
+| HY-360 | Files and Databases                | 8    | HY-240 and {HY-118 or HY-180}                                            | -         |
+| HY-380 | Algorithms and Complexity          | 8    | HY-118, HY-240                                                           | -         |
 | HY-498 | Bachelor΄s Thesis                  | 18   | Successful completion of all core courses<br>of the first four semesters | -         |
-
-> hacker123
