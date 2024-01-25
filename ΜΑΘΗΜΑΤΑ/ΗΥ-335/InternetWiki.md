@@ -1,4 +1,4 @@
-# Protocols of the internet 
+# Protocols of the internet
 1. _[HTTP: HyperText Transmition Protocol](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol)_
 2. _[FTP: File Transfer Protocol](https://en.wikipedia.org/wiki/File_Transfer_Protocol)_
 3. _[SMTP: Simple Mail Transfer Protocol](https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol)_
@@ -17,7 +17,7 @@
 16. _[CSMA/CD: Carrier-sense multiple access with collision detection](https://en.wikipedia.org/wiki/Carrier-sense_multiple_access_with_collision_detection)_
 17. _[ARP: Address Resolution Protocol](https://en.wikipedia.org/wiki/Address_Resolution_Protocol)_
 
-# Services of the internet 
+# Services of the internet
 1. _[RTT: Round Trip Time](https://en.wikipedia.org/wiki/Round-trip_delay_time)_
 2. _[MSS: Maximum Segment Size](https://en.wikipedia.org/wiki/Maximum_segment_size)_
 3. _[DHT: Distributed hash table](https://en.wikipedia.org/wiki/Distributed_hash_table)_

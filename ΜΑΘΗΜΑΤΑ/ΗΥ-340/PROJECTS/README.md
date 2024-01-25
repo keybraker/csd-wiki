@@ -22,7 +22,7 @@ compiler |  alpha  (vm)  | alpha executable |---------------|                 | 
 |   |   |
 |   |   '-- bison_libs
 |   |	    '-- DataStruct.h
-|   | 
+|   |
 |   |-- flex
 |   |   |
 |   |   |-- flex_functions
@@ -81,7 +81,7 @@ compiler |  alpha  (vm)  | alpha executable |---------------|                 | 
 |   |
 |   '-- examples
 |       |
-|       '-- ... 
+|       '-- ...
 |
 |-- Makefile
 '-- README.md
@@ -122,7 +122,7 @@ By typing, ``` make ``` the compiler ``` alphac ``` and vm ``` alpha ``` will be
 ##### 2. EXECUTABLE GENERATION
 To create an executable program you will have to simply type:
 ```
-./alphac YOUR_CODE.txt 
+./alphac YOUR_CODE.txt
 ```
 This will create a new AlphaCode.bin, if you want to give it a custom name , simply add:
 ```

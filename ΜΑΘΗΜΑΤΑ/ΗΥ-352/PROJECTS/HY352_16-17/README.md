@@ -1,6 +1,6 @@
 # A JSON implementation in C++
 
-This is an implementation of JSON in C++ with a single library that is open source. 
+This is an implementation of JSON in C++ with a single library that is open source.
 You can manipulate it to serve your needs.
 
 ## Installation
@@ -19,7 +19,7 @@ cd .../json-implementation/
 
 ### There are three compilation settings:
 
-1. ```make``` ~ to just compile. 
+1. ```make``` ~ to just compile.
 2. ```make run``` ~ to compile-and-run the whole project.
 3. ```make clean``` ~ to compile-run-and-clean the whole project at ones.
 
