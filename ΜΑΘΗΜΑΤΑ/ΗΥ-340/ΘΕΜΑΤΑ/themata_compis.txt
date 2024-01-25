@@ -1,0 +1,37 @@
+ 						8EMATA
+
+1) Na vreite mia grammatikh pou paragei thn ekfrash (......) kai na deixete
+oti einai diforoumenh. Tropopoihste thn
+   grammatikh wste na mhn einai diforoumenh (lecture 4 -> slides 29
+34).
+
+2) Anaferete tis 3 texnikes kataskeuhs apeu8eias se kwdika lexikografikou
+analyth kai grapste se pseudokwdika ton vasiko tropo leitourgias tous 
+(lecture 2 -> slides 22-30). Poia einai protimoterh kai giati ?
+
+3) Grapste se pseudokwdika tis synarthseis anadromikhs ka8odikhs analyshs
+	(lecture 5 -> slides 19-21).
+
+4) Veltiwseis tou SLR parser (lecture 7 -> slide 47).
+
+5) Grammatikes gnwrismatwn (lecture 8 -> slide 17).
+
+6) Ylopoihsh se LL parsers (lecture 8 -> slides 50-51).
+
+7) Vreite ta la8h sto parakatw paradeigma kwdika(........).
+    -> Diavase dialexeis gia endiameso kwdika, Ma8e pws mia ekfrash
+	metafrazetai se endiameso kwdika.
+
+8) Ti kaloume perivallon & synarthsh ? Grapste tis exiswseis perivallontos
+	kai stoivas (lecture 12 -> slides 6, 14, 21, 42-43)
+
+9) Grapste thn antistoixish sthn mnhmh ths synarthshs me ta parakatw
+orismata kai klhseis(.........)
+    (lecture 12 -> o,ti anaferetai sthn diaxeirish twn klhsewn sthn mnhmh
+kai eidika des slides 31-36)
+
+10) Grapsete ena mikro programma se glwssa alpha. Den to 8ymamai akrivws.
+
+
+Dialexeis 13-17 den eixe balei tipota.
+

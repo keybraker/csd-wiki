@@ -1,0 +1,39 @@
+THEMA 1
+Na sxediasete diagramma katastasewn gia while kai letter
+(letter|underscore|digit)*
+
+Pws mporei na meiwthei o kwdikas an exoume polles lexeis-kleidia?
+
+THEMA 2
+if-else		paradeigma diforoumenhs grammatikhs->lysh me RDP(kwdikas)
+
+THEMA 3
+E->E op E,E->(E), E->id, op-> +|-|*|/
+Na kanete to afhrhmeno dentro mias ekfrashs 2*3-10...
+Nea grammatikh me 4 epipeda proteraiothtas me fthinousa seira: - + / *
+
+THEMA 4
+Call->Call(Arguments)|id(Arguments)
+na ginei apo aristera, dexia anadromikh
+
+F -> func (Arg) Block
+	| func (Arg) member Block
+	| func (Arg) Library Block
+	| func id (Arg) Block
+	| func id (Arg) member Block
+	| func id (Arg) Library Block
+
+Ti provlhma exei enas kathodikos syntaktikos analyths me ayth th grammatikh?
+Pws diorthwnetai?(Grapse th diorthwmenh grammatikh)
+
+Katastash mnhmhs
+RDP, LL Parser
+
+Na ektypwnei enwmena "one""two""three""for" xwris na einai orismata 
+kai xwris ekxwrhseis
+
+t = [];
+t1 = [];
+t2 = [];
+t(t1);
+t(t2);
