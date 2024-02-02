@@ -3,9 +3,10 @@
 #include <sys/syscall.h>
 #include <errno.h>
 
-#define __NR_set_param_sys 343   
+#define __NR_set_param_sys 343
 
-int main() {
+int main()
+{
     char group_name = 'B';
     int member_id = 1;
     char group_name1 = 'C';
@@ -15,62 +16,69 @@ int main() {
     char group_name3 = 'A';
     int member_id3 = 3;
 
-    printf("Arguments passed: %d , %c\n\n", member_id , group_name);
+    printf("Arguments passed: %d , %c\n\n", member_id, group_name);
 
     printf("Trap to kernel level \n");
 
     long ret = syscall(__NR_set_param_sys, group_name, member_id);
 
-    if (ret == 0) {
+    if (ret == 0)
+    {
         printf("Parameters set successfully.\n");
-    } else {
+    }
+    else
+    {
         printf("Error setting parameters\n");
     }
 
     printf("Back to user level \n\n");
 
-    printf("Arguments passed: %d , %c\n\n", member_id1 , group_name1);
+    printf("Arguments passed: %d , %c\n\n", member_id1, group_name1);
 
     printf("Trap to kernel level \n");
 
     long ret1 = syscall(__NR_set_param_sys, group_name1, member_id1);
 
-    if (ret1 == 0) {
+    if (ret1 == 0)
+    {
         printf("Parameters set successfully.\n");
-    } else {
+    }
+    else
+    {
         printf("Error setting parameters\n");
-
     }
 
     printf("Back to user level \n\n");
 
-
-    printf("Arguments passed: %d , %c\n\n", member_id2 , group_name2);
+    printf("Arguments passed: %d , %c\n\n", member_id2, group_name2);
 
     printf("Trap to kernel level \n");
 
-
     long ret2 = syscall(__NR_set_param_sys, group_name2, member_id2);
 
-    if (ret2 == 0) {
+    if (ret2 == 0)
+    {
         printf("Parameters set successfully.\n");
-    } else {
+    }
+    else
+    {
         printf("Error setting parameters\n");
     }
 
     printf("Back to user level \n\n");
 
+    printf("Arguments passed: %d , %c\n\n", member_id, group_name);
 
-    printf("Arguments passed: %d , %c\n\n", member_id , group_name);
-
- 
     printf("Trap to kernel level \n");
 
     long ret3 = syscall(__NR_set_param_sys, group_name, member_id);
 
-    if (ret3 == 0) {
+    if (ret3 == 0)
+    {
         printf("Parameters set successfully.\n");
-    } else {
+    }
+    else
+    {
         printf("Error setting parameters\n");
     }
 
