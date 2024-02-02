@@ -5,7 +5,7 @@
  * @brief  Header file with the structures and function prototypes    *
  * for the needs of the Data Structures (HY-240a) project (Fall 2015) *
  * Computer Science Department, University of Crete, Greece           *
-**********************************************************************/
+ **********************************************************************/
 
 #define M 3 /*Number of child's preferences*/
 #define N 4 /*Number of children's age categories*/
@@ -13,41 +13,45 @@
 /*Needed structs definition*/
 
 /*Structure defining a node of the children list*/
-struct child {
-	int cid; /*The identifier of the child.*/
-	int age; /*The age of the child.*/
-	int did; /*The identifier of the child.*/
+struct child
+{
+	int cid;				/*The identifier of the child.*/
+	int age;				/*The age of the child.*/
+	int did;				/*The identifier of the child.*/
 	int present_choices[M]; /*The array in which the preferences of the child for presents are stored*/
-	struct child *next; /* Singly-linked, sorted by id */
+	struct child *next;		/* Singly-linked, sorted by id */
 };
 
 /*Structure defining a node of the presents list*/
-struct present {
-	int pid; /*The identifier of the present*/
-	int stock_cnt; /*The counter of available presents in stock*/
-	int request_cnt; /*The counter of requested presents in stock*/
+struct present
+{
+	int pid;			  /*The identifier of the present*/
+	int stock_cnt;		  /*The counter of available presents in stock*/
+	int request_cnt;	  /*The counter of requested presents in stock*/
 	struct present *prev; /* Double-linked with sentinel, unsorted */
 	struct present *next; /* a variant of the Transpose Heuristic is applied during LookUp() */
 };
 
 /*Structure defining a node of the present assignments list*/
-struct present_assign {
-	int cid; /*The identifier of the child that the present assigned to*/
-	int pid; /*The identifier of the present assigned to the child*/
-	int s_degree; /*The degree of satisfaction of the child who received the present*/
+struct present_assign
+{
+	int cid;					 /*The identifier of the child that the present assigned to*/
+	int pid;					 /*The identifier of the present assigned to the child*/
+	int s_degree;				 /*The degree of satisfaction of the child who received the present*/
 	struct present_assign *next; /* Singly-linked, unsorted */
 };
 
 /*Structure defining a node of the districts list*/
-struct district {
-	int did; /*The identifier of the district that the child lives in*/
+struct district
+{
+	int did;						/*The identifier of the district that the child lives in*/
 	struct present_assign *assignL; /*A pointer to the list of present assignments*/
-	struct district *next; /* Singly-linked, sorted by did */
+	struct district *next;			/* Singly-linked, sorted by did */
 };
 
 extern struct child *Age_categories[N]; /*The array of the children's age categories*/
 
-extern struct present *stock_list; /* global variable which is a pointer to the beginning of the list “stock” */
+extern struct present *stock_list;	   /* global variable which is a pointer to the beginning of the list “stock” */
 extern struct present *stock_sentinel; /* global variable of pointer to the sentinel node of the list “stock” */
 
 extern struct district *district_head;
@@ -82,7 +86,7 @@ int buy_present(int pid, int stock_cnt);
 int letter_received(int cid, int age, int did, int pid1, int pid2, int pid3);
 
 /**
- * @brief Assign presents to children taking into consideration their preference and stock availability 
+ * @brief Assign presents to children taking into consideration their preference and stock availability
  *
  * @return 1 on success
  *         0 on failure

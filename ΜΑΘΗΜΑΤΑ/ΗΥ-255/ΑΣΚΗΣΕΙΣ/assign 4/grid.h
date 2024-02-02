@@ -6,15 +6,18 @@
  * as4
  */
 
-#define  FALSE  0
-#define  TRUE   1
+#define FALSE 0
+#define TRUE 1
 
-typedef struct grid_s {
-  int unique;      /* if 1 after solving, puzzle has unique solution */
-  struct { 
-    int val;       /* value of element i,j */
-    struct {         
-      int count;   /* number of possible choices for element i,j */ 
+typedef struct grid_s
+{
+  int unique; /* if 1 after solving, puzzle has unique solution */
+  struct
+  {
+    int val; /* value of element i,j */
+    struct
+    {
+      int count;   /* number of possible choices for element i,j */
       int num[10]; /* map of choices: num[k]==1 if k is a valid choice
                       for element i,j, else num[k]=0 */
     } choices;     /* struct choices is used while solving the

@@ -1,4 +1,4 @@
-/*	
+/*
  * README
  * John Rambo
  * rambo@csd.uoc.gr
@@ -21,8 +21,6 @@
 	   (length > 0) pou 8a mas dwsei false an exei arnitikh timh to length
 	   k true alliws.
 
-
-	
 	Ektos apo tis zhtoumenes synarthseis xrhsimopoih8hke k mia ektos tou
 	interface, h findchar pou psaxnei gia first occurence enos char c se
 	ena string s (antistoixh ths strchr ths string.h).

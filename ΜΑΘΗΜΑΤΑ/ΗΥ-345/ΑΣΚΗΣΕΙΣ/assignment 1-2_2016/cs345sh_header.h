@@ -5,7 +5,7 @@
  * @brief  Header file with the structures and function prototypes    *
  * for the needs of the Operating Systems (HY-345) ask1 (Fall 2016)	  *
  * Computer Science Department, University of Crete, Greece           *
-**********************************************************************/
+ **********************************************************************/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -21,7 +21,8 @@
 #define PrintEnding "----------------------------\ncs345sh execution has ended.\n⏟⏟⏟⏟⏟⏟⏟⏟⏟⏟⏟⏟⏟⏟⏟⏟⏟⏟⏟⏟⏟⏟⏟⏟⏟⏟⏟\n"
 
 /*Needed structs definition*/
-struct var {
+struct var
+{
   char *name, *data;
   struct var *next;
 };
@@ -41,7 +42,7 @@ extern void executioner_direct(char *command);
 extern void executioner_var(char *command);
 extern void pipe_func(char *buffer, struct var *root_var);
 
-extern void execv_args_creator(char *command,char *args[]);
+extern void execv_args_creator(char *command, char *args[]);
 
 extern void redirection_func_type_one(char *buffer, struct var *root_var);
 extern void redirection_func_type_two(char *buffer, struct var *root_var);
@@ -52,12 +53,12 @@ extern void man_func(void);
 
 /*
 extern	char *joker;
-extern	char *name; 
-extern  char *path; 
-extern  char *buf; 
-extern  char *buffer; 
-extern  char *buffer_cpy; 
-extern  char *sep_buffer; 
+extern	char *name;
+extern  char *path;
+extern  char *buf;
+extern  char *buffer;
+extern  char *buffer_cpy;
+extern  char *sep_buffer;
 extern  char *var_name;
 extern  char *var_data;
 extern	int answer;
@@ -68,9 +69,7 @@ extern  size_t buffer_size;
 
 
 extern struct var *root_var;
-extern struct var *current_var; 
+extern struct var *current_var;
 extern struct var *new_var;
-extern struct var *reader_var;  
+extern struct var *reader_var;
 */
-
-

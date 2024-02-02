@@ -17,10 +17,10 @@ typedef struct SymTable *SymTable_T;
 
 typedef struct Sym *SymT;
 
-void pfApply(const char *pcKey, void *pvValue, void *pvExtra) {
+void pfApply(const char *pcKey, void *pvValue, void *pvExtra)
+{
 
-	*(int *) pvValue += *(int *) pvExtra;
-
+      *(int *)pvValue += *(int *)pvExtra;
 }
 /*returns a new symtable_t which is empty*/
 SymTable_T SymTable_new(void);
@@ -38,8 +38,8 @@ int SymTable_remove(SymTable_T oSymTable, const char *pcKey);
 
 int SymTable_contains(SymTable_T oSymTable, const char *pcKey);
 
-void* SymTable_get(SymTable_T oSymTable, const char *pcKey);
+void *SymTable_get(SymTable_T oSymTable, const char *pcKey);
 
 void SymTable_map(SymTable_T oSymTable,
-      void (*pfApply)(const char *pcKey, void *pvValue, void *pvExtra),
-      void *pvExtra);
+                  void (*pfApply)(const char *pcKey, void *pvValue, void *pvExtra),
+                  void *pvExtra);

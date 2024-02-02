@@ -8,10 +8,10 @@ float calculateCharges(int c)
     }
     else if (c < 20)
     {                                 // There is 20 and not 24 because 20 minus 1 is the
-        return (((c - 3) * 0.5) + 2); // 19 that if dicreased by 3 (the hours
+        return (((c - 3) * 0.5) + 2); // 19 that if decreased by 3 (the hours
     }
     else
-    {              // from the beggining) = 16 multiplied with 0.5
+    {              // from the beginning) = 16 multiplied with 0.5
         return 10; // gives 8 plus 2 = 10 euro which is our charge limit.
     }
     return -1;

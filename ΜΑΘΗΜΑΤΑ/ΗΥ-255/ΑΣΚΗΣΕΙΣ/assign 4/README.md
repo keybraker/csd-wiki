@@ -12,4 +12,3 @@
     static int sudoku_has_errors(Grid_T g, int print)
     static int sudoku_count_blanks(Grid_T g)
     static void sudoku_apply_choice(Grid_T *g, int i, int j, int n)
-   

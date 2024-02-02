@@ -16,15 +16,15 @@
  * initialized to these values
  * the input has the format:
 
-1 2 3 4 5 6 7 8 9 
+1 2 3 4 5 6 7 8 9
 4 5 6 7 8 9 1 2 3
 7 8 9 1 2 3 4 5 6
-2 3 4 5 6 7 8 9 1 
+2 3 4 5 6 7 8 9 1
 5 6 7 8 9 1 2 3 4
-8 9 1 2 3 4 5 6 7 
+8 9 1 2 3 4 5 6 7
 3 4 5 6 7 8 9 1 2
-6 7 8 9 1 2 3 4 5 
-9 1 2 3 4 5 6 7 8 
+6 7 8 9 1 2 3 4 5
+9 1 2 3 4 5 6 7 8
 
  * each number is followed by a space. Each line is terminated with
  * \n. Values of 0 indicate empty grid cells.
@@ -66,7 +66,7 @@ int sudoku_solution_is_unique(Grid_T g);
  * elements having non-0 value
  * the smaller nelts the harder may be to generate/solve the puzzle
  * for instance nelts=81 should return a completed and correct puzzle
- * if unique=1 the puzzle must have a unique choice at each step of 
+ * if unique=1 the puzzle must have a unique choice at each step of
  * finding the solution
  */
 Grid_T sudoku_generate(int nelts, int unique);

@@ -13,7 +13,7 @@
     (d)
       Ari8mos entolwn ths main:  19
       Ari8mos bytes pou katalamvanoun oi entoles ths main:  60
-      To katallhlo offset gia to zhtoumeno breakpoint einai:  28 
+      To katallhlo offset gia to zhtoumeno breakpoint einai:  28
     (e)
       S   = 500500                          [0x80495a4]
       Msg = "The sum from 0 to %d is %d\n"  [0x80495a8]

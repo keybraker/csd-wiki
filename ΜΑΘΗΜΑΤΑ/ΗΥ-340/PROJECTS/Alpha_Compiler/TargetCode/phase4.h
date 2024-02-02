@@ -6,13 +6,14 @@ typedef struct stringToBinary stringToBinary;
 typedef struct userFuncToBinary userFuncToBinary;
 typedef struct libFuncToBinary libFuncToBinary;
 
-struct instructionToBinary{
+struct instructionToBinary
+{
 
 	int instrOpcode;
-	
+
 	int resultType;
 	int resultOffset;
-	
+
 	int arg1Type;
 	int arg1Offset;
 
@@ -20,21 +21,20 @@ struct instructionToBinary{
 	int arg2Offset;
 
 	int instrLine;
-
 };
 
 // struct numberToBinary{
 
 // 	int offset;
 // 	int value;
-	
+
 // };
 
 // struct stringToBinary{
 
 // 	int offset;
 // 	char* value;
-	
+
 // };
 
 // struct userFuncToBinary{
@@ -43,13 +43,12 @@ struct instructionToBinary{
 // 	int address;
 // 	int localSize;
 // 	char* id;
-	
+
 // };
 
 // struct libFuncToBinary{
 
 // 	int offset;
 // 	char* value;
-	
-// };
 
+// };
