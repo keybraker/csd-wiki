@@ -2,7 +2,7 @@
 
 int main()
 {
-	int args[2] = {0,0},k=0,check=0,input=0,file_check=0;
+	int args[2] = {0, 0}, k = 0, check = 0, input = 0, file_check = 0;
 	char *cmd = (char *)malloc(sizeof(char));
 
 	printf("\n");
@@ -26,38 +26,66 @@ int main()
 	printf(" want to execute or enter custom file : ");
 	scanf("%d", &input);
 
-	if (input == 1) {
+	if (input == 1)
+	{
 		file_check = file_reader("oscillator_beacon.txt");
-	}else if (input == 2) {
+	}
+	else if (input == 2)
+	{
 		file_check = file_reader("oscillator_blinker.txt");
-	}else if (input == 3) {
+	}
+	else if (input == 3)
+	{
 		file_check = file_reader("oscillator_Pentadecathlon.txt");
-	}else if (input == 4) {
+	}
+	else if (input == 4)
+	{
 		file_check = file_reader("oscillator_pulsar.txt");
-	}else if (input == 5) {
+	}
+	else if (input == 5)
+	{
 		file_check = file_reader("oscillator_toad.txt");
-	}else if (input == 6) {
+	}
+	else if (input == 6)
+	{
 		file_check = file_reader("spaceships_glider.txt");
-	}else if (input == 7) {
+	}
+	else if (input == 7)
+	{
 		file_check = file_reader("spaceships_lwss.txt");
-	}else if (input == 8) {
+	}
+	else if (input == 8)
+	{
 		file_check = file_reader("still_behive.txt");
-	}else if (input == 9) {
+	}
+	else if (input == 9)
+	{
 		file_check = file_reader("still_block.txt");
-	}else if (input == 10) {
+	}
+	else if (input == 10)
+	{
 		file_check = file_reader("still_boat.txt");
-	}else if (input == 11) {
+	}
+	else if (input == 11)
+	{
 		file_check = file_reader("still_loaf.txt");
-	}else if (input == 0){
+	}
+	else if (input == 0)
+	{
 		printf(" Enter the custom file you want to execute : ");
 		scanf("%s", cmd);
 		file_check = file_reader(cmd);
-	}else{
+	}
+	else
+	{
 		printf(" invalid input given, program will end\n");
 		return 0;
 	}
 
-	if (file_check) { return 0; }
+	if (file_check)
+	{
+		return 0;
+	}
 
 	// first time life_print
 	print_life();
@@ -66,27 +94,40 @@ int main()
 	pthread_t executioner[100];
 
 	// infinite looper
-	while (1) {
+	while (1)
+	{
 
 		// 100 loops for every thread
 		k = 0;
-		while (k < 100) {
+		while (k < 100)
+		{
 
 			// giving every one of the threads a hundredth of the work to execute
-			check = pthread_create(&(executioner[k]), NULL, exec_hundredth,(void *)&args);
-			if(check == 1) { fprintf(stderr, "Error creating thread\n"); return 1; }
+			check = pthread_create(&(executioner[k]), NULL, exec_hundredth, (void *)&args);
+			if (check == 1)
+			{
+				fprintf(stderr, "Error creating thread\n");
+				return 1;
+			}
 			// joining every threat to mother exec
 			pthread_join(executioner[k], NULL);
 			// changing x,y for next thread's starting point
-			if(args[1] == 90){ args[0] = args[0]+10; args[1]=0;}else{	args[1] = args[1]+10; }
+			if (args[1] == 90)
+			{
+				args[0] = args[0] + 10;
+				args[1] = 0;
+			}
+			else
+			{
+				args[1] = args[1] + 10;
+			}
 			k++;
-
 		}
 		// initializing args for next thread
-		args[0] = 0; args[1] = 0;
+		args[0] = 0;
+		args[1] = 0;
 		// printing every life stage
 		print_life();
-
 	}
 
 	return 0;

@@ -18,12 +18,12 @@ SymTable_T SymTable_new(void)
 	SymTable_T newsym;
 
 	newsym = malloc(sizeof(struct SymTable));
-	
+
 	assert(newsym != NULL);
 
-	newsym -> key = NULL;
-	newsym -> value = NULL;
-	newsym -> next = NULL;
+	newsym->key = NULL;
+	newsym->value = NULL;
+	newsym->next = NULL;
 
 	head = newsym;
 
@@ -33,7 +33,7 @@ SymTable_T SymTable_new(void)
 /*frees whole memory osymtable uses, if osymtable = null do nothing*/
 void SymTable_free(SymTable_T oSymTable)
 {
-	if( oSymTable == NULL )
+	if (oSymTable == NULL)
 	{
 		printf("empty array do not free memory\n");
 		return;
@@ -47,16 +47,16 @@ void SymTable_free(SymTable_T oSymTable)
 /*returns the number of bindings of osymtable*/
 unsigned int SymTable_getLength(SymTable_T oSymTable)
 {
-	unsigned int counter=0;
+	unsigned int counter = 0;
 	SymTable_T head_o;
 
 	assert(oSymTable != NULL);
 
 	head_o = oSymTable;
-	while(head_o != NULL)
+	while (head_o != NULL)
 	{
-		counter ++;
-		head_o = head_o -> next;
+		counter++;
+		head_o = head_o->next;
 	}
 	return counter;
 }
@@ -72,23 +72,23 @@ int SymTable_put(SymTable_T oSymTable, char *pcKey, void *pvValue)
 	assert(pcKey != NULL);
 
 	head_o = oSymTable;
-	
-	while(head_o != NULL)
-	{	
-		if(head_o -> key == pcKey)
+
+	while (head_o != NULL)
+	{
+		if (head_o->key == pcKey)
 		{
 			flag = 1;
 		}
-		head_o = head_o -> next;
+		head_o = head_o->next;
 	}
 
-	if(flag == 0)
+	if (flag == 0)
 	{
 		newsym = malloc(sizeof(struct SymTable));
 
-		newsym -> key = pcKey;
-		newsym -> value = pvValue;
-		newsym -> next = oSymTable;
+		newsym->key = pcKey;
+		newsym->value = pvValue;
+		newsym->next = oSymTable;
 
 		oSymTable = newsym;
 		head = oSymTable;
@@ -110,45 +110,44 @@ int SymTable_remove(SymTable_T oSymTable, const char *pcKey)
 
 	head_o = oSymTable;
 	previous = NULL;
-	while(head_o != NULL)
+	while (head_o != NULL)
 	{
-		if(head_o -> key == pcKey)
+		if (head_o->key == pcKey)
 		{
-			if(head_o -> next == NULL)
+			if (head_o->next == NULL)
 			{
 				/*teleutaio node tis listas*/
-				if(previous == NULL)
+				if (previous == NULL)
 				{
-					oSymTable = NULL;		/*adeia lista pleon*/
+					oSymTable = NULL; /*adeia lista pleon*/
 					head = NULL;
 					return 1;
 				}
 				else
 				{
-					previous -> next = NULL;
+					previous->next = NULL;
 					return 1;
 				}
 			}
 			else
 			{
-				if(previous == NULL)
+				if (previous == NULL)
 				{
 					/*proto node tis listas*/
-					oSymTable = head_o -> next;
+					oSymTable = head_o->next;
 					head = oSymTable;
 					return 1;
-
 				}
 				else
 				{
-					previous -> next = head_o -> next;		/*to prospernao*/
+					previous->next = head_o->next; /*to prospernao*/
 					return 1;
 				}
 			}
 		}
 
 		previous = head_o;
-		head_o = head_o -> next;
+		head_o = head_o->next;
 	}
 
 	/*an ftasei edo den brike to pckey */
@@ -159,26 +158,26 @@ int SymTable_remove(SymTable_T oSymTable, const char *pcKey)
 int SymTable_contains(SymTable_T oSymTable, const char *pcKey)
 {
 	SymTable_T head_o;
-	
+
 	assert(oSymTable != NULL);
 	assert(pcKey != NULL);
-	
+
 	head_o = oSymTable;
 
-	while(head_o != NULL)
+	while (head_o != NULL)
 	{
-		if(head_o -> key == pcKey)
+		if (head_o->key == pcKey)
 		{
 			return 1;
 		}
-		head_o = head_o -> next;
+		head_o = head_o->next;
 	}
 
 	return 0;
 }
 
-/*ckecks if there is binding with pckey and returns it*/ 
-void* SymTable_get(SymTable_T oSymTable, const char *pcKey)
+/*ckecks if there is binding with pckey and returns it*/
+void *SymTable_get(SymTable_T oSymTable, const char *pcKey)
 {
 	SymTable_T head_o;
 
@@ -187,36 +186,33 @@ void* SymTable_get(SymTable_T oSymTable, const char *pcKey)
 
 	head_o = oSymTable;
 
-	while(head_o != NULL)
+	while (head_o != NULL)
 	{
-		if(head_o -> key == pcKey)
+		if (head_o->key == pcKey)
 		{
 			return head_o;
 		}
 
-		head_o = head_o -> next;
+		head_o = head_o->next;
 	}
 	return NULL;
 }
 
 /*pfAplly in every binding with the extra*/
 void SymTable_map(SymTable_T oSymTable,
-      void (*pfApply)(const char *pcKey, void *pvValue, void *pvExtra),
-      void *pvExtra)
+				  void (*pfApply)(const char *pcKey, void *pvValue, void *pvExtra),
+				  void *pvExtra)
 {
 	SymTable_T node;
 
 	assert(oSymTable != NULL);
-  	assert(pfApply != NULL);
-  	assert(pvExtra != NULL);
+	assert(pfApply != NULL);
+	assert(pvExtra != NULL);
 
-
-  	for (node = head;
-       node != NULL;
-       node = node -> next)
-  	{
-  		(*pfApply)(node -> key, node -> value, pvExtra);
-
-  	}
-
+	for (node = head;
+		 node != NULL;
+		 node = node->next)
+	{
+		(*pfApply)(node->key, node->value, pvExtra);
+	}
 }

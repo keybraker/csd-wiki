@@ -1,33 +1,42 @@
 #include "phase3.h"
 
-int isFuncJumpStackEmpty(){ if(functionJumpStack == NULL) return 1; else return 0; }
+int isFuncJumpStackEmpty()
+{
+	if (functionJumpStack == NULL)
+		return 1;
+	else
+		return 0;
+}
 
-void pushFuncJump(int mem){ 
+void pushFuncJump(int mem)
+{
 
-	if(functionJumpStack == NULL){ 
+	if (functionJumpStack == NULL)
+	{
 
-		myStack *newTop = (myStack*) malloc (sizeof(myStack));
+		myStack *newTop = (myStack *)malloc(sizeof(myStack));
 		newTop->info = mem;
 		newTop->next = NULL;
 
 		functionJumpStack = newTop;
+	}
+	else
+	{
 
-	}else{ 
-
-		myStack *newTop = (myStack*) malloc (sizeof(myStack));
+		myStack *newTop = (myStack *)malloc(sizeof(myStack));
 		newTop->info = mem;
 
 		newTop->next = functionJumpStack;
 		functionJumpStack = newTop;
-
 	}
-
 }
 
-int popFuncJump(){
+int popFuncJump()
+{
 
-	if(!isFuncJumpStackEmpty()){
-		
+	if (!isFuncJumpStackEmpty())
+	{
+
 		myStack *tmp = functionJumpStack;
 		int i = tmp->info;
 
@@ -37,9 +46,9 @@ int popFuncJump(){
 		// thows seg on csd machines free( tmp);
 
 		return i;
-
-	}else{
+	}
+	else
+	{
 		return -1;
 	}
-	
 }

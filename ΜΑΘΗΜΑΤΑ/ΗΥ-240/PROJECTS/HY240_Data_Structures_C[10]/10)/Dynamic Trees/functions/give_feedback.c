@@ -12,32 +12,41 @@
 #include <stdlib.h>
 #include "../libraries/santa_claus.h"
 
-int give_feedback(int cid, int did, int s_degree) {
-    
-    struct district* DistrictsLR = DistrictsL;
-    
-    if (DistrictsLR == NULL) { printf("Districts list is empty\n"); return 1; }
-    
-    while (DistrictsLR->did != did) { //printf(" . ");
+int give_feedback(int cid, int did, int s_degree)
+{
+
+    struct district *DistrictsLR = DistrictsL;
+
+    if (DistrictsLR == NULL)
+    {
+        printf("Districts list is empty\n");
+        return 1;
+    }
+
+    while (DistrictsLR->did != did)
+    { // printf(" . ");
         DistrictsLR = DistrictsLR->next;
     }
-    
-    int i=0;
-    while (i < DistrictsLR->children_cnt) {
-        
-        if (DistrictsLR->assignHT[i].cid == cid) {
-            
-            if (DistrictsLR->assignHT[i].pid == -2) {
+
+    int i = 0;
+    while (i < DistrictsLR->children_cnt)
+    {
+
+        if (DistrictsLR->assignHT[i].cid == cid)
+        {
+
+            if (DistrictsLR->assignHT[i].pid == -2)
+            {
                 DistrictsLR->assignHT[i].s_degree = 1;
-            }else{
+            }
+            else
+            {
                 DistrictsLR->assignHT[i].s_degree = s_degree;
             }
-            printf("F <%d>, <%d>, <%d>\n\nDONE\n\n",DistrictsLR->assignHT[i].cid,DistrictsLR->assignHT[i].s_degree,DistrictsLR->assignHT[i].pid);
-
+            printf("F <%d>, <%d>, <%d>\n\nDONE\n\n", DistrictsLR->assignHT[i].cid, DistrictsLR->assignHT[i].s_degree, DistrictsLR->assignHT[i].pid);
         }
-        
+
         i++;
-    
     }
 
     return 1;

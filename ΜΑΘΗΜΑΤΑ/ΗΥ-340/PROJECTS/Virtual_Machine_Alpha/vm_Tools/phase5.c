@@ -41,7 +41,7 @@ avm_memcell* avm_translate_operand(vmarg* arg, avm_memcell* reg){
 								return reg;
 							}
 
-		case libfunc_a:		{	
+		case libfunc_a:		{
 								reg->type = libfunc_m;
 								reg->data.libfuncVal = libfuncs_getused(arg->val);
 								return reg;
@@ -50,7 +50,6 @@ avm_memcell* avm_translate_operand(vmarg* arg, avm_memcell* reg){
 		default:			assert(0);
 
 		}
-
 }
 
 double consts_getnumber(unsigned int index){\
@@ -86,19 +85,19 @@ void initPhase5(void){
 int main(int argc, char **argv){
 
 	char* customName = strdup("");
-	int printerino = 0, i = 1, custom = 0; 
+	int printerino = 0, i = 1, custom = 0;
 	while(i <= argc && argv[i] != NULL){
-		
+
 		if(strcmp(argv[i],"-s") == 0){ printf(a_c_r"\nლ(~•̀︿•́~)つ︻̷┻̿═━一 Soupia\n\n"a_c_re); }
 		if(strcmp(argv[i],"-p") == 0){ printerino = 1; }
-		if(strcmp(argv[i],"-i") == 0){ 
-			printf(a_c_y"| ------------------------------------------ |\n"a_c_re); 
-			printf(a_c_y"| Compiler by Murtakis, Agelarakis, Tsiakkas |\n"a_c_re); 
-			printf(a_c_y"| ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ |\n"a_c_re); 
-			printf(a_c_y"| Fully functional compiler for alpha        |\n"a_c_re); 
-			printf(a_c_y"| Made in 2017                               |\n"a_c_re); 
-			printf(a_c_y"| All rights reserved                        |\n"a_c_re); 
-			printf(a_c_y"| ------------------------------------------ |\n\n"a_c_re); 
+		if(strcmp(argv[i],"-i") == 0){
+			printf(a_c_y"| ------------------------------------------ |\n"a_c_re);
+			printf(a_c_y"| Compiler by Murtakis, Agelarakis, Tsiakkas |\n"a_c_re);
+			printf(a_c_y"| ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ |\n"a_c_re);
+			printf(a_c_y"| Fully functional compiler for alpha        |\n"a_c_re);
+			printf(a_c_y"| Made in 2017                               |\n"a_c_re);
+			printf(a_c_y"| All rights reserved                        |\n"a_c_re);
+			printf(a_c_y"| ------------------------------------------ |\n\n"a_c_re);
 		}
 		if(strcmp(argv[i],"-n") == 0){
 			strcat(customName,argv[i+1]);
@@ -110,7 +109,7 @@ int main(int argc, char **argv){
 	}
 
 	if(custom == 0) {
-		strcat(customName,"AlphaCode"); 
+		strcat(customName,"AlphaCode");
 	}
 
 	DataTables* tables;
@@ -135,7 +134,6 @@ int main(int argc, char **argv){
 	avm_initialize();
 
 	while(executionFinished == 0){
-		
 		//printf("Executing instruction %d\n",pc );
 		execute_cycle();
 	}

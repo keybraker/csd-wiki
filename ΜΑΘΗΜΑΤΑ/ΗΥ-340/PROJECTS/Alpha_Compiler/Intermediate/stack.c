@@ -1,34 +1,42 @@
 #include "phase3.h"
 
-int isStackEmpty(){ if(functionLocalsStack == NULL) return 1; else return 0; }
+int isStackEmpty()
+{
+	if (functionLocalsStack == NULL)
+		return 1;
+	else
+		return 0;
+}
 
+void push(int mem)
+{
 
-void push(int mem){ 
+	if (functionLocalsStack == NULL)
+	{
 
-	if(functionLocalsStack == NULL){ 
-
-		myStack *newTop = (myStack*) malloc (sizeof(myStack));
+		myStack *newTop = (myStack *)malloc(sizeof(myStack));
 		newTop->info = mem;
 		newTop->next = NULL;
 
 		functionLocalsStack = newTop;
+	}
+	else
+	{
 
-	}else{ 
-
-		myStack *newTop = (myStack*) malloc (sizeof(myStack));
+		myStack *newTop = (myStack *)malloc(sizeof(myStack));
 		newTop->info = mem;
 
 		newTop->next = functionLocalsStack;
 		functionLocalsStack = newTop;
-
 	}
-
 }
 
-int pop(void){
+int pop(void)
+{
 
-	if(!isStackEmpty()){
-		
+	if (!isStackEmpty())
+	{
+
 		myStack *tmp = functionLocalsStack;
 		int i = tmp->info;
 
@@ -38,10 +46,9 @@ int pop(void){
 		// thows seg on csd machines free( tmp);
 
 		return i;
-
-	}else{
+	}
+	else
+	{
 		return -1;
 	}
-	
 }
-

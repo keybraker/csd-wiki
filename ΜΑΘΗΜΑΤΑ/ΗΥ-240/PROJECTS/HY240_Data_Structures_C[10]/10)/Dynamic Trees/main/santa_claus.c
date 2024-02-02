@@ -5,7 +5,7 @@
  * @brief  Main file for the needs of the Data Structures (HY-240a)   *
  * project (Fall 2015)                                                *
  * Computer Science Department, University of Crete, Greece           *
-**********************************************************************/
+ **********************************************************************/
 
 #include <errno.h>
 #include <fcntl.h>
@@ -37,11 +37,11 @@ int give_feedback(int cid, int did, int s_degree) {
 }
 
 int new_season(void) {
-    return 1;
+	return 1;
 }
 
 int clear_list_of_children(void) {
-    return 1;
+	return 1;
 }
 
 int analytics(int k) {
@@ -64,12 +64,15 @@ int print_stock(void) {
 	return 1;
 }
 */
-void tokenize(char *s) { /*tokenization of input arguments*/
+void tokenize(char *s)
+{ /*tokenization of input arguments*/
 	char *p, *last;
 	int i = 0;
 	for ((p = strtok_r(s, " ", &last)); p;
-	    (p = strtok_r(NULL, " ", &last))) {
-		if (i < LEN(tokens) - 1) {
+		 (p = strtok_r(NULL, " ", &last)))
+	{
+		if (i < LEN(tokens) - 1)
+		{
 			tokens[i] = p;
 			asint[i] = atoi(p);
 			i++;
@@ -78,8 +81,9 @@ void tokenize(char *s) { /*tokenization of input arguments*/
 	tokens[i] = NULL;
 }
 
-int main(int argc, char *argv[]) { /*main function*/
-	
+int main(int argc, char *argv[])
+{ /*main function*/
+
 	char *prog = argv[0];
 	char *file = argv[1];
 	char buf[1024];
@@ -88,18 +92,21 @@ int main(int argc, char *argv[]) { /*main function*/
 
 	FILE *fp;
 
-	if (file == NULL) {
+	if (file == NULL)
+	{
 		fprintf(stderr, "Usage: %s file\n", prog);
 		return 1;
 	}
 
 	fp = fopen(file, "r");
-	if (fp == NULL) {
+	if (fp == NULL)
+	{
 		fprintf(stderr, "fopen %s: %s\n", file, strerror(errno));
 		return 1;
 	}
 	int number = 1;
-	while (fgets(buf, sizeof(buf), fp) != NULL) {
+	while (fgets(buf, sizeof(buf), fp) != NULL)
+	{
 
 		buf[strcspn(buf, "\n")] = '\0';
 		tokenize(buf);
@@ -107,7 +114,8 @@ int main(int argc, char *argv[]) { /*main function*/
 
 		printf("(%d) Event %c started\n", number, ev);
 
-		switch (ev) {
+		switch (ev)
+		{
 		case 'B':
 			ret = buy_present(asint[1], asint[2]);
 			break;
@@ -148,8 +156,6 @@ int main(int argc, char *argv[]) { /*main function*/
 
 		fprintf(stderr, "(%d) Event '%c' %s\n", number, ev, ret ? "passed" : "failed");
 		number++;
-
 	}
 	return 1;
 }
-

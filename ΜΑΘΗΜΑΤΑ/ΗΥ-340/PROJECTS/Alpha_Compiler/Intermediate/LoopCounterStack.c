@@ -1,34 +1,42 @@
 #include "phase3.h"
 
-int isLoopCounterStackEmpty(){ if(loopCounterStack == NULL) return 1; else return 0; }
+int isLoopCounterStackEmpty()
+{
+	if (loopCounterStack == NULL)
+		return 1;
+	else
+		return 0;
+}
 
+void pushLoopCounter(int mem)
+{
 
-void pushLoopCounter(int mem){ 
+	if (loopCounterStack == NULL)
+	{
 
-	if(loopCounterStack == NULL){ 
-
-		myStack *newTop = (myStack*) malloc (sizeof(myStack));
+		myStack *newTop = (myStack *)malloc(sizeof(myStack));
 		newTop->info = mem;
 		newTop->next = NULL;
 
 		loopCounterStack = newTop;
+	}
+	else
+	{
 
-	}else{ 
-
-		myStack *newTop = (myStack*) malloc (sizeof(myStack));
+		myStack *newTop = (myStack *)malloc(sizeof(myStack));
 		newTop->info = mem;
 
 		newTop->next = loopCounterStack;
 		loopCounterStack = newTop;
-
 	}
-
 }
 
-int popLoopCounter(){
+int popLoopCounter()
+{
 
-	if(!isLoopCounterStackEmpty()){
-		
+	if (!isLoopCounterStackEmpty())
+	{
+
 		myStack *tmp = loopCounterStack;
 		int i = tmp->info;
 
@@ -38,10 +46,9 @@ int popLoopCounter(){
 		// thows seg on csd machines free(tmp);
 
 		return i;
-
-	}else{
+	}
+	else
+	{
 		return -1;
 	}
-	
 }
-

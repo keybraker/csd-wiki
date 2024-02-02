@@ -5,11 +5,10 @@ HY 255		*/
 
 #include "symtable.h"
 
-
 int main()
 {
 	unsigned int k;
-	int l,m,n;
+	int l, m, n;
 	char pcKey[5] = "alexi";
 	char Key[5] = "aleko";
 
@@ -19,22 +18,22 @@ int main()
 	SymTable_T keybind = NULL;
 
 	head = SymTable_new();
-	printf("ekana new\n");	
-	
+	printf("ekana new\n");
+
 	k = SymTable_getLength(head);
 	printf("h length epistrefei: %u\n", k);
 
 	l = SymTable_put(head, pcKey, pvValue);
 	printf("h put epistrefei: %d\n", l);
-	
+
 	l = SymTable_put(head, Key, pvValue);
 	printf("h put epistrefei: %d\n", l);
-	
+
 	n = SymTable_contains(head, pcKey);
 	printf("h contains epistrefei: %d\n", n);
-	
+
 	keybind = SymTable_get(head, pcKey);
-	if(keybind == NULL)
+	if (keybind == NULL)
 	{
 		printf("einai null\n");
 	}
@@ -50,9 +49,6 @@ int main()
 
 	SymTable_free(head);
 	printf("ekana free\n");
-
-
-
 
 	return 0;
 }

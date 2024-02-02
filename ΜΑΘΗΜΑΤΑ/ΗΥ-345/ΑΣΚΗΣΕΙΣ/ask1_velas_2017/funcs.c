@@ -16,9 +16,7 @@ void ctrl_sq() {
 void
 print_prompt()
 {
-	
 	long size = pathconf(".", _PC_PATH_MAX);
-	
 	char* pathbuf = (char *) malloc((size_t)size);
 
 	printf("%s@cs345sh%s ",getlogin(),getcwd(pathbuf,size));
@@ -62,7 +60,7 @@ tokenize(char* s)
 		if(index >= bufsize) {
 			bufsize += SIZE;
 			tokens = realloc(tokens, bufsize * sizeof(char*));
-			
+
 			if(!tokens){
 				perror("realloc error!");
         		exit(EXIT_FAILURE);

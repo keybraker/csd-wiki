@@ -14,28 +14,36 @@
 
 int t_cnt = 0;
 
-void printStock(struct present* P){
-    
-    if (P == stock_sentinel) { return; }
-    
+void printStock(struct present *P)
+{
+
+    if (P == stock_sentinel)
+    {
+        return;
+    }
+
     printStock(P->lc);
-    
+
     t_cnt++;
-    if (t_cnt == 8) { printf("\n            "); t_cnt = 0; }
-    printf("<%d:%d>, ",P->pid,P->stock_cnt);
+    if (t_cnt == 8)
+    {
+        printf("\n            ");
+        t_cnt = 0;
+    }
+    printf("<%d:%d>, ", P->pid, P->stock_cnt);
 
     printStock(P->rc);
-
 }
 
-int print_stock(void) {
-    
+int print_stock(void)
+{
+
     printf("T\n\n    Stock = ");
-    
+
     t_cnt = 0;
     printStock(stock_tree);
-    
+
     printf("\n\nDONE\n\n");
-    
+
     return 1;
 }

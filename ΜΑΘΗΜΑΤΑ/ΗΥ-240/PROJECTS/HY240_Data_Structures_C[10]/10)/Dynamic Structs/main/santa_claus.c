@@ -5,7 +5,7 @@
  * @brief  Main file for the needs of the Data Structures (HY-240a)   *
  * project (Fall 2015)                                                *
  * Computer Science Department, University of Crete, Greece           *
-**********************************************************************/
+ **********************************************************************/
 
 #include <errno.h>
 #include <fcntl.h>
@@ -68,12 +68,15 @@ int advanced_analytics(void) {
 	return 1;
 }
 */
-void tokenize(char *s) { /*tokenization of input arguments*/
+void tokenize(char *s)
+{ /*tokenization of input arguments*/
 	char *p, *last;
 	int i = 0;
 	for ((p = strtok_r(s, " ", &last)); p;
-	    (p = strtok_r(NULL, " ", &last))) {
-		if (i < LEN(tokens) - 1) {
+		 (p = strtok_r(NULL, " ", &last)))
+	{
+		if (i < LEN(tokens) - 1)
+		{
 			tokens[i] = p;
 			asint[i] = atoi(p);
 			i++;
@@ -82,7 +85,8 @@ void tokenize(char *s) { /*tokenization of input arguments*/
 	tokens[i] = NULL;
 }
 
-int main(int argc, char *argv[]) { /*main function*/
+int main(int argc, char *argv[])
+{ /*main function*/
 	char *prog = argv[0];
 	char *file = argv[1];
 	char buf[1024];
@@ -90,24 +94,28 @@ int main(int argc, char *argv[]) { /*main function*/
 	int ret;
 	char ev;
 
-	if (file == NULL) {
+	if (file == NULL)
+	{
 		fprintf(stderr, "Usage: %s file\n", prog);
 		return 1;
 	}
-    
-    //fp = fopen("/Users/Keybraker/Desktop/C_files_for_Domes/test.txt", "r");
+
+	// fp = fopen("/Users/Keybraker/Desktop/C_files_for_Domes/test.txt", "r");
 	fp = fopen(file, "r");
-	if (fp == NULL) {
+	if (fp == NULL)
+	{
 		fprintf(stderr, "fopen %s: %s\n", file, strerror(errno));
 		return 1;
 	}
 
-	while (fgets(buf, sizeof(buf), fp) != NULL) {
+	while (fgets(buf, sizeof(buf), fp) != NULL)
+	{
 		buf[strcspn(buf, "\n")] = '\0';
 		tokenize(buf);
 		ev = *tokens[0];
 
-		switch (ev) {
+		switch (ev)
+		{
 		case 'B':
 			ret = buy_present(asint[1], asint[2]);
 			break;
@@ -148,7 +156,7 @@ int main(int argc, char *argv[]) { /*main function*/
 			fprintf(stderr, "Invalid event");
 			return 1;
 		}
-		//fprintf(stderr, "Event '%c' %s\n", ev, ret ? "passed" : "failed");
+		// fprintf(stderr, "Event '%c' %s\n", ev, ret ? "passed" : "failed");
 	}
 	return 1;
 }
