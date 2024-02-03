@@ -4,11 +4,6 @@
 #include <pthread.h>
 #include <time.h>
 
-//----------------------------*
-//  Antonia Krasoudaki        |
-//  csd4140                   |
-//----------------------------*
-
 int study_room[8];
 int *wait_room[40];
 int study_time;
